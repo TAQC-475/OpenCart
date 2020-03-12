@@ -10,7 +10,7 @@ import com.softserve.edu.opencart.data.IUser;
 
 public final class DataBaseUtils {
 
-	private static final String DATABASE_SERVER_IP = "10.26.34.177";
+	private static final String DATABASE_SERVER_IP = "10.26.34.142";
 	private static final String DATABASE_URL = "jdbc:mysql://" + DATABASE_SERVER_IP
 			+ "/opencart?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
 	private static final String USERNAME = "lv459";

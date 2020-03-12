@@ -37,7 +37,7 @@ public class LoginTest extends EpizyUserTestRunner {
 	}
 
 	//@Test(dataProvider = "customers")
-	//@Test(dataProvider = "externalCustomers")
+	@Test(dataProvider = "externalCustomers")
 	public void checkSuccessful(IUser validUser) throws Exception {
 		// Test Data
 		// User validUser = UserRepository.getDefault();
@@ -83,12 +83,12 @@ public class LoginTest extends EpizyUserTestRunner {
 
 	@BeforeSuite
 	public void beforeSuiteInvalidUsers() {
-		DataBaseUtils.openConnection();
+		//DataBaseUtils.openConnection();
 	}
 
 	@AfterSuite
 	public void afterSuiteInvalidUsers() {
-		DataBaseUtils.closeConnection();
+		//DataBaseUtils.closeConnection();
 	}
 
 	@BeforeMethod
@@ -103,7 +103,7 @@ public class LoginTest extends EpizyUserTestRunner {
 		DataBaseUtils.clearLoginedUsers(invalidUser);
 	}
 	
-	@Test(dataProvider = "invalidUsers")
+	//@Test(dataProvider = "invalidUsers")
 	public void checkUnsuccessful(IUser invalidUser) throws Exception {
 		//
 		// Steps

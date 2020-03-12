@@ -31,7 +31,7 @@ public abstract class EpizyUserTestRunner {
 	private final Long ONE_SECOND_DELAY = 1000L;
 	private final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss";
 	//private String serverUrl = "http://taqc-opencart.epizy.com";
-	private String serverUrl = "http://10.26.34.177/opencart/upload";
+	private String serverUrl = "http://10.26.34.142/opencart/upload";
 	//protected WebDriver driver;
 	private Map<Long, WebDriver> drivers;
 
