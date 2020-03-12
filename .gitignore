@@ -52,7 +52,7 @@ hs_err_pid*
 /.checkstyle
 /reports/
 /.idea/
-*.iml
+/.iml
 *.ucls
 
 # Multi Modules Project
