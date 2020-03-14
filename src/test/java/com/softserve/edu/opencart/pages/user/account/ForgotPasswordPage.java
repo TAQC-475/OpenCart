@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class ForgotPasswordPage extends AccountSidebarGuestPart {
 
-	private WebElement emailField;
+	private WebElement email;
 	private WebElement continueButton;
 	private WebElement backButton;
 
@@ -17,9 +17,9 @@ public class ForgotPasswordPage extends AccountSidebarGuestPart {
 	}
 
 	private void initElements() {
-		emailField = driver.findElement(By.id("input-email"));
+		email = driver.findElement(By.id("input-email"));
 		continueButton = driver.findElement(By.xpath("//input[@type='submit']"));
-		backButton = driver.findElement(By.xpath("//input[text()='Back']"));
+		backButton = driver.findElement(By.xpath("//a[text()='Back']"));
 	}
 
 	// Page Object
@@ -27,7 +27,7 @@ public class ForgotPasswordPage extends AccountSidebarGuestPart {
 	// Functional
 
 	public WebElement getEmail() {
-		return emailField;
+		return email;
 	}
 
 	public WebElement getContinueButton() {
@@ -46,11 +46,9 @@ public class ForgotPasswordPage extends AccountSidebarGuestPart {
 		getEmail().click();
 	}
 
-	public void clearEmailField(){
-		getEmail().clear();
-	}
+	public void clearEmailField(){ getEmail().clear(); }
 
-	public void clickContinue(){
+	public void clickContinue(){ //private for atomic methods?
 		getContinueButton().click();
 	}
 
