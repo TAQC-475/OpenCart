@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.emailclient.inbox;
+package com.softserve.edu.opencart.pages.emailclient.email;
 
 import com.softserve.edu.opencart.pages.emailclient.common.TopCornerPart;
 
