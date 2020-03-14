@@ -12,10 +12,6 @@ public class ShoppingCartPage extends BreadCrumbPart {
         super(driver);
     }
 
-    public List<WebElement> getListOfItemsFromShoppingCart(){
-        return driver.findElements(By.xpath("//div[@class = 'table-responsive']//table[@class = 'table table-bordered']/tbody/tr"));
-    }
-
     public String getPriceOfShoppingCartElement(WebElement shoppingCartElement){
         return shoppingCartElement.findElement(By.xpath("/td[@class = 'text-right'][1]")).getText();
     }
