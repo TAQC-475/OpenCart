@@ -1,4 +1,4 @@
 package com.softserve.edu.opencart.pages.emailclient.email;
 
-public class EmailsPage extends LeftEmailsPanelPart{
+public class EmailPage extends LeftEmailsPanelPart {
 }
