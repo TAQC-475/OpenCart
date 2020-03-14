@@ -69,6 +69,7 @@ public abstract class EpizyUserTestRunner {
 		//	}
 		//}
 		WebDriverManager.chromedriver().setup();
+		getDriver().manage().window().maximize();
 	}
 
 	@AfterClass(alwaysRun = true)
