@@ -5,14 +5,14 @@ public enum SortByFilter {
     Created for 'Sort by' dropdown menu on Search Page;
      */
 
-    NAMEAZ("Name (A - Z)"),
-    NAMEZA("Name (Z - A)"),
-    PRICELOWHIGH("Price (Low > High)"),
-    PRICEHIGHLOW("Price (High > Low)"),
-    RATINGHIGHEST("Rating (Highest)"),
-    RATINGLOWEST("Rating (Lowest)"),
-    MODELAZ("Model (A - Z)"),
-    MODELZA("Model (Z - A)");
+    NAME_AZ("Name (A - Z)"),
+    NAME_ZA("Name (Z - A)"),
+    PRICE_LOW_HIGH("Price (Low > High)"),
+    PRICE_HIGH_LOW("Price (High > Low)"),
+    RATING_HIGHEST("Rating (Highest)"),
+    RATING_LOWEST("Rating (Lowest)"),
+    MODEL_AZ("Model (A - Z)"),
+    MODEL_ZA("Model (Z - A)");
 
     private String filter;
 

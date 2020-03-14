@@ -12,7 +12,7 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     private WebElement listViewButton;
     private WebElement gridViewButton;
     private WebElement productsView;
-    private Select sortByDropDownMenu;
+    private static Select sortByDropDownMenu;
     private Select showDropDownMenu;
 
     public ProductsDisplayComponent(WebDriver driver) {
@@ -30,10 +30,6 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     // Page Object
 
     // listViewButton
-    public WebElement getListViewButton() {
-        return listViewButton;
-    }
-
     public void clickListViewButton() {
         if (!listViewButton.isSelected()) {
             gridViewButton.click();
@@ -45,10 +41,6 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     }
 
     // gridViewButton
-    public WebElement getGridViewButton() {
-        return gridViewButton;
-    }
-
     public void clickGridViewButton() {
         if (!gridViewButton.isSelected()) {
             gridViewButton.click();
@@ -59,23 +51,18 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         return productsView.findElement(By.cssSelector(".product-grid")).isDisplayed();
     }
 
-
     // sortByDropDownMenu
-    public Select getSortByDropDownMenu() {
-        return sortByDropDownMenu;
-    }
-
     public WebElement getInputSortWebElement() {
-        return getSortByDropDownMenu().getWrappedElement();
+        return sortByDropDownMenu.getWrappedElement();
     }
 
-    public String GetInputSortText() {
-        return getSortByDropDownMenu().getFirstSelectedOption().getText();
+    public String getInputSortText() {
+        return sortByDropDownMenu.getFirstSelectedOption().getText();
     }
 
-//    public void setSortByDropDownMenu(SortByFilter text) {
-//        getSortByDropDownMenu().selectByVisibleText(text);
-//    }
+    public void setSortByDropDownMenu(SortByFilter filter) {
+        sortByDropDownMenu.selectByVisibleText(String.valueOf(filter));
+    }
 
     public void clickSortByDropDownMenu() {
         getInputSortWebElement().click();
