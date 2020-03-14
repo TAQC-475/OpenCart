@@ -1,114 +1,117 @@
 package com.softserve.edu.opencart.pages.user.search;
 
+import com.softserve.edu.opencart.data.SortByFilter;
+import com.softserve.edu.opencart.pages.user.common.ProductsContainerComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.softserve.edu.opencart.pages.user.common.ProductsContainerComponent;
-
 public class ProductsDisplayComponent extends ProductsContainerComponent {
 
-	private WebElement listViewButton;
-	private WebElement gridViewButton;
-	// TODO productCompare
-	private Select inputSort;
-	private Select inputLimit;
+    private WebElement listViewButton;
+    private WebElement gridViewButton;
+    private WebElement productsView;
+    private Select sortByDropDownMenu;
+    private Select showDropDownMenu;
 
-	public ProductsDisplayComponent(WebDriver driver) {
-		super(driver);
-		initElements();
-	}
+    public ProductsDisplayComponent(WebDriver driver) {
+        super(driver);
+        initElements();
+    }
 
-	private void initElements() {
-		// init elements
-		listViewButton = driver.findElement(By.id("list-view"));
-		gridViewButton = driver.findElement(By.id("grid-view"));
-		// TODO ProductCompare
-		inputSort = new Select(driver.findElement(By.id("input-sort")));
-		inputLimit = new Select(driver.findElement(By.id("input-limit")));
-	}
+    private void initElements() {
+        listViewButton = driver.findElement(By.id("list-view"));
+        gridViewButton = driver.findElement(By.id("grid-view"));
+        sortByDropDownMenu = new Select(driver.findElement(By.id("input-sort")));
+        showDropDownMenu = new Select(driver.findElement(By.id("input-limit")));
+    }
 
-	// Page Object
+    // Page Object
 
-	// listViewButton
-	public WebElement getListViewButton() {
-		return listViewButton;
-	}
+    // listViewButton
+    public WebElement getListViewButton() {
+        return listViewButton;
+    }
 
-	public void clickListViewButton() {
-		getListViewButton().click();
-	}
+    public void clickListViewButton() {
+        if (!listViewButton.isSelected()) {
+            gridViewButton.click();
+        }
+    }
 
-	// gridViewButton
-	public WebElement getGridViewButton() {
-		return gridViewButton;
-	}
+    public boolean isListViewDisplayed() {
+        return productsView.findElement(By.cssSelector(".product-list")).isDisplayed();
+    }
 
-	public void clickGridViewButton() {
-		getGridViewButton().click();
-	}
+    // gridViewButton
+    public WebElement getGridViewButton() {
+        return gridViewButton;
+    }
 
-	// productCompare
+    public void clickGridViewButton() {
+        if (!gridViewButton.isSelected()) {
+            gridViewButton.click();
+        }
+    }
 
-	// inputSort
-	public Select getInputSort() {
-		return inputSort;
-	}
+    public boolean isGridViewDisplayed() {
+        return productsView.findElement(By.cssSelector(".product-grid")).isDisplayed();
+    }
 
-	public WebElement getInputSortWebElement() {
-		return getInputSort().getWrappedElement();
-	}
 
-	public String GetInputSortText() {
-		return getInputSort().getFirstSelectedOption().getText();
-	}
+    // sortByDropDownMenu
+    public Select getSortByDropDownMenu() {
+        return sortByDropDownMenu;
+    }
 
-	public void setInputSort(String text) {
-		getInputSort().selectByVisibleText(text);
-	}
+    public WebElement getInputSortWebElement() {
+        return getSortByDropDownMenu().getWrappedElement();
+    }
 
-	public void clickInputSort() {
-		getInputSortWebElement().click();
-	}
+    public String GetInputSortText() {
+        return getSortByDropDownMenu().getFirstSelectedOption().getText();
+    }
 
-	// inputLimit
-	public Select getInputLimit() {
-		return inputLimit;
-	}
+//    public void setSortByDropDownMenu(SortByFilter text) {
+//        getSortByDropDownMenu().selectByVisibleText(text);
+//    }
 
-	public WebElement getInputLimitWebElement() {
-		return getInputLimit().getWrappedElement();
-	}
+    public void clickSortByDropDownMenu() {
+        getInputSortWebElement().click();
+    }
 
-	public String getInputLimitText() {
-		return getInputLimit().getFirstSelectedOption().getText();
-	}
+    // showDropDownMenu
+    public Select getShowDropDownMenu() {
+        return showDropDownMenu;
+    }
 
-	public void setInputLimit(String text) {
-		getInputLimit().selectByVisibleText(text);
-	}
+    public WebElement getShowDropDownMenuWebElement() {
+        return getShowDropDownMenu().getWrappedElement();
+    }
 
-	public void clickInputLimit() {
-		getInputLimitWebElement().click();
-	}
+    public String getShowDropDownMenuText() {
+        return getShowDropDownMenu().getFirstSelectedOption().getText();
+    }
 
-	// Functional
+    public void setShowDropDownMenu(String text) {
+        getShowDropDownMenu().selectByVisibleText(text);
+    }
 
-	// Business Logic
+    public void clickShowDropDownButton() {
+        getShowDropDownMenuWebElement().click();
+    }
 
-	public ProductsDisplayComponent viewProductsByList() {
-		clickListViewButton();
-		//initElements();
-		//return this;
-		return new ProductsDisplayComponent(driver);
-	}
+    // Functional
 
-	public ProductsDisplayComponent viewProductsByGrid() {
-		clickGridViewButton();
-		//initElements();
-		//return this;
-		return new ProductsDisplayComponent(driver);
-	}
+    // Business Logic
+
+    public void viewProductsByList() {
+        clickListViewButton();
+    }
+
+    public void viewProductsByGrid() {
+        clickGridViewButton();
+    }
 
 }
