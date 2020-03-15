@@ -49,7 +49,7 @@ public abstract class TopPart {
     private WebElement searchTopButton;
     private WebElement cartButton;
     //
-    // private MainMenuComponent MainMenuComponent; 
+    private MainMenuComponent mainMenuComponent;
     private DropdownComponent dropdownComponent;
     private ViewCartComponent viewCartComponent;
     private DropdownGuest dropdownGuest;
@@ -224,6 +224,10 @@ public abstract class TopPart {
     private DropdownComponent createDropdownComponent(By searchLocator) {
         dropdownComponent = new DropdownComponent(driver, searchLocator);
         return getDropdownComponent();
+    }
+
+    public MainMenuComponent getMainMenuComponent() {
+        return mainMenuComponent = new MainMenuComponent(driver);
     }
 
     private void clickDropdownComponentByPartialName(String optionName) {
