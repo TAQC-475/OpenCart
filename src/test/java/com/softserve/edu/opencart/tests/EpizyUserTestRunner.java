@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -31,7 +32,7 @@ public abstract class EpizyUserTestRunner {
 	private final Long ONE_SECOND_DELAY = 1000L;
 	private final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss";
 	//private String serverUrl = "http://taqc-opencart.epizy.com";
-	private String serverUrl = "http://10.26.34.142/opencart/upload";
+	private String serverUrl = "http://127.0.0.1/opencart/";
 	//protected WebDriver driver;
 	private Map<Long, WebDriver> drivers;
 
@@ -53,20 +54,22 @@ public abstract class EpizyUserTestRunner {
 	
 	@BeforeClass
 	public void beforeClass(ITestContext context) {
-		System.setProperty("webdriver.chrome.driver",
-				EpizyUserTestRunner.class.getResource("/chromedriver-windows-32bit.exe").getPath());
+		//System.setProperty("webdriver.chrome.driver",
+		//		EpizyUserTestRunner.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 		// TODO Check Exist ChromeDriver
 		//driver = new ChromeDriver();
 		//driver.manage().window().maximize();
 		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		//
-		for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
-			System.out.println("Key: " + entry.getKey() + "  Value: " + entry.getValue());
-			if (entry.getKey().toLowerCase().equals("url")) {
-				serverUrl = entry.getValue();
-				break;
-			}
-		}
+		//for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
+		//	System.out.println("Key: " + entry.getKey() + "  Value: " + entry.getValue());
+		//	if (entry.getKey().toLowerCase().equals("url")) {
+		//		serverUrl = entry.getValue();
+		//		break;
+		//	}
+		//}
+		WebDriverManager.chromedriver().setup();
+		getDriver().manage().window().maximize();
 	}
 
 	@AfterClass(alwaysRun = true)

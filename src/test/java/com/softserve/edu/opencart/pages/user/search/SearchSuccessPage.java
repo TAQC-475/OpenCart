@@ -39,14 +39,14 @@ public class SearchSuccessPage extends SearchCriteriaPart {
 	// TODO Use Enum
 	public SearchSuccessPage sortProductsByCriteria(String text)
     {
-		//productsDisplay.setInputSort(text);
+		//productsDisplay.setSortByDropDownMenu(text);
         return new SearchSuccessPage(driver);
     }
     
     // TODO Use Enum
     public SearchSuccessPage showProductsByCount(String text)
     {
-    	//productsDisplay.setInputLimit(text);
+    	//productsDisplay.setShowDropDownMenu(text);
         return new SearchSuccessPage(driver);
     }
 
