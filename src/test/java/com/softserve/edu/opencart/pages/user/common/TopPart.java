@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.user.common;
 
+import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
 import com.softserve.edu.opencart.tools.RegularExpression;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ public abstract class TopPart {
         shoppingCart = driver.findElement(By.cssSelector("a[title='Shopping Cart']"));
         checkout = driver.findElement(By.cssSelector("a[title='Checkout']"));
         logo = driver.findElement(By.cssSelector("#logo a"));
-        searchTopField = driver.findElement(By.name("search"));
+        searchTopField = driver.findElement(By.cssSelector("#search > input"));
         searchTopButton = driver.findElement(By.cssSelector("button.btn.btn-default"));
         cartButton = driver.findElement(By.cssSelector("#cart > button"));
 	}
@@ -174,6 +175,7 @@ public abstract class TopPart {
     }
 
     public void setSearchTopField(String text) {
+	    getSearchTopField().click();
         getSearchTopField().sendKeys(text);
     }
 
@@ -182,8 +184,9 @@ public abstract class TopPart {
         return searchTopButton;
     }
 
-    public void clickSearchTopButton() {
+    public ProductsDisplayComponent clickSearchTopButton() {
         getSearchTopButton().click();
+        return new ProductsDisplayComponent(driver);
     }
 
     // cartButton

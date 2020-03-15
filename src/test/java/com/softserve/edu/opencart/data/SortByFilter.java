@@ -2,7 +2,7 @@ package com.softserve.edu.opencart.data;
 
 public enum SortByFilter {
     /**
-    Created for 'Sort by' dropdown menu on Search Page;
+     * Created for 'Sort by' dropdown menu on Search Page;
      */
 
     NAME_AZ("Name (A - Z)"),
@@ -16,7 +16,7 @@ public enum SortByFilter {
 
     private String filter;
 
-    SortByFilter(String  filter) {
+    SortByFilter(String filter) {
         this.filter = filter;
     }
 
