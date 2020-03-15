@@ -512,57 +512,57 @@ public abstract class TopPart {
 
     public String getViewCartComponentTotalText(){
         createViewCartComponent();
-        return viewCartComponent.getCartTotalText();
+        return getViewCartComponent().getCartTotalText();
     }
 
     public String getViewCartComponentTotalAmount(){
         createViewCartComponent();
-        return viewCartComponent.getCartTotalAmount();
+        return getViewCartComponent().getCartTotalAmount();
     }
 
     public String getViewCartEmptyMsgText(){
         openViewCartComponent();
-        return viewCartComponent.getEmptyCartMsgText();
+        return getViewCartComponent().getEmptyCartMsgText();
     }
 
     public String getProductNameFromViewCart(Product product){
         openViewCartComponent();
-        return viewCartComponent.getViewProductComponentName(product);
+        return getViewCartComponent().getViewProductComponentName(product);
     }
 
     public String getProductPriceFromViewCart(Product product){
         openViewCartComponent();
-        return viewCartComponent.getViewProductComponentPrice(product);
+        return getViewCartComponent().getViewProductComponentPrice(product);
     }
 
     public String getProductQuantityFromViewCart(Product product){
         openViewCartComponent();
-        return viewCartComponent.getViewProductComponentQuantity(product);
+        return getViewCartComponent().getViewProductComponentQuantity(product);
     }
 
     public String getSubTotalPriceFromViewCart(){
         openViewCartComponent();
-        return viewCartComponent.getSubTotalText();
+        return getViewCartComponent().getSubTotalText();
     }
 
     public String getEcoTaxPriceFromViewCart(){
         openViewCartComponent();
-        return viewCartComponent.getEcoTaxText();
+        return getViewCartComponent().getEcoTaxText();
     }
 
     public String getVATPriceFromViewCart(){
         openViewCartComponent();
-        return viewCartComponent.getVatTaxText();
+        return getViewCartComponent().getVatTaxText();
     }
 
     public String getTotalFromViewCart(){
         openViewCartComponent();
-        return viewCartComponent.getTotalPriceText();
+        return getViewCartComponent().getTotalPriceText();
     }
 
     public void removeProductFromViewCart(Product product){
         openViewCartComponent();
-        viewCartComponent.removeViewProductComponent(product);
+        getViewCartComponent().removeViewProductComponent(product);
     }
 
 }
