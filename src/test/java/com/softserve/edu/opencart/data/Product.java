@@ -55,5 +55,4 @@ public class Product {
 	public String getPrice(Currencies currency) {
 		return prices.get(currency);
 	}
-
 }

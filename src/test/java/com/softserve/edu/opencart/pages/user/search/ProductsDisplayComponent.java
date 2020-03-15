@@ -41,10 +41,11 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     }
 
     // gridViewButton
-    public void clickGridViewButton() {
+    public ProductsDisplayComponent clickGridViewButton() {
         if (!gridViewButton.isSelected()) {
             gridViewButton.click();
         }
+        return new ProductsDisplayComponent(driver);
     }
 
     public boolean isGridViewDisplayed() {
@@ -69,20 +70,16 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     }
 
     // showDropDownMenu
-    public Select getShowDropDownMenu() {
-        return showDropDownMenu;
-    }
-
     public WebElement getShowDropDownMenuWebElement() {
-        return getShowDropDownMenu().getWrappedElement();
+        return showDropDownMenu.getWrappedElement();
     }
 
     public String getShowDropDownMenuText() {
-        return getShowDropDownMenu().getFirstSelectedOption().getText();
+        return showDropDownMenu.getFirstSelectedOption().getText();
     }
 
     public void setShowDropDownMenu(String text) {
-        getShowDropDownMenu().selectByVisibleText(text);
+        showDropDownMenu.selectByVisibleText(text);
     }
 
     public void clickShowDropDownButton() {

@@ -20,9 +20,12 @@ public class SearchTest extends EpizyUserTestRunner {
 		Currencies currency = Currencies.EURO;
 		//
 		// Steps
-		SearchSuccessPage searchSuccessPage = loadApplication().successfulSearch(validProduct).chooseCurrency(currency);
+		SearchSuccessPage searchSuccessPage = loadApplication()
+				.successfulSearch(validProduct)
+				.chooseCurrency(currency);
 		presentationSleep();
-		ProductComponent actualProductComponent = searchSuccessPage.getProductsDisplay()
+		ProductComponent actualProductComponent = searchSuccessPage
+				.getProductsDisplay()
 				.getProductComponentByName(validProduct);
 		presentationSleep();
 		//
