@@ -15,6 +15,9 @@ public class ShoppingCartPageTest extends EpizyUserTestRunner {
                         .clickLogo();
         ProductsContainerComponent productsContainerComponent = new ProductsContainerComponent(super.getDriver());
         productsContainerComponent.getProductComponentByName(ProductRepository.getMacBook()).clickAddToCartButton();
+        presentationSleep();
+        productsContainerComponent.getProductComponentByName(ProductRepository.getIPhone3()).clickAddToCartButton();
+        presentationSleep();
         loadApplication().clickShoppingCart();
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(super.getDriver());
     }

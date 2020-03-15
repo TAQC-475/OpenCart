@@ -21,14 +21,14 @@ public class ShoppingCartProductComponent {
     }
 
     public void initElements() {
-        image = shoppingCartProductLayout.findElement(By.xpath("//td[@class = 'text-center']/a"));
-        productName = shoppingCartProductLayout.findElement(By.xpath("//td[@class = 'text-left']/a"));
-        model = shoppingCartProductLayout.findElement(By.xpath("//td[@class = 'text-left'][2]"));
-        quantity = shoppingCartProductLayout.findElement(By.xpath("//input[@type = 'text']"));
-        refreshButton = shoppingCartProductLayout.findElement(By.xpath("//button[@data-original-title = 'Update']"));
-        removeButton = shoppingCartProductLayout.findElement(By.xpath("//button[@data-original-title = 'Remove']"));
-        unitPrice = shoppingCartProductLayout.findElement(By.xpath("//td[@class = 'text-right'][last()-1]"));
-        totalPrice = shoppingCartProductLayout.findElement(By.xpath("//td[@class = 'text-right'][last()]"));
+        image = shoppingCartProductLayout.findElement(By.xpath(".//td[@class = 'text-center']/a"));
+        productName = shoppingCartProductLayout.findElement(By.xpath(".//td[@class = 'text-left']/a"));
+        model = shoppingCartProductLayout.findElement(By.xpath(".//td[@class = 'text-left'][2]"));
+        quantity = shoppingCartProductLayout.findElement(By.xpath(".//input[@type = 'text']"));
+        refreshButton = shoppingCartProductLayout.findElement(By.xpath(".//button[@data-original-title = 'Update']"));
+        removeButton = shoppingCartProductLayout.findElement(By.xpath(".//button[@data-original-title = 'Remove']"));
+        unitPrice = shoppingCartProductLayout.findElement(By.xpath(".//td[@class = 'text-right'][last()-1]"));
+        totalPrice = shoppingCartProductLayout.findElement(By.xpath(".//td[@class = 'text-right'][last()]"));
     }
 
     public WebElement getImage() {

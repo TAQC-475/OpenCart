@@ -17,6 +17,7 @@ public class ShoppingCartProductsContainerComponent {
 
     public ShoppingCartProductsContainerComponent(WebDriver driver) {
         this.driver = driver;
+        initElements();
     }
 
     public void initElements() {
@@ -45,6 +46,7 @@ public class ShoppingCartProductsContainerComponent {
 
     protected ShoppingCartProductComponent getShoppingCartProductComponentByName(String productName) {
         ShoppingCartProductComponent result = null;
+
         for (ShoppingCartProductComponent current : getShoppingCartProductComponents()) {
             if (current.getProductNameText().toLowerCase().equals(productName.toLowerCase())) {
                 result = current;
