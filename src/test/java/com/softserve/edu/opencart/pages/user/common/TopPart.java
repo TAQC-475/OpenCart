@@ -1,8 +1,11 @@
 package com.softserve.edu.opencart.pages.user.common;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.softserve.edu.opencart.pages.emailclient.unlogged.EmailLoginPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -439,6 +442,33 @@ public abstract class TopPart {
     	clickWishList();
     	defaultLogin(user);
         return new WishListPage(driver);
+    }
+
+    protected void openNewTab(){ //atomic
+        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
+    }
+
+    protected ArrayList<String> getTabsHandles(){ //atomic
+	    return new ArrayList<>(driver.getWindowHandles());
+    }
+
+    protected int getLastTabIndex(){ //atomic
+	    return getTabsHandles().size() - 1;
+    }
+
+    protected void switchToNewTab(){ //atomic
+	    driver.switchTo().window(getTabsHandles().get(getLastTabIndex()));
+    }
+
+    protected void openUrl(String url){ //atomic
+	    driver.get(url);
+    }
+
+    protected EmailLoginPage openEmailLoginTab(String emailServiceUrl){ //business logic
+	    openNewTab();
+	    switchToNewTab();
+	    openUrl(emailServiceUrl);
+	    return new EmailLoginPage(driver);
     }
 
 }

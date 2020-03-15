@@ -1,7 +1,11 @@
 package com.softserve.edu.opencart.pages.emailclient.email;
 
-public abstract class TopNavigatePanelPart extends AccountOptionsPart{
+import org.openqa.selenium.WebDriver;
 
+public abstract class TopNavigatePanelPart extends AccountOptionsPart{
+    public TopNavigatePanelPart(WebDriver driver) {
+        super(driver);
+    }
 }
 
 

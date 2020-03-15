@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.pages.emailclient.email;
 
 import com.softserve.edu.opencart.pages.emailclient.common.BottomServicesNavigatePart;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public abstract class LeftEmailsPanelPart extends BottomServicesNavigatePart {
@@ -14,7 +15,9 @@ public abstract class LeftEmailsPanelPart extends BottomServicesNavigatePart {
     private WebElement addressBookButton;
 
 
-
+    public LeftEmailsPanelPart(WebDriver driver){
+        super(driver);
+    }
 
 
 }
