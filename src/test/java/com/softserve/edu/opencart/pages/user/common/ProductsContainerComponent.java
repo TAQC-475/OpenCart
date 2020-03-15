@@ -118,4 +118,9 @@ public class ProductsContainerComponent {
     	return getProductComponentByName(product.getName());
     }
 
+    public AddProductAlertPage addProductToCartFromContainer(Product product){
+        clickProductComponentAddToCartButtonByName(product.getName());
+        return new AddProductAlertPage(driver);
+    }
+
 }
