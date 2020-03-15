@@ -30,10 +30,11 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     // Page Object
 
     // listViewButton
-    public void clickListViewButton() {
+    public ProductsDisplayComponent clickListViewButton() {
         if (!listViewButton.isSelected()) {
             gridViewButton.click();
         }
+        return new ProductsDisplayComponent(driver);
     }
 
     public boolean isListViewDisplayed() {
@@ -61,12 +62,14 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         return sortByDropDownMenu.getFirstSelectedOption().getText();
     }
 
-    public void setSortByDropDownMenu(SortByFilter filter) {
+    public ProductsDisplayComponent setSortByDropDownMenu(SortByFilter filter) {
         sortByDropDownMenu.selectByVisibleText(String.valueOf(filter));
+        return new ProductsDisplayComponent(driver);
     }
 
-    public void clickSortByDropDownMenu() {
+    public ProductsDisplayComponent clickSortByDropDownMenuButton() {
         getInputSortWebElement().click();
+        return this;
     }
 
     // showDropDownMenu
@@ -78,12 +81,14 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         return showDropDownMenu.getFirstSelectedOption().getText();
     }
 
-    public void setShowDropDownMenu(String text) {
+    public ProductsDisplayComponent setShowDropDownMenu(String text) {
         showDropDownMenu.selectByVisibleText(text);
+        return this;
     }
 
-    public void clickShowDropDownButton() {
+    public ProductsDisplayComponent clickShowDropDownButton() {
         getShowDropDownMenuWebElement().click();
+        return this;
     }
 
     // Functional
