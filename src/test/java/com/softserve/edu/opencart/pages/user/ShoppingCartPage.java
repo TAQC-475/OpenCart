@@ -17,7 +17,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
     }
 
     public void initElements(){
-        shoppingCartExpectedText = driver.findElement(By.xpath("//div[@id = 'content']/h1[contains (text(),  'Shopping Cart')]"));
+        shoppingCartExpectedText = driver.findElement(By.xpath("//div[@id = 'content']/h1[contains (text(), 'Shopping Cart')]"));
         shoppingCartProductsContainerComponent = new ShoppingCartProductsContainerComponent(driver);
     }
 
