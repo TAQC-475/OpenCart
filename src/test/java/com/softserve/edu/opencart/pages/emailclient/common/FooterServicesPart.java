@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 public abstract class FooterServicesPart{
 
-    private WebDriver driver;
+    protected WebDriver driver;
 
     private WebElement searchField;
     private WebElement searchButton;
