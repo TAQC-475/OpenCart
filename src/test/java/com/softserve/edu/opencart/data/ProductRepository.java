@@ -17,8 +17,8 @@ public final class ProductRepository {
 						.addPrice(Currencies.US_DOLLAR, "602.00");
 	}
 
-	public static Product getIPhone3() {
-		return new Product("iPhone 3",
+	public static Product getIPhone() {
+		return new Product("iPhone",
 				"iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a nam..", "101.00")
 						.addPrice(Currencies.EURO, "96.66")
 						.addPrice(Currencies.POUND_STERLING, "75.46")

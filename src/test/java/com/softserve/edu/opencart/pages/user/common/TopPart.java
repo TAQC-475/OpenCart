@@ -1,9 +1,12 @@
 package com.softserve.edu.opencart.pages.user.common;
 
 import com.softserve.edu.opencart.tools.RegularExpression;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.softserve.edu.opencart.pages.emailclient.unlogged.EmailLoginPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -47,7 +50,7 @@ public abstract class TopPart {
     //
     // private MainMenuComponent MainMenuComponent; 
     private DropdownComponent dropdownComponent;
-    //ButtonCartContainerComponent
+    private ViewCartComponent viewCartComponent;
     private DropdownGuest dropdownGuest;
     private DropdownLogged dropdownLogged;
 
@@ -312,7 +315,22 @@ public abstract class TopPart {
         clickSearchTopField();
         dropdownLogged= null;
     }
-    
+
+    //view cart button
+    private ViewCartComponent getViewCartComponent() {
+        if (viewCartComponent == null)
+        {
+            // TODO Develop Custom Exception
+            throw new RuntimeException(OPTION_NULL_MESSAGE);
+        }
+        return viewCartComponent;
+    }
+
+    private ViewCartComponent createViewCartComponent() {
+        viewCartComponent = new ViewCartComponent(driver);
+        return getViewCartComponent();
+    }
+
 	// Functional
 
     // currency
@@ -445,6 +463,99 @@ public abstract class TopPart {
     	clickWishList();
     	defaultLogin(user);
         return new WishListPage(driver);
+    }
+
+    protected void openNewTab(){ //atomic
+        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
+    }
+
+    protected ArrayList<String> getTabsHandles(){ //atomic
+	    return new ArrayList<>(driver.getWindowHandles());
+    }
+
+    protected int getLastTabIndex(){ //atomic
+	    return getTabsHandles().size() - 1;
+    }
+
+    protected void switchToNewTab(){ //atomic
+	    driver.switchTo().window(getTabsHandles().get(getLastTabIndex()));
+    }
+
+    protected void openUrl(String url){ //atomic
+	    driver.get(url);
+    }
+
+    protected EmailLoginPage openEmailLoginTab(String emailServiceUrl){ //business logic
+	    openNewTab();
+	    switchToNewTab();
+	    openUrl(emailServiceUrl);
+	    return new EmailLoginPage(driver);
+    }
+
+    // view cart button logic
+    public void openViewCartComponent(){
+        clickCartButton();
+        createViewCartComponent();
+    }
+
+    public void closeViewCartComponent(){
+        clickCartButton();
+        viewCartComponent = null;
+    }
+
+    public String getViewCartComponentTotalText(){
+        createViewCartComponent();
+        return viewCartComponent.getCartTotalText();
+    }
+
+    public String getViewCartComponentTotalAmount(){
+        createViewCartComponent();
+        return viewCartComponent.getCartTotalAmount();
+    }
+
+    public String getViewCartEmptyMsgText(){
+        openViewCartComponent();
+        return viewCartComponent.getEmptyCartMsgText();
+    }
+
+    public String getProductNameFromViewCart(Product product){
+        openViewCartComponent();
+        return viewCartComponent.getViewProductComponentName(product);
+    }
+
+    public String getProductPriceFromViewCart(Product product){
+        openViewCartComponent();
+        return viewCartComponent.getViewProductComponentPrice(product);
+    }
+
+    public String getProductQuantityFromViewCart(Product product){
+        openViewCartComponent();
+        return viewCartComponent.getViewProductComponentQuantity(product);
+    }
+
+    public String getSubTotalPriceFromViewCart(){
+        openViewCartComponent();
+        return viewCartComponent.getSubTotalText();
+    }
+
+    public String getEcoTaxPriceFromViewCart(){
+        openViewCartComponent();
+        return viewCartComponent.getEcoTaxText();
+    }
+
+    public String getVATPriceFromViewCart(){
+        openViewCartComponent();
+        return viewCartComponent.getVatTaxText();
+    }
+
+    public String getTotalFromViewCart(){
+        openViewCartComponent();
+        return viewCartComponent.getTotalPriceText();
+    }
+
+    public void removeProductFromViewCart(Product product){
+        openViewCartComponent();
+        viewCartComponent.removeViewProductComponent(product);
     }
 
 }
