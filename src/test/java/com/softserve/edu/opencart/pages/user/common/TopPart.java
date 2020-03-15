@@ -47,7 +47,7 @@ public abstract class TopPart {
     //
     // private MainMenuComponent MainMenuComponent; 
     private DropdownComponent dropdownComponent;
-    //ButtonCartContainerComponent
+    private ViewCartComponent viewCartComponent;
     private DropdownGuest dropdownGuest;
     private DropdownLogged dropdownLogged;
 
@@ -309,7 +309,22 @@ public abstract class TopPart {
         clickSearchTopField();
         dropdownLogged= null;
     }
-    
+
+    //view cart button
+    private ViewCartComponent getViewCartComponent() {
+        if (viewCartComponent == null)
+        {
+            // TODO Develop Custom Exception
+            throw new RuntimeException(OPTION_NULL_MESSAGE);
+        }
+        return viewCartComponent;
+    }
+
+    private ViewCartComponent createViewCartComponent() {
+        viewCartComponent = new ViewCartComponent(driver);
+        return getViewCartComponent();
+    }
+
 	// Functional
 
     // currency
@@ -469,6 +484,72 @@ public abstract class TopPart {
 	    switchToNewTab();
 	    openUrl(emailServiceUrl);
 	    return new EmailLoginPage(driver);
+    }
+
+    // view cart button logic
+    public void openViewCartComponent(){
+        clickCartButton();
+        createViewCartComponent();
+    }
+
+    public void closeViewCartComponent(){
+        clickCartButton();
+        viewCartComponent = null;
+    }
+
+    public String getViewCartComponentTotalText(){
+        createViewCartComponent();
+        return viewCartComponent.getCartTotalText();
+    }
+
+    public String getViewCartComponentTotalAmount(){
+        createViewCartComponent();
+        return viewCartComponent.getCartTotalAmount();
+    }
+
+    public String getViewCartEmptyMsgText(){
+        openViewCartComponent();
+        return viewCartComponent.getEmptyCartMsgText();
+    }
+
+    public String getProductNameFromViewCart(Product product){
+        openViewCartComponent();
+        return viewCartComponent.getViewProductComponentName(product);
+    }
+
+    public String getProductPriceFromViewCart(Product product){
+        openViewCartComponent();
+        return viewCartComponent.getViewProductComponentPrice(product);
+    }
+
+    public String getProductQuantityFromViewCart(Product product){
+        openViewCartComponent();
+        return viewCartComponent.getViewProductComponentQuantity(product);
+    }
+
+    public String getSubTotalPriceFromViewCart(){
+        openViewCartComponent();
+        return viewCartComponent.getSubTotalText();
+    }
+
+    public String getEcoTaxPriceFromViewCart(){
+        openViewCartComponent();
+        return viewCartComponent.getEcoTaxText();
+    }
+
+    public String getVATPriceFromViewCart(){
+        openViewCartComponent();
+        return viewCartComponent.getVatTaxText();
+    }
+
+    public String getTotalFromViewCart(){
+        openViewCartComponent();
+        return viewCartComponent.getTotalPriceText();
+    }
+
+    public void removeProductFromViewCart(Product product){
+        openViewCartComponent();
+        viewCartComponent.removeViewProductComponent(product);
     }
 
 }
