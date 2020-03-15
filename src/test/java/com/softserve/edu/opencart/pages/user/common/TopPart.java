@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.user.common;
 
+import com.softserve.edu.opencart.tools.RegularExpression;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -31,6 +32,8 @@ public abstract class TopPart {
     protected final String DROPDOWN_MYACCOUNT_CSSSELECTOR = ".dropdown-menu-right li";
     //
 	protected WebDriver driver;
+
+
     //
     private WebElement currency;
     private WebElement myAccount;
@@ -108,9 +111,12 @@ public abstract class TopPart {
         getWishList().click();
     }
 
-//    public int getWishListNumber() {
+    public int getWishListNumber() {
 //        Use getWishListText()
-//    }
+      RegularExpression regularExpression = new RegularExpression();
+
+      return regularExpression.getNumberFromWishList(getWishListText());
+    }
 
     // shoppingCart
     public WebElement getShoppingCart() {

@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import com.softserve.edu.opencart.pages.admin.account.SigninPage;
 
 public abstract class LocalAdminTestRunner extends EpizyUserTestRunner {
-	private String adminServerUrl = "http://10.26.34.76/opencart/upload/admin";
+	private String adminServerUrl = "http://192.168.220.130/opencart/upload/admin";
 	
 	@BeforeMethod
 	public void beforeMethod() {

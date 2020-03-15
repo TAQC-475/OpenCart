@@ -54,6 +54,7 @@ hs_err_pid*
 /reports/
 /.idea/
 /.iml
+/testng.xml
 *.ucls
 
 # Multi Modules Project

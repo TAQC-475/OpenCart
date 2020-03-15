@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.tests;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,8 +32,9 @@ import com.softserve.edu.opencart.pages.user.HomePage;
 public abstract class EpizyUserTestRunner {
 	private final Long ONE_SECOND_DELAY = 1000L;
 	private final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss";
-	//private String serverUrl = "http://taqc-opencart.epizy.com";
-	private String serverUrl = "http://127.0.0.1/opencart/";
+//	private String serverUrl = "http://taqc-opencart.epizy.com";
+
+	private String serverUrl = "http://192.168.220.130/opencart/upload/";
 	//protected WebDriver driver;
 	private Map<Long, WebDriver> drivers;
 
@@ -41,6 +43,7 @@ public abstract class EpizyUserTestRunner {
 		if (currentWebDriver == null) {
 			currentWebDriver = new ChromeDriver();
 			//driver.manage().window().maximize();
+//			currentWebDriver.manage().window().maximize();
 			currentWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			drivers.put(Thread.currentThread().getId(), currentWebDriver);
 		}
