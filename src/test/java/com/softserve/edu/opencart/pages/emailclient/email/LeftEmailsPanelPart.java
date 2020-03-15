@@ -1,10 +1,9 @@
 package com.softserve.edu.opencart.pages.emailclient.email;
 
-import com.softserve.edu.opencart.pages.emailclient.common.BottomServicesNavigatePart;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public abstract class LeftEmailsPanelPart extends BottomServicesNavigatePart {
+public abstract class LeftEmailsPanelPart extends LoggedMenuBarPart {
     private WebElement checkEmailsButton;
     private WebElement newLetterButton;
     private WebElement inbox;
