@@ -1,18 +1,19 @@
 package com.softserve.edu.opencart.pages.user.common;
 
+import com.softserve.edu.opencart.pages.user.search.ProductInfoPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public final class WishListProductComponent {
 
-    private WebElement tableLayout;
-    private WebElement image;
-    private WebElement name;
-    private WebElement model;
-    private WebElement stock;
-    private WebElement price;
-    private WebElement addToCartButton;
-    private WebElement removeFromWIshListButton;
+  private WebElement tableLayout;
+  private WebElement image;
+  private WebElement name;
+  private WebElement model;
+  private WebElement stock;
+  private WebElement price;
+  private WebElement addToCartButton;
+  private WebElement removeFromWIshListButton;
 
 
   public WishListProductComponent(WebElement tableLayout) {
@@ -20,14 +21,18 @@ public final class WishListProductComponent {
     initElements();
   }
 
-  private void initElements(){
-    image = tableLayout.findElement(By.xpath("//div[@class='table-responsive']//td[@class='text-center']/a"));
-    name = tableLayout.findElement(By.xpath("//div[@class='table-responsive']//td[@class='text-left']/a"));
+  private void initElements() {
+    image = tableLayout
+        .findElement(By.xpath("//div[@class='table-responsive']//td[@class='text-center']/a"));
+    name = tableLayout
+        .findElement(By.xpath("//div[@class='table-responsive']//td[@class='text-left']/a"));
     model = tableLayout.findElement(By.xpath("//tbody//td[contains(text(),'Product')]"));
     stock = tableLayout.findElement(By.xpath("//tbody//td[contains(text(),'Stock')]"));
     price = tableLayout.findElement(By.xpath("//div[@class='price']"));
-    addToCartButton = tableLayout.findElement(By.xpath("//div//button[@data-original-title='Add to Cart']"));
-    removeFromWIshListButton = tableLayout.findElement(By.xpath("//div//a[@data-original-title='Remove']"));
+    addToCartButton = tableLayout
+        .findElement(By.xpath("//div//button[@data-original-title='Add to Cart']"));
+    removeFromWIshListButton = tableLayout
+        .findElement(By.xpath("//div//a[@data-original-title='Remove']"));
 
   }
 
@@ -39,8 +44,21 @@ public final class WishListProductComponent {
     return name;
   }
 
+  public void clickProductName(){
+    getName().click();
+  }
+
+  public String getNameText() {
+
+    return getName().getText();
+  }
+
   public WebElement getModel() {
     return model;
+  }
+
+  public String getModelText(){
+     return getModel().getText();
   }
 
   public WebElement getStock() {
@@ -50,10 +68,15 @@ public final class WishListProductComponent {
   public WebElement getPrice() {
     return price;
   }
+  // TODO when there two prices
+  public String getPriceText(){
+    return getPrice().getText();
+  }
 
   public WebElement getAddToCartButton() {
     return addToCartButton;
   }
+
   public void clickAddToCartButton() {
     getAddToCartButton().click();
   }
