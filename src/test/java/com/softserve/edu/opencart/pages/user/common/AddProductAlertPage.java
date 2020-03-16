@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class AddProductAlertPage extends TopPart{
+public class AddProductAlertPage extends BreadCrumbPart{
     public static final String ADDED_PRODUCT_ALERT_MSG = "Success: You have added %s to your shopping cart! ";
     //
     private WebElement alertMessage;
