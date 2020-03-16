@@ -57,8 +57,7 @@ public class ProductsContainerComponent {
         return productComponentNames;
     }
 
-    protected ProductComponent getProductComponentByName(String productName)
-    {
+    protected ProductComponent getProductComponentByName(String productName) {
         ProductComponent result = null;
         for (ProductComponent current : getProductComponents())
         {

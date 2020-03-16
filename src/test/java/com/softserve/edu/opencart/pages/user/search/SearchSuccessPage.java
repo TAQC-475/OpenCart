@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.pages.user.search;
 
 import com.softserve.edu.opencart.data.Currencies;
+import com.softserve.edu.opencart.data.CountOfProducts;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.SortByFilter;
 import org.openqa.selenium.WebDriver;
@@ -41,9 +42,8 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return new SearchSuccessPage(driver);
     }
 
-    // TODO Use Enum
-    public SearchSuccessPage showProductsByCount(String text) {
-        productsDisplay.setShowDropDownMenu(text);
+    public SearchSuccessPage showProductsByCount(CountOfProducts count) {
+        productsDisplay.setShowDropDownMenu(count);
         return new SearchSuccessPage(driver);
     }
 
