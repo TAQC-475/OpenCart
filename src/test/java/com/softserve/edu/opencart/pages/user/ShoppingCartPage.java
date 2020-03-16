@@ -1,5 +1,7 @@
 package com.softserve.edu.opencart.pages.user;
 
+import com.softserve.edu.opencart.data.Product;
+import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
 import com.softserve.edu.opencart.pages.user.common.ShoppingCartProductsContainerComponent;
 import org.openqa.selenium.By;
@@ -27,5 +29,12 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     public ShoppingCartProductsContainerComponent getShoppingCartProductsContainerComponent() {
         return shoppingCartProductsContainerComponent;
+    }
+
+    public ShoppingCartPage refreshShoppingCartPageByProduct(Product product){
+            this.getShoppingCartProductsContainerComponent()
+                .getShoppingCartProductComponentByProduct(product)
+                .clickRefreshButton();
+            return new ShoppingCartPage(driver);
     }
 }
