@@ -1,7 +1,9 @@
 package com.softserve.edu.opencart.pages.user.common;
 
 import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
+import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
 import com.softserve.edu.opencart.tools.RegularExpression;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +29,7 @@ import com.softserve.edu.opencart.pages.user.search.SearchUnsuccessPage;
 public abstract class TopPart {
     protected final String OPTION_NULL_MESSAGE = "DropdownComponent is null";
     protected final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
-    protected final String PAGE_DO_NOT_EXIST="Page do not exist!!!";
+    protected final String PAGE_DO_NOT_EXIST = "Page do not exist!!!";
     //
     protected final String TAG_ATTRIBUTE_VALUE = "value";
     protected final String TAG_ATTRIBUTE_SRC = "src";
@@ -35,7 +37,7 @@ public abstract class TopPart {
     protected final String LIST_CURRENCIES_CSSSELECTOR = "div.btn-group.open ul.dropdown-menu li";
     protected final String DROPDOWN_MYACCOUNT_CSSSELECTOR = ".dropdown-menu-right li";
     //
-	protected WebDriver driver;
+    protected WebDriver driver;
 
 
     //
@@ -49,19 +51,20 @@ public abstract class TopPart {
     private WebElement searchTopButton;
     private WebElement cartButton;
     //
+    private ProductsSidebarEmptyPage productsSidebarEmptyPage;
     private MainMenuComponent mainMenuComponent;
     private DropdownComponent dropdownComponent;
     private ViewCartComponent viewCartComponent;
     private DropdownGuest dropdownGuest;
     private DropdownLogged dropdownLogged;
 
-	public TopPart(WebDriver driver) {
-		this.driver = driver;
-		initElements();
-	}
+    public TopPart(WebDriver driver) {
+        this.driver = driver;
+        initElements();
+    }
 
-	private void initElements() {
-		// init elements
+    private void initElements() {
+        // init elements
         currency = driver.findElement(By.cssSelector(".btn.btn-link.dropdown-toggle"));
         myAccount = driver.findElement(By.cssSelector(".list-inline > li > a.dropdown-toggle"));
         wishList = driver.findElement(By.id("wishlist-total"));
@@ -71,13 +74,13 @@ public abstract class TopPart {
         searchTopField = driver.findElement(By.cssSelector("#search > input"));
         searchTopButton = driver.findElement(By.cssSelector("button.btn.btn-default"));
         cartButton = driver.findElement(By.cssSelector("#cart > button"));
-	}
+    }
 
-	// Page Object
+    // Page Object
 
     // currency
     public WebElement getCurrency() {
-    	//return driver.findElement(By.cssSelector(".btn.btn-link.dropdown-toggle"));
+        //return driver.findElement(By.cssSelector(".btn.btn-link.dropdown-toggle"));
         return currency;
     }
 
@@ -117,9 +120,9 @@ public abstract class TopPart {
 
     public int getWishListNumber() {
 //        Use getWishListText()
-      RegularExpression regularExpression = new RegularExpression();
+        RegularExpression regularExpression = new RegularExpression();
 
-      return regularExpression.getNumberFromWishList(getWishListText());
+        return regularExpression.getNumberFromWishList(getWishListText());
     }
 
     // shoppingCart
@@ -175,7 +178,7 @@ public abstract class TopPart {
     }
 
     public void setSearchTopField(String text) {
-	    getSearchTopField().click();
+        getSearchTopField().click();
         getSearchTopField().sendKeys(text);
     }
 
@@ -209,12 +212,11 @@ public abstract class TopPart {
 //  public int getCartButtonSum() {
 //  Use getCartButtonText()
 //}
-    
+
     // dropdownComponent
     protected DropdownComponent getDropdownComponent() {
         //LeaveUtils.castExceptionByCondition(dropdownOptions == null, OPTION_NULL_MESSAGE);
-    	if (dropdownComponent == null)
-        {
+        if (dropdownComponent == null) {
             // TODO Develop Custom Exception 
             throw new RuntimeException(OPTION_NULL_MESSAGE);
         }
@@ -230,17 +232,26 @@ public abstract class TopPart {
         return mainMenuComponent = new MainMenuComponent(driver);
     }
 
+    public ProductsSidebarEmptyPage gotoProductsSidebarEmptyPage() {
+        getProductsSidebarEmptyPage()
+                .gotoLeftMenuBar();
+        return new ProductsSidebarEmptyPage(driver);
+    }
+
+    public ProductsSidebarEmptyPage getProductsSidebarEmptyPage() {
+        return productsSidebarEmptyPage = new ProductsSidebarEmptyPage(driver);
+    }
+
     private void clickDropdownComponentByPartialName(String optionName) {
         //LeaveUtils.castExceptionByCondition(!getDropdownOptions().isExistDropdownOptionByPartialName(optionName),
         //        String.format(OPTION_NOT_FOUND_MESSAGE, optionName, dropdownOptions.getListOptionsText().toString()));
-    	if (!getDropdownComponent().isExistDropdownOptionByPartialName(optionName))
-        {
+        if (!getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
             // TODO Develop Custom Exception 
             throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName, getDropdownComponent().getListOptionsText().toString()));
         }
-    	getDropdownComponent().clickDropdownOptionByPartialName(optionName);
-    	dropdownComponent = null;
-    	//closeDropdownComponent();
+        getDropdownComponent().clickDropdownOptionByPartialName(optionName);
+        dropdownComponent = null;
+        //closeDropdownComponent();
     }
 
     private void closeDropdownComponent() {
@@ -250,8 +261,7 @@ public abstract class TopPart {
 
     // dropdownGuest
     protected DropdownGuest getDropdownGuest() {
-    	if (dropdownGuest == null)
-        {
+        if (dropdownGuest == null) {
             // TODO Develop Custom Exception 
             throw new RuntimeException(OPTION_NULL_MESSAGE);
         }
@@ -264,24 +274,23 @@ public abstract class TopPart {
     }
 
     private void clickDropdownGuestRegister() {
-    	getDropdownGuest().clickRegister();
-    	dropdownGuest = null;
+        getDropdownGuest().clickRegister();
+        dropdownGuest = null;
     }
-    
+
     private void clickDropdownGuestLogin() {
-    	getDropdownGuest().clickLogin();
-    	dropdownGuest = null;
+        getDropdownGuest().clickLogin();
+        dropdownGuest = null;
     }
 
     private void closeDropdownGuest() {
         clickSearchTopField();
         dropdownGuest = null;
     }
-    
+
     // dropdownLogged
     protected DropdownLogged getDropdownLogged() {
-    	if (dropdownLogged == null)
-        {
+        if (dropdownLogged == null) {
             // TODO Develop Custom Exception 
             throw new RuntimeException(OPTION_NULL_MESSAGE);
         }
@@ -294,39 +303,38 @@ public abstract class TopPart {
     }
 
     private void clickDropdownLoggedMyAccount() {
-    	getDropdownLogged().clickMyAccount();
-    	dropdownLogged= null;
+        getDropdownLogged().clickMyAccount();
+        dropdownLogged = null;
     }
 
     private void clickDropdownLoggedOrderHistory() {
-    	getDropdownLogged().clickOrderHistory();
-    	dropdownLogged= null;
+        getDropdownLogged().clickOrderHistory();
+        dropdownLogged = null;
     }
 
     private void clickDropdownLoggedTransactions() {
-    	getDropdownLogged().clickTransactions();
-    	dropdownLogged= null;
+        getDropdownLogged().clickTransactions();
+        dropdownLogged = null;
     }
 
     private void clickDropdownLoggedDownloads() {
-    	getDropdownLogged().clickDownloads();
-    	dropdownLogged= null;
+        getDropdownLogged().clickDownloads();
+        dropdownLogged = null;
     }
 
     private void clickDropdownLoggedLogout() {
-    	getDropdownLogged().clickLogout();
-    	dropdownLogged= null;
+        getDropdownLogged().clickLogout();
+        dropdownLogged = null;
     }
 
     private void closeDropdownLogged() {
         clickSearchTopField();
-        dropdownLogged= null;
+        dropdownLogged = null;
     }
 
     //view cart button
     private ViewCartComponent getViewCartComponent() {
-        if (viewCartComponent == null)
-        {
+        if (viewCartComponent == null) {
             // TODO Develop Custom Exception
             throw new RuntimeException(OPTION_NULL_MESSAGE);
         }
@@ -338,72 +346,72 @@ public abstract class TopPart {
         return getViewCartComponent();
     }
 
-	// Functional
+    // Functional
 
     // currency
- 	private void openCurrencyDropdownComponent() {
- 		//clickSearchTopField();
- 		closeDropdownComponent();
- 		clickCurrency();
- 		createDropdownComponent(By.cssSelector(LIST_CURRENCIES_CSSSELECTOR));
- 	}
- 	
- 	//protected void clickCurrencyByPartialName(String currencyName) { // Code Smell
+    private void openCurrencyDropdownComponent() {
+        //clickSearchTopField();
+        closeDropdownComponent();
+        clickCurrency();
+        createDropdownComponent(By.cssSelector(LIST_CURRENCIES_CSSSELECTOR));
+    }
+
+    //protected void clickCurrencyByPartialName(String currencyName) { // Code Smell
     protected void clickCurrencyByPartialName(Currencies optionName) {
-    	openCurrencyDropdownComponent();
-    	//clickDropdownComponentByPartialName(currencyName);
-    	clickDropdownComponentByPartialName(optionName.toString());
+        openCurrencyDropdownComponent();
+        //clickDropdownComponentByPartialName(currencyName);
+        clickDropdownComponentByPartialName(optionName.toString());
     }
 
     public List<String> getListCurrencyNames() {
-    	openCurrencyDropdownComponent();
+        openCurrencyDropdownComponent();
         List<String> result = getDropdownComponent().getListOptionsText();
         closeDropdownComponent();
         return result;
     }
-    
+
     // myAccount
     protected void openMyAccountDropdown() {
-		clickSearchTopField();
-		clickMyAccount();
-	}
-    
+        clickSearchTopField();
+        clickMyAccount();
+    }
+
     // TODO myAccount
-    
+
     // searchTopField
     private void fillSearchTopField(String searchText) {
         clickSearchTopField();
         clearSearchTopField();
         setSearchTopField(searchText);
     }
-    
+
     protected void defaultLogin(User user) {
-    	if (!ApplicationStatus.get().isLogged()) {
-        	new LoginPage(driver)
-    			.fillLogin(user);
-    	} else {
-    		// TODO throw Custom Exception
-    	}
+        if (!ApplicationStatus.get().isLogged()) {
+            new LoginPage(driver)
+                    .fillLogin(user);
+        } else {
+            // TODO throw Custom Exception
+        }
     }
-    
-	// Business Logic
-    
+
+    // Business Logic
+
     public HomePage gotoHomePage() {
         clickLogo();
         return new HomePage(driver);
     }
-    
-	//public SearchSuccessPage successfulSearch(String searchText) {
+
+    //public SearchSuccessPage successfulSearch(String searchText) {
     public SearchSuccessPage successfulSearch(Product product) {
-		//fillSearchTopField(searchText);
-		fillSearchTopField(product.getName());
-		clickSearchTopButton();
-		return new SearchSuccessPage(driver);
-	}
-	
-    public SearchUnsuccessPage unsuccessfulSearch(String searchText){
-    //public SearchUnsuccessPage unsuccessfulSearch(Product product){
-    	fillSearchTopField(searchText);
+        //fillSearchTopField(searchText);
+        fillSearchTopField(product.getName());
+        clickSearchTopButton();
+        return new SearchSuccessPage(driver);
+    }
+
+    public SearchUnsuccessPage unsuccessfulSearch(String searchText) {
+        //public SearchUnsuccessPage unsuccessfulSearch(Product product){
+        fillSearchTopField(searchText);
         //fillSearchTopField(product.getName());
         clickSearchTopButton();
         return new SearchUnsuccessPage(driver);
@@ -411,156 +419,156 @@ public abstract class TopPart {
 
     // dropdownGuest
     public LoginPage gotoLoginPage() {
-    	openMyAccountDropdown();
-    	createDropdownGuest();
-    	clickDropdownGuestLogin();
+        openMyAccountDropdown();
+        createDropdownGuest();
+        clickDropdownGuestLogin();
         return new LoginPage(driver);
     }
 
     public RegisterPage gotoRegisterPage() {
-    	openMyAccountDropdown();
-    	createDropdownGuest();
-    	clickDropdownGuestRegister();
+        openMyAccountDropdown();
+        createDropdownGuest();
+        clickDropdownGuestRegister();
         return new RegisterPage(driver);
     }
 
     // dropdownLogged
     public MyAccountPage gotoMyAccount() {
-    	openMyAccountDropdown();
-    	createDropdownLogged();
-    	clickDropdownLoggedMyAccount();
+        openMyAccountDropdown();
+        createDropdownLogged();
+        clickDropdownLoggedMyAccount();
         return new MyAccountPage(driver);
     }
-    
+
 //    public OrderHistoryPage gotoOrderHistory() {
 //    	openMyAccountDropdown();
 //    	createDropdownLogged();
 //    	clickDropdownLoggedOrderHistory();
 //        return new OrderHistoryPage(driver);
 //    }
-    
+
 //    public TransactionsPage gotoTransactions() {
 //    	openMyAccountDropdown();
 //    	createDropdownLogged();
 //    	clickDropdownLoggedTransactions();
 //        return new TransactionsPage(driver);
 //    }
-    
+
 //    public DownloadsPage gotoDownloads() {
 //    	openMyAccountDropdown();
 //    	createDropdownLogged();
 //    	clickDropdownLoggedDownloads();
 //        return new DownloadsPage(driver);
 //    }
-    
+
     public AccountLogoutPage logout() {
-    	openMyAccountDropdown();
-    	createDropdownLogged();
-    	clickDropdownLoggedLogout();
+        openMyAccountDropdown();
+        createDropdownLogged();
+        clickDropdownLoggedLogout();
         return new AccountLogoutPage(driver);
     }
 
     // wishList
     public WishListPage gotoWishListPage() {
-    	clickWishList();
+        clickWishList();
         return new WishListPage(driver);
     }
-    
+
     public WishListPage gotoWishListPage(User user) {
-    	clickWishList();
-    	defaultLogin(user);
+        clickWishList();
+        defaultLogin(user);
         return new WishListPage(driver);
     }
 
-    protected void openNewTab(){ //atomic
-        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
+    protected void openNewTab() { //atomic
+        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "t");
     }
 
-    protected ArrayList<String> getTabsHandles(){ //atomic
-	    return new ArrayList<>(driver.getWindowHandles());
+    protected ArrayList<String> getTabsHandles() { //atomic
+        return new ArrayList<>(driver.getWindowHandles());
     }
 
-    protected int getLastTabIndex(){ //atomic
-	    return getTabsHandles().size() - 1;
+    protected int getLastTabIndex() { //atomic
+        return getTabsHandles().size() - 1;
     }
 
-    protected void switchToNewTab(){ //atomic
-	    driver.switchTo().window(getTabsHandles().get(getLastTabIndex()));
+    protected void switchToNewTab() { //atomic
+        driver.switchTo().window(getTabsHandles().get(getLastTabIndex()));
     }
 
-    protected void openUrl(String url){ //atomic
-	    driver.get(url);
+    protected void openUrl(String url) { //atomic
+        driver.get(url);
     }
 
-    protected EmailLoginPage openEmailLoginTab(String emailServiceUrl){ //business logic
-	    openNewTab();
-	    switchToNewTab();
-	    openUrl(emailServiceUrl);
-	    return new EmailLoginPage(driver);
+    protected EmailLoginPage openEmailLoginTab(String emailServiceUrl) { //business logic
+        openNewTab();
+        switchToNewTab();
+        openUrl(emailServiceUrl);
+        return new EmailLoginPage(driver);
     }
 
     // view cart button logic
-    public void openViewCartComponent(){
+    public void openViewCartComponent() {
         clickCartButton();
         createViewCartComponent();
     }
 
-    public void closeViewCartComponent(){
+    public void closeViewCartComponent() {
         clickCartButton();
         viewCartComponent = null;
     }
 
-    public String getViewCartComponentTotalText(){
+    public String getViewCartComponentTotalText() {
         createViewCartComponent();
         return getViewCartComponent().getCartTotalText();
     }
 
-    public String getViewCartComponentTotalAmount(){
+    public String getViewCartComponentTotalAmount() {
         createViewCartComponent();
         return getViewCartComponent().getCartTotalAmount();
     }
 
-    public String getViewCartEmptyMsgText(){
+    public String getViewCartEmptyMsgText() {
         openViewCartComponent();
         return getViewCartComponent().getEmptyCartMsgText();
     }
 
-    public String getProductNameFromViewCart(Product product){
+    public String getProductNameFromViewCart(Product product) {
         openViewCartComponent();
         return getViewCartComponent().getViewProductComponentName(product);
     }
 
-    public String getProductPriceFromViewCart(Product product){
+    public String getProductPriceFromViewCart(Product product) {
         openViewCartComponent();
         return getViewCartComponent().getViewProductComponentPrice(product);
     }
 
-    public String getProductQuantityFromViewCart(Product product){
+    public String getProductQuantityFromViewCart(Product product) {
         openViewCartComponent();
         return getViewCartComponent().getViewProductComponentQuantity(product);
     }
 
-    public String getSubTotalPriceFromViewCart(){
+    public String getSubTotalPriceFromViewCart() {
         openViewCartComponent();
         return getViewCartComponent().getSubTotalText();
     }
 
-    public String getEcoTaxPriceFromViewCart(){
+    public String getEcoTaxPriceFromViewCart() {
         openViewCartComponent();
         return getViewCartComponent().getEcoTaxText();
     }
 
-    public String getVATPriceFromViewCart(){
+    public String getVATPriceFromViewCart() {
         openViewCartComponent();
         return getViewCartComponent().getVatTaxText();
     }
 
-    public String getTotalFromViewCart(){
+    public String getTotalFromViewCart() {
         openViewCartComponent();
         return getViewCartComponent().getTotalPriceText();
     }
 
-    public void removeProductFromViewCart(Product product){
+    public void removeProductFromViewCart(Product product) {
         openViewCartComponent();
         getViewCartComponent().removeViewProductComponent(product);
     }
