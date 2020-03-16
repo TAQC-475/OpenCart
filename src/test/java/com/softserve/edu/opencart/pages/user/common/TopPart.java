@@ -401,7 +401,7 @@ public abstract class TopPart {
         return new HomePage(driver);
     }
 
-    //public SearchSuccessPage successfulSearch(String searchText) {
+    //TODO class for parameter
     public SearchSuccessPage successfulSearch(Product product) {
         //fillSearchTopField(searchText);
         fillSearchTopField(product.getName());

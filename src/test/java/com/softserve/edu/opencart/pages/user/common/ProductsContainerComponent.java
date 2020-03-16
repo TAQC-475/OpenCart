@@ -57,8 +57,7 @@ public class ProductsContainerComponent {
         return productComponentNames;
     }
 
-    protected ProductComponent getProductComponentByName(String productName)
-    {
+    protected ProductComponent getProductComponentByName(String productName) {
         ProductComponent result = null;
         for (ProductComponent current : getProductComponents())
         {
@@ -123,7 +122,7 @@ public class ProductsContainerComponent {
     	return getProductComponentByName(product.getName());
     }
 
-    public AddProductAlertPage addProductToCartFromContainer(Product product){
+    public AddProductAlertPage addProductToCartDirectly(Product product){
         clickProductComponentAddToCartButton(product);
         return new AddProductAlertPage(driver);
     }

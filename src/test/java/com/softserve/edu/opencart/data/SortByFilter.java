@@ -22,6 +22,8 @@ public enum SortByFilter {
 
     @Override
     public String toString() {
-        return filter;
+        return "SortByFilter{" +
+                "filter='" + filter + '\'' +
+                "} " + super.toString();
     }
 }
