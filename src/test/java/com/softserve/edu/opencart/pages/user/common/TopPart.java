@@ -122,7 +122,7 @@ public abstract class TopPart {
 //        Use getWishListText()
         RegularExpression regularExpression = new RegularExpression();
 
-        return regularExpression.getNumberFromWishList(getWishListText());
+        return regularExpression.getNumberFromString(getWishListText());
     }
 
     // shoppingCart
