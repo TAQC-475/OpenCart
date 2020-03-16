@@ -3,6 +3,7 @@ package com.softserve.edu.opencart.pages.user.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.softserve.edu.opencart.pages.user.search.ProductInfoPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -89,16 +90,20 @@ public class ProductsContainerComponent {
         return getProductComponentByName(productName).getPartialDescriptionText();
     }
 
-    // TODO Change to Product
-    public void clickProductComponentAddToCartButtonByName(String productName)
+    public void clickProductComponentAddToCartButton(Product product)
     {
-        getProductComponentByName(productName).clickAddToCartButton();
+        getProductComponentByName(product.getName()).clickAddToCartButton();
     }
 
     // TODO Change to Product
     public void clickProductComponentAddToWishButtonByName(String productName)
     {
         getProductComponentByName(productName).clickAddToWishButton();
+    }
+
+    public void clickProductComponentNameLink(Product product)
+    {
+        getProductComponentByName(product.getName()).clickName();
     }
 
     public String getProductComponentPriceByProduct(Product product)
@@ -119,8 +124,13 @@ public class ProductsContainerComponent {
     }
 
     public AddProductAlertPage addProductToCartFromContainer(Product product){
-        clickProductComponentAddToCartButtonByName(product.getName());
+        clickProductComponentAddToCartButton(product);
         return new AddProductAlertPage(driver);
+    }
+
+    public ProductInfoPage openProductFromContainer(Product product){
+        clickProductComponentNameLink(product);
+        return new ProductInfoPage(driver);
     }
 
 }
