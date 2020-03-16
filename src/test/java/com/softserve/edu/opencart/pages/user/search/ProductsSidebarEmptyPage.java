@@ -29,16 +29,6 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
         return leftMenuItemList;
     }
 
-    /*  public int getNumberFromWishList(String str){
-    int listNumber = 0;
-    Pattern regularExpressionPattern = Pattern.compile("-?\\d+");
-    Matcher matcher = regularExpressionPattern.matcher(str);
-    while (matcher.find()){
-      listNumber = Integer.parseInt(matcher.group());}
-    return listNumber;
-  }
-*/
-
     // Functional
     private String withoutNumbers(String strInput){
         String strResult = "";
