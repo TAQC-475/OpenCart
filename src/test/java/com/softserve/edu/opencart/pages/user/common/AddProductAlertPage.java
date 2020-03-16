@@ -8,7 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AddProductAlertPage extends TopPart {
+
+
+public class AddProductAlertPage extends BreadCrumbPart{
+
     public static final String ADDED_PRODUCT_ALERT_MSG = "Success: You have added %s to your shopping cart! ";
     //
     private WebElement alertMessage;
