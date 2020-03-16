@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.emailclient.unlogged;
 
+import com.softserve.edu.opencart.data.EmailBoxName;
 import com.softserve.edu.opencart.pages.emailclient.email.EmailsListPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -75,7 +76,7 @@ public class LoginFormComponent {
         //enterLogin();
         //enterPassword();
         //clickLoginButton();
-        return new EmailsListPage(driver);
+        return new EmailsListPage(driver, EmailBoxName.INBOX);
     }
 
 }
