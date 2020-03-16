@@ -81,17 +81,16 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         return showDropDownMenu.getFirstSelectedOption().getText();
     }
 
-    public ProductsDisplayComponent setShowDropDownMenu(String text) {
-        showDropDownMenu.selectByVisibleText(text);
-        return this;
-    }
-
-    public ProductsDisplayComponent clickShowDropDownButton() {
+    public void clickShowDropDownButton() {
         getShowDropDownMenuWebElement().click();
-        return this;
     }
 
     // Functional
+
+    public void setShowDropDownMenu(String text) {
+        clickShowDropDownButton();
+        showDropDownMenu.selectByVisibleText(text);
+    }
 
     // Business Logic
 
