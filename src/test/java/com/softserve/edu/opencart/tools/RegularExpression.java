@@ -13,7 +13,8 @@ public final class RegularExpression {
     Pattern regularExpressionPattern = Pattern.compile("-?\\d+");
     Matcher matcher = regularExpressionPattern.matcher(str);
     while (matcher.find()){
-      listNumber = Integer.parseInt(matcher.group());}
+      listNumber = Integer.parseInt(matcher.group());
+    break;}
     return listNumber;
   }
 }
