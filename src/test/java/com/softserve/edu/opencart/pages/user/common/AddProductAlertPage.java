@@ -80,16 +80,4 @@ public class AddProductAlertPage extends BreadCrumbPart {
         driver.navigate().refresh();
         return new HomePage(driver);
     }
-
-    public boolean waitForJSandJQueryToLoad() {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        // wait for jQuery to load
-        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                return ((Long) ((JavascriptExecutor) driver).executeScript("return jQuery.active") == 0);
-            }
-        };
-        return wait.until(jQueryLoad);
-    }
 }

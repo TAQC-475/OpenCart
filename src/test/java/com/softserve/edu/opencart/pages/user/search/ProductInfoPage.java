@@ -3,6 +3,7 @@ package com.softserve.edu.opencart.pages.user.search;
 import com.softserve.edu.opencart.data.ProductOptionsSet;
 import com.softserve.edu.opencart.pages.user.common.AddProductAlertPage;
 import com.softserve.edu.opencart.pages.user.common.ProductInfoOptionsComponent;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -10,6 +11,8 @@ import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
 import org.openqa.selenium.WebElement;
 
 public class ProductInfoPage extends BreadCrumbPart {
+
+	private WaitUtils alertPageWait;
 
 	private WebElement productName;
 	private WebElement productPrice;
@@ -28,6 +31,7 @@ public class ProductInfoPage extends BreadCrumbPart {
 		productPrice = driver.findElement(By.cssSelector(".col-sm-4 h2"));
 		productQuantity = driver.findElement(By.cssSelector("#input-quantity"));
 		addToCartButton = driver.findElement(By.cssSelector("#button-cart"));
+		alertPageWait = new WaitUtils(driver, 10);
 	}
 
 	// Page Object
@@ -66,6 +70,7 @@ public class ProductInfoPage extends BreadCrumbPart {
 	// Functional
 	public void clickAddToCartButton(){
 		getAddToCartButton().click();
+		alertPageWait.waitForAlertVisibility(driver);
 	}
 
 	public void clearProductQuantity(){

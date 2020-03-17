@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.softserve.edu.opencart.pages.user.search.ProductInfoPage;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,7 @@ public class ProductsContainerComponent {
     protected WebDriver driver;
 	//
 	private List<ProductComponent> productComponents;
+    private WaitUtils alertPageWait;
 
 	public ProductsContainerComponent(WebDriver driver) {
 		this.driver = driver;
@@ -30,6 +32,7 @@ public class ProductsContainerComponent {
         {
             productComponents.add(new ProductComponent(current));
         }
+        alertPageWait = new WaitUtils(driver, 10);
 	}
 
 	// Page Object
@@ -124,6 +127,7 @@ public class ProductsContainerComponent {
 
     public AddProductAlertPage addProductToCartDirectly(Product product){
         clickProductComponentAddToCartButton(product);
+        alertPageWait.waitForAlertVisibility(driver);
         return new AddProductAlertPage(driver);
     }
 
