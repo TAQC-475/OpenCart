@@ -1,7 +1,8 @@
 package com.softserve.edu.opencart.pages.user.search;
 
+import com.softserve.edu.opencart.data.ProductOptionsSet;
 import com.softserve.edu.opencart.pages.user.common.AddProductAlertPage;
-//import com.softserve.edu.opencart.pages.user.common.ProductInfoOptionsComponent;
+import com.softserve.edu.opencart.pages.user.common.ProductInfoOptionsComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -14,7 +15,7 @@ public class ProductInfoPage extends BreadCrumbPart {
 	private WebElement productPrice;
 	private WebElement productQuantity;
 	private WebElement addToCartButton;
-//	private ProductInfoOptionsComponent productInfoOptions;
+	private ProductInfoOptionsComponent productInfoOptions;
 
 	public ProductInfoPage(WebDriver driver) {
 		super(driver);
@@ -55,12 +56,12 @@ public class ProductInfoPage extends BreadCrumbPart {
 		return addToCartButton;
 	}
 
-//	public ProductInfoOptionsComponent getProductInfoOptions() {
-//		if (productInfoOptions == null) {
-//			return new ProductInfoOptionsComponent(driver);
-//		}
-//		return productInfoOptions;
-//	}
+	public ProductInfoOptionsComponent getProductInfoOptions() {
+		if (productInfoOptions == null) {
+			return new ProductInfoOptionsComponent(driver);
+		}
+		return productInfoOptions;
+	}
 
 	// Functional
 	public void clickAddToCartButton(){
@@ -84,6 +85,9 @@ public class ProductInfoPage extends BreadCrumbPart {
 		clearProductQuantity();
 		setProductQuantity(quantity);
 	}
+	public void setProductOptions(ProductOptionsSet optionsSet){
+		getProductInfoOptions().setProductOptionsFull(optionsSet);
+	}
 
 	// Business Logic
 	public AddProductAlertPage addProductDefaultQuantity(){
@@ -92,6 +96,19 @@ public class ProductInfoPage extends BreadCrumbPart {
 	}
 
 	public AddProductAlertPage addProductSetQuantity(String quantity){
+		inputProductQuantity(quantity);
+		clickAddToCartButton();
+		return new AddProductAlertPage(driver);
+	}
+
+	public AddProductAlertPage addProductWithOptionsDefaultQuantity(ProductOptionsSet optionsSet){
+		setProductOptions(optionsSet);
+		clickAddToCartButton();
+		return new AddProductAlertPage(driver);
+	}
+
+	public AddProductAlertPage addProductWithOptionsSetQuantity(ProductOptionsSet optionsSet, String quantity){
+		setProductOptions(optionsSet);
 		inputProductQuantity(quantity);
 		clickAddToCartButton();
 		return new AddProductAlertPage(driver);
