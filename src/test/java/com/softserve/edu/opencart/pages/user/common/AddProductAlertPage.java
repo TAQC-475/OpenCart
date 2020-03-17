@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.user.common;
 
+import com.softserve.edu.opencart.pages.user.HomePage;
 import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -73,6 +74,11 @@ public class AddProductAlertPage extends BreadCrumbPart {
     public ShoppingCartPage goToShoppingCartFromAlert() {
         clickCartLink();
         return new ShoppingCartPage(driver);
+    }
+
+    public HomePage goToHomePageFromAlert(){
+        driver.navigate().refresh();
+        return new HomePage(driver);
     }
 
     public boolean waitForJSandJQueryToLoad() {

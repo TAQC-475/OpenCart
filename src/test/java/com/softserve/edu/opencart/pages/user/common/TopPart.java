@@ -1,31 +1,22 @@
 package com.softserve.edu.opencart.pages.user.common;
 
-import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
-import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
-import com.softserve.edu.opencart.tools.RegularExpression;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.softserve.edu.opencart.pages.emailclient.unlogged.EmailLoginPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import com.softserve.edu.opencart.data.ApplicationStatus;
 import com.softserve.edu.opencart.data.Currencies;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.pages.user.HomePage;
-import com.softserve.edu.opencart.pages.user.account.AccountLogoutPage;
-import com.softserve.edu.opencart.pages.user.account.LoginPage;
-import com.softserve.edu.opencart.pages.user.account.MyAccountPage;
-import com.softserve.edu.opencart.pages.user.account.RegisterPage;
-import com.softserve.edu.opencart.pages.user.account.WishListPage;
+import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
+import com.softserve.edu.opencart.pages.user.account.*;
+import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
+import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
 import com.softserve.edu.opencart.pages.user.search.SearchUnsuccessPage;
+import com.softserve.edu.opencart.tools.RegularExpression;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public abstract class TopPart {
     protected final String OPTION_NULL_MESSAGE = "DropdownComponent is null";
@@ -135,6 +126,11 @@ public abstract class TopPart {
 
     public void clickShoppingCart() {
         getShoppingCart().click();
+    }
+
+    public ShoppingCartPage goToShoppingCartPage() {
+        clickShoppingCart();
+        return new ShoppingCartPage(driver);
     }
 
     // checkout
@@ -478,7 +474,6 @@ public abstract class TopPart {
         defaultLogin(user);
         return new WishListPage(driver);
     }
-
 
 
     // view cart button logic

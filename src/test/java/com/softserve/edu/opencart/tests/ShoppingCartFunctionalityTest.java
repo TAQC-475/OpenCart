@@ -13,7 +13,11 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .gotoHomePage()
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(ProductRepository.getIPhone())
-                .goToShoppingCartFromAlert()
+                .goToHomePageFromAlert()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(ProductRepository.getMacBook())
+                .goToHomePageFromAlert()
+                .goToShoppingCartPage()
                 .calculateCorrectTotalPrice(ProductRepository.getIPhone());
 
     }
