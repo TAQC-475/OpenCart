@@ -49,7 +49,9 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return new ShoppingCartPage(driver);
     }
 
-    public BigDecimal calculateCorrectTotalPrice(ShoppingCartProductComponent productComponent) {
+    public BigDecimal calculateCorrectTotalPrice(Product product) {
+        ShoppingCartProductComponent productComponent = this.getShoppingCartProductsContainerComponent()
+                                                            .getShoppingCartProductComponentByProduct(product);
         BigDecimal quantity = new BigDecimal(productComponent.getQuantityText());
         String unitPrice = productComponent.getUnitPriceText();
         BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(unitPrice);

@@ -8,6 +8,13 @@ import org.testng.annotations.Test;
 public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
     @Test
     public void priceTest() {
+        loadApplication().gotoLoginPage()
+                .successfulLogin(UserRepository.get().getDefault())
+                .gotoHomePage()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(ProductRepository.getIPhone())
+                .goToShoppingCartFromAlert()
+                .calculateCorrectTotalPrice(ProductRepository.getIPhone());
 
     }
     @Test
@@ -17,7 +24,7 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .successfulLogin(UserRepository.get().getDefault())
                 .gotoHomePage()
                 .getProductComponentsContainer()
-                .addProductToCartFromContainer(ProductRepository.getMacBook())
+                .addProductToCartDirectly(ProductRepository.getMacBook())
                 .goToShoppingCartFromAlert()
                 .refreshShoppingCartPageByProduct(ProductRepository.getMacBook())
                 .removeShoppingCartComponentFromContainerByProduct(ProductRepository.getMacBook());
