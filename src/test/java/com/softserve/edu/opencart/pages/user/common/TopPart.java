@@ -480,32 +480,7 @@ public abstract class TopPart {
         return new WishListPage(driver);
     }
 
-    protected void openNewTab() { //atomic
-        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "t");
-    }
 
-    protected ArrayList<String> getTabsHandles() { //atomic
-        return new ArrayList<>(driver.getWindowHandles());
-    }
-
-    protected int getLastTabIndex() { //atomic
-        return getTabsHandles().size() - 1;
-    }
-
-    protected void switchToNewTab() { //atomic
-        driver.switchTo().window(getTabsHandles().get(getLastTabIndex()));
-    }
-
-    protected void openUrl(String url) { //atomic
-        driver.get(url);
-    }
-
-    protected EmailLoginPage openEmailLoginTab(String emailServiceUrl) { //business logic
-        openNewTab();
-        switchToNewTab();
-        openUrl(emailServiceUrl);
-        return new EmailLoginPage(driver);
-    }
 
     // view cart button logic
     public void openViewCartComponent() {
