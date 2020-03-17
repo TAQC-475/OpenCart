@@ -4,6 +4,7 @@ import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
 import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
 import com.softserve.edu.opencart.tools.RegularExpression;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,11 +119,11 @@ public abstract class TopPart {
         getWishList().click();
     }
 
-    public int getWishListNumber() {
+    public BigDecimal getWishListNumber() {
 //        Use getWishListText()
         RegularExpression regularExpression = new RegularExpression();
 
-        return regularExpression.getNumberFromString(getWishListText());
+        return regularExpression.getBigDecimalFromTheShoppingCartPriceField(getWishListText());
     }
 
     // shoppingCart
