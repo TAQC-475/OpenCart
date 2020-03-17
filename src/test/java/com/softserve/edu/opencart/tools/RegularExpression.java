@@ -9,12 +9,12 @@ public final class RegularExpression {
   public RegularExpression() {
   }
 
-  public String getNumberFromString(String str){
-    String stringNumber = "";
-    Pattern regularExpressionPattern = Pattern.compile("-?\\d+.\\d+.\\d+");
+  public int getNumberFromString(String str){
+    int stringNumber = 0;
+    Pattern regularExpressionPattern = Pattern.compile("-?\\d+");
     Matcher matcher = regularExpressionPattern.matcher(str);
     while (matcher.find()){
-      stringNumber = matcher.group();
+      stringNumber = Integer.parseInt(matcher.group());
     break;}
     return stringNumber;
   }

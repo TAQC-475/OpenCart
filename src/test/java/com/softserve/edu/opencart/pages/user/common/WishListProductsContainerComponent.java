@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.user.common;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import com.softserve.edu.opencart.data.Product;
@@ -55,7 +56,11 @@ public class WishListProductsContainerComponent {
     return result;
   }
 
-  public String getWishListComponentPriceByName(String productName){
+  public String getWishListComponentByNameText(String productName){
+    return getWishListComponentByName(productName).getNameText();
+  }
+
+  public BigDecimal getWishListComponentPriceByName(String productName){
     return getWishListComponentByName(productName).getPriceText();
   }
 
