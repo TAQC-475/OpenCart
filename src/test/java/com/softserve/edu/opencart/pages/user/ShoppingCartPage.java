@@ -44,7 +44,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     public ShoppingCartPage removeShoppingCartComponentFromContainerByProduct(Product product) {
         this.getShoppingCartProductsContainerComponent()
-                .getShoppingCartProductComponentByProduct(ProductRepository.getMacBook())
+                .getShoppingCartProductComponentByProduct(product)
                 .clickRemoveButton();
         return new ShoppingCartPage(driver);
     }

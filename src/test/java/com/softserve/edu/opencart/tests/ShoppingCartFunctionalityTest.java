@@ -29,8 +29,12 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .gotoHomePage()
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(ProductRepository.getMacBook())
-                .goToShoppingCartFromAlert()
+                .goToHomePageFromAlert()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(ProductRepository.getIPhone())
+                .goToHomePageFromAlert()
+                .goToShoppingCartPage()
                 .refreshShoppingCartPageByProduct(ProductRepository.getMacBook())
-                .removeShoppingCartComponentFromContainerByProduct(ProductRepository.getMacBook());
+                .removeShoppingCartComponentFromContainerByProduct(ProductRepository.getIPhone());
     }
 }
