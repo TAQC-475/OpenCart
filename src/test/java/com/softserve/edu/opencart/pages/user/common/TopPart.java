@@ -119,11 +119,9 @@ public abstract class TopPart {
         getWishList().click();
     }
 
-    public BigDecimal getWishListNumber() {
+    public int getWishListComponentNumber() {
 //        Use getWishListText()
-        RegularExpression regularExpression = new RegularExpression();
-
-        return regularExpression.getBigDecimalFromTheShoppingCartPriceField(getWishListText());
+        return new RegularExpression().getNumberFromString(getWishListText());
     }
 
     // shoppingCart
