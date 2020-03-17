@@ -21,11 +21,11 @@ public class WaitUtils {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         waitForJSandJQueryToLoad(driver);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ALERT_MESSAGE_CSS)));
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     private boolean waitForJSandJQueryToLoad(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         // wait for jQuery to load
         ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
             @Override
