@@ -5,12 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-
-public class AddProductAlertPage extends BreadCrumbPart{
+public class AddProductAlertPage extends BreadCrumbPart {
 
     public static final String ADDED_PRODUCT_ALERT_MSG = "Success: You have added %s to your shopping cart! ";
     //
@@ -29,7 +29,7 @@ public class AddProductAlertPage extends BreadCrumbPart{
         alertMessage = driver.findElement(By.cssSelector(".alert.alert-success"));
         alertButton = driver.findElement(By.cssSelector(".alert.alert-success button"));
         productLink = alertMessage.findElement(By.xpath(".//a[contains(@href,'?route=product/product')]"));
-        cartLink = driver.findElement(By.xpath(".//a[text() = 'shopping cart']"));
+        cartLink = alertMessage.findElement(By.xpath(".//a[text() = 'shopping cart']"));
     }
 
     // Page Object
@@ -61,6 +61,8 @@ public class AddProductAlertPage extends BreadCrumbPart{
     }
 
     public WebElement getCartLink() {
+        Actions builder = new Actions(driver);
+        builder.moveToElement(cartLink).build().perform();
         return cartLink;
     }
 
@@ -69,7 +71,6 @@ public class AddProductAlertPage extends BreadCrumbPart{
     }
 
     public ShoppingCartPage goToShoppingCartFromAlert() {
-        waitForJSandJQueryToLoad();
         clickCartLink();
         return new ShoppingCartPage(driver);
     }
