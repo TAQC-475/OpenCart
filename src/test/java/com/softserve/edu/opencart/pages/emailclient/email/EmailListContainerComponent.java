@@ -13,6 +13,8 @@ public class EmailListContainerComponent {
 
     private final String XPATH_EMAIL_LIST_ITEM_LOCATOR = "//table[@id='messlist']//tr[td]";
 
+    //private final String exception
+
     public EmailListContainerComponent(WebDriver driver){
         this.driver = driver;
         initElements();
@@ -29,4 +31,15 @@ public class EmailListContainerComponent {
     public List<EmailListItemComponent> getEmailListItemComponents() {
         return emailListItemComponents;
     }
+
+    public EmailListItemComponent findEmailListItemBySenderName(String senderName){
+        for(EmailListItemComponent component : getEmailListItemComponents()){
+            if(component.getSenderName().equals(senderName)){
+                return component;
+            }
+        }
+        return null;
+    }
+
+
 }

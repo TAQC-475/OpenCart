@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.user.search;
 
+import com.softserve.edu.opencart.data.CountOfProducts;
 import com.softserve.edu.opencart.data.SortByFilter;
 import com.softserve.edu.opencart.pages.user.common.ProductsContainerComponent;
 import org.openqa.selenium.By;
@@ -81,17 +82,16 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         return showDropDownMenu.getFirstSelectedOption().getText();
     }
 
-    public ProductsDisplayComponent setShowDropDownMenu(String text) {
-        showDropDownMenu.selectByVisibleText(text);
-        return this;
-    }
-
-    public ProductsDisplayComponent clickShowDropDownButton() {
+    public void clickShowDropDownButton() {
         getShowDropDownMenuWebElement().click();
-        return this;
     }
 
     // Functional
+
+    public void setShowDropDownMenu(CountOfProducts count) {
+        clickShowDropDownButton();
+        showDropDownMenu.selectByVisibleText(String.valueOf(count));
+    }
 
     // Business Logic
 

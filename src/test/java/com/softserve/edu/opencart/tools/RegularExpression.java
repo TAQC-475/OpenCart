@@ -9,13 +9,14 @@ public final class RegularExpression {
   public RegularExpression() {
   }
 
-  public int getNumberFromWishList(String str){
-    int listNumber = 0;
-    Pattern regularExpressionPattern = Pattern.compile("-?\\d+");
+  public String getNumberFromString(String str){
+    String stringNumber = "";
+    Pattern regularExpressionPattern = Pattern.compile("-?\\d+.\\d+.\\d+");
     Matcher matcher = regularExpressionPattern.matcher(str);
     while (matcher.find()){
-      listNumber = Integer.parseInt(matcher.group());}
-    return listNumber;
+      stringNumber = matcher.group();
+    break;}
+    return stringNumber;
   }
 
   public BigDecimal getBigDecimalFromTheShoppingCartPriceField(String field){

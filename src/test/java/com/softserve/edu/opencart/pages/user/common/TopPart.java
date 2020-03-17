@@ -4,6 +4,7 @@ import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
 import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
 import com.softserve.edu.opencart.tools.RegularExpression;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,11 +119,11 @@ public abstract class TopPart {
         getWishList().click();
     }
 
-    public int getWishListNumber() {
+    public BigDecimal getWishListNumber() {
 //        Use getWishListText()
         RegularExpression regularExpression = new RegularExpression();
 
-        return regularExpression.getNumberFromWishList(getWishListText());
+        return regularExpression.getBigDecimalFromTheShoppingCartPriceField(getWishListText());
     }
 
     // shoppingCart
@@ -401,7 +402,7 @@ public abstract class TopPart {
         return new HomePage(driver);
     }
 
-    //public SearchSuccessPage successfulSearch(String searchText) {
+    //TODO class for parameter
     public SearchSuccessPage successfulSearch(Product product) {
         //fillSearchTopField(searchText);
         fillSearchTopField(product.getName());
@@ -480,32 +481,7 @@ public abstract class TopPart {
         return new WishListPage(driver);
     }
 
-    protected void openNewTab() { //atomic
-        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "t");
-    }
 
-    protected ArrayList<String> getTabsHandles() { //atomic
-        return new ArrayList<>(driver.getWindowHandles());
-    }
-
-    protected int getLastTabIndex() { //atomic
-        return getTabsHandles().size() - 1;
-    }
-
-    protected void switchToNewTab() { //atomic
-        driver.switchTo().window(getTabsHandles().get(getLastTabIndex()));
-    }
-
-    protected void openUrl(String url) { //atomic
-        driver.get(url);
-    }
-
-    protected EmailLoginPage openEmailLoginTab(String emailServiceUrl) { //business logic
-        openNewTab();
-        switchToNewTab();
-        openUrl(emailServiceUrl);
-        return new EmailLoginPage(driver);
-    }
 
     // view cart button logic
     public void openViewCartComponent() {

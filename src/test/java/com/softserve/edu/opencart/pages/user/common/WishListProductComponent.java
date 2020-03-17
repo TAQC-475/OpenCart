@@ -68,10 +68,12 @@ public final class WishListProductComponent {
   public WebElement getPrice() {
     return price;
   }
+
   // TODO when there two prices
   public String getPriceText(){
     return getPrice().getText();
   }
+
 
   public WebElement getAddToCartButton() {
     return addToCartButton;
