@@ -11,9 +11,11 @@ public class EmailListContainerComponent {
     private List<EmailListItemComponent> emailListItemComponents;
     private WebDriver driver;
 
-    private final String XPATH_EMAIL_LIST_ITEM_LOCATOR = "//table[@id='messlist']//tr[td]";
+    private final String XPATH_EMAIL_LIST_LOCATOR = "//table[@id='messlist']//tr[td and @style]";
+    private final String EMAIL_NOT_FOUND_EXCEPTION_FORMAT = "No new reset password messages found from %s";
 
-    //private final String exception
+    private final String APPLICATION_EMAIL_NAME = "Your Store";
+    private final String RESET_ACCOUNT_PASSWORD_TOPIC = "Your Store - Password reset request";
 
     public EmailListContainerComponent(WebDriver driver){
         this.driver = driver;
@@ -23,7 +25,7 @@ public class EmailListContainerComponent {
 
     private void initElements(){
         emailListItemComponents = new LinkedList<>();
-        for(WebElement currentEmailListItem : driver.findElements(By.xpath(XPATH_EMAIL_LIST_ITEM_LOCATOR))){
+        for(WebElement currentEmailListItem : driver.findElements(By.xpath(XPATH_EMAIL_LIST_LOCATOR))){
             emailListItemComponents.add(new EmailListItemComponent(currentEmailListItem));
         }
     }
@@ -32,13 +34,25 @@ public class EmailListContainerComponent {
         return emailListItemComponents;
     }
 
-    public EmailListItemComponent findEmailListItemBySenderName(String senderName){
+
+    private boolean isMessageMatches(EmailListItemComponent emailComponent){
+        return emailComponent.getSenderNameText().equalsIgnoreCase(APPLICATION_EMAIL_NAME) &&
+                emailComponent.getTopicText().equalsIgnoreCase(RESET_ACCOUNT_PASSWORD_TOPIC);
+    }
+
+
+    public EmailListItemComponent findEmailListItemBySenderNameAndTopic() throws Exception{
         for(EmailListItemComponent component : getEmailListItemComponents()){
-            if(component.getSenderName().equals(senderName)){
+            if(isMessageMatches(component)){
                 return component;
             }
         }
-        return null;
+        throw new Exception(String.format(EMAIL_NOT_FOUND_EXCEPTION_FORMAT, RESET_ACCOUNT_PASSWORD_TOPIC));
+    }
+
+    public EmailPage goToEmail() throws Exception{
+        findEmailListItemBySenderNameAndTopic().clickSenderName();
+        return new EmailPage(driver);
     }
 
 
