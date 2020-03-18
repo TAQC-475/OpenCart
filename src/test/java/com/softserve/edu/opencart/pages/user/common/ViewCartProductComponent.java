@@ -47,7 +47,7 @@ public class ViewCartProductComponent {
     }
 
     public String getQuantityText() {
-        return getQuantity().getText();
+        return getQuantity().getText().substring(1);
     }
 
     public WebElement getPrice() {
