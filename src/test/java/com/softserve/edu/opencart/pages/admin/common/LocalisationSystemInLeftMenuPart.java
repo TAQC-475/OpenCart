@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.admin.common;
 
+import com.softserve.edu.opencart.pages.admin.currencies.CurrenciesPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,4 +22,14 @@ public class LocalisationSystemInLeftMenuPart extends SystemInLeftMenuPart {
         languages = driver.findElement(By.xpath("//*[@id=\"menu-system\"]//a[contains(text(), 'Languages')]"));
         currencies = driver.findElement(By.xpath("//*[@id=\"menu-system\"]//a[contains(text(), 'Currencies')]"));
     }
+    //Currencies
+    public void clickCurrencies() {
+        currencies.click();
+    }
+
+    public CurrenciesPage localisationSystemInLeftMenuPart() {
+        clickCurrencies();
+        return new CurrenciesPage(driver);
+    }
+
 }

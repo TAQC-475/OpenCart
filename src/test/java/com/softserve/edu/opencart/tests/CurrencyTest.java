@@ -8,6 +8,11 @@ import com.softserve.edu.opencart.pages.user.HomePage;
 public class CurrencyTest extends EpizyUserTestRunner {
 
 	@Test
+	public void addNewCurrency(){
+
+	}
+
+	@Test
 	public void checkChangeCurrency() throws Exception {
 		// Steps
 		HomePage homepage = loadApplication()

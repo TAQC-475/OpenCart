@@ -22,7 +22,7 @@ public class SystemInLeftMenuPart extends LeftMenuPart {
         localisation = driver.findElement(By.xpath("//*[@id='menu-system']//a[contains(text(), 'Localisation')]"));
         tools = driver.findElement(By.xpath("//*[@id='menu-system']//a[contains(text(), 'Tools')]"));
     }
-
+    //Localisation
     public void clickLocalisation() {
         localisation.click();
     }
