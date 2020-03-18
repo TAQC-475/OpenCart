@@ -12,19 +12,21 @@ import java.util.concurrent.TimeUnit;
 public class WaitUtils {
     private final String ALERT_MESSAGE_CSS = ".alert.alert-success";
     private WebDriverWait wait;
+    private WebDriver driver;
 
     public WaitUtils(WebDriver driver, int seconds){
+        this.driver = driver;
         this.wait = new WebDriverWait(driver, seconds);
     }
 
-    public void waitForAlertVisibility(WebDriver driver){
+    public void waitForAlertVisibility(){
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        waitForJSandJQueryToLoad(driver);
+        waitForJSandJQueryToLoad();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ALERT_MESSAGE_CSS)));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    private boolean waitForJSandJQueryToLoad(WebDriver driver) {
+    private boolean waitForJSandJQueryToLoad() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         // wait for jQuery to load
         ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {

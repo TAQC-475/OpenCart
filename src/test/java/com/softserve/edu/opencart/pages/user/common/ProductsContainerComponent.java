@@ -127,7 +127,7 @@ public class ProductsContainerComponent {
 
     public AddProductAlertPage addProductToCartDirectly(Product product){
         clickProductComponentAddToCartButton(product);
-        alertPageWait.waitForAlertVisibility(driver);
+        alertPageWait.waitForAlertVisibility();
         return new AddProductAlertPage(driver);
     }
 
