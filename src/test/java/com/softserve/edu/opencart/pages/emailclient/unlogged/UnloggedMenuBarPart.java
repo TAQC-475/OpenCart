@@ -20,8 +20,6 @@ public abstract class  UnloggedMenuBarPart extends FooterServicesPart {
     private WebElement ruLan;
     private WebElement uaLan;
 
-    protected WebDriver driver;
-
     public UnloggedMenuBarPart(WebDriver driver){
         super(driver);
         initElements();

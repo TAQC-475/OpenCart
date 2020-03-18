@@ -41,17 +41,17 @@ public class EmailListContainerComponent {
     }
 
 
-    public EmailListItemComponent findEmailListItemBySenderNameAndTopic() throws Exception{
+    public EmailListItemComponent findResetPasswordEmail() throws RuntimeException{
         for(EmailListItemComponent component : getEmailListItemComponents()){
             if(isMessageMatches(component)){
                 return component;
             }
         }
-        throw new Exception(String.format(EMAIL_NOT_FOUND_EXCEPTION_FORMAT, RESET_ACCOUNT_PASSWORD_TOPIC));
+        throw new RuntimeException(String.format(EMAIL_NOT_FOUND_EXCEPTION_FORMAT, RESET_ACCOUNT_PASSWORD_TOPIC));
     }
 
-    public EmailPage goToEmail() throws Exception{
-        findEmailListItemBySenderNameAndTopic().clickSenderName();
+    public EmailPage goToEmail() throws RuntimeException{
+        findResetPasswordEmail().clickSenderName();
         return new EmailPage(driver);
     }
 
