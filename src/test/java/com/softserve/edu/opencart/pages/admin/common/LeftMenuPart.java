@@ -95,6 +95,17 @@ public class LeftMenuPart extends HeaderPart {
 		return getNavigatePannelClassAttribute().equals(NAVIGATE_PANNEL_ACTIVE);
 	}
 
+
+	//Sysstem
+	public void clickSystem() {
+		system.click();
+	}
+
+	public SystemInLeftMenuPart leftMenuPart() {
+		clickSystem();
+		return new SystemInLeftMenuPart(driver);
+	}
+
 	// navigatePannel
 	public void activeNavigatePannel() {
 		if (!isNavigatePannelActive()) {
