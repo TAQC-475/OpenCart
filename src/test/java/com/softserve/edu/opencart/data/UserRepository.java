@@ -87,23 +87,22 @@ public final class UserRepository {
 				.build();
 	}
 
-	public IUser getMrAndersonUser(){
+	public IUser getVasyl(){
 		return User.get()
-				.setFirstName("MrAnderson")
-				.setLastName("Neo")
-				.setEmail("testByAnderson@gamil.com")
-				.setTelephone("+30636969696")
+				.setFirstName("Vasyl")
+				.setLastName("Shchuka")
+				.setEmail("test.user.vasyl@meta.ua")
+				.setTelephone("1234567")
 				.setAddress1("address")
-				.setCity("Isengard")
-				.setPostCode("129413")
-				.setCountry("Ukraine")
-				.setRegionState("L`vivs`ka Oblast`")
-//				.setPassword(System.getenv().get("MY_PASSWORD"))
-				.setPassword("qwerty")
+				.setCity("Fish and Chips")
+				.setPostCode("1212")
+				.setCountry("United Kingdom")
+				.setRegionState("Bristol")
+				.setPassword("qwerty1488")
 				.setSubscribe(true)
 				.setFax("fax")
 				.setCompany("company")
-				.setAddress2("address2")
+				.setAddress2("address_2")
 				.build();
 	}
 

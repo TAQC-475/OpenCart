@@ -17,7 +17,7 @@ public class EmailsListPage extends LeftEmailsPanelPart{
         emails = new EmailListContainerComponent(driver);
     }
 
-    public EmailPage goToResetPasswordEmailPage() {
+    public EmailPage goToResetPasswordEmail() {
         emails.goToEmail();
         return new EmailPage(driver);
 
