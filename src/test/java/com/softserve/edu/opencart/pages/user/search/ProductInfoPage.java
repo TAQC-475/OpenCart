@@ -62,7 +62,7 @@ public class ProductInfoPage extends BreadCrumbPart {
 
 	public ProductInfoOptionsComponent getProductInfoOptions() {
 		if (productInfoOptions == null) {
-			return new ProductInfoOptionsComponent(driver);
+			productInfoOptions =  new ProductInfoOptionsComponent(driver);
 		}
 		return productInfoOptions;
 	}
