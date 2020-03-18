@@ -1,13 +1,10 @@
 package com.softserve.edu.opencart.pages.user.common;
 
+import com.softserve.edu.opencart.pages.user.HomePage;
 import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class AddProductAlertPage extends BreadCrumbPart {
@@ -61,8 +58,8 @@ public class AddProductAlertPage extends BreadCrumbPart {
     }
 
     public WebElement getCartLink() {
-        Actions builder = new Actions(driver);
-        builder.moveToElement(cartLink).build().perform();
+//        Actions builder = new Actions(driver);
+//        builder.moveToElement(cartLink).build().perform();
         return cartLink;
     }
 
@@ -75,15 +72,8 @@ public class AddProductAlertPage extends BreadCrumbPart {
         return new ShoppingCartPage(driver);
     }
 
-    public boolean waitForJSandJQueryToLoad() {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        // wait for jQuery to load
-        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                return ((Long) ((JavascriptExecutor) driver).executeScript("return jQuery.active") == 0);
-            }
-        };
-        return wait.until(jQueryLoad);
+    public HomePage goToHomePageFromAlert() {
+        driver.navigate().refresh();
+        return new HomePage(driver);
     }
 }

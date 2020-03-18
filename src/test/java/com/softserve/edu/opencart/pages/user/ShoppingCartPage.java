@@ -1,7 +1,6 @@
 package com.softserve.edu.opencart.pages.user;
 
 import com.softserve.edu.opencart.data.Product;
-import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
 import com.softserve.edu.opencart.pages.user.common.ShoppingCartProductComponent;
 import com.softserve.edu.opencart.pages.user.common.ShoppingCartProductsContainerComponent;
@@ -11,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ShoppingCartPage extends BreadCrumbPart {
     private WebElement shoppingCartExpectedText;
@@ -44,18 +44,35 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     public ShoppingCartPage removeShoppingCartComponentFromContainerByProduct(Product product) {
         this.getShoppingCartProductsContainerComponent()
-                .getShoppingCartProductComponentByProduct(ProductRepository.getMacBook())
+                .getShoppingCartProductComponentByProduct(product)
                 .clickRemoveButton();
         return new ShoppingCartPage(driver);
     }
 
-    public BigDecimal calculateCorrectTotalPrice(Product product) {
+    public ShoppingCartPage setQuantity(Product product, String quantity) {
+        ShoppingCartProductComponent shoppingCartProductComponent = this.getShoppingCartProductsContainerComponent()
+                .getShoppingCartProductComponentByProduct(product);
+        shoppingCartProductComponent.getQuantity().clear();
+        shoppingCartProductComponent.getQuantity().sendKeys(quantity);
+        return refreshShoppingCartPageByProduct(product);
+
+    }
+
+    public BigDecimal calculateProductCorrectTotalPrice(Product product) {
         ShoppingCartProductComponent productComponent = this.getShoppingCartProductsContainerComponent()
-                                                            .getShoppingCartProductComponentByProduct(product);
+                .getShoppingCartProductComponentByProduct(product);
         BigDecimal quantity = new BigDecimal(productComponent.getQuantityText());
         String unitPrice = productComponent.getUnitPriceText();
         BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(unitPrice);
         BigDecimal totalPrice = bdPrice.multiply(quantity);
+        return totalPrice;
+    }
+
+    public BigDecimal calculateOrderCorrectTotalPrice(List<BigDecimal> productsCorrectTotalPrices) {
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (BigDecimal decimal : productsCorrectTotalPrices) {
+            totalPrice = totalPrice.add(decimal);
+        }
         return totalPrice;
     }
 }

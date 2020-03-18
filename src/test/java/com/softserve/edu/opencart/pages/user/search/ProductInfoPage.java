@@ -1,7 +1,9 @@
 package com.softserve.edu.opencart.pages.user.search;
 
+import com.softserve.edu.opencart.data.ProductOptionsSet;
 import com.softserve.edu.opencart.pages.user.common.AddProductAlertPage;
-//import com.softserve.edu.opencart.pages.user.common.ProductInfoOptionsComponent;
+import com.softserve.edu.opencart.pages.user.common.ProductInfoOptionsComponent;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -10,11 +12,13 @@ import org.openqa.selenium.WebElement;
 
 public class ProductInfoPage extends BreadCrumbPart {
 
+	private WaitUtils alertPageWait;
+
 	private WebElement productName;
 	private WebElement productPrice;
 	private WebElement productQuantity;
 	private WebElement addToCartButton;
-//	private ProductInfoOptionsComponent productInfoOptions;
+	private ProductInfoOptionsComponent productInfoOptions;
 
 	public ProductInfoPage(WebDriver driver) {
 		super(driver);
@@ -27,6 +31,7 @@ public class ProductInfoPage extends BreadCrumbPart {
 		productPrice = driver.findElement(By.cssSelector(".col-sm-4 h2"));
 		productQuantity = driver.findElement(By.cssSelector("#input-quantity"));
 		addToCartButton = driver.findElement(By.cssSelector("#button-cart"));
+		alertPageWait = new WaitUtils(driver, 10);
 	}
 
 	// Page Object
@@ -55,16 +60,17 @@ public class ProductInfoPage extends BreadCrumbPart {
 		return addToCartButton;
 	}
 
-//	public ProductInfoOptionsComponent getProductInfoOptions() {
-//		if (productInfoOptions == null) {
-//			return new ProductInfoOptionsComponent(driver);
-//		}
-//		return productInfoOptions;
-//	}
+	public ProductInfoOptionsComponent getProductInfoOptions() {
+		if (productInfoOptions == null) {
+			return new ProductInfoOptionsComponent(driver);
+		}
+		return productInfoOptions;
+	}
 
 	// Functional
 	public void clickAddToCartButton(){
 		getAddToCartButton().click();
+		alertPageWait.waitForAlertVisibility(driver);
 	}
 
 	public void clearProductQuantity(){
@@ -84,6 +90,9 @@ public class ProductInfoPage extends BreadCrumbPart {
 		clearProductQuantity();
 		setProductQuantity(quantity);
 	}
+	public void setProductOptions(ProductOptionsSet optionsSet){
+		getProductInfoOptions().setProductOptionsFull(optionsSet);
+	}
 
 	// Business Logic
 	public AddProductAlertPage addProductDefaultQuantity(){
@@ -92,6 +101,19 @@ public class ProductInfoPage extends BreadCrumbPart {
 	}
 
 	public AddProductAlertPage addProductSetQuantity(String quantity){
+		inputProductQuantity(quantity);
+		clickAddToCartButton();
+		return new AddProductAlertPage(driver);
+	}
+
+	public AddProductAlertPage addProductWithOptionsDefaultQuantity(ProductOptionsSet optionsSet){
+		setProductOptions(optionsSet);
+		clickAddToCartButton();
+		return new AddProductAlertPage(driver);
+	}
+
+	public AddProductAlertPage addProductWithOptionsSetQuantity(ProductOptionsSet optionsSet, String quantity){
+		setProductOptions(optionsSet);
 		inputProductQuantity(quantity);
 		clickAddToCartButton();
 		return new AddProductAlertPage(driver);

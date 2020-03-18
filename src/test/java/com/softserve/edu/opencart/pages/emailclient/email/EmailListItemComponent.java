@@ -9,9 +9,8 @@ public class EmailListItemComponent  {
     private WebElement topic;
     private WebElement emailStatus;
 
-    private final String XPATH_SENDER_NAME_LOCATOR = ".//td[a]//a[1]"; //ask for correctness in mentor
+    private final String XPATH_SENDER_NAME_LOCATOR = ".//td[a]//a[1]";
     private final String XPATH_TOPIC_LOCATOR = ".//td//a[2]";
-    private final String XPATH_MESSAGE_STATUS_LOCATOR = ".//td//img[1]";
 
 
     public EmailListItemComponent(WebElement emailListItem){
@@ -56,8 +55,5 @@ public class EmailListItemComponent  {
         return getTopic().getText();
     }
 
-    public boolean isUnread(){
-        return true; //add regex;
-    }
 
 }

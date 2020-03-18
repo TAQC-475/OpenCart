@@ -29,4 +29,15 @@ public final class RegularExpression {
     }
     return new BigDecimal(stringValue);
   }
+
+  private String getClearCategoryName(String strInput){
+    String strResult = "";
+    Pattern p = Pattern.compile("[A-Z].+[^ (0-9)]");
+    Matcher m = p.matcher(strInput);
+    while(m.find()){
+      strResult = String.valueOf(m.group());
+    }
+
+    return strResult;
+  }
 }

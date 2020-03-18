@@ -15,6 +15,14 @@ public class LeftMenuPart extends HeaderPart {
 	private WebElement navigatePannel;
 	private WebElement menuButton;
 	private WebElement logoutButton;
+	private WebElement catalog;
+	private WebElement extensions;
+	private WebElement design;
+	private WebElement sales;
+	private WebElement customers;
+	private WebElement marketing;
+	private WebElement system;
+	private WebElement reports;
 	//
 	private NavigationComponent navigationComponent;
 	
@@ -28,6 +36,14 @@ public class LeftMenuPart extends HeaderPart {
 		navigatePannel = driver.findElement(By.id("column-left"));
 		menuButton = driver.findElement(By.id("button-menu"));
 		logoutButton = driver.findElement(By.cssSelector("a[href*='route=common/logout']"));
+		catalog = driver.findElement(By.id("menu-catalog"));
+		extensions = driver.findElement(By.id("menu-extension"));
+		design = driver.findElement(By.id("menu-design"));
+		sales = driver.findElement(By.id("menu-sale"));
+		customers = driver.findElement(By.id("menu-customer"));
+		marketing = driver.findElement(By.id("menu-catalog"));
+		system = driver.findElement(By.id("menu-system"));
+		reports = driver.findElement(By.id("menu-report"));
 	}
 
 	// Page Object

@@ -25,7 +25,7 @@ public abstract class LeftEmailsPanelPart extends LoggedMenuBarPart {
     private void initElements(){
         newLetterButton = driver.findElement(By.id("id_send_email"));
         checkEmailsButton = driver.findElement(By.id("id_check_email"));
-        inbox = driver.findElement(By.xpath("//div[@class='left_boxes']//a)[1]"));
+        inbox = driver.findElement(By.xpath("(//div[@class='left_boxes']//a)[1]"));
         drafts = driver.findElement(By.xpath("//a[contains(@href, 'INBOX.Drafts')]"));
         sent = driver.findElement(By.xpath("//a[contains(@href, 'INBOX.Sent')]"));
         spam = driver.findElement(By.xpath("//a[contains(@href, 'INBOX.Spam')]"));

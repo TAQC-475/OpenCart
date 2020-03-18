@@ -1,33 +1,25 @@
 package com.softserve.edu.opencart.pages.user.common;
 
-import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
-import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
-import com.softserve.edu.opencart.tools.RegularExpression;
-
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import com.softserve.edu.opencart.data.ApplicationStatus;
 import com.softserve.edu.opencart.data.Currencies;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.pages.user.HomePage;
-import com.softserve.edu.opencart.pages.user.account.AccountLogoutPage;
-import com.softserve.edu.opencart.pages.user.account.LoginPage;
-import com.softserve.edu.opencart.pages.user.account.MyAccountPage;
-import com.softserve.edu.opencart.pages.user.account.RegisterPage;
+import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
+import com.softserve.edu.opencart.pages.user.account.*;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
+import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
+import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
 import com.softserve.edu.opencart.pages.user.search.SearchUnsuccessPage;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import com.softserve.edu.opencart.tools.RegularExpression;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public abstract class TopPart {
-
   protected final String OPTION_NULL_MESSAGE = "DropdownComponent is null";
   protected final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
   protected final String PAGE_DO_NOT_EXIST = "Page do not exist!!!";
@@ -135,6 +127,11 @@ public abstract class TopPart {
 
   public void clickShoppingCart() {
     getShoppingCart().click();
+  }
+
+  public ShoppingCartPage goToShoppingCartPage() {
+    clickShoppingCart();
+    return new ShoppingCartPage(driver);
   }
 
   // checkout
@@ -246,8 +243,7 @@ public abstract class TopPart {
     //        String.format(OPTION_NOT_FOUND_MESSAGE, optionName, dropdownOptions.getListOptionsText().toString()));
     if (!getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
       // TODO Develop Custom Exception
-      throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName,
-          getDropdownComponent().getListOptionsText().toString()));
+      throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName, getDropdownComponent().getListOptionsText().toString()));
     }
     getDropdownComponent().clickDropdownOptionByPartialName(optionName);
     dropdownComponent = null;
@@ -469,16 +465,10 @@ public abstract class TopPart {
   }
 
   // wishList
-  public WishListPage gotoWishListPage() throws InterruptedException {
-    Thread.sleep(1000);
-//    JavascriptExecutor js = ((JavascriptExecutor) driver);
-//    js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-//    WebDriverWait wait = new WebDriverWait(driver, 1);
-//    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("wishlist-total")));
+  public WishListPage gotoWishListPage() {
     clickWishList();
     return new WishListPage(driver);
   }
-
 
   public WishListPage gotoWishListPage(User user) {
     clickWishList();
