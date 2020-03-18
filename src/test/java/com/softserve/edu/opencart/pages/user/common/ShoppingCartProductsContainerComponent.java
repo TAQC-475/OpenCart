@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,5 +118,17 @@ public class ShoppingCartProductsContainerComponent {
 
     public ShoppingCartProductComponent getShoppingCartProductComponentByProduct(Product product) {
         return getShoppingCartProductComponentByProduct(product.getName());
+    }
+
+    public BigDecimal calculateOrderCorrectTotalPrice() {
+        List<BigDecimal> productsCorrectTotalPrices = new ArrayList<>();
+        for(ShoppingCartProductComponent component: getShoppingCartProductComponents()){
+            productsCorrectTotalPrices.add(component.calculateProductCorrectTotalPrice());
+        }
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (BigDecimal decimal : productsCorrectTotalPrices) {
+            totalPrice = totalPrice.add(decimal);
+        }
+        return totalPrice;
     }
 }
