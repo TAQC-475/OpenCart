@@ -70,7 +70,7 @@ public class ProductInfoPage extends BreadCrumbPart {
 	// Functional
 	public void clickAddToCartButton(){
 		getAddToCartButton().click();
-		alertPageWait.waitForAlertVisibility(driver);
+		alertPageWait.waitForAlertVisibility();
 	}
 
 	public void clearProductQuantity(){
