@@ -5,13 +5,21 @@ import org.openqa.selenium.WebDriver;
 
 public class EmailsListPage extends LeftEmailsPanelPart{
     private final EmailBoxName boxName;
+    private EmailListContainerComponent emails;
 
     public EmailsListPage(WebDriver driver, EmailBoxName boxName) {
         super(driver);
         this.boxName = boxName;
+        initElements();
     }
 
     private void initElements(){
-        //coming soon
+        emails = new EmailListContainerComponent(driver);
+    }
+
+    public EmailPage goToResetPasswordEmailPage() {
+        emails.goToEmail();
+        return new EmailPage(driver);
+
     }
 }

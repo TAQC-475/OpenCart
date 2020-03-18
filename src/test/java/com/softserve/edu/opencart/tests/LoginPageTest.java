@@ -17,6 +17,7 @@ public class LoginPageTest extends EpizyUserTestRunner{
         loadApplication().gotoLoginPage()
                 .gotoForgottenPasswordRight()
                 .requestResetEmail(emailUser)
-                .login(emailUser);
+                .login(emailUser)
+                .goToResetPasswordEmailPage();
     }
 }
