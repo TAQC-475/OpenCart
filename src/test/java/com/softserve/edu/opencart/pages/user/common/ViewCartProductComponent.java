@@ -39,7 +39,7 @@ public class ViewCartProductComponent {
     }
 
     public String getNameText() {
-        return name.getText();
+        return getName().getText();
     }
 
     public WebElement getQuantity() {
@@ -47,7 +47,7 @@ public class ViewCartProductComponent {
     }
 
     public String getQuantityText() {
-        return quantity.getText();
+        return getQuantity().getText();
     }
 
     public WebElement getPrice() {
@@ -55,7 +55,7 @@ public class ViewCartProductComponent {
     }
 
     public String getPriceText() {
-        return price.getText();
+        return getPrice().getText();
     }
 
     public WebElement getRemoveButton() {
