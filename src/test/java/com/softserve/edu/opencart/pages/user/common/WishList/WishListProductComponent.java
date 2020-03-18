@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.user.common;
+package com.softserve.edu.opencart.pages.user.common.WishList;
 
 import com.softserve.edu.opencart.pages.user.search.ProductInfoPage;
 import com.softserve.edu.opencart.tools.RegularExpression;
@@ -28,7 +28,7 @@ public final class WishListProductComponent {
         .findElement(By.xpath("//div[@class='table-responsive']//td[@class='text-center']/a"));
     name = tableLayout
         .findElement(By.xpath("//div[@class='table-responsive']//td[@class='text-left']/a"));
-    model = tableLayout.findElement(By.xpath("//tbody//td[contains(text(),'Product')]"));
+    model = tableLayout.findElement(By.xpath("//tbody//td[contains(text(),'roduct')]"));
     stock = tableLayout.findElement(By.xpath("//tbody//td[contains(text(),'Stock')]"));
     price = tableLayout.findElement(By.xpath("//div[@class='price']"));
     addToCartButton = tableLayout

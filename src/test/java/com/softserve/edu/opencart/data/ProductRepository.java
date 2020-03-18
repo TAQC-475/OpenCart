@@ -33,6 +33,14 @@ public final class ProductRepository {
 				.addPrice(Currencies.US_DOLLAR, "110.00");
 	}
 
+	public static Product getIPodClassic(){
+		return new Product("iPod Classic",
+				"More room to move. With 80GB or 160GB of storage and up to 40 hours of battery l..","100.00")
+				.addPrice(Currencies.EURO,"95.72")
+				.addPrice(Currencies.POUND_STERLING,"74.73")
+				.addPrice(Currencies.US_DOLLAR,"122.00");
+	}
+
 	public static Product getInvalid() {
 		return new Product("Bok", "Intel", "100");
 	}
