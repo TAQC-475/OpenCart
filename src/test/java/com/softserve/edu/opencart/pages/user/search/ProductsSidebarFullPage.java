@@ -1,7 +1,5 @@
 package com.softserve.edu.opencart.pages.user.search;
 
-import com.softserve.edu.opencart.pages.user.common.DropdownComponent;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class ProductsSidebarFullPage extends ProductsSidebarPart {
@@ -41,6 +39,10 @@ public class ProductsSidebarFullPage extends ProductsSidebarPart {
 	}
 
 	// Page Object
+
+	public ProductsDisplayComponent getProductsDisplayComponent() {
+		return productsDisplayComponent;
+	}
 
 	// Functional
 

@@ -1,5 +1,7 @@
 package com.softserve.edu.opencart.pages.user.search;
 
+import com.softserve.edu.opencart.data.Currencies;
+import com.softserve.edu.opencart.data.MenuItems;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -58,4 +60,8 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
     }
 
     // Business Logic
+
+    public ProductsSidebarEmptyPage chooseCategory(MenuItems menuItems) {
+        return new ProductsSidebarEmptyPage(driver);
+    }
 }
