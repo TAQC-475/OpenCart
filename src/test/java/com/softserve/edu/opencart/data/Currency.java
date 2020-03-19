@@ -11,6 +11,34 @@ public final class Currency implements ICurrency {
     private double valueField;
     private String StatusButton;
 
+    public void setTitleField(String titleField) {
+        this.titleField = titleField;
+    }
+
+    public void setCodeField(String codeField) {
+        this.codeField = codeField;
+    }
+
+    public void setSymbolLeftField(String symbolLeftField) {
+        this.symbolLeftField = symbolLeftField;
+    }
+
+    public void setSymbolRightField(String symbolRightField) {
+        this.symbolRightField = symbolRightField;
+    }
+
+    public void setDecimalPlacesField(String decimalPlacesField) {
+        this.decimalPlacesField = decimalPlacesField;
+    }
+
+    public void setValueField(double valueField) {
+        this.valueField = valueField;
+    }
+
+    public void setStatusButton(String statusButton) {
+        StatusButton = statusButton;
+    }
+
     public String getCurrencyTitleField() {
         return null;
     }
