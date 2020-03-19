@@ -112,6 +112,9 @@ public class AddNewCurrencyPage extends LeftMenuPart {
     public void clickStatusEnabledButton(){
         currencyStatusEnabledButton.click();
     }
+    public void setCurrencyStatusButton(String statusButton){
+        currencyStatusButton.sendKeys(statusButton);
+    }
 
     private void fillTitleField(ICurrency currency){
         clickCurrencyTitleField();

@@ -5,23 +5,29 @@ import org.openqa.selenium.WebElement;
 interface ITitleField {
     ICodeField setCurrencyTitleField(String titleField);
 }
+
 interface ICodeField {
     ISymbolLeftField setCurrencyCodeField(String codeField);
 }
+
 interface ISymbolLeftField {
     ISymbolRightField setCurrencySymbolLeftField(String symbolLeftField);
 }
+
 interface ISymbolRightField {
     IDecimalPlacesField setCurrencySymbolRightField(String symbolRightField);
 }
+
 interface IDecimalPlacesField {
     IValueField setCurrencyDecimalPlacesField(String decimalPlacesField);
 }
+
 interface IValueField {
     IStatusButton setCurrencyValueField(double valueField);
 }
+
 interface IStatusButton {
-    IStatusButton setCurrencyStatusButton(double statusButton);
+    IStatusButton setCurrencyStatusButton(String statusButton);
 }
 
 
@@ -34,8 +40,7 @@ public final class Currency implements
     private String symbolRightField;
     private String decimalPlacesField;
     private double valueField;
-    private String StatusButton;
-
+    private String statusButton;
 
 
     public String getCurrencyTitleField() {
@@ -63,34 +68,41 @@ public final class Currency implements
     }
 
     public String getCurrencyStatusButton() {
-        return StatusButton;
+        return statusButton;
     }
 
     public ICodeField setCurrencyTitleField(String titleField) {
-        return null;
+        this.titleField = titleField;
+        return this;
     }
 
     public ISymbolLeftField setCurrencyCodeField(String codeField) {
-        return null;
+        this.codeField = codeField;
+        return this;
     }
 
     public ISymbolRightField setCurrencySymbolLeftField(String symbolLeftField) {
-        return null;
+        this.symbolLeftField = symbolLeftField;
+        return this;
     }
 
     public IDecimalPlacesField setCurrencySymbolRightField(String symbolRightField) {
-        return null;
+        this.symbolRightField = symbolRightField;
+        return this;
     }
 
     public IValueField setCurrencyDecimalPlacesField(String decimalPlacesField) {
-        return null;
+        this.decimalPlacesField = decimalPlacesField;
+        return this;
     }
 
     public IStatusButton setCurrencyValueField(double valueField) {
-        return null;
+        this.valueField = valueField;
+        return this;
     }
 
-    public IStatusButton setCurrencyStatusButton(double statusButton) {
-        return null;
+    public IStatusButton setCurrencyStatusButton(String statusButton) {
+        this.statusButton = statusButton;
+        return this;
     }
 }
