@@ -52,9 +52,12 @@ public abstract class TopPart {
     private ViewCartComponent viewCartComponent;
     private DropdownGuest dropdownGuest;
     private DropdownLogged dropdownLogged;
+    // to check if cart view already opened
+    private boolean isViewCartOpened;
 
     public TopPart(WebDriver driver) {
         this.driver = driver;
+        isViewCartOpened = false;
         initElements();
     }
 
@@ -203,13 +206,13 @@ public abstract class TopPart {
         getCartButton().click();
     }
 
-//  public int getCartButtonCount() {
-//  Use getCartButtonText()
-//}
+    public boolean isViewCartOpened() {
+        return isViewCartOpened;
+    }
 
-//  public int getCartButtonSum() {
-//  Use getCartButtonText()
-//}
+    public void setViewCartOpened(boolean viewCartOpened) {
+        isViewCartOpened = viewCartOpened;
+    }
 
     // dropdownComponent
     protected DropdownComponent getDropdownComponent() {
@@ -333,15 +336,9 @@ public abstract class TopPart {
     //view cart button
     private ViewCartComponent getViewCartComponent() {
         if (viewCartComponent == null) {
-            // TODO Develop Custom Exception
-            throw new RuntimeException(OPTION_NULL_MESSAGE);
+            viewCartComponent = new ViewCartComponent(driver);
         }
         return viewCartComponent;
-    }
-
-    private ViewCartComponent createViewCartComponent() {
-        viewCartComponent = new ViewCartComponent(driver);
-        return getViewCartComponent();
     }
 
     // Functional
@@ -487,66 +484,88 @@ public abstract class TopPart {
     // view cart button logic
     public void openViewCartComponent() {
         clickCartButton();
-        createViewCartComponent();
+        setViewCartOpened(true);
     }
 
     public void closeViewCartComponent() {
         clickCartButton();
+        if(isViewCartOpened()){
+            clickCartButton();
+            viewCartComponent = null;
+            setViewCartOpened(false);
+        }
         viewCartComponent = null;
+        setViewCartOpened(false);
     }
 
     public String getViewCartComponentTotalText() {
-        createViewCartComponent();
         return getViewCartComponent().getCartTotalText();
     }
 
     public String getViewCartComponentTotalAmount() {
-        createViewCartComponent();
         return getViewCartComponent().getCartTotalAmount();
     }
 
     public String getViewCartEmptyMsgText() {
-        openViewCartComponent();
+        if(!isViewCartOpened()) {
+            openViewCartComponent();
+        }
         return getViewCartComponent().getEmptyCartMsgText();
     }
 
     public String getProductNameFromViewCart(Product product) {
-        openViewCartComponent();
+        if(!isViewCartOpened()) {
+            openViewCartComponent();
+        }
         return getViewCartComponent().getViewProductComponentName(product);
     }
 
     public String getProductPriceFromViewCart(Product product) {
-        openViewCartComponent();
+        if(!isViewCartOpened()) {
+            openViewCartComponent();
+        }
         return getViewCartComponent().getViewProductComponentPrice(product);
     }
 
     public String getProductQuantityFromViewCart(Product product) {
-        openViewCartComponent();
+        if(!isViewCartOpened()) {
+            openViewCartComponent();
+        }
         return getViewCartComponent().getViewProductComponentQuantity(product);
     }
 
     public String getSubTotalPriceFromViewCart() {
-        openViewCartComponent();
+        if(!isViewCartOpened()) {
+            openViewCartComponent();
+        }
         return getViewCartComponent().getSubTotalText();
     }
 
     public String getEcoTaxPriceFromViewCart() {
-        openViewCartComponent();
+        if(!isViewCartOpened()) {
+            openViewCartComponent();
+        }
         return getViewCartComponent().getEcoTaxText();
     }
 
     public String getVATPriceFromViewCart() {
-        openViewCartComponent();
+        if(!isViewCartOpened()) {
+            openViewCartComponent();
+        }
         return getViewCartComponent().getVatTaxText();
     }
 
     public String getTotalFromViewCart() {
-        openViewCartComponent();
+        if(!isViewCartOpened()) {
+            openViewCartComponent();
+        }
         return getViewCartComponent().getTotalPriceText();
     }
 
     public void removeProductFromViewCart(Product product) {
-        openViewCartComponent();
+        if(!isViewCartOpened()) {
+            openViewCartComponent();
+        }
         getViewCartComponent().removeViewProductComponent(product);
     }
 
