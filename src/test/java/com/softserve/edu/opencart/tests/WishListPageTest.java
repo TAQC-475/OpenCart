@@ -11,13 +11,12 @@ public class WishListPageTest extends EpizyUserTestRunner {
 
     loadApplication().gotoLoginPage()
         .successfulLogin(UserRepository.get().getMrAndersonUser())
-//        .successfulSearch(ProductRepository.getMacBook())
-//        .AddToWishButtonByName(ProductRepository.getMacBook())
-//        .successfulSearch(ProductRepository.getIPodClassic())
-//        .AddToWishButtonByName(ProductRepository.getIPodClassic())
-//        .successfulSearch(ProductRepository.getIPhone())
-//        .AddToWishButtonByName(ProductRepository.getIPhone())
-//        .gotoHomePage()
+        .successfulSearch(ProductRepository.getMacBook())
+        .AddToWishButtonByName(ProductRepository.getMacBook())
+        .successfulSearch(ProductRepository.getIPodClassic())
+        .AddToWishButtonByName(ProductRepository.getIPodClassic())
+        .successfulSearch(ProductRepository.getIPhone())
+        .AddToWishButtonByName(ProductRepository.getIPhone())
         .gotoWishListPage()
         .deleteProductFromWishList(ProductRepository.getIPodClassic());
 

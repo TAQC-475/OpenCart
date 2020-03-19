@@ -22,21 +22,21 @@ public class WishListProductsContainerComponent {
     initElements();
   }
 
-  //  private void initElements() {
-//    wishListComponents = new ArrayList<>();
-//    for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_XPATH))) {
-//      wishListComponents.add(new WishListProductComponent(current));
-//    }
-//  }
-  private void initElements() {
+    private void initElements() {
     wishListComponents = new ArrayList<>();
-    int i = 1;
     for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_XPATH))) {
-      wishListComponents.add(new WishListProductComponent(
-          current.findElement(By.xpath("//div[@class='table-responsive']//tbody//tr[" + i + "]"))));
-      i++;
+      wishListComponents.add(new WishListProductComponent(current));
     }
   }
+//  private void initElements() {
+//    wishListComponents = new ArrayList<>();
+//    int i = 1;
+//    for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_XPATH))) {
+//      wishListComponents.add(new WishListProductComponent(
+//          driver.findElement(By.xpath("//div[@class='table-responsive']//tbody//tr[" + i + "]"))));
+//      i++;
+//    }
+//  }
 
   public List<WishListProductComponent> getWishListComponents() {
     return wishListComponents;
