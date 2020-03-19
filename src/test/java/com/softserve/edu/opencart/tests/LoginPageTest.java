@@ -7,6 +7,7 @@ import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.user.account.LoginPage;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import static org.testng.Assert.*;
 
 public class LoginPageTest extends EpizyUserTestRunner{
     @DataProvider(name = "emailClientDataProvider")
@@ -26,6 +27,6 @@ public class LoginPageTest extends EpizyUserTestRunner{
                 .goToResetPasswordEmail()
                 .goToResetPasswordPage()
                 .resetPassword(user);
-
+        assertEquals(loginPageAfterReset.getAlertText(), "");
     }
 }

@@ -2,6 +2,7 @@ package com.softserve.edu.opencart.pages.user.account;
 
 import com.softserve.edu.opencart.data.EmailUser;
 import com.softserve.edu.opencart.pages.emailclient.metaua.unlogged.EmailLoginPage;
+import com.softserve.edu.opencart.pages.emailclient.ukrnet.unlogged.UNLoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -64,10 +65,10 @@ public class ForgotPasswordPage extends AccountSidebarGuestPart {
 	}
 
 
-	public EmailLoginPage requestResetEmail(EmailUser user){
+	public UNLoginPage requestResetEmail(EmailUser user){
 		enterEmail(user.getEmail());
 		clickContinue();
 		getEmailLoginPage(user.getEmailServiceUrl());
-		return new EmailLoginPage(driver);
+		return new UNLoginPage(driver);
 	}
 }
