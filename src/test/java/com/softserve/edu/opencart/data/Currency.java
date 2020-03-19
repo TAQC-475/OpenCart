@@ -1,6 +1,5 @@
 package com.softserve.edu.opencart.data;
 
-import org.openqa.selenium.WebElement;
 
 interface ITitleField {
     ICodeField setCurrencyTitleField(String titleField);
@@ -27,13 +26,15 @@ interface IValueField {
 }
 
 interface IStatusButton {
-    IStatusButton setCurrencyStatusButton(String statusButton);
+    IBuildCurrency setCurrencyStatusButton(String statusButton);
+}
+interface IBuildCurrency {
+    ICurrency build();
 }
 
-
 public final class Currency implements
-        ITitleField, ICodeField, ISymbolLeftField,
-        ISymbolRightField, IDecimalPlacesField, IValueField, IStatusButton {
+        ITitleField, ICodeField, ISymbolLeftField, ISymbolRightField,
+        IDecimalPlacesField, IValueField, IStatusButton, ICurrency, IBuildCurrency {
     private String titleField;
     private String codeField;
     private String symbolLeftField;
@@ -42,6 +43,9 @@ public final class Currency implements
     private double valueField;
     private String statusButton;
 
+    public static ITitleField get() {
+        return new Currency();
+    }
 
     public String getCurrencyTitleField() {
         return titleField;
@@ -101,8 +105,11 @@ public final class Currency implements
         return this;
     }
 
-    public IStatusButton setCurrencyStatusButton(String statusButton) {
-        this.statusButton = statusButton;
+    public ICurrency build() {
+        return this;
+    }
+
+    public IBuildCurrency setCurrencyStatusButton(String statusButton) {
         return this;
     }
 }

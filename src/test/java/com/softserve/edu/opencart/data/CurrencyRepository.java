@@ -15,13 +15,21 @@ public class CurrencyRepository {
         }
         return instance;
     }
-//    public ICurrency getDefault() {
-//        return getUACurrency();
-//
-//    }
+    public ICurrency getDefault() {
+        return getUACurrency();
 
-//    private ICurrency getUACurrency() {
-//return Currency
-//    }
+    }
+
+    private ICurrency getUACurrency() {
+        return Currency.get()
+                .setCurrencyTitleField("hrn")
+                .setCurrencyCodeField("UAH")
+                .setCurrencySymbolLeftField("")
+                .setCurrencySymbolRightField("₴")
+                .setCurrencyDecimalPlacesField("")
+                .setCurrencyValueField(29)
+                .setCurrencyStatusButton("")
+                .build();
+    }
 
 }
