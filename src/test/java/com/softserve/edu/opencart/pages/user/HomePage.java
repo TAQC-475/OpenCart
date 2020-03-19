@@ -11,7 +11,6 @@ import com.softserve.edu.opencart.pages.user.common.ProductsContainerComponent;
 import com.softserve.edu.opencart.pages.user.common.TopPart;
 
 public class HomePage extends TopPart {
-	public static final String INPUT_SEARCH_VALUE = "Mac";
 	public static final String EXPECTED_IPHONE6 = "iPhone6";
 	//
 	private WebElement slideshow0;

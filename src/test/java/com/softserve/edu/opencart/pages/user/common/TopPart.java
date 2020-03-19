@@ -175,9 +175,9 @@ public abstract class TopPart {
         getSearchTopField().click();
     }
 
-    public void setSearchTopField(String text) {
+    public void setSearchTopField(Product product) {
         getSearchTopField().click();
-        getSearchTopField().sendKeys(text);
+        getSearchTopField().sendKeys(product.getName());
     }
 
     // searchTopButton
@@ -377,7 +377,7 @@ public abstract class TopPart {
     // TODO myAccount
 
     // searchTopField
-    private void fillSearchTopField(String searchText) {
+    private void fillSearchTopField(Product searchText) {
         clickSearchTopField();
         clearSearchTopField();
         setSearchTopField(searchText);
@@ -400,15 +400,15 @@ public abstract class TopPart {
     }
 
     //TODO class for parameter
-    public SearchSuccessPage successfulSearch(String  product) {
+    public SearchSuccessPage successfulSearch(Product product) {
         fillSearchTopField(product);
         clickSearchTopButton();
         return new SearchSuccessPage(driver);
     }
 
-    public SearchUnsuccessPage unsuccessfulSearch(String searchText) {
+    public SearchUnsuccessPage unsuccessfulSearch(Product product) {
         //public SearchUnsuccessPage unsuccessfulSearch(Product product){
-        fillSearchTopField(searchText);
+        fillSearchTopField(product);
         //fillSearchTopField(product.getName());
         clickSearchTopButton();
         return new SearchUnsuccessPage(driver);

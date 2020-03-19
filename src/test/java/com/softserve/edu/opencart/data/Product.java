@@ -29,6 +29,10 @@ public class Product {
 		this.quantity = quantity;
 	}
 
+	public Product(String name) {
+		this.name = name;
+	}
+
 	// setters
 
 	public void setName(String name) {
