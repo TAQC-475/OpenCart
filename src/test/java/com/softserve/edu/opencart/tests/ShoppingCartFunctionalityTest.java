@@ -15,7 +15,7 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
 
     @DataProvider
     public Object[][] dataForSumRefreshAndRemoveTest() {
-        return new Object[][]{{UserRepository.get().getDefault(), ProductRepository.getMacBook(), ProductRepository.getIPhone()}};
+        return new Object[][]{{UserRepository.get().getDefault(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart()}};
     }
 
     @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
@@ -28,10 +28,9 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .goToHomePageFromAlert()
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(product2)
-                .goToShoppingCartFromAlert();
-
-        shoppingCartPage = shoppingCartPage.setQuantity(product1, "2");
-        shoppingCartPage = shoppingCartPage.setQuantity(product2, "3");
+                .goToShoppingCartFromAlert()
+                .setQuantity(product1, product1.getQuantity())
+                .setQuantity(product2, product2.getQuantity());
 
         BigDecimal correctResult = shoppingCartPage.getShoppingCartProductsContainerComponent().calculateOrderCorrectTotalPrice();
         BigDecimal actualResult = shoppingCartPage.getOrderSubTotalPrice();
@@ -41,7 +40,6 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
 
     @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
     public void refreshTest(User testUser, Product product1, Product product2) {
-//        ShoppingCartPage shoppingCartPage = loadApplication().goToShoppingCartPage();
         ShoppingCartPage shoppingCartPage = loadApplication()
                 .gotoLoginPage()
                 .successfulLogin(testUser)

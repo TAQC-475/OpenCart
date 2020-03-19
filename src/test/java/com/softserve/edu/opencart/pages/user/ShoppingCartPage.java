@@ -89,4 +89,6 @@ public class ShoppingCartPage extends BreadCrumbPart {
         WebElement subTotal = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Sub-Total')]/parent::td/following-sibling::td"));
         return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(subTotal.getText());
     }
+
+
 }
