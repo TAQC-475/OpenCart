@@ -60,7 +60,7 @@ public abstract class TopPart {
 
     private void initElements() {
         // init elements
-        currency = driver.findElement(By.cssSelector(".btn.btn-link.dropdown-toggle"));
+        currency = driver.findElement(By.cssSelector(".btn-link.dropdown-toggle"));
         myAccount = driver.findElement(By.cssSelector(".list-inline > li > a.dropdown-toggle"));
         wishList = driver.findElement(By.id("wishlist-total"));
         shoppingCart = driver.findElement(By.cssSelector("a[title='Shopping Cart']"));
@@ -400,9 +400,8 @@ public abstract class TopPart {
     }
 
     //TODO class for parameter
-    public SearchSuccessPage successfulSearch(Product product) {
-        //fillSearchTopField(searchText);
-        fillSearchTopField(product.getName());
+    public SearchSuccessPage successfulSearch(String  product) {
+        fillSearchTopField(product);
         clickSearchTopButton();
         return new SearchSuccessPage(driver);
     }
