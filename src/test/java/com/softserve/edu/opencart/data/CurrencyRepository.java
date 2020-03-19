@@ -15,13 +15,13 @@ public class CurrencyRepository {
         }
         return instance;
     }
-    public ICurrency getDefault() {
-        return getUACurrency();
+//    public ICurrency getDefault() {
+//        return getUACurrency();
+//
+//    }
 
-    }
-
-    private ICurrency getUACurrency() {
-return Currency
-    }
+//    private ICurrency getUACurrency() {
+//return Currency
+//    }
 
 }

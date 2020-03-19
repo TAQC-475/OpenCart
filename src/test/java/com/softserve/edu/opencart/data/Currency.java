@@ -3,29 +3,31 @@ package com.softserve.edu.opencart.data;
 import org.openqa.selenium.WebElement;
 
 interface ITitleField {
-    ITitleField setCurrencyTitleField(String titleField);
+    ICodeField setCurrencyTitleField(String titleField);
 }
 interface ICodeField {
-    ITitleField setCurrencyCodeField(String codeField);
+    ISymbolLeftField setCurrencyCodeField(String codeField);
 }
 interface ISymbolLeftField {
-    ITitleField setCurrencySymbolLeftField(String symbolLeftField);
+    ISymbolRightField setCurrencySymbolLeftField(String symbolLeftField);
 }
 interface ISymbolRightField {
-    ITitleField setCurrencySymbolRightField(String symbolRightField);
+    IDecimalPlacesField setCurrencySymbolRightField(String symbolRightField);
 }
 interface IDecimalPlacesField {
-    ITitleField setCurrencyDecimalPlacesField(String decimalPlacesField);
+    IValueField setCurrencyDecimalPlacesField(String decimalPlacesField);
 }
 interface IValueField {
-    ITitleField setCurrencyValueField(double valueField);
+    IStatusButton setCurrencyValueField(double valueField);
 }
 interface IStatusButton {
-    ITitleField setCurrencyStatusButton(double statusButton);
+    IStatusButton setCurrencyStatusButton(double statusButton);
 }
 
 
-public final class Currency implements ICurrency {
+public final class Currency implements
+        ITitleField, ICodeField, ISymbolLeftField,
+        ISymbolRightField, IDecimalPlacesField, IValueField, IStatusButton {
     private String titleField;
     private String codeField;
     private String symbolLeftField;
@@ -34,59 +36,61 @@ public final class Currency implements ICurrency {
     private double valueField;
     private String StatusButton;
 
-    public void setTitleField(String titleField) {
-        this.titleField = titleField;
-    }
 
-    public void setCodeField(String codeField) {
-        this.codeField = codeField;
-    }
-
-    public void setSymbolLeftField(String symbolLeftField) {
-        this.symbolLeftField = symbolLeftField;
-    }
-
-    public void setSymbolRightField(String symbolRightField) {
-        this.symbolRightField = symbolRightField;
-    }
-
-    public void setDecimalPlacesField(String decimalPlacesField) {
-        this.decimalPlacesField = decimalPlacesField;
-    }
-
-    public void setValueField(double valueField) {
-        this.valueField = valueField;
-    }
-
-    public void setStatusButton(String statusButton) {
-        StatusButton = statusButton;
-    }
 
     public String getCurrencyTitleField() {
-        return null;
+        return titleField;
     }
 
     public String getCurrencyCodeField() {
-        return null;
+        return codeField;
     }
 
     public String getCurrencySymbolLeftField() {
-        return null;
+        return symbolLeftField;
     }
 
     public String getCurrencySymbolRightField() {
-        return null;
+        return symbolRightField;
     }
 
     public String getCurrencyDecimalPlacesField() {
-        return null;
+        return decimalPlacesField;
     }
 
     public double getCurrencyValueField() {
-        return 0;
+        return valueField;
     }
 
     public String getCurrencyStatusButton() {
+        return StatusButton;
+    }
+
+    public ICodeField setCurrencyTitleField(String titleField) {
+        return null;
+    }
+
+    public ISymbolLeftField setCurrencyCodeField(String codeField) {
+        return null;
+    }
+
+    public ISymbolRightField setCurrencySymbolLeftField(String symbolLeftField) {
+        return null;
+    }
+
+    public IDecimalPlacesField setCurrencySymbolRightField(String symbolRightField) {
+        return null;
+    }
+
+    public IValueField setCurrencyDecimalPlacesField(String decimalPlacesField) {
+        return null;
+    }
+
+    public IStatusButton setCurrencyValueField(double valueField) {
+        return null;
+    }
+
+    public IStatusButton setCurrencyStatusButton(double statusButton) {
         return null;
     }
 }
