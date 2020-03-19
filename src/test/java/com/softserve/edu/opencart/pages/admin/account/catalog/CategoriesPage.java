@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.admin.account.catalog;
 
+import com.softserve.edu.opencart.pages.admin.account.catalog.AddCategoryPage;
 import com.softserve.edu.opencart.pages.admin.common.LeftMenuPart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -44,6 +45,11 @@ public class CategoriesPage extends LeftMenuPart {
 
     public String getAddNewButtonText() {
         return getAddNewButton().getText();
+    }
+
+    public AddCategoryPage gotoAddCategoryPage() {
+        getAddNewButton().click();
+        return new AddCategoryPage(driver);
     }
 
     //rebuildButton
