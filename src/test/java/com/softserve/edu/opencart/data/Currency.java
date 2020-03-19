@@ -2,6 +2,29 @@ package com.softserve.edu.opencart.data;
 
 import org.openqa.selenium.WebElement;
 
+interface ITitleField {
+    ITitleField setCurrencyTitleField(String titleField);
+}
+interface ICodeField {
+    ITitleField setCurrencyCodeField(String codeField);
+}
+interface ISymbolLeftField {
+    ITitleField setCurrencySymbolLeftField(String symbolLeftField);
+}
+interface ISymbolRightField {
+    ITitleField setCurrencySymbolRightField(String symbolRightField);
+}
+interface IDecimalPlacesField {
+    ITitleField setCurrencyDecimalPlacesField(String decimalPlacesField);
+}
+interface IValueField {
+    ITitleField setCurrencyValueField(double valueField);
+}
+interface IStatusButton {
+    ITitleField setCurrencyStatusButton(double statusButton);
+}
+
+
 public final class Currency implements ICurrency {
     private String titleField;
     private String codeField;
