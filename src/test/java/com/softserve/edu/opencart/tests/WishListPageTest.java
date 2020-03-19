@@ -10,8 +10,8 @@ public class WishListPageTest extends EpizyUserTestRunner {
   @Test
   public void removeFromWishListTest() throws InterruptedException {
 
-//    loadApplication().gotoLoginPage()
-//        .successfulLogin(UserRepository.get().getMrAndersonUser())
+    loadApplication().gotoLoginPage()
+        .successfulLogin(UserRepository.get().getMrAndersonUser())
 //        .successfulSearch(ProductRepository.getMacBook())
 //        .AddToWishButtonByName(ProductRepository.getMacBook())
 //        .successfulSearch(ProductRepository.getIPodClassic())
@@ -19,8 +19,8 @@ public class WishListPageTest extends EpizyUserTestRunner {
 //        .successfulSearch(ProductRepository.getIPhone())
 //        .AddToWishButtonByName(ProductRepository.getIPhone())
 //        .gotoHomePage()
-//        .gotoWishListPage()
-//        .deleteFromWishListByName(ProductRepository.getMacBook());
+        .gotoWishListPage()
+        .deleteFromWishListByName(ProductRepository.getMacBook());
 
 //        .goToWIshLIstPageByAlert()
 //        .getWishListProductsContainerComponent()

@@ -47,8 +47,9 @@ public class WishListProductsContainerComponent {
 
   protected WishListProductComponent getWishListComponentByName(Product product) {
     WishListProductComponent result = null;
-//    for (WishListProductComponent current : getWishListComponents()) {
-    for (WishListProductComponent current : getCorrectXPathComponents()) {
+    wishListComponents = getCorrectXPathComponents();
+    for (WishListProductComponent current : getWishListComponents()) {
+//    for (WishListProductComponent current : getCorrectXPathComponents()) {
       if (current.getNameText().toLowerCase().equals(product.getName().toLowerCase())) {
         result = current;
         break;
