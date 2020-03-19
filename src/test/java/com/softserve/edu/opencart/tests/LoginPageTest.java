@@ -11,7 +11,9 @@ import org.testng.annotations.Test;
 public class LoginPageTest extends EpizyUserTestRunner{
     @DataProvider(name = "emailClientDataProvider")
     public Object[][] getEmailClient(){
-        Object[][] users = {{EmailUserRepository.getVasyl(), UserRepository.get().getVasyl()}};
+        EmailUser emailUser = EmailUserRepository.getVasyl();
+        IUser user = UserRepository.get().getVasyl();
+        Object[][] users = {{emailUser, user}};
         return users;
     }
 
