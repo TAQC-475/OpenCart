@@ -3,7 +3,7 @@
 
 <suite name="SuiteOpenCart">
 	<parameter name="url" value="http://127.0.0.1/opencart/" />
-	<parameter name="urlLogout" value="http://localhost/opencart/index.php?route=account/logout" />
+<!--	<parameter name="urlLogout" value="http://localhost/opencart/index.php?route=account/logout" />-->
 
 <!-- 	<parameter name="url" value="http://taqc-opencart.epizy.com" /> -->
 	<parameter name="browsername" value="chrome" />
