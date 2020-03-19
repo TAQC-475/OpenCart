@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.pages.user.common;
 
 import com.softserve.edu.opencart.data.Product;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ public class ViewCartComponent {
     //
     protected WebDriver driver;
     //
+    private WaitUtils cartWait;
     private WebElement cartTotalMsg;
     //
     private List<ViewCartProductComponent> cartProductTable;
@@ -27,6 +29,7 @@ public class ViewCartComponent {
 
     public ViewCartComponent(WebDriver driver) {
         this.driver = driver;
+        this.cartWait = new WaitUtils(driver, 5);
         initElements();
     }
 
@@ -136,6 +139,7 @@ public class ViewCartComponent {
     public void removeViewProductComponent(Product product)
     {
         getViewProductComponentByName(product).removeProductFromCart();
+        cartWait.waitForViewCartButtonLoading();
     }
 
     public String getViewProductComponentName(Product product)

@@ -567,6 +567,7 @@ public abstract class TopPart {
             openViewCartComponent();
         }
         getViewCartComponent().removeViewProductComponent(product);
+        setViewCartOpened(false);
     }
 
 }

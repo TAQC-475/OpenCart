@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class WaitUtils {
     private final String ALERT_MESSAGE_CSS = ".alert.alert-success";
+    private final String LOADING_CART_BUTTON_CSS = ".btn.btn-inverse.btn-block.btn-lg.dropdown-toggle.disabled";
     private WebDriverWait wait;
     private WebDriver driver;
     private final String WISH_LISTS_SELECTOR = "#wishlist-total > span";
@@ -18,13 +19,6 @@ public class WaitUtils {
     public WaitUtils(WebDriver driver, int seconds){
         this.driver = driver;
         this.wait = new WebDriverWait(driver, seconds);
-    }
-
-    public void waitForAlertVisibility(){
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        waitForJSandJQueryToLoad();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ALERT_MESSAGE_CSS)));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     private boolean waitForJSandJQueryToLoad() {
@@ -39,11 +33,24 @@ public class WaitUtils {
         return wait.until(jQueryLoad);
     }
 
+    public void waitForAlertVisibility(){
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        waitForJSandJQueryToLoad();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ALERT_MESSAGE_CSS)));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
     public void waitForElementClickability(By locator){
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         waitForJSandJQueryToLoad();
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    public void waitForViewCartButtonLoading(){
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(LOADING_CART_BUTTON_CSS)));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 }
