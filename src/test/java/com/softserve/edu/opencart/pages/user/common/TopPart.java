@@ -7,6 +7,7 @@ import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.pages.user.HomePage;
 import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
 import com.softserve.edu.opencart.pages.user.account.*;
+import com.softserve.edu.opencart.pages.user.common.WishList.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
 import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
 import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
@@ -470,10 +471,14 @@ public abstract class TopPart {
         return new WishListPage(driver);
     }
 
-    public WishListPage gotoWishListPage(User user) {
+    public WishListPage goToWishListPage(User user) {
         clickWishList();
         defaultLogin(user);
         return new WishListPage(driver);
+    }
+    public WishListEmptyPage gotToWishListEmptyPage(){
+        clickWishList();
+        return new WishListEmptyPage(driver);
     }
 
 
