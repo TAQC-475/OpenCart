@@ -13,6 +13,7 @@ public class WaitUtils {
     private final String ALERT_MESSAGE_CSS = ".alert.alert-success";
     private WebDriverWait wait;
     private WebDriver driver;
+    private final String WISH_LISTS_SELECTOR = "#wishlist-total > span";
 
     public WaitUtils(WebDriver driver, int seconds){
         this.driver = driver;

@@ -14,6 +14,7 @@ import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
 import com.softserve.edu.opencart.pages.user.search.SearchUnsuccessPage;
 import com.softserve.edu.opencart.tools.RegularExpression;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -467,6 +468,7 @@ public abstract class TopPart {
 
     // wishList
     public WishListPage gotoWishListPage() {
+        new WaitUtils(driver,1).waitForAlertVisibility();
         clickWishList();
         return new WishListPage(driver);
     }
