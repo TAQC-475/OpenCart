@@ -1,11 +1,11 @@
 package com.softserve.edu.opencart.pages.emailclient.ukrnet.email;
 
-import com.softserve.edu.opencart.pages.emailclient.ukrnet.BaseParentEmailPart;
+import com.softserve.edu.opencart.pages.emailclient.ukrnet.UNParentBasePart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public abstract class UkrNetLeftEmailPanelPart extends BaseParentEmailPart {
+public abstract class UNLeftEmailPanelPart extends UNParentBasePart {
     private WebElement newLetterButton;
     private WebElement inbox;
     private WebElement drafts;
@@ -17,7 +17,7 @@ public abstract class UkrNetLeftEmailPanelPart extends BaseParentEmailPart {
     private WebElement attachments;
     private WebElement addressBookButton;
 
-    public UkrNetLeftEmailPanelPart(WebDriver driver){
+    public UNLeftEmailPanelPart(WebDriver driver){
         super(driver);
     }
 

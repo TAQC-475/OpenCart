@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.softserve.edu.opencart.pages.admin.account.SigninPage;
 import com.softserve.edu.opencart.pages.admin.currencies.CurrenciesPage;
+import com.softserve.edu.opencart.pages.admin.account.catalog.CategoriesPage;
 
 public class LeftMenuPart extends HeaderPart {
 
@@ -23,6 +24,7 @@ public class LeftMenuPart extends HeaderPart {
 	private WebElement marketing;
 	private WebElement system;
 	private WebElement reports;
+	private WebElement categories;
 	//
 	private NavigationComponent navigationComponent;
 	
@@ -44,6 +46,7 @@ public class LeftMenuPart extends HeaderPart {
 		marketing = driver.findElement(By.id("menu-catalog"));
 		system = driver.findElement(By.id("menu-system"));
 		reports = driver.findElement(By.id("menu-report"));
+		categories = driver.findElement(By.xpath("//li[@id='menu-catalog']//a[contains(text(),'Categories')]"));
 	}
 
 	// Page Object
@@ -142,4 +145,18 @@ public class LeftMenuPart extends HeaderPart {
         return new SigninPage(driver);
     }
 
+	//Categories
+	public void clickCatalog() {
+		catalog.click();
+	}
+
+	public void clickCategories() {
+		categories.click();
+	}
+
+	public CategoriesPage gotoCategoriesPage() {
+		clickCatalog();
+		clickCategories();
+		return new CategoriesPage(driver);
+	}
 }
