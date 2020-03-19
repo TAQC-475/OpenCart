@@ -2,11 +2,11 @@ package com.softserve.edu.opencart.data;
 
 public class ResetEmailEntity {
     private String subject;
-    private String bodyLinkDomain;
+    private String bodyLinkPart;
 
-    public ResetEmailEntity(String subject, String bodyLinkDomain) {
+    public ResetEmailEntity(String subject, String bodyLinkPart) {
         this.subject = subject;
-        this.bodyLinkDomain = bodyLinkDomain;
+        this.bodyLinkPart = bodyLinkPart;
     }
 
     public String getSubject() {
@@ -17,11 +17,11 @@ public class ResetEmailEntity {
         this.subject = subject;
     }
 
-    public String getBodyLinkDomain() {
-        return bodyLinkDomain;
+    public String getBodyLinkPart() {
+        return bodyLinkPart;
     }
 
-    public void setBodyLinkDomain(String bodyLinkDomain) {
-        this.bodyLinkDomain = bodyLinkDomain;
+    public void setBodyLinkDomain(String bodyLinkPart) {
+        this.bodyLinkPart = bodyLinkPart;
     }
 }

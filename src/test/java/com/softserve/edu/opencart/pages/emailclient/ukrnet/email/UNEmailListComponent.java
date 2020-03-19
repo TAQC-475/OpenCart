@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public abstract class UNEmailListComponent extends UNContentPanelBasePart {
+public class UNEmailListComponent extends UNContentPanelBasePart {
     private WaitUtils waitUtils;
     private EmailBoxName boxName;
     private final String XPATH_LAST_UNREAD_FORMAT =
@@ -33,9 +33,8 @@ public abstract class UNEmailListComponent extends UNContentPanelBasePart {
         return driver.findElement(getUnreadLocator(subject));
     }
 
-    public UNEmailPage goToResetMail(ResetEmailEntity resetEmail){
-        findLastUnreadEmail(resetEmail.getSubject()).click();
-        return new UNEmailPage(driver);
+    public void clickLastUnreadMail(String subject){
+        findLastUnreadEmail(subject).click();
     }
 
 

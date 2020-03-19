@@ -29,7 +29,7 @@ public class UNEmailComponent extends UNContentBaseComponent {
         return getMessageBody().findElement(getRelativeBodyLinkLocator(linkPart));
     }
 
-    private void clickBodyLink(String linkPart){
+    public void clickBodyLink(String linkPart){
         findLink(linkPart).click();
     }
 
