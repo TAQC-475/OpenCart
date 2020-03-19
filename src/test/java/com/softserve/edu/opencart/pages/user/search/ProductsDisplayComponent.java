@@ -1,19 +1,26 @@
 package com.softserve.edu.opencart.pages.user.search;
 
 import com.softserve.edu.opencart.data.CountOfProducts;
+import com.softserve.edu.opencart.data.Pagination;
 import com.softserve.edu.opencart.data.SortByFilter;
 import com.softserve.edu.opencart.pages.user.common.ProductsContainerComponent;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductsDisplayComponent extends ProductsContainerComponent {
 
+    private String productsGridView = ".product-grid";
+    private String productsListView = ".product-list";
+    private String pagination = "//a[text()='%s']";
+
     private WebElement listViewButton;
     private WebElement gridViewButton;
-    private WebElement productsView;
-    private static Select sortByDropDownMenu;
+    private Select sortByDropDownMenu;
     private Select showDropDownMenu;
 
     public ProductsDisplayComponent(WebDriver driver) {
@@ -22,8 +29,8 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     }
 
     private void initElements() {
-        listViewButton = driver.findElement(By.id("list-view"));
-        gridViewButton = driver.findElement(By.id("grid-view"));
+        listViewButton = driver.findElement(By.xpath("//*[@id='list-view']"));
+        gridViewButton = driver.findElement(By.xpath("//*[@id='grid-view']"));
         sortByDropDownMenu = new Select(driver.findElement(By.id("input-sort")));
         showDropDownMenu = new Select(driver.findElement(By.id("input-limit")));
     }
@@ -31,27 +38,26 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     // Page Object
 
     // listViewButton
-    public ProductsDisplayComponent clickListViewButton() {
+    public void clickListViewButton() {
+        visibilityOfElement(listViewButton);
         if (!listViewButton.isSelected()) {
-            gridViewButton.click();
+            listViewButton.click();
         }
-        return new ProductsDisplayComponent(driver);
     }
 
     public boolean isListViewDisplayed() {
-        return productsView.findElement(By.cssSelector(".product-list")).isDisplayed();
+        return driver.findElement(By.cssSelector(productsListView)).isDisplayed();
     }
 
     // gridViewButton
-    public ProductsDisplayComponent clickGridViewButton() {
+    public void clickGridViewButton() {
         if (!gridViewButton.isSelected()) {
             gridViewButton.click();
         }
-        return new ProductsDisplayComponent(driver);
     }
 
     public boolean isGridViewDisplayed() {
-        return productsView.findElement(By.cssSelector(".product-grid")).isDisplayed();
+        return driver.findElement(By.cssSelector(productsGridView)).isDisplayed();
     }
 
     // sortByDropDownMenu
@@ -63,14 +69,8 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         return sortByDropDownMenu.getFirstSelectedOption().getText();
     }
 
-    public ProductsDisplayComponent setSortByDropDownMenu(SortByFilter filter) {
-        sortByDropDownMenu.selectByVisibleText(String.valueOf(filter));
-        return new ProductsDisplayComponent(driver);
-    }
-
-    public ProductsDisplayComponent clickSortByDropDownMenuButton() {
+    public void clickSortByDropDownMenuButton() {
         getInputSortWebElement().click();
-        return this;
     }
 
     // showDropDownMenu
@@ -86,11 +86,37 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         getShowDropDownMenuWebElement().click();
     }
 
+    //Pagination
+
+    public void clickNeedPage(Pagination page) {
+        WebElement result = driver.findElement(By.xpath(String.format(pagination, page)));
+        scrollUntilButtonsVisible(result);
+        if (!result.isSelected()){
+            result.click();
+        }
+    }
+
     // Functional
+
+    private void visibilityOfElement(WebElement element){
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    private void scrollUntilButtonsVisible(WebElement element){
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("arguments[0].scrollIntoView();", element);
+    }
 
     public void setShowDropDownMenu(CountOfProducts count) {
         clickShowDropDownButton();
         showDropDownMenu.selectByVisibleText(String.valueOf(count));
+    }
+
+    public ProductsDisplayComponent setSortByDropDownMenu(SortByFilter filter) {
+        clickSortByDropDownMenuButton();
+        sortByDropDownMenu.selectByVisibleText(filter.toString());
+        return new ProductsDisplayComponent(driver);
     }
 
     // Business Logic

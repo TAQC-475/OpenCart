@@ -32,6 +32,7 @@ public abstract class EpizyUserTestRunner {
 //    private String serverUrl = "http://192.168.174.129//opencart/upload/";  //Lyubomyr
 //    private String serverUrl = "http://192.168.220.130/opencart/upload/";  //Andrew
     private String serverUrl = "http://127.0.0.1/opencart/";
+    private String serverUrlLogout = "http://localhost/opencart/index.php?route=account/logout"; //Pavlo
     private String serverAdminUrl = serverUrl + "admin/";
     //protected WebDriver driver;
     private Map<Long, WebDriver> drivers;
@@ -62,13 +63,16 @@ public abstract class EpizyUserTestRunner {
 		//driver.manage().window().maximize();
 		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		//
-		//for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
-		//	System.out.println("Key: " + entry.getKey() + "  Value: " + entry.getValue());
-		//	if (entry.getKey().toLowerCase().equals("url")) {
-		//		serverUrl = entry.getValue();
-		//		break;
-		//	}
-		//}
+		for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
+			System.out.println("Key: " + entry.getKey() + "  Value: " + entry.getValue());
+			if (entry.getKey().toLowerCase().equals("url")) {
+				serverUrl = entry.getValue();
+			//	break;
+			}
+            if (entry.getKey().toLowerCase().equals("urllogout")) {
+                serverUrlLogout = entry.getValue();
+            }
+		}
 		WebDriverManager.chromedriver().setup();
 		getDriver().manage().window().maximize();
 	}
@@ -103,6 +107,7 @@ public abstract class EpizyUserTestRunner {
             takePageSource(takeScreenShot());
             // previous state, logout, etc.
         }
+        getDriver().get(serverUrlLogout);
         // driver.get(SERVER_URL);
     }
 
