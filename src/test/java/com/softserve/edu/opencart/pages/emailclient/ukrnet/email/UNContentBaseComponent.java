@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 public abstract class UNContentBaseComponent {
     protected WebDriver driver;
     protected WebElement messageControls;
-    protected EmailBoxName emailBoxName;
 
     public UNContentBaseComponent(WebDriver driver){
         this.driver = driver;

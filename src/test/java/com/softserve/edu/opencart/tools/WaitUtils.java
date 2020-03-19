@@ -38,4 +38,12 @@ public class WaitUtils {
         };
         return wait.until(jQueryLoad);
     }
+
+    public void waitForElementClickability(By locator){
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        waitForJSandJQueryToLoad();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
 }
