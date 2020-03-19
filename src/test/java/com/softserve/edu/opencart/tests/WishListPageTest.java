@@ -20,7 +20,7 @@ public class WishListPageTest extends EpizyUserTestRunner {
 //        .AddToWishButtonByName(ProductRepository.getIPhone())
 //        .gotoHomePage()
         .gotoWishListPage()
-        .deleteFromWishListByName(ProductRepository.getMacBook());
+        .deleteFromWishListByName(ProductRepository.getIPodClassic());
 
 //        .goToWIshLIstPageByAlert()
 //        .getWishListProductsContainerComponent()

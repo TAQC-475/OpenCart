@@ -22,10 +22,19 @@ public class WishListProductsContainerComponent {
     initElements();
   }
 
+  //  private void initElements() {
+//    wishListComponents = new ArrayList<>();
+//    for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_XPATH))) {
+//      wishListComponents.add(new WishListProductComponent(current));
+//    }
+//  }
   private void initElements() {
     wishListComponents = new ArrayList<>();
+    int i = 1;
     for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_XPATH))) {
-      wishListComponents.add(new WishListProductComponent(current));
+      wishListComponents.add(new WishListProductComponent(
+          current.findElement(By.xpath("//div[@class='table-responsive']//tbody//tr[" + i + "]"))));
+      i++;
     }
   }
 
@@ -47,7 +56,6 @@ public class WishListProductsContainerComponent {
 
   protected WishListProductComponent getWishListComponentByName(Product product) {
     WishListProductComponent result = null;
-    wishListComponents = getCorrectXPathComponents();
     for (WishListProductComponent current : getWishListComponents()) {
 //    for (WishListProductComponent current : getCorrectXPathComponents()) {
       if (current.getNameText().toLowerCase().equals(product.getName().toLowerCase())) {
@@ -66,7 +74,8 @@ public class WishListProductsContainerComponent {
     List<WishListProductComponent> correctList = new ArrayList<>();
     for (int i = 1; i <= getWishListComponentsCount(); i++) {
       correctList.add(new WishListProductComponent(
-          driver.findElement(By.xpath("//div[@class='table-responsive']//tbody//tr[" + i + "]")))
+//          driver.findElement(By.xpath("//div[@class='table-responsive']//tbody//tr[" + i + "]")))
+          driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[1]/table/tbody/tr[" + i + "]")))
       );
 
     }

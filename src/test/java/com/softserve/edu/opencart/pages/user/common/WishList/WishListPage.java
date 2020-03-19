@@ -53,15 +53,15 @@ public class WishListPage extends AccountSidebarLoggedPart {
   }
 
 
-  public WishListPage deleteFromWishListByName(Product product) {
+  public WishLIstMessagePage deleteFromWishListByName(Product product) {
     wishListProductsContainerComponent.clickWishListComponentRemoveButtonByName(product);
-    return new WishListPage(driver);
+    return new WishLIstMessagePage(driver);
   }
 
-  public WishListPage addToCart(Product product) {
+  public WishLIstMessagePage addToCart(Product product) {
     wishListProductsContainerComponent
         .clickWishListComponentAddToCartButtonByName(product);
-    return new WishListPage(driver);
+    return new WishLIstMessagePage(driver);
   }
 
 
