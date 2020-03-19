@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.tests;
 
+import com.softserve.edu.opencart.data.ICurrency;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -21,30 +22,33 @@ public class AdminMenuTest extends LocalAdminTestRunner {
 	}
 	
 	@Test(dataProvider = "admins")
-	public void checkSuccessful(IUser validAdmin) throws Exception {
+	public void checkSuccessful(IUser validAdmin, ICurrency currency) throws Exception {
 		// Test Data
 		// User validUser = UserRepository.getDefault();
 		//
 		// Steps
 		CurrenciesPage currenciesPage = loadSigninPage()
 				.successfulLogin(validAdmin)
-				.gotoCurrenciesPage();
-		presentationSleep(2);
+				.gotoCurrencyPage()
+				.goToAddNewCurrecyPage()
+				.addNewCurrency(currency);
+		presentationSleep(5);
 		//
 		// Check
-		Assert.assertTrue(currenciesPage.getTitleText().toLowerCase()
-				.contains(CurrenciesPage.EXPECTED_TITLE_MESSAGE.toLowerCase()));
-		presentationSleep(2);
+//		Assert.assertTrue(currenciesPage.getTitleText().toLowerCase()
+//				.contains(CurrenciesPage.EXPECTED_TITLE_MESSAGE.toLowerCase()));
+//		presentationSleep(2);
 		//
 		// Return to Previous State
-		SigninPage signinPage = currenciesPage
-				.logout();
-		presentationSleep(2);
-		//
-		// Check (optional)
-		Assert.assertTrue(signinPage.getPanelTitleText().toLowerCase()
-				.contains(SigninPage.EXPECTED_PANEL_TITLE_MESSAGE.toLowerCase()));
-		presentationSleep(2);
+//		SigninPage signinPage = currenciesPage
+//				.logout();
+//		presentationSleep(2);
+//		//
+//		// Check (optional)
+//		Assert.assertTrue(signinPage.getPanelTitleText().toLowerCase()
+//				.contains(SigninPage.EXPECTED_PANEL_TITLE_MESSAGE.toLowerCase()));
+//		presentationSleep(2);
+
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.admin.currencies;
 
+import com.softserve.edu.opencart.data.ICurrency;
 import com.softserve.edu.opencart.pages.admin.common.LeftMenuPart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,13 +37,15 @@ public class AddNewCurrencyPage extends LeftMenuPart {
         currencyStatusButton = driver.findElement(By.xpath("//*[@id=\"input-status\"]"));
         currencyStatusEnabledButton = driver.findElement(By.xpath("//*[@id='input-status']/option[@value = '1']"));
     }
-
+    //SaveButton
     public void clickSaveButton(){
         saveButton.click();
     }
+    //CancelButton
     public void clickCancelButton(){
         cancelButton.click();
     }
+    //TitleField
     public void clickCurrencyTitleField(){
         currencyTitleField.click();
     }
@@ -52,6 +55,7 @@ public class AddNewCurrencyPage extends LeftMenuPart {
     public void setCurrencyTitleField(String titleField){
         currencyTitleField.sendKeys(titleField);
     }
+    //CodeField
     public void clickCurrencyCodeField(){
         currencyCodeField.click();
     }
@@ -61,6 +65,7 @@ public class AddNewCurrencyPage extends LeftMenuPart {
     public void setCurrencyCodeField(String codeField){
         currencyCodeField.sendKeys(codeField);
     }
+    //SymbolLeftField
     public void clickSymbolLeftField(){
         currencySymbolLeftField.click();
     }
@@ -70,15 +75,17 @@ public class AddNewCurrencyPage extends LeftMenuPart {
     public void setCurrencySymbolLeftField(String symbolLeftField){
         currencySymbolLeftField.sendKeys(symbolLeftField);
     }
+    //SymbolRightField
     public void clickSymbolRightField(){
         currencySymbolRightField.click();
     }
     public void clearSymbolRightField(){
         currencySymbolRightField.clear();
     }
-    public void setSymbolRightField(String symbolRightField){
+    public void setCurrencySymbolRightField(String symbolRightField){
         currencySymbolRightField.sendKeys(symbolRightField);
     }
+    //DecimalPlacesField
     public void clickDecimalPlacesField(){
         currencyDecimalPlacesField.click();
     }
@@ -88,68 +95,71 @@ public class AddNewCurrencyPage extends LeftMenuPart {
     public void setCurrencyDecimalPlacesField(String decimalPlacesField){
         currencyDecimalPlacesField.sendKeys(decimalPlacesField);
     }
+    //ValueField
     public void clickValueField(){
         currencyValueField.click();
     }
     public void clearValueField(){
         currencyValueField.clear();
     }
-    public void setCurrencyValueField(String valueField){
-        currencyValueField.sendKeys(valueField);
+    public void setCurrencyValueField(double valueField){
+        currencyValueField.sendKeys(String.valueOf(valueField));
     }
+    //StatusButton
     public void clickStatusButton(){
         currencyStatusButton.click();
     }
     public void clickStatusEnabledButton(){
         currencyStatusEnabledButton.click();
     }
-    private void fillTitleField(){
+
+    private void fillTitleField(ICurrency currency){
         clickCurrencyTitleField();
         clearCurrencyTitleField();
-        //setCurrencyTitleField();
+        setCurrencyTitleField(currency.getCurrencyTitleField());
     }
-    private void fillCodeField(){
+    private void fillCodeField(ICurrency currency){
         clickCurrencyCodeField();
         clearCurrencyCodeField();
-        //setCurrencyCodeField();
+        setCurrencyCodeField(currency.getCurrencyCodeField());
     }
-    private void fillSymbolLeftField(){
+    private void fillSymbolLeftField(ICurrency currency){
         clickSymbolLeftField();
         clearSymbolLeftField();
-        //setSymbolLeftField();
+        setCurrencySymbolLeftField(currency.getCurrencySymbolLeftField());
     }
-    private void fillSymbolRightField(){
+    private void fillSymbolRightField(ICurrency currency){
         clickSymbolRightField();
         clearSymbolRightField();
-        //setSymbolRightField();
+        setCurrencySymbolRightField(currency.getCurrencySymbolRightField());
     }
-    private void fillDecimalPlacesField() {
+    private void fillDecimalPlacesField(ICurrency currency) {
         clickDecimalPlacesField();
         clearDecimalPlacesField();
-        //setDecimalPlacesField();
+        setCurrencyDecimalPlacesField(currency.getCurrencyDecimalPlacesField());
     }
-    private void fillValueField() {
+    private void fillValueField(ICurrency currency) {
         clickValueField();
         clearValueField();
-        //setValueField();
+        setCurrencyValueField(currency.getCurrencyValueField());
     }
     private void chooseStatusEnabled() {
         clickStatusButton();
         clickStatusEnabledButton();
     }
-    private void fillAllFields(){
-        fillTitleField();
-        fillCodeField();
-        fillSymbolLeftField();
-        fillSymbolRightField();
-        fillDecimalPlacesField();
-        fillValueField();
+    private void fillAllFields(ICurrency currency){
+        fillTitleField(currency);
+        fillCodeField(currency);
+        fillSymbolLeftField(currency);
+        fillSymbolRightField(currency);
+        fillDecimalPlacesField(currency);
+        fillValueField(currency);
         chooseStatusEnabled();
     }
-//    public CurrenciesPage addNewCurrency(){
-//        fillAllFields();
-//        clickSaveButton();
-//        return new CurrenciesPage(driver);
-//    }
+    public CurrenciesPage addNewCurrency(ICurrency currency){
+        fillAllFields(currency);
+        clickSaveButton();
+        return new CurrenciesPage(driver);
+    }
 
 }
