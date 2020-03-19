@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.math.BigDecimal;
+import java.util.concurrent.TimeUnit;
 
 public class ShoppingCartPage extends BreadCrumbPart {
     private WebElement shoppingCartExpectedText;
@@ -47,8 +48,10 @@ public class ShoppingCartPage extends BreadCrumbPart {
         this.getShoppingCartProductsContainerComponent()
                 .getShoppingCartProductComponentByProduct(product)
                 .clickRefreshButton();
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         (new WebDriverWait(driver, 5))
                 .until(ExpectedConditions.presenceOfElementLocated(messageAboutSuccessfulRefresh));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return new ShoppingCartPage(driver);
     }
 
@@ -56,9 +59,11 @@ public class ShoppingCartPage extends BreadCrumbPart {
         this.getShoppingCartProductsContainerComponent()
                 .getShoppingCartProductComponentByProduct(product)
                 .clickRemoveButton();
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         (new WebDriverWait(driver, 5))
                 .until(ExpectedConditions.stalenessOf(this.getShoppingCartProductsContainerComponent()
                         .getShoppingCartProductComponentByProduct(product).getProductName()));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return new ShoppingCartPage(driver);
     }
 

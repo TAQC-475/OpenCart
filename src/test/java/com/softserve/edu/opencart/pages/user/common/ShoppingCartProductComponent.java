@@ -1,6 +1,5 @@
 package com.softserve.edu.opencart.pages.user.common;
 
-import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.tools.RegularExpression;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -87,7 +86,7 @@ public class ShoppingCartProductComponent {
         return refreshButton;
     }
 
-    public void clickRefreshButton(){
+    public void clickRefreshButton() {
         getRefreshButton().click();
     }
 
@@ -95,7 +94,7 @@ public class ShoppingCartProductComponent {
         return removeButton;
     }
 
-    public void clickRemoveButton(){
+    public void clickRemoveButton() {
         getRemoveButton().click();
     }
 
