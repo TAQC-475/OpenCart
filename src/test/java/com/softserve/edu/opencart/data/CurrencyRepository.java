@@ -21,7 +21,7 @@ public class CurrencyRepository {
     }
 
     private ICurrency getUACurrency() {
-return Cure
+return Currency
     }
 
 }
