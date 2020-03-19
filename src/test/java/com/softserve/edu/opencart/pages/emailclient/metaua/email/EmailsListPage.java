@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.emailclient.email;
+package com.softserve.edu.opencart.pages.emailclient.metaua.email;
 
 import com.softserve.edu.opencart.data.EmailBoxName;
 import org.openqa.selenium.WebDriver;

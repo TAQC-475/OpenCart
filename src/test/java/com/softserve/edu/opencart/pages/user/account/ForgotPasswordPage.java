@@ -1,8 +1,7 @@
 package com.softserve.edu.opencart.pages.user.account;
 
 import com.softserve.edu.opencart.data.EmailUser;
-import com.softserve.edu.opencart.data.IUser;
-import com.softserve.edu.opencart.pages.emailclient.unlogged.EmailLoginPage;
+import com.softserve.edu.opencart.pages.emailclient.metaua.unlogged.EmailLoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

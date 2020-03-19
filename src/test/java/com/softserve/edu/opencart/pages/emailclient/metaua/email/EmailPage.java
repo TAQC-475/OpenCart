@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.emailclient.email;
+package com.softserve.edu.opencart.pages.emailclient.metaua.email;
 
 import com.softserve.edu.opencart.pages.user.account.ChangePasswordPage;
 import org.openqa.selenium.By;
@@ -18,7 +18,7 @@ public class EmailPage extends LeftEmailsPanelPart {
 
     public EmailPage(WebDriver driver) {
         super(driver);
-
+        initElements();
     }
 
     private void initElements(){
@@ -26,8 +26,8 @@ public class EmailPage extends LeftEmailsPanelPart {
         upperForwardButton = driver.findElement(By.id("id_forward1"));
         upperDeleteButton = driver.findElement(By.id("id_delete1"));
         upperSpamButton = driver.findElement(By.id("id_spam1"));
-        upperMoveSelect = driver.findElement(By.id("move_select1"));
-        messageBody = driver.findElement(By.id("//div[@id='message_body']"));
+        upperMoveSelect = driver.findElement(By.id("moveSelect1"));
+        messageBody = driver.findElement(By.xpath("//div[@id='message_body']"));
     }
 
     public WebElement getUpperReplyButton() {
@@ -57,7 +57,7 @@ public class EmailPage extends LeftEmailsPanelPart {
     //click ...
 
     public WebElement getLinkFromMessageBody(){
-        return messageBody.findElement(By.xpath("//a"));
+        return getMessageBody().findElement(By.xpath(".//a"));
     }
     public void clickLinkInMessageBody(){
         getLinkFromMessageBody().click();
