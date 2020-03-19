@@ -73,6 +73,11 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         getInputSortWebElement().click();
     }
 
+    public boolean isSortByCorrectTextSelected(SortByFilter filter) {
+        return getInputSortText().contains(filter.toString());
+    }
+
+
     // showDropDownMenu
     public WebElement getShowDropDownMenuWebElement() {
         return showDropDownMenu.getWrappedElement();
@@ -86,25 +91,29 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         getShowDropDownMenuWebElement().click();
     }
 
+    public boolean isShowCorrectQuantitySelected(CountOfProducts count) {
+        return getShowDropDownMenuText().contains(count.toString());
+    }
+
     //Pagination
 
     public void clickNeedPage(Pagination page) {
         WebElement result = driver.findElement(By.xpath(String.format(pagination, page)));
         scrollUntilButtonsVisible(result);
-        if (!result.isSelected()){
+        if (!result.isSelected()) {
             result.click();
         }
     }
 
     // Functional
 
-    private void visibilityOfElement(WebElement element){
+    private void visibilityOfElement(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    private void scrollUntilButtonsVisible(WebElement element){
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
+    private void scrollUntilButtonsVisible(WebElement element) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("arguments[0].scrollIntoView();", element);
     }
 

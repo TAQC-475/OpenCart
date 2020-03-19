@@ -2,9 +2,6 @@ package com.softserve.edu.opencart.pages.user.search;
 
 import com.softserve.edu.opencart.data.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchSuccessPage extends SearchCriteriaPart {
 
@@ -47,6 +44,14 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return new SearchSuccessPage(driver);
     }
 
+    public static boolean isSortByCorrectCriteria(SortByFilter filter){
+        return productsDisplay.isSortByCorrectTextSelected(filter);
+    }
+
+    public static boolean isShowCorrectQuantity(CountOfProducts count){
+        return productsDisplay.isShowCorrectQuantitySelected(count);
+    }
+
     public SearchSuccessPage viewProductsByList() {
         productsDisplay.viewProductsByList();
         return new SearchSuccessPage(driver);
@@ -65,7 +70,7 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return productsDisplay.isListViewDisplayed();
     }
 
-    public SearchSuccessPage clickNeedPage(Pagination page){
+    public SearchSuccessPage clickNeededPage(Pagination page){
         productsDisplay.clickNeedPage(page);
         return new SearchSuccessPage(driver);
     }

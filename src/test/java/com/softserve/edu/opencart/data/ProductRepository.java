@@ -1,5 +1,7 @@
 package com.softserve.edu.opencart.data;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
+
 public final class ProductRepository {
 
 	private ProductRepository() {
@@ -55,6 +57,14 @@ public final class ProductRepository {
 				.addPrice(Currencies.EURO,"95.72")
 				.addPrice(Currencies.POUND_STERLING,"74.73")
 				.addPrice(Currencies.US_DOLLAR,"122.00");
+	}
+
+	public static Product getMac(){
+		return new Product("Mac");
+	}
+
+	public static Product getAllProducts(){
+		return new Product("%");
 	}
 
 	public static Product getInvalid() {

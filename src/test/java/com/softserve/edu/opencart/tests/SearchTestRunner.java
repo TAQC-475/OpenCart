@@ -1,17 +1,21 @@
 package com.softserve.edu.opencart.tests;
 
+import com.softserve.edu.opencart.data.CountOfProducts;
+import com.softserve.edu.opencart.data.ProductRepository;
+import com.softserve.edu.opencart.data.SortByFilter;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
 public abstract class SearchTestRunner extends EpizyUserTestRunner {
-    public static final String INPUT_SEARCH_ALL_PRODUCTS = "%";
     SoftAssert softAssert = new SoftAssert();
+    static SortByFilter SELECT_SORT_BY_FILTER = SortByFilter.NAME_AZ;
+    static CountOfProducts SELECT_SHOW_FILTER = CountOfProducts.FIFTY;
 
-    @BeforeTest
+    @BeforeMethod()
     public void searchInput() {
         loadApplication()
-                .successfulSearch(INPUT_SEARCH_ALL_PRODUCTS);
+                .successfulSearch(ProductRepository.getAllProducts());
     }
 
     public SearchSuccessPage successPage() {
