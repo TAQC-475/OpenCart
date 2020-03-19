@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 public class WishListProductsContainerComponent {
 
   private final String PRODUCT_COMPONENT_XPATH = "//div[@class='table-responsive']//tbody//tr";
-//  private final String PRODUCT_COMPONENT_CSSSELECTOR ="#content > div.table-responsive > table > tbody > tr";
+  private final String PRODUCT_COMPONENT_CSSSELECTOR ="#content > div.table-responsive > table > tbody > tr";
 
   protected WebDriver driver;
 
@@ -22,21 +22,13 @@ public class WishListProductsContainerComponent {
     initElements();
   }
 
-    private void initElements() {
+  private void initElements() {
     wishListComponents = new ArrayList<>();
     for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_XPATH))) {
       wishListComponents.add(new WishListProductComponent(current));
     }
   }
-//  private void initElements() {
-//    wishListComponents = new ArrayList<>();
-//    int i = 1;
-//    for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_XPATH))) {
-//      wishListComponents.add(new WishListProductComponent(
-//          driver.findElement(By.xpath("//div[@class='table-responsive']//tbody//tr[" + i + "]"))));
-//      i++;
-//    }
-//  }
+
 
   public List<WishListProductComponent> getWishListComponents() {
     return wishListComponents;
@@ -57,7 +49,6 @@ public class WishListProductsContainerComponent {
   protected WishListProductComponent getWishListComponentByName(Product product) {
     WishListProductComponent result = null;
     for (WishListProductComponent current : getWishListComponents()) {
-//    for (WishListProductComponent current : getCorrectXPathComponents()) {
       if (current.getNameText().toLowerCase().equals(product.getName().toLowerCase())) {
         result = current;
         break;
@@ -70,17 +61,7 @@ public class WishListProductsContainerComponent {
     return result;
   }
 
-  private List<WishListProductComponent> getCorrectXPathComponents() {
-    List<WishListProductComponent> correctList = new ArrayList<>();
-    for (int i = 1; i <= getWishListComponentsCount(); i++) {
-      correctList.add(new WishListProductComponent(
-//          driver.findElement(By.xpath("//div[@class='table-responsive']//tbody//tr[" + i + "]")))
-          driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[1]/table/tbody/tr[" + i + "]")))
-      );
 
-    }
-    return correctList;
-  }
 
 
   public BigDecimal getWishListComponentPriceByName(Product productName) {
@@ -96,14 +77,7 @@ public class WishListProductsContainerComponent {
   }
 
   public void clickWishListComponentRemoveButtonByName(Product productName) {
-    for (String s : getWishListComponentNames()) {
-      System.out.println(s);
-    }
-    for (WishListProductComponent s : getWishListComponents()) {
-      System.out.println(s.getNameText());
-    }
-    System.out.println(getWishListComponentsCount());
-    getWishListComponentByName(productName).clickRemoveFromWIshListButton();
+    getWishListComponentByName(productName).clickRemoveFromWishListButton();
   }
 
   public void clickWishListComponentNameOnName(Product productName) {

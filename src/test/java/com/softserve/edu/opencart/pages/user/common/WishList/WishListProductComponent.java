@@ -25,16 +25,16 @@ public final class WishListProductComponent {
 
   private void initElements() {
     image = tableLayout
-        .findElement(By.xpath("//div[@class='table-responsive']//td[@class='text-center']/a"));
+        .findElement(By.xpath("./td[@class='text-center']/a"));
     name = tableLayout
-        .findElement(By.xpath("//div[@class='table-responsive']//td[@class='text-left']/a"));
-    model = tableLayout.findElement(By.xpath("//tbody//td[contains(text(),'roduct')]"));
-    stock = tableLayout.findElement(By.xpath("//tbody//td[contains(text(),'Stock')]"));
-    price = tableLayout.findElement(By.xpath("//div[@class='price']"));
+        .findElement(By.xpath("./td[@class='text-left']/a"));
+    model = tableLayout.findElement(By.xpath("./td[@class='text-left']/a/../following-sibling::td[@class='text-left']"));
+    stock = tableLayout.findElement(By.xpath("./td[@class='text-right']/div[@class='price']/../preceding-sibling::td[@class='text-right']"));
+    price = tableLayout.findElement(By.xpath("./td[@class='text-right']/div[@class='price']"));
     addToCartButton = tableLayout
-        .findElement(By.xpath("//div//button[@data-original-title='Add to Cart']"));
+        .findElement(By.xpath(".//button[@data-original-title='Add to Cart']"));
     removeFromWIshListButton = tableLayout
-        .findElement(By.xpath("//div//a[@data-original-title='Remove']"));
+        .findElement(By.xpath(".//a[@data-original-title='Remove']"));
 
   }
 
@@ -88,7 +88,7 @@ public final class WishListProductComponent {
     return removeFromWIshListButton;
   }
 
-  public void clickRemoveFromWIshListButton() {
+  public void clickRemoveFromWishListButton() {
     getRemoveFromWIshListButton().click();
   }
 }
