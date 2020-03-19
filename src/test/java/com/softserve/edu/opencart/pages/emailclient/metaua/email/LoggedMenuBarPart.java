@@ -1,6 +1,6 @@
-package com.softserve.edu.opencart.pages.emailclient.email;
+package com.softserve.edu.opencart.pages.emailclient.metaua.email;
 
-import com.softserve.edu.opencart.pages.emailclient.common.FooterServicesPart;
+import com.softserve.edu.opencart.pages.emailclient.metaua.common.FooterServicesPart;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

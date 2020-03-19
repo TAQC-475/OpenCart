@@ -1,0 +1,692 @@
+[33mcommit ce60ceeb47ec26dab747c6ec5563e05cf4a60c12[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Thu Mar 19 01:04:50 2020 +0200
+
+    component fix
+
+[33mcommit b9b5e071a891461884a6439ce8f04be0f9aa0bf6[m
+Author: stadnytskyivp <stadnytskyi.volodymyr@gmail.com>
+Date:   Thu Mar 19 00:49:29 2020 +0200
+
+    code update
+
+[33mcommit ca0443be74d0ed07d73c760da6ed5eebd67d056c[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Thu Mar 19 00:23:32 2020 +0200
+
+    component fix
+
+[33mcommit 861dcfdd2a6cd3d3ca10dc96790f431dfd8dc5a9[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Thu Mar 19 00:08:53 2020 +0200
+
+    small view cart fixes
+
+[33mcommit 2298f456a790867f8cf266bfc7cc291e7f70c514[m
+Author: stadnytskyivp <stadnytskyi.volodymyr@gmail.com>
+Date:   Wed Mar 18 23:41:08 2020 +0200
+
+    changes in menu items
+
+[33mcommit 43528897c8c9a37d73b45d335755f3138520a1d7[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Wed Mar 18 22:17:02 2020 +0200
+
+    fixed wait
+
+[33mcommit 1894d8a8ae44454e9151fc00992f08c488d3a879[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Wed Mar 18 22:08:14 2020 +0200
+
+    Add methods for alert to LoginPage
+
+[33mcommit aa0f9949eef5eb320d944f4d7485a2034ed93c40[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Wed Mar 18 20:59:08 2020 +0200
+
+    Add new User. Add class body to EmailPage
+
+[33mcommit ce66a1f9d823b1a0924540bb27b84f1596329246[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Wed Mar 18 20:34:17 2020 +0200
+
+    restore tabulation in TopPart
+
+[33mcommit 5cee2a87688ac2c7e9b792e8cb70ee7f1d374aca[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Wed Mar 18 20:17:22 2020 +0200
+
+    refactored tests, relocated methods for checking orders total price to ShoppingCartProductsContainerComponent.class and to ShoppingCartProductComponent.class
+
+[33mcommit 206240b820cc7b0dad5c86c93127c016e281666c[m
+Author: LyubomyrKovch <lkovch@gmail.com>
+Date:   Wed Mar 18 19:56:49 2020 +0200
+
+    finalized class localisationSystemInLeftMenuPart for next class Currencie
+
+[33mcommit 2c0ad85ce31883c2617c4a618d1cfa260d38e071[m
+Author: LyubomyrKovch <lkovch@gmail.com>
+Date:   Wed Mar 18 19:39:35 2020 +0200
+
+    add two new classes which extends LeftMenuPart in admin page and new web elements
+
+[33mcommit 94e112123de030a10559db23b883c246f7ec15cf[m
+Merge: ca95c00 ffbcf6a
+Author: LyubomyrKovch <lkovch@gmail.com>
+Date:   Wed Mar 18 19:28:02 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit ca95c00cd795294ffbe3ecc973e6af3dfcf6fb78[m
+Author: LyubomyrKovch <lkovch@gmail.com>
+Date:   Wed Mar 18 19:27:45 2020 +0200
+
+    Add two new classes which extends LeftMenuPart in admin page
+
+[33mcommit ffbcf6ae669b1b133bbe5adc1c8f894fb2aac60b[m
+Merge: 89dfc91 1c01f5d
+Author: Boris <borismenko.sgmail.com>
+Date:   Wed Mar 18 19:12:55 2020 +0200
+
+    resolve conflict in top part
+
+[33mcommit 89dfc91ea41a1139aa578261b63d9f4f6c46f65c[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Wed Mar 18 19:07:10 2020 +0200
+
+    Bug Fix Compare Names Wish List Product and Product
+
+[33mcommit 1c01f5dbb21b2b07afc3fc789245744498e527b3[m
+Merge: 6fb3fab fe6f691
+Author: LyubomyrKovch <lkovch@gmail.com>
+Date:   Wed Mar 18 18:06:44 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit 6fb3fabc1203994bcf4aa272ee9234e73dc0c132[m
+Author: LyubomyrKovch <lkovch@gmail.com>
+Date:   Wed Mar 18 18:05:57 2020 +0200
+
+    Add AdminURL and web elements into class LeftMenuPart in admin page
+
+[33mcommit fe6f691b6acae80078fa648203543ec9f8861a28[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Wed Mar 18 15:21:57 2020 +0200
+
+    fix xpathes
+
+[33mcommit 54458f8b0e1e73fe60e8fe1f2ea5e5ddddd56b46[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Wed Mar 18 13:31:20 2020 +0200
+
+    refactored test, added method for checking orders total price to ShoppingCartPage
+
+[33mcommit 39081f0231d5f787ec03f6ea3e118724a87c7488[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Wed Mar 18 13:23:03 2020 +0200
+
+    Add several test steps. Remove LoginForm class. Fix errors
+
+[33mcommit 5e228d6be6d6dd6f5cc410d30b202c0d7471be4d[m
+Author: LyubomyrKovch <lkovch@gmail.com>
+Date:   Wed Mar 18 11:28:36 2020 +0200
+
+    add url for Admin in TestRunner
+
+[33mcommit a2d408eb0f71179948d143848869898f85d45288[m
+Author: stadnytskyivp <stadnytskyi.volodymyr@gmail.com>
+Date:   Wed Mar 18 11:19:40 2020 +0200
+
+    added a regular expression
+
+[33mcommit cddd02b747462edd8f9a1b06fccdd7d5ce705d4c[m
+Author: stadnytskyivp <stadnytskyi.volodymyr@gmail.com>
+Date:   Wed Mar 18 09:16:03 2020 +0200
+
+    added methods to ProductSidebarPart
+
+[33mcommit dc076e0726a2ebef65dae99f7218ee70e7ead404[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Wed Mar 18 09:04:38 2020 +0200
+
+    Add EmailUser and EmailUserRepository classes
+
+[33mcommit 46b2107c14c27a340095fe6fc3228279eadeed87[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Wed Mar 18 00:14:28 2020 +0200
+
+     try to fix timings from AlertPage by explicit+JQuery waits after product adding methods
+
+[33mcommit fe46082fee8fdcc4923a8f7e2d2fdee8f0a5709a[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Wed Mar 18 00:08:51 2020 +0200
+
+     try to fix timings from AlertPage by explicit+JQuery waits after product adding methods
+
+[33mcommit edb0fad05d62ba35f0e9846f0cc31ebb49b20501[m
+Merge: ac780a4 2ea0bf8
+Author: stadnytskyivp <stadnytskyi.volodymyr@gmail.com>
+Date:   Tue Mar 17 22:37:25 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit ac780a4926f692231bb614cee2e951d8cbaae952[m
+Author: stadnytskyivp <stadnytskyi.volodymyr@gmail.com>
+Date:   Tue Mar 17 22:36:56 2020 +0200
+
+    added menu items class
+
+[33mcommit 2ea0bf80913f3061e70a91e83f8a43ea6f5069d8[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Tue Mar 17 22:31:48 2020 +0200
+
+    Add methods to emailListItemComponent and EmailListContainerComponent
+
+[33mcommit a3ac9702d80f4f0cb095aaf67c79a8015d6b23a2[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Tue Mar 17 21:57:47 2020 +0200
+
+    refactored ShoppingCartPage and test for it
+
+[33mcommit 471f0e45b813953f79c0069931b591534345f519[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Tue Mar 17 21:50:28 2020 +0200
+
+    added method goToShoppingPage in TopPart class, goToHomePage in AddProductAlertPage, and refactored test for shoppingCartPage
+
+[33mcommit 909c71ceecc0a518ae6ea26d4cf24073ed30c82c[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Tue Mar 17 21:21:23 2020 +0200
+
+     - add methods to ProductInfoPage for adding simple/ complicated product with/wo setting Quantity
+     - add ProductInfoOptionsComponent for adding complicated product(AppleCinema30)
+     - add ProductOptionsSet and repo to create options set for difficult adding(AppleCinema30)
+
+[33mcommit 43f24147142ec1167314ce8590b97550e6f95e63[m
+Merge: f2014ff 60220d2
+Author: Boris <borismenko.sgmail.com>
+Date:   Tue Mar 17 18:16:21 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit f2014fff93c131726232043b33ab5cd91e80c0a8[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Tue Mar 17 18:16:08 2020 +0200
+
+    update .gitignore
+
+[33mcommit 60220d23c8136c8b3edcbc4f95db9aa90f44a751[m
+Merge: 34e0f3e 24e11b3
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Tue Mar 17 18:10:50 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit 34e0f3e83e0dbe6c3e69aa14c8b0e91617b5befd[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Tue Mar 17 18:10:45 2020 +0200
+
+    refactored AddProductAllertPage, resolved problem with clicking on shopping cart
+
+[33mcommit 24e11b34962ba7716b8543478fee8f06272cf4e0[m
+Merge: 8530f0c 23ed164
+Author: Boris <borismenko.sgmail.com>
+Date:   Tue Mar 17 17:56:31 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit 8530f0ce4a61a08d86a4f48131899b7d36e26853[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Tue Mar 17 17:56:25 2020 +0200
+
+    update RegularExpression and WishList
+
+[33mcommit 23ed1643faee6052d23791d2be4c4ee6875a7cc3[m
+Merge: 976254d 3a75cfc
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Tue Mar 17 15:49:40 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit 976254d805b4b023f2fd30f116dee92244983dbb[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Tue Mar 17 15:49:32 2020 +0200
+
+    refactored shoppingcartpage
+
+[33mcommit 3a75cfc95d21d8862ae819db0fe50f8c0bd2ac76[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Tue Mar 17 14:44:43 2020 +0200
+
+    add methods for cart adding from ProductInfoPage + component for options set(not yet finished, commented)
+
+[33mcommit 4c30ef42aafb6ad66af01ebc56d6a7201bdebb40[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Tue Mar 17 08:26:18 2020 +0200
+
+    eror fix
+
+[33mcommit bb6c15fc377427852354f6967cfde129c2dcf4ec[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Tue Mar 17 06:06:39 2020 +0200
+
+    remove tab methods from TopPart. Add EmailListItem and controller classes
+
+[33mcommit 3b5249b2756b2849836920658c2d423b8137984b[m
+Author: stadnytskyivp <stadnytskyi.volodymyr@gmail.com>
+Date:   Tue Mar 17 00:21:43 2020 +0200
+
+    deleted wasted comments
+
+[33mcommit cb628de6af5750049a658b3d113912f58f11c682[m
+Author: stadnytskyivp <stadnytskyi.volodymyr@gmail.com>
+Date:   Tue Mar 17 00:17:27 2020 +0200
+
+    added Test and added methods to ProductSidebarEmptyPage
+
+[33mcommit fbff021a05af4e93ebb13b677c36a1b691714194[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Mon Mar 16 23:58:24 2020 +0200
+
+    upadte Regular Expression
+
+[33mcommit 56099bf30e0035d9422d5ed7447145d7265afbcb[m
+Merge: d46fd98 a3a1bf0
+Author: Boris <borismenko.sgmail.com>
+Date:   Mon Mar 16 23:50:18 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit d46fd981cb1a64066342e67806e01bc0e67cc48e[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Mon Mar 16 23:50:11 2020 +0200
+
+    Update WishListProductComponent
+
+[33mcommit a3a1bf00f6c03a0dd654cfed63f23a028cdca27b[m
+Author: Andrew Rorat <rorat6937@gmail.com>
+Date:   Mon Mar 16 23:40:42 2020 +0200
+
+    Created new new enum class 'CountOfProducts'
+
+[33mcommit bb51a232b118c22017a155d98cca28acd4f5f2a8[m
+Author: Andrew Rorat <rorat6937@gmail.com>
+Date:   Mon Mar 16 22:25:11 2020 +0200
+
+    add new method for sorting by criteria in SearchSuccessPage class
+
+[33mcommit 35fe4519d810bf25828d65be59d35e664bbcd22f[m
+Merge: e785ecc 235e16a
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Mon Mar 16 22:13:31 2020 +0200
+
+    resolved conflict in AddProductAlertPage class
+
+[33mcommit e785ecca6e10190ac9db674ae19475d143deeecb[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Mon Mar 16 22:10:04 2020 +0200
+
+    added regular expression, method waitForJSandJQueryToLoad and removed commented code from test
+
+[33mcommit 235e16ae22c6b6e931ca8bf852aa8947ce7e83e1[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Mon Mar 16 20:14:00 2020 +0200
+
+    method name and extend fix
+
+[33mcommit ee73103e4f355da775ec43d2eb0558fdce7587e0[m
+Merge: 1e9fcb0 b7948e7
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Mon Mar 16 17:28:49 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit 1e9fcb04e503c0f199c3888c9a5c60d5795bfe7a[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Mon Mar 16 17:28:36 2020 +0200
+
+    added new method to ShoppingCart class and modified its test class
+
+[33mcommit b7948e7cf8a4be8fc86424dfcd444f73907279aa[m
+Merge: e4e0390 9112575
+Author: Boris <borismenko.sgmail.com>
+Date:   Mon Mar 16 15:37:55 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit e4e0390154df07b2de338ebf1bbd929550c02553[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Mon Mar 16 15:37:48 2020 +0200
+
+    Add WishListPageTest and update WishListPage
+
+[33mcommit 9112575d21bed08983cc617714b1e10d16e55603[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Mon Mar 16 14:54:06 2020 +0200
+
+     - add method to open ProductInfoPage from ProductsContainerComponent
+     - fix add to cart from ProductsContainerComponent
+     - add elements to ProductInfoPage
+
+[33mcommit b8725463c12a66912a8de2ea5872f45bce342c3f[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Mon Mar 16 14:36:17 2020 +0200
+
+    Hot fix. Add EmailListComponent
+
+[33mcommit 03bca277975f15e6120a9c438167d3ed53810825[m
+Author: stadnytskyivp <stadnytskyi.volodymyr@gmail.com>
+Date:   Mon Mar 16 13:27:05 2020 +0200
+
+    added methods to ProdSidebarEmptyPage and added params & methods to TopPart
+
+[33mcommit 11540d32f47732bfe17b6394e4a8ce2309fb276b[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Mon Mar 16 12:45:25 2020 +0200
+
+    Add body to EmailBox enum. Add methods to LeftEmailPanelPart
+
+[33mcommit 52a555119321747be0c2afa939b32d0585f9800f[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Mon Mar 16 12:28:55 2020 +0200
+
+    update WishListProductcomponent and WishListCOnteinerComponent
+
+[33mcommit b7ff4e8f5de2a5fdf4c4a119b98e53ef395391c7[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Mon Mar 16 11:07:08 2020 +0200
+
+    upade WishListProductComponent
+
+[33mcommit 80f9cb3a7fb28302bef27c76024fa9b8b5d7ba92[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Mon Mar 16 01:11:03 2020 +0200
+
+    update ViewCart methods
+
+[33mcommit efa544d3665c3548793a980677b3819e84e464e7[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Mon Mar 16 01:01:03 2020 +0200
+
+    - add AppleCinema to ProductRepository for test
+
+[33mcommit 83d505c0f1420d8755705e84a1c7624daebc2c94[m
+Author: stadnytskyivp <stadnytskyi.volodymyr@gmail.com>
+Date:   Mon Mar 16 00:09:40 2020 +0200
+
+    added MainMenu class and declared parameter and getter in TopPart
+
+[33mcommit a4c728f2453d2927b91fcc0d54db105f99679002[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Sun Mar 15 23:53:07 2020 +0200
+
+    comment url
+
+[33mcommit c06bf6af5b1b7d47307ff76a0a3abb40099ee5e7[m
+Merge: 2981226 a9db880
+Author: Boris <borismenko.sgmail.com>
+Date:   Sun Mar 15 23:51:36 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit 2981226b5db48c88103f6a6a54f935107d923798[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Sun Mar 15 23:51:26 2020 +0200
+
+    add two classes WishListComponent
+
+[33mcommit a9db88070f5e129087f344549b0f25782c3aaefe[m
+Author: Andrew Rorat <rorat6937@gmail.com>
+Date:   Sun Mar 15 23:06:56 2020 +0200
+
+    corrected 'searchTopField' web element in TopPart add final string in Home page
+
+[33mcommit 751f940ed80355469fba565bbdcefbf6fa899ac1[m
+Merge: bb4b2e2 5a63d5b
+Author: Boris <borismenko.sgmail.com>
+Date:   Sun Mar 15 21:21:57 2020 +0200
+
+    Resolve conflict in EpiziUserTestRanner and TopPart
+
+[33mcommit 5a63d5bc672d960b878a6b94d585c4d39f52b9de[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Sun Mar 15 21:11:51 2020 +0200
+
+     - add simple add method directly from ProductsContainerComponent
+     - add alert page with confirmation message about adding product
+
+[33mcommit bb4b2e216afc2cd933b8a8603a993ca91469f95a[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Sun Mar 15 21:11:07 2020 +0200
+
+    update .gitignor
+
+[33mcommit ededcf9ca3104721891ec21a0f625e7a1e60e4d4[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sun Mar 15 19:59:34 2020 +0200
+
+    refactored ShoppingCartPage and Test for this page
+
+[33mcommit fbb9cfaae513abce0174ffa003ab5ac5f672bfe8[m
+Author: Andrew Rorat <rorat6937@gmail.com>
+Date:   Sun Mar 15 19:32:41 2020 +0200
+
+    refactor iphone 3 to iphone
+
+[33mcommit b35149c8cb69335ab2347eae9e7514b9b707e4ac[m
+Merge: c0eeaef 279eaa9
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sun Mar 15 18:36:26 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit c0eeaef36870ca82a3aa874eefd9e88fd41e00af[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sun Mar 15 18:36:10 2020 +0200
+
+    refactored ShoppingCart, ShoppingCartProductComponent and Container classes
+
+[33mcommit 279eaa9702af8d9f9e82436d2e77721da78e0ab2[m
+Author: 51stRoR <51sttestinrror@gmail.com>
+Date:   Sun Mar 15 17:12:40 2020 +0200
+
+     - add ViewCartComponent and ViewCartProductComponent to the view cart by button from the top part
+     - add ViewCartComponent logic to the TopPart
+
+[33mcommit 259b47213ee76a382c2125954c71b229f10c1cb5[m
+Merge: 76e3fe2 bb8c874
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sun Mar 15 16:20:53 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit 76e3fe24201123ab20d4186c68dbf475f5be7e64[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sun Mar 15 16:20:44 2020 +0200
+
+    added more new methods to ShoppingCartProductsContainerComponent class
+
+[33mcommit bb8c8748069792989e40a1ce40245bdb5992c879[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sun Mar 15 15:52:08 2020 +0200
+
+    Add xpathes to email panel. Fix login page
+
+[33mcommit d3753f2907a6c275e034ebbc5110f8ad814cf53a[m
+Merge: 2c7c1b9 f06e052
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sun Mar 15 15:28:58 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit 2c7c1b9a57a8799705f80cd16b35af7f8edf7cdd[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sun Mar 15 15:28:52 2020 +0200
+
+    added new  methods to ShoppingCartProductsContainerComponent class
+
+[33mcommit f06e05267b58c20fd38eead80d4f012b40a1909e[m
+Merge: 529ddd5 7600fd8
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sun Mar 15 14:01:27 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit 529ddd59938a4146985e92a7631b82c04749852b[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sun Mar 15 14:01:18 2020 +0200
+
+    Add body to unlogged email client classes
+
+[33mcommit 7600fd8538668ff6e25c031ea46578ad4e7c0093[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sun Mar 15 13:41:28 2020 +0200
+
+    added xpathes, getters and methods for attributes of ShoppingCartProductComponent class
+
+[33mcommit eac64b9d626ae578caaa8645a8444f0032d86564[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sun Mar 15 11:18:43 2020 +0200
+
+    Add tab switch methods. Add constructors for email PO
+
+[33mcommit 95f6826f37e1ea9521ecb5a2d71d47af93121018[m
+Merge: c47298c 04f74a9
+Author: Boris <borismenko.sgmail.com>
+Date:   Sun Mar 15 09:47:07 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit c47298cd4b0acc39c6c3b0b631791b268da4bbc9[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Sun Mar 15 09:46:51 2020 +0200
+
+    added Regular Expresion class
+
+[33mcommit 04f74a9be7366c24175061fcaa9b9b6faa2cff19[m
+Author: Andrew Rorat <rorat6937@gmail.com>
+Date:   Sun Mar 15 00:07:58 2020 +0200
+
+    new boolean methods in ProductsDisplayComponent class
+
+[33mcommit 782813ca80f75dbcecbe3990086a760abf95745c[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sat Mar 14 21:18:32 2020 +0200
+
+    Added ShoppingCartProductComponent and ShoppingCartProductsContainerComponent classes
+
+[33mcommit 512712d0ca57171489d8d76fcfba565798b41016[m
+Author: Andrew Rorat <rorat6937@gmail.com>
+Date:   Sat Mar 14 20:02:29 2020 +0200
+
+    add new enum class 'SortByFilter'
+
+[33mcommit 0ac53de29571033cf6009d65b7d58fc59c8ddfad[m
+Merge: 98a50d6 9179b34
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sat Mar 14 19:39:59 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit 98a50d634eea20775fb7cc7928fbca01ee2a29f9[m
+Author: Pavlo Tytarchuk <tytarchuk.pavel@gmail.com>
+Date:   Sat Mar 14 19:39:06 2020 +0200
+
+    Added Shoppingcart page and test
+
+[33mcommit 9179b34bec1e5e3c782ccc58c0f38962797259c6[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sat Mar 14 18:36:44 2020 +0200
+
+    Implement ChangePasswordPage
+
+[33mcommit 3851cf5464a82e8dd5cc965b33d4f43bbee339dd[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sat Mar 14 18:00:43 2020 +0200
+
+    Implement ForgotPasswordPage
+
+[33mcommit 7dcabc28d1b478900d4daea26be936e456678097[m
+Merge: 7c22636 b29eb83
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sat Mar 14 17:16:01 2020 +0200
+
+    Merge branch 'master' of https://github.com/TAQC-475/OpenCart
+
+[33mcommit b29eb8315b06d587306c715c417474e60ad1ca7e[m
+Author: LyubomyrKovch <lkovch@gmail.com>
+Date:   Sat Mar 14 15:31:46 2020 +0200
+
+    created new page class - AddNewCurrencyPage and added webElements
+
+[33mcommit 7c22636e29cd7163288fd9fb1152fa77d3d71dcd[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sat Mar 14 14:52:19 2020 +0200
+
+    fix class names
+
+[33mcommit de03b66d47a53b12c04650ba7ee7f058b1fca86c[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sat Mar 14 14:20:09 2020 +0200
+
+    Add empty email page
+
+[33mcommit c331ab23624fcd825288afa81175e6f553f86a73[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sat Mar 14 13:36:26 2020 +0200
+
+    Add inbox empty classes
+
+[33mcommit 6d12be3f20b05fbd2e966dedf13b9df8c7e01be7[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Sat Mar 14 00:07:18 2020 +0200
+
+    Fix class names
+
+[33mcommit 28dea7da62553afe216a6e1212ada6b1b40df590[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Fri Mar 13 23:36:35 2020 +0200
+
+    Add email service packages and top navigate part
+
+[33mcommit 8612a4e4d92d4c6f5e6a063374844f3fae2c3140[m
+Author: BorisTitarenko <specmohnat2309@gmail.com>
+Date:   Fri Mar 13 21:52:40 2020 +0200
+
+    ready to work
+
+[33mcommit e1ff722926e48eeb54fbcb4d7e59ed7231651590[m[33m ([m[1;31morigin/BorysMenko[m[33m)[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Thu Mar 12 18:27:46 2020 +0200
+
+    update .gitignore
+
+[33mcommit 1d5416364891c2019427aa0cac4c5799425c5f54[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Thu Mar 12 18:19:13 2020 +0200
+
+    remove .idea folder
+
+[33mcommit c6a7cb0b13c5780b77e12ebc7f55ce11c1ea752a[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Thu Mar 12 17:55:55 2020 +0200
+
+    add .gitignore file
+
+[33mcommit e33399f4c981aed4c269080d8f7dcd3d61db9e8a[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Thu Mar 12 16:30:36 2020 +0200
+
+    New Verison OpenCart
+
+[33mcommit 7032926c16a6e9e4dbd3dc181b2d1399ef88f149[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Wed Mar 11 17:52:16 2020 +0200
+
+    Deleteed useless files
+
+[33mcommit 95000b2caaee12ca98c4838651a8770806c77ae5[m
+Author: Boris <borismenko.sgmail.com>
+Date:   Wed Mar 11 17:09:57 2020 +0200
+
+    Test Automation OpenCart version 1

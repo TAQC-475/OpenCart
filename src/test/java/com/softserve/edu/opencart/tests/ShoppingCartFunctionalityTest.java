@@ -5,18 +5,17 @@ import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
 
     @DataProvider
     public Object[][] dataForSumRefreshAndRemoveTest() {
-        return new Object[][]{{UserRepository.get().getDefault(), ProductRepository.getMacBook(), ProductRepository.getIPhone()}};
+        return new Object[][]{{UserRepository.get().getDefault(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart()}};
     }
 
     @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
@@ -29,22 +28,20 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .goToHomePageFromAlert()
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(product2)
-                .goToShoppingCartFromAlert();
+                .goToShoppingCartFromAlert()
+                .setQuantity(product1, product1.getQuantity())
+                .setQuantity(product2, product2.getQuantity());
 
-        shoppingCartPage = shoppingCartPage.setQuantity(product1, "2");
-        shoppingCartPage = shoppingCartPage.setQuantity(product2, "3");
+        BigDecimal correctResult = shoppingCartPage.getShoppingCartProductsContainerComponent().calculateOrderCorrectTotalPrice();
+        BigDecimal actualResult = shoppingCartPage.getOrderSubTotalPrice();
 
-        List<BigDecimal> productsCorrectTotalPrices = new ArrayList<>();
-
-        productsCorrectTotalPrices.add(shoppingCartPage.calculateProductCorrectTotalPrice(product1));
-        productsCorrectTotalPrices.add(shoppingCartPage.calculateProductCorrectTotalPrice(product2));
-
-        shoppingCartPage.calculateOrderCorrectTotalPrice(productsCorrectTotalPrices);
+        Assert.assertEquals(actualResult, correctResult);
     }
 
     @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
     public void refreshTest(User testUser, Product product1, Product product2) {
-        loadApplication().gotoLoginPage()
+        ShoppingCartPage shoppingCartPage = loadApplication()
+                .gotoLoginPage()
                 .successfulLogin(testUser)
                 .gotoHomePage()
                 .getProductComponentsContainer()
@@ -52,8 +49,16 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .goToHomePageFromAlert()
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(product2)
-                .goToShoppingCartFromAlert()
-                .refreshShoppingCartPageByProduct(product1)
-                .removeShoppingCartComponentFromContainerByProduct(product2);
+                .goToShoppingCartFromAlert();
+
+        shoppingCartPage = shoppingCartPage.refreshShoppingCartPageByProduct(product1);
+
+        Assert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
+
+        int numberOfProductsBeforeRemoving = shoppingCartPage.getShoppingCartProductsContainerComponent().getShoppingCartProductComponentCount();
+        shoppingCartPage = shoppingCartPage.removeShoppingCartComponentFromContainerByProduct(product2);
+        int numberOfProductsAfterRemoving = shoppingCartPage.getShoppingCartProductsContainerComponent().getShoppingCartProductComponentCount();
+
+        Assert.assertTrue(numberOfProductsAfterRemoving < numberOfProductsBeforeRemoving);
     }
 }

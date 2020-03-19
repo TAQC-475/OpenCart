@@ -8,6 +8,7 @@ public class Product {
 	private String name;
 	private String description;
 	private String priceDollarExTax;
+	private String quantity;
 	// TODO
 	// private Map<Currencies, Decimal> prices;
 	private Map<Currencies, String> prices;
@@ -17,6 +18,15 @@ public class Product {
 		this.description = description;
 		this.priceDollarExTax = priceDollarExTax;
 		prices = new HashMap<Currencies, String>();
+		this.quantity = "1";
+	}
+
+	public Product(String name, String description, String priceDollarExTax, String quantity) {
+		this.name = name;
+		this.description = description;
+		this.priceDollarExTax = priceDollarExTax;
+		prices = new HashMap<Currencies, String>();
+		this.quantity = quantity;
 	}
 
 	// setters
@@ -31,6 +41,10 @@ public class Product {
 
 	public void setPriceDollarExTax(String priceDollarExTax) {
 		this.priceDollarExTax = priceDollarExTax;
+	}
+
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
 	}
 
 	public Product addPrice(Currencies currency, String price) {
@@ -54,5 +68,9 @@ public class Product {
 
 	public String getPrice(Currencies currency) {
 		return prices.get(currency);
+	}
+
+	public String getQuantity() {
+		return quantity;
 	}
 }

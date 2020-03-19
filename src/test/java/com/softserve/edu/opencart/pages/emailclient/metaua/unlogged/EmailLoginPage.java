@@ -1,9 +1,8 @@
-package com.softserve.edu.opencart.pages.emailclient.unlogged;
+package com.softserve.edu.opencart.pages.emailclient.metaua.unlogged;
 
 import com.softserve.edu.opencart.data.EmailBoxName;
 import com.softserve.edu.opencart.data.EmailUser;
-import com.softserve.edu.opencart.pages.emailclient.common.FooterServicesPart;
-import com.softserve.edu.opencart.pages.emailclient.email.EmailsListPage;
+import com.softserve.edu.opencart.pages.emailclient.metaua.email.EmailsListPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

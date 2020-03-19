@@ -6,14 +6,19 @@ import com.softserve.edu.opencart.pages.user.common.ShoppingCartProductComponent
 import com.softserve.edu.opencart.pages.user.common.ShoppingCartProductsContainerComponent;
 import com.softserve.edu.opencart.tools.RegularExpression;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ShoppingCartPage extends BreadCrumbPart {
     private WebElement shoppingCartExpectedText;
+
+    private By messageAboutSuccessfulRefresh = By.xpath("//div[contains (text(), 'Success: You have modified your shopping cart!')]");
 
     private ShoppingCartProductsContainerComponent shoppingCartProductsContainerComponent;
 
@@ -25,6 +30,10 @@ public class ShoppingCartPage extends BreadCrumbPart {
     public void initElements() {
         shoppingCartExpectedText = driver.findElement(By.xpath("//div[@id = 'content']/h1[contains (text(), 'Shopping Cart')]"));
         shoppingCartProductsContainerComponent = new ShoppingCartProductsContainerComponent(driver);
+    }
+
+    public By getMessageAboutSuccessfulRefresh() {
+        return messageAboutSuccessfulRefresh;
     }
 
     public WebElement getShoppingCartExpectedText() {
@@ -39,6 +48,10 @@ public class ShoppingCartPage extends BreadCrumbPart {
         this.getShoppingCartProductsContainerComponent()
                 .getShoppingCartProductComponentByProduct(product)
                 .clickRefreshButton();
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        (new WebDriverWait(driver, 5))
+                .until(ExpectedConditions.presenceOfElementLocated(messageAboutSuccessfulRefresh));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return new ShoppingCartPage(driver);
     }
 
@@ -46,6 +59,11 @@ public class ShoppingCartPage extends BreadCrumbPart {
         this.getShoppingCartProductsContainerComponent()
                 .getShoppingCartProductComponentByProduct(product)
                 .clickRemoveButton();
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        (new WebDriverWait(driver, 5))
+                .until(ExpectedConditions.stalenessOf(this.getShoppingCartProductsContainerComponent()
+                        .getShoppingCartProductComponentByProduct(product).getProductName()));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return new ShoppingCartPage(driver);
     }
 
@@ -58,21 +76,19 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     }
 
-    public BigDecimal calculateProductCorrectTotalPrice(Product product) {
-        ShoppingCartProductComponent productComponent = this.getShoppingCartProductsContainerComponent()
-                .getShoppingCartProductComponentByProduct(product);
-        BigDecimal quantity = new BigDecimal(productComponent.getQuantityText());
-        String unitPrice = productComponent.getUnitPriceText();
-        BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(unitPrice);
-        BigDecimal totalPrice = bdPrice.multiply(quantity);
-        return totalPrice;
+    public boolean isElementPresent(By by) {
+        try {
+            driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
-    public BigDecimal calculateOrderCorrectTotalPrice(List<BigDecimal> productsCorrectTotalPrices) {
-        BigDecimal totalPrice = new BigDecimal(0);
-        for (BigDecimal decimal : productsCorrectTotalPrices) {
-            totalPrice = totalPrice.add(decimal);
-        }
-        return totalPrice;
+    public BigDecimal getOrderSubTotalPrice() {
+        WebElement subTotal = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Sub-Total')]/parent::td/following-sibling::td"));
+        return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(subTotal.getText());
     }
+
+
 }

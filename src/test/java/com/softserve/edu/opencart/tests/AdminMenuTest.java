@@ -22,16 +22,16 @@ public class AdminMenuTest extends LocalAdminTestRunner {
 	}
 	
 	@Test(dataProvider = "admins")
-	public void checkSuccessful(IUser validAdmin, ICurrency currency) throws Exception {
+	public void checkSuccessful(IUser validAdmin ) throws Exception {
 		// Test Data
 		// User validUser = UserRepository.getDefault();
 		//
 		// Steps
 		CurrenciesPage currenciesPage = loadSigninPage()
 				.successfulLogin(validAdmin)
-				.gotoCurrencyPage()
-				.goToAddNewCurrecyPage()
-				.addNewCurrency(currency);
+				.gotoCurrencyPage();
+			//	.goToAddNewCurrecyPage()
+			//	.addNewCurrency();
 		presentationSleep(5);
 		//
 		// Check

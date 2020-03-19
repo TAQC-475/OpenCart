@@ -3,7 +3,6 @@ package com.softserve.edu.opencart.pages.admin.common;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import com.softserve.edu.opencart.pages.admin.account.SigninPage;
 import com.softserve.edu.opencart.pages.admin.currencies.CurrenciesPage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -35,6 +34,8 @@ public class LeftMenuPart extends HeaderPart {
     private WebElement storeLocation;
     private WebElement languages;
     private WebElement currencies;
+    //
+    private WebElement categories;
     //WebDriverWait
     WebDriverWait wait = new WebDriverWait(driver, 5);
     //
@@ -64,6 +65,8 @@ public class LeftMenuPart extends HeaderPart {
         storeLocation = driver.findElement(By.xpath("//*[@id=\"menu-system\"]//a[contains(text(), 'Store')]"));
         languages = driver.findElement(By.xpath("//*[@id=\"menu-system\"]//a[contains(text(), 'Languages')]"));
         currencies = driver.findElement(By.xpath("//*[@id=\"menu-system\"]//a[contains(text(), 'Currencies')]"));
+        //
+        categories = driver.findElement(By.xpath("//li[@id='menu-catalog']//a[contains(text(),'Categories')]"));
     }
 
     // Page Object
@@ -189,11 +192,11 @@ public class LeftMenuPart extends HeaderPart {
 
     public CurrenciesPage gotoCurrencyPage() throws InterruptedException {
         activeNavigatePannel();
-//        Thread.sleep(500);
+        Thread.sleep(500);
         clickSystem();
-//        Thread.sleep(2500);
+        Thread.sleep(2500);
         clickLocalisation();
-//        Thread.sleep(1500);
+        Thread.sleep(1500);
         clickCurrencies();
         return new CurrenciesPage(driver);
     }
@@ -203,4 +206,18 @@ public class LeftMenuPart extends HeaderPart {
         return new SigninPage(driver);
     }
 
+	//Categories
+//	public void clickCatalog() {
+//		catalog.click();
+//	}
+//
+//	public void clickCategories() {
+//		categories.click();
+//	}
+//
+//	public CategoriesPage gotoCategoriesPage() {
+//		clickCatalog();
+//		clickCategories();
+//		return new CategoriesPage(driver);
+//	}
 }

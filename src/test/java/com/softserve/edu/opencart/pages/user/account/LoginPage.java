@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.user.account;
 
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,9 @@ public class LoginPage extends AccountSidebarGuestPart {
 	private WebElement email;
 	private WebElement password;
 	private WebElement loginButton;
+	private WaitUtils alertUpdateWait;
+
+	private final String CSS_ALERT_MESSAGE = ".alert.alert-success";
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -21,6 +25,7 @@ public class LoginPage extends AccountSidebarGuestPart {
 		email = driver.findElement(By.name("email"));
 		password = driver.findElement(By.name("password"));
 		loginButton = driver.findElement(By.cssSelector("input.btn.btn-primary"));
+		alertUpdateWait = new WaitUtils(driver, 5);
 	}
 
 	// Page Object
@@ -80,6 +85,15 @@ public class LoginPage extends AccountSidebarGuestPart {
 
 	public void clickLoginButton() {
 		getLoginButton().click();
+	}
+
+	public WebElement getAlert(){
+		alertUpdateWait.waitForAlertVisibility();
+		return driver.findElement(By.cssSelector(CSS_ALERT_MESSAGE));
+	}
+
+	public String getAlertText(){
+		return getAlert().getText();
 	}
 
 	// Functional

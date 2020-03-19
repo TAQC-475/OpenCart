@@ -56,7 +56,7 @@ public class ViewCartComponent {
         return cartProductTable;
     }
 
-    public List<WebElement> cartSummary() {
+    public List<WebElement> getCartSummary() {
         return cartSummary;
     }
 
@@ -65,7 +65,7 @@ public class ViewCartComponent {
     }
 
     public String getSubTotalText() {
-        return subTotal.getText();
+        return getSubTotal().getText();
     }
 
     public WebElement getEcoTax() {
@@ -73,7 +73,7 @@ public class ViewCartComponent {
     }
 
     public String getEcoTaxText() {
-        return ecoTax.getText();
+        return getEcoTax().getText();
     }
 
     public WebElement getVatTax() {
@@ -81,7 +81,7 @@ public class ViewCartComponent {
     }
 
     public String getVatTaxText() {
-        return vatTax.getText();
+        return getVatTax().getText();
     }
 
     public WebElement getTotalPrice() {
@@ -89,7 +89,7 @@ public class ViewCartComponent {
     }
 
     public String getTotalPriceText() {
-        return totalPrice.getText();
+        return getTotalPrice().getText();
     }
 
     public WebElement getEmptyCartMsg() {
@@ -105,7 +105,7 @@ public class ViewCartComponent {
     }
 
     public String getCartTotalText() {
-        return cartTotalMsg.getText();
+        return getCartTotal().getText();
     }
 
     public String getCartTotalAmount() {

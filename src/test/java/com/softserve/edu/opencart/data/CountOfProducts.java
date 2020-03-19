@@ -16,8 +16,6 @@ public enum CountOfProducts {
 
     @Override
     public String toString() {
-        return "CountOfProducts{" +
-                "filter=" + filter +
-                "} " + super.toString();
+        return ((String.valueOf(filter)));
     }
 }

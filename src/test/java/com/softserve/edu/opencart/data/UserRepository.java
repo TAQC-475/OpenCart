@@ -87,6 +87,25 @@ public final class UserRepository {
 				.build();
 	}
 
+	public IUser getVasyl(){
+		return User.get()
+				.setFirstName("Vasyl")
+				.setLastName("Shchuka")
+				.setEmail("test.user.vasyl@meta.ua")
+				.setTelephone("1234567")
+				.setAddress1("address")
+				.setCity("Fish and Chips")
+				.setPostCode("1212")
+				.setCountry("United Kingdom")
+				.setRegionState("Bristol")
+				.setPassword(System.getenv().get("VASYLS_PASSWORD"))
+				.setSubscribe(true)
+				.setFax("fax")
+				.setCompany("company")
+				.setAddress2("address_2")
+				.build();
+	}
+
 	public IUser getMrAndersonUser(){
 		return User.get()
 				.setFirstName("MrAnderson")

@@ -2,7 +2,6 @@ package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.data.UserRepository;
-import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
 import org.testng.annotations.Test;
 
 public class WishListPageTest extends EpizyUserTestRunner {
@@ -12,15 +11,14 @@ public class WishListPageTest extends EpizyUserTestRunner {
 
     loadApplication().gotoLoginPage()
         .successfulLogin(UserRepository.get().getMrAndersonUser())
-//        .successfulSearch(ProductRepository.getMacBook())
-//        .AddToWishButtonByName(ProductRepository.getMacBook())
-//        .successfulSearch(ProductRepository.getIPodClassic())
-//        .AddToWishButtonByName(ProductRepository.getIPodClassic())
-//        .successfulSearch(ProductRepository.getIPhone())
-//        .AddToWishButtonByName(ProductRepository.getIPhone())
-//        .gotoHomePage()
+        .successfulSearch(ProductRepository.getMacBook())
+        .AddToWishButtonByName(ProductRepository.getMacBook())
+        .successfulSearch(ProductRepository.getIPodClassic())
+        .AddToWishButtonByName(ProductRepository.getIPodClassic())
+        .successfulSearch(ProductRepository.getIPhone())
+        .AddToWishButtonByName(ProductRepository.getIPhone())
         .gotoWishListPage()
-        .deleteFromWishListByName(ProductRepository.getMacBook());
+        .deleteProductFromWishList(ProductRepository.getIPodClassic());
 
 //        .goToWIshLIstPageByAlert()
 //        .getWishListProductsContainerComponent()

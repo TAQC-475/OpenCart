@@ -1,7 +1,10 @@
 package com.softserve.edu.opencart.pages.user.common;
 
+import com.softserve.edu.opencart.tools.RegularExpression;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.math.BigDecimal;
 
 public class ShoppingCartProductComponent {
     private WebElement shoppingCartProductLayout;
@@ -83,7 +86,7 @@ public class ShoppingCartProductComponent {
         return refreshButton;
     }
 
-    public void clickRefreshButton(){
+    public void clickRefreshButton() {
         getRefreshButton().click();
     }
 
@@ -91,7 +94,14 @@ public class ShoppingCartProductComponent {
         return removeButton;
     }
 
-    public void clickRemoveButton(){
+    public void clickRemoveButton() {
         getRemoveButton().click();
+    }
+
+    public BigDecimal calculateProductCorrectTotalPrice() {
+        BigDecimal quantity = new BigDecimal(this.getQuantityText());
+        BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(this.getUnitPriceText());
+        BigDecimal totalPrice = bdPrice.multiply(quantity);
+        return totalPrice;
     }
 }

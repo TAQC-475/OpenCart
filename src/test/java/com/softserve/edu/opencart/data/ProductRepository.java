@@ -17,12 +17,28 @@ public final class ProductRepository {
 						.addPrice(Currencies.US_DOLLAR, "602.00");
 	}
 
+	public static Product getMacBookForShoppingCart() {
+		return new Product("MacBook",
+				"Intel Core 2 Duo processor Powered by an Intel Core 2 Duo processor at speeds up to 2.1..", "500.00", "2")
+				.addPrice(Currencies.EURO, "472.33")
+				.addPrice(Currencies.POUND_STERLING, "368.73")
+				.addPrice(Currencies.US_DOLLAR, "602.00");
+	}
+
 	public static Product getIPhone() {
 		return new Product("iPhone",
 				"iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a nam..", "101.00")
 						.addPrice(Currencies.EURO, "96.66")
 						.addPrice(Currencies.POUND_STERLING, "75.46")
 						.addPrice(Currencies.US_DOLLAR, "123.20");
+	}
+
+	public static Product getIPhoneForShoppingCart() {
+		return new Product("iPhone",
+				"iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a nam..", "101.00", "3")
+				.addPrice(Currencies.EURO, "96.66")
+				.addPrice(Currencies.POUND_STERLING, "75.46")
+				.addPrice(Currencies.US_DOLLAR, "123.20");
 	}
 
 	public static Product getAppleCinema30() {

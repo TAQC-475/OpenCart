@@ -62,7 +62,7 @@ public class ProductInfoPage extends BreadCrumbPart {
 
 	public ProductInfoOptionsComponent getProductInfoOptions() {
 		if (productInfoOptions == null) {
-			return new ProductInfoOptionsComponent(driver);
+			productInfoOptions =  new ProductInfoOptionsComponent(driver);
 		}
 		return productInfoOptions;
 	}
@@ -70,7 +70,7 @@ public class ProductInfoPage extends BreadCrumbPart {
 	// Functional
 	public void clickAddToCartButton(){
 		getAddToCartButton().click();
-		alertPageWait.waitForAlertVisibility(driver);
+		alertPageWait.waitForAlertVisibility();
 	}
 
 	public void clearProductQuantity(){

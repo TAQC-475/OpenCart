@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.emailclient.email;
+package com.softserve.edu.opencart.pages.emailclient.metaua.email;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -9,8 +9,8 @@ public class EmailListItemComponent  {
     private WebElement topic;
     private WebElement emailStatus;
 
-    private final String XPATH_SENDER_NAME_LOCATOR = ".//td[a]//a[1]";
-    private final String XPATH_TOPIC_LOCATOR = ".//td//a[2]";
+    private final String XPATH_SENDER_NAME_LOCATOR = ".//td[4]//a";
+    private final String XPATH_TOPIC_LOCATOR = ".//td[5]//a";
 
 
     public EmailListItemComponent(WebElement emailListItem){
