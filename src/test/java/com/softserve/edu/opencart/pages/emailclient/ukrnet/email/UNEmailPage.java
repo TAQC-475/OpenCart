@@ -10,7 +10,7 @@ public class UNEmailPage extends UNContentPanelBasePart {
 
     }
 
-    private void initElements(){
-        content = new UNInboxComponent(driver);
-    }
+//    private void initElements(){
+//        content = new UNInboxComponent(driver);
+//    }
 }

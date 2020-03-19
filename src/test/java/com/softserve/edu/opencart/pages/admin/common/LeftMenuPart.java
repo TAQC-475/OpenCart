@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.admin.common;
 
+import com.softserve.edu.opencart.pages.admin.account.catalog.CategoriesPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -206,18 +207,18 @@ public class LeftMenuPart extends HeaderPart {
         return new SigninPage(driver);
     }
 
-	//Categories
-//	public void clickCatalog() {
-//		catalog.click();
-//	}
-//
-//	public void clickCategories() {
-//		categories.click();
-//	}
-//
-//	public CategoriesPage gotoCategoriesPage() {
-//		clickCatalog();
-//		clickCategories();
-//		return new CategoriesPage(driver);
-//	}
+//	Categories
+	public void clickCatalog() {
+		catalog.click();
+	}
+
+	public void clickCategories() {
+		categories.click();
+	}
+
+	public CategoriesPage gotoCategoriesPage() {
+		clickCatalog();
+		clickCategories();
+		return new CategoriesPage(driver);
+	}
 }
