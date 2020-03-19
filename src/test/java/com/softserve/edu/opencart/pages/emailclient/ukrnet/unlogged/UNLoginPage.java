@@ -2,13 +2,13 @@ package com.softserve.edu.opencart.pages.emailclient.ukrnet.unlogged;
 
 import com.softserve.edu.opencart.data.EmailBoxName;
 import com.softserve.edu.opencart.data.EmailUser;
-import com.softserve.edu.opencart.pages.emailclient.ukrnet.BaseParentEmailPart;
 import com.softserve.edu.opencart.pages.emailclient.metaua.email.EmailsListPage;
+import com.softserve.edu.opencart.pages.emailclient.ukrnet.UNParentBasePart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class UkrNetLoginPage extends BaseParentEmailPart {
+public class UNLoginPage extends UNParentBasePart {
     private WebElement loginField;
     private WebElement passwordField;
     private WebElement loginButton;
@@ -16,7 +16,7 @@ public class UkrNetLoginPage extends BaseParentEmailPart {
     private WebElement forgotPassword;
     private WebElement newEmail;
 
-    public UkrNetLoginPage(WebDriver driver){
+    public UNLoginPage(WebDriver driver){
         super(driver);
         //this.driver = driver;
         initElements();

@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public abstract class UkrNetContentPanelPart extends UkrNetLeftEmailPanelPart {
+public abstract class UNContentPanelBasePart extends UNLeftEmailPanelPart {
     private WebElement search;
     private WebElement accountOptions;
 
-    public UkrNetContentPanelPart(WebDriver driver){
+    public UNContentPanelBasePart(WebDriver driver){
         super(driver);
         initElements();
 
