@@ -2,7 +2,6 @@ package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.data.UserRepository;
-import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
 import org.testng.annotations.Test;
 
 public class WishListPageTest extends EpizyUserTestRunner {
@@ -20,7 +19,7 @@ public class WishListPageTest extends EpizyUserTestRunner {
 //        .AddToWishButtonByName(ProductRepository.getIPhone())
 //        .gotoHomePage()
         .gotoWishListPage()
-        .deleteFromWishListByName(ProductRepository.getIPodClassic());
+        .deleteProductFromWishList(ProductRepository.getIPodClassic());
 
 //        .goToWIshLIstPageByAlert()
 //        .getWishListProductsContainerComponent()
