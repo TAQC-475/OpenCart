@@ -8,14 +8,15 @@ import java.util.ArrayList;
 
 public class UNEmailComponent extends UNContentBaseComponent {
     private WebElement messageBody;
-    private final String XPATH_BODY_LINK_FORMAT = ".//a[contains(text(), %s)]";
+    private final String XPATH_BODY_LINK_FORMAT = ".//a[contains(text(), \'%s\')]";
 
     public UNEmailComponent(WebDriver driver){
         super(driver);
+        initElements();
     }
 
     private void initElements(){
-        messageBody = driver.findElement(By.className("readmsg__body"));
+        messageBody = driver.findElement(By.xpath("//div[@class='readmsg__body']"));
     }
 
     public WebElement getMessageBody() {

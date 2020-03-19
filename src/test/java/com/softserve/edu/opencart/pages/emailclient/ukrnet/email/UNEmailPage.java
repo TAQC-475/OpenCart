@@ -11,12 +11,9 @@ public class UNEmailPage extends UNContentPanelBasePart{
 
     public UNEmailPage(WebDriver driver){
         super(driver);
-
+        initElements();
     }
 
-//    private void initElements(){
-//        content = new UNInboxComponent(driver);
-//    }
     private void initElements(){
         email = new UNEmailComponent(driver);
     }

@@ -4,6 +4,7 @@ import com.softserve.edu.opencart.data.EmailBoxName;
 import com.softserve.edu.opencart.data.EmailUser;
 import com.softserve.edu.opencart.pages.emailclient.metaua.email.EmailsListPage;
 import com.softserve.edu.opencart.pages.emailclient.ukrnet.UNParentBasePart;
+import com.softserve.edu.opencart.pages.emailclient.ukrnet.email.UNInboxPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,16 +69,16 @@ public class UNLoginPage extends UNParentBasePart {
     }
 
     private void enterPassword(String password){
-        clickPasswordField();
+        //clickPasswordField();
         clearPasswordField();
         setPassword(password);
     }
 
-    public EmailsListPage login(EmailUser emailUser){
+    public UNInboxPage login(EmailUser emailUser){
         enterLogin(emailUser.getEmail());
         enterPassword(emailUser.getPassword());
         clickLoginButton();
-        return new EmailsListPage(driver, EmailBoxName.INBOX);
+        return new UNInboxPage(driver);
 
     }
 }

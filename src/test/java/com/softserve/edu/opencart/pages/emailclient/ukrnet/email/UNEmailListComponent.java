@@ -11,7 +11,7 @@ public class UNEmailListComponent extends UNContentPanelBasePart {
     private WaitUtils waitUtils;
     private EmailBoxName boxName;
     private final String XPATH_LAST_UNREAD_FORMAT =
-            "//table//tr[1][contains(@class, 'unread')]//td[contains(@class, 'subject')]//a[contains(text(), %s)]";
+            "//table//tr[1][contains(@class, 'unread')]//td[contains(@class, 'subject')]//a[contains(text(), \'%s\')]";
 
 
     public UNEmailListComponent(WebDriver driver, EmailBoxName boxName){
