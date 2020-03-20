@@ -5,7 +5,7 @@ import com.softserve.edu.opencart.data.UserRepository;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class AddingFromAdminTest extends LocalAdminTestRunner{
+public class AddingCategoryFromAdminTest extends LocalAdminTestRunner{
 
     @DataProvider // (parallel = true)
     public Object[][] correctUsers() {
