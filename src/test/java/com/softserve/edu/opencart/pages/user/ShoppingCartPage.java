@@ -90,5 +90,8 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(subTotal.getText());
     }
 
+    public boolean areCorrectAndActualTotalPricesEqual(){
+        return getShoppingCartProductsContainerComponent().calculateOrderCorrectTotalPrice().equals(getOrderSubTotalPrice());
+    }
 
 }

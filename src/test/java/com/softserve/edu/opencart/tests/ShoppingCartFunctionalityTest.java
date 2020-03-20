@@ -9,8 +9,6 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.math.BigDecimal;
-
 public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
 
     @DataProvider
@@ -32,10 +30,7 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .setQuantity(product1, product1.getQuantity())
                 .setQuantity(product2, product2.getQuantity());
 
-        BigDecimal correctResult = shoppingCartPage.getShoppingCartProductsContainerComponent().calculateOrderCorrectTotalPrice();
-        BigDecimal actualResult = shoppingCartPage.getOrderSubTotalPrice();
-
-        Assert.assertEquals(actualResult, correctResult);
+        Assert.assertTrue(shoppingCartPage.areCorrectAndActualTotalPricesEqual());
     }
 
     @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
