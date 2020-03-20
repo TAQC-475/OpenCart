@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.math.BigDecimal;
 
 public class ShoppingCartProductComponent {
-    private WebElement shoppingCartProductLayout;
+    private WebElement shoppingCartProductComponent;
 
     private WebElement image;
     private WebElement productName;
@@ -19,19 +19,19 @@ public class ShoppingCartProductComponent {
     private WebElement removeButton;
 
     public ShoppingCartProductComponent(WebElement shoppingCartProductLayout) {
-        this.shoppingCartProductLayout = shoppingCartProductLayout;
+        this.shoppingCartProductComponent = shoppingCartProductLayout;
         initElements();
     }
 
     public void initElements() {
-        image = shoppingCartProductLayout.findElement(By.xpath(".//td[@class = 'text-center']/a"));
-        productName = shoppingCartProductLayout.findElement(By.xpath(".//td[@class = 'text-left']/a"));
-        model = shoppingCartProductLayout.findElement(By.xpath(".//td[@class = 'text-left'][2]"));
-        quantity = shoppingCartProductLayout.findElement(By.xpath(".//input[@type = 'text']"));
-        refreshButton = shoppingCartProductLayout.findElement(By.xpath(".//button[@data-original-title = 'Update']"));
-        removeButton = shoppingCartProductLayout.findElement(By.xpath(".//button[@data-original-title = 'Remove']"));
-        unitPrice = shoppingCartProductLayout.findElement(By.xpath(".//td[@class = 'text-right'][last()-1]"));
-        totalPrice = shoppingCartProductLayout.findElement(By.xpath(".//td[@class = 'text-right'][last()]"));
+        image = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-center']/a"));
+        productName = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-left']/a"));
+        model = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-left']/a/../following-sibling::td[@class = 'text-left' and not (div)]"));
+        quantity = shoppingCartProductComponent.findElement(By.xpath(".//input[@type = 'text']"));
+        refreshButton = shoppingCartProductComponent.findElement(By.xpath(".//button[@data-original-title = 'Update']"));
+        removeButton = shoppingCartProductComponent.findElement(By.xpath(".//button[@data-original-title = 'Remove']"));
+        unitPrice = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-right'][last()-1]"));
+        totalPrice = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-right'][last()]"));
     }
 
     public WebElement getImage() {
