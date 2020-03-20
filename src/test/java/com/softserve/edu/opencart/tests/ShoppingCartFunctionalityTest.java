@@ -91,11 +91,22 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
 
         softAssert.assertTrue(shoppingCartPage.areCorrectAndActualTotalPricesEqual());
 
-        shoppingCartPage = shoppingCartPage.refreshShoppingCartPageByProduct(product1);
+        shoppingCartPage = shoppingCartPage.refreshShoppingCartPageByProduct(product2);
         softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
 
-        shoppingCartPage = shoppingCartPage.removeShoppingCartComponentFromContainerByProduct(product2);
-        softAssert.assertEquals(shoppingCartPage.sizeDifferenceBeforeAndAfterRemoving(sizeBeforeRemoving), 2);
+        shoppingCartPage = shoppingCartPage.removeShoppingCartComponentFromContainerByProduct(product1);
+        softAssert.assertEquals(shoppingCartPage.sizeDifferenceBeforeAndAfterRemoving(sizeBeforeRemoving), 1);
+
+        shoppingCartPage =
+                shoppingCartPage
+                .goToShippingAndTaxesComponent()
+                .selectCountryByName("United States")
+                .selectRegionStateByName("Oregon")
+                .inputPostCode("79000")
+                .switchToSelectShippingMethodPage()
+                .selectFlatShippingRate()
+                .clickApplyShippingButton();
+
         softAssert.assertAll();
     }
 }
