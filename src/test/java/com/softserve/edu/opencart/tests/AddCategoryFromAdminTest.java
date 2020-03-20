@@ -25,6 +25,7 @@ public class AddCategoryFromAdminTest extends LocalAdminTestRunner{
                 .typeTitle("test")
                 .clickDataButton()
                 .typeParent("test")
+                .clickAddToTopMenu()
                 .gotoModifiedCatalogPage()
                 .getSuccessText();
 

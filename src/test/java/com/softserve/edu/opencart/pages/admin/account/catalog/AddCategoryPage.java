@@ -11,6 +11,7 @@ public class AddCategoryPage extends LeftMenuPart {
     private WebElement inputTitle;
     private WebElement dataButton;
     private WebElement inputParent;
+    private WebElement addToTopMenu;
     private WebElement saveButton;
 
     public AddCategoryPage(WebDriver driver) {
@@ -24,6 +25,7 @@ public class AddCategoryPage extends LeftMenuPart {
         inputTitle = driver.findElement(By.id("input-meta-title1"));
         dataButton = driver.findElement(By.xpath("//a[@href='#tab-data']"));
         inputParent = driver.findElement(By.cssSelector("#input-parent"));
+        addToTopMenu = driver.findElement(By.cssSelector("#input-top"));
         saveButton = driver.findElement(By.cssSelector(".btn-primary > .fa"));
     }
 
@@ -50,6 +52,11 @@ public class AddCategoryPage extends LeftMenuPart {
         inputParent.click();
         inputParent.clear();
         inputParent.sendKeys(arg);
+        return this;
+    }
+
+    public AddCategoryPage clickAddToTopMenu(){
+        addToTopMenu.click();
         return this;
     }
 
