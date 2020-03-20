@@ -28,13 +28,6 @@ import java.util.concurrent.TimeUnit;
 public abstract class EpizyUserTestRunner {
     private final Long ONE_SECOND_DELAY = 1000L;
     private final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss";
-//    private String serverUrl = "http://taqc-opencart.epizy.com";
-//    private String serverUrl = "http://192.168.174.129//opencart/upload/";  //Lyubomyr
-    private String serverUrl = "http://192.168.112.130/opencart/upload/";  //Andrew
-//    private String serverUrl = "http://127.0.0.1/opencart/";
-    private String serverUrlLogout = "http://localhost/opencart/index.php?route=account/logout"; //Pavlo
-    private String serverAdminUrl = serverUrl + "admin/";
-    //protected WebDriver driver;
     private Map<Long, WebDriver> drivers;
 
     protected WebDriver getDriver() {
@@ -53,9 +46,10 @@ public abstract class EpizyUserTestRunner {
 	public void beforeSuite() {
 		drivers = new HashMap<>();
 	}
-	
+
+    @Parameters({"url", "serverUrlLogout"})
 	@BeforeClass
-	public void beforeClass(ITestContext context) {
+	public void beforeClass(ITestContext context, String serverUrl, String serverUrlLogout) {
 		//System.setProperty("webdriver.chrome.driver",
 		//		EpizyUserTestRunner.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 		// TODO Check Exist ChromeDriver
@@ -98,8 +92,9 @@ public abstract class EpizyUserTestRunner {
     }
 
     // @After
+    @Parameters({"serverUrlLogout"})
     @AfterMethod
-    public void afterMethod(ITestResult result) throws IOException {
+    public void afterMethod(ITestResult result, String serverUrlLogout) throws IOException {
         // TODO Logout
         if (!result.isSuccess()) {
             System.out.println("***Test " + result.getName() + " ERROR");
