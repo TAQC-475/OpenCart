@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 
-public class UNEmailComponent extends UNContentBaseComponent {
+public class UNEmailComponent extends UNRightContentBaseComponent {
     private WebElement messageBody;
     private final String XPATH_BODY_LINK_FORMAT = ".//a[contains(text(), \'%s\')]";
 

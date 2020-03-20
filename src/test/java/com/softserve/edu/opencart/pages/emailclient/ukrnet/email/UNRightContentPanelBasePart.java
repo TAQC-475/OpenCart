@@ -4,11 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public abstract class UNContentPanelBasePart extends UNLeftEmailPanelPart {
-    private WebElement search;
-    private WebElement accountOptions;
+public abstract class UNRightContentPanelBasePart extends UNLeftEmailPanelPart {
+    protected WebElement search;
+    protected WebElement accountOptions;
+    protected WebElement messageControls;
 
-    public UNContentPanelBasePart(WebDriver driver){
+    public UNRightContentPanelBasePart(WebDriver driver){
         super(driver);
         initElements();
 
@@ -17,6 +18,7 @@ public abstract class UNContentPanelBasePart extends UNLeftEmailPanelPart {
     private void initElements(){
         search = driver.findElement(By.xpath("//div[@class='search']//input"));
         accountOptions = driver.findElement(By.cssSelector("a.login-button"));
+        messageControls = driver.findElement(By.className("controls"));
     }
     //coming soon
 

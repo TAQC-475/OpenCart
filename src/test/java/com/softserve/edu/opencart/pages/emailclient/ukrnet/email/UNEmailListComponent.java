@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class UNEmailListComponent extends UNContentPanelBasePart {
+public class UNEmailListComponent extends UNRightContentBaseComponent {
     private WaitUtils waitUtils;
     private EmailBoxName boxName;
     private final String XPATH_LAST_UNREAD_FORMAT =

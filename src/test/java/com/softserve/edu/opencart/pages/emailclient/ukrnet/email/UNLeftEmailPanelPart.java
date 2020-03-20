@@ -15,7 +15,6 @@ public abstract class UNLeftEmailPanelPart extends UNParentBasePart {
     private WebElement unread;
     private WebElement marked;
     private WebElement attachments;
-    private WebElement addressBookButton;
 
     public UNLeftEmailPanelPart(WebDriver driver){
         super(driver);
@@ -67,10 +66,6 @@ public abstract class UNLeftEmailPanelPart extends UNParentBasePart {
 
     public WebElement getAttachments() {
         return attachments;
-    }
-
-    public WebElement getAddressBookButton() {
-        return addressBookButton;
     }
 
 

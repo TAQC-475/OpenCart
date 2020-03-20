@@ -2,11 +2,18 @@ package com.softserve.edu.opencart.pages.emailclient.ukrnet.email;
 
 import com.softserve.edu.opencart.data.ResetEmailEntity;
 import com.softserve.edu.opencart.pages.user.account.ChangePasswordPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 
-public class UNEmailPage extends UNContentPanelBasePart{
+public class UNEmailPage extends UNRightContentPanelBasePart{
+    private WebElement replyButton;
+    private WebElement forwardButton;
+    private WebElement deleteButton;
+    private WebElement spamButton;
+
     private UNEmailComponent email;
 
     public UNEmailPage(WebDriver driver){
@@ -15,6 +22,11 @@ public class UNEmailPage extends UNContentPanelBasePart{
     }
 
     private void initElements(){
+        replyButton = messageControls.findElement(By.xpath(".//a[contains(@class, 'reply')]"));
+        forwardButton = messageControls.findElement(By.xpath(".//a[contains(@class, 'forward')]"));
+        deleteButton = messageControls.findElement(By.xpath(".//a[contains(@class, 'remove')]"));
+        spamButton = messageControls.findElement(By.xpath(".//a[contains(@class, 'spam')]"));
+
         email = new UNEmailComponent(driver);
     }
 
