@@ -91,9 +91,9 @@ public abstract class EpizyUserTestRunner {
     }
 
     // @Before
+    @Parameters({"url"})
     @BeforeMethod
-    public void beforeMethod() {
-        //driver.get(serverUrl);
+    public void beforeMethod(String serverUrl) {
         getDriver().get(serverUrl);
     }
 

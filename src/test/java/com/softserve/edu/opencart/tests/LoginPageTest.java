@@ -25,6 +25,6 @@ public class LoginPageTest extends EpizyUserTestRunner{
                 .gotoResetPasswordEmail(resetEmail)
                 .goToChangePasswordPage(resetEmail)
                 .resetPassword(user);
-        assertEquals(loginPageAfterReset.getAlertText(), "");
+        assertEquals(loginPageAfterReset.getAlertText(), "Success: Your password has been successfully updated.");
     }
 }
