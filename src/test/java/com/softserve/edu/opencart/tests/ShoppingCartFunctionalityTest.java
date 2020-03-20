@@ -8,12 +8,18 @@ import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
 
     @DataProvider
     public Object[][] dataForSumRefreshAndRemoveTest() {
         return new Object[][]{{UserRepository.get().getDefault(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart()}};
+    }
+
+    @DataProvider
+    public Object[][] dataForRemoveTest(){
+        return new Object[][]{{UserRepository.get().getDefault(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart(), 2}};
     }
 
     @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
@@ -29,7 +35,6 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .goToShoppingCartFromAlert()
                 .setQuantity(product1, product1.getQuantity())
                 .setQuantity(product2, product2.getQuantity());
-
         Assert.assertTrue(shoppingCartPage.areCorrectAndActualTotalPricesEqual());
     }
 
@@ -50,8 +55,8 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
         Assert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
     }
 
-    @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
-    public void removeButtonTest(User testUser, Product product1, Product product2) {
+    @Test(dataProvider = "dataForRemoveTest")
+    public void removeButtonTest(User testUser, Product product1, Product product2, int numberBeforeRemoving) {
         ShoppingCartPage shoppingCartPage = loadApplication()
                 .gotoLoginPage()
                 .successfulLogin(testUser)
@@ -62,6 +67,35 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(product2)
                 .goToShoppingCartFromAlert()
-                .assertThatSizeOfContainerComponentsIsReducingAfterDeleting(product2);
+                .removeShoppingCartComponentFromContainerByProduct(product1);
+
+        Assert.assertEquals(shoppingCartPage.sizeDifferenceBeforeAndAfterRemoving(numberBeforeRemoving), 1);
+    }
+
+    @Test(dataProvider = "dataForRemoveTest")
+    public void shoppingCartFunctionalityTest(User testUser, Product product1, Product product2, int sizeBeforeRemoving){
+
+        ShoppingCartPage shoppingCartPage = loadApplication().gotoLoginPage()
+                .successfulLogin(testUser)
+                .gotoHomePage()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product1)
+                .goToHomePageFromAlert()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product2)
+                .goToShoppingCartFromAlert()
+                .setQuantity(product1, product1.getQuantity())
+                .setQuantity(product2, product2.getQuantity());
+
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertTrue(shoppingCartPage.areCorrectAndActualTotalPricesEqual());
+
+        shoppingCartPage = shoppingCartPage.refreshShoppingCartPageByProduct(product1);
+        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
+
+        shoppingCartPage = shoppingCartPage.removeShoppingCartComponentFromContainerByProduct(product2);
+        softAssert.assertEquals(shoppingCartPage.sizeDifferenceBeforeAndAfterRemoving(sizeBeforeRemoving), 2);
+        softAssert.assertAll();
     }
 }
