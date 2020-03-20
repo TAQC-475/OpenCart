@@ -34,7 +34,7 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
     }
 
     @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
-    public void refreshTest(User testUser, Product product1, Product product2) {
+    public void refreshButtonTest(User testUser, Product product1, Product product2) {
         ShoppingCartPage shoppingCartPage = loadApplication()
                 .gotoLoginPage()
                 .successfulLogin(testUser)
@@ -44,16 +44,24 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .goToHomePageFromAlert()
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(product2)
-                .goToShoppingCartFromAlert();
-
-        shoppingCartPage = shoppingCartPage.refreshShoppingCartPageByProduct(product1);
+                .goToShoppingCartFromAlert()
+                .refreshShoppingCartPageByProduct(product1);
 
         Assert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
+    }
 
-        int numberOfProductsBeforeRemoving = shoppingCartPage.getShoppingCartProductsContainerComponent().getShoppingCartProductComponentCount();
-        shoppingCartPage = shoppingCartPage.removeShoppingCartComponentFromContainerByProduct(product2);
-        int numberOfProductsAfterRemoving = shoppingCartPage.getShoppingCartProductsContainerComponent().getShoppingCartProductComponentCount();
-
-        Assert.assertTrue(numberOfProductsAfterRemoving < numberOfProductsBeforeRemoving);
+    @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
+    public void removeButtonTest(User testUser, Product product1, Product product2) {
+        ShoppingCartPage shoppingCartPage = loadApplication()
+                .gotoLoginPage()
+                .successfulLogin(testUser)
+                .gotoHomePage()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product1)
+                .goToHomePageFromAlert()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product2)
+                .goToShoppingCartFromAlert()
+                .assertThatSizeOfContainerComponentsIsReducingAfterDeleting(product2);
     }
 }
