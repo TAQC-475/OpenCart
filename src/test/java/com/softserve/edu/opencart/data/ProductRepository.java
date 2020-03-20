@@ -59,6 +59,13 @@ public final class ProductRepository {
 				.addPrice(Currencies.US_DOLLAR,"122.00");
 	}
 
+	public static Product getTVkivi40(){
+		return new Product("Kivi40","TV has: 40*/ SmartTV/ 4k/ WiFi/ Android/ made in China","300")
+				.addPrice(Currencies.EURO, "260")
+				.addPrice(Currencies.US_DOLLAR,"300")
+				.addPrice(Currencies.UA_HRYVNIA,"7800");
+	}
+
 	public static Product getMac(){
 		return new Product("Mac");
 	}
