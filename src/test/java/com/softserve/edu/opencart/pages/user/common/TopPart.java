@@ -463,9 +463,7 @@ public abstract class TopPart {
     }
 
     // wishList
-    public WishListPage gotoWishListPage() throws InterruptedException {
-//        new WaitUtils(driver,1).waitForAlertVisibility();
-        Thread.sleep(1000);
+    public WishListPage gotoWishListPage(){
         clickWishList();
         return new WishListPage(driver);
     }

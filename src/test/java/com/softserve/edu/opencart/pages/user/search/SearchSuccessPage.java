@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.pages.user.search;
 
 import com.softserve.edu.opencart.data.*;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.WebDriver;
 
 public class SearchSuccessPage extends SearchCriteriaPart {
@@ -77,6 +78,7 @@ public class SearchSuccessPage extends SearchCriteriaPart {
 
     public SearchSuccessAlertPage AddToWishButtonByName(Product product) {
         productsDisplay.clickProductComponentAddToWishButtonByName(product.getName());
+        new WaitUtils(driver,10).waitForAlertVisibility();
         return new SearchSuccessAlertPage(driver);
     }
 

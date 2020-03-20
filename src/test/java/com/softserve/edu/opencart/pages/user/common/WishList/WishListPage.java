@@ -33,7 +33,7 @@ public class WishListPage extends AccountSidebarLoggedPart {
   }
 
   public String getProductName(Product product) {
-     return wishListProductsContainerComponent.getWishListComponentByName(product).getNameText();
+    return wishListProductsContainerComponent.getWishListComponentByName(product).getNameText();
   }
 
   public void getProductPrice(Product product) {
@@ -64,13 +64,14 @@ public class WishListPage extends AccountSidebarLoggedPart {
     return new WishLIstMessagePage(driver);
   }
 
-  public WishLIstMessagePage gotToWishListMessagePage(){
+  public WishLIstMessagePage gotToWishListMessagePage() {
     return new WishLIstMessagePage(driver);
   }
 
 
-
 }
+
+
 
 // Business Logic
 
