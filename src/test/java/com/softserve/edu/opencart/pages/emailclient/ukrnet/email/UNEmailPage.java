@@ -22,6 +22,8 @@ public class UNEmailPage extends UNRightContentPanelBasePart{
     }
 
     private void initElements(){
+        messageControls = driver.findElement(By.className("controls"));
+
         replyButton = messageControls.findElement(By.xpath(".//a[contains(@class, 'reply')]"));
         forwardButton = messageControls.findElement(By.xpath(".//a[contains(@class, 'forward')]"));
         deleteButton = messageControls.findElement(By.xpath(".//a[contains(@class, 'remove')]"));

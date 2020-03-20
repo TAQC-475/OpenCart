@@ -18,7 +18,6 @@ public abstract class UNRightContentPanelBasePart extends UNLeftEmailPanelPart {
     private void initElements(){
         search = driver.findElement(By.xpath("//div[@class='search']//input"));
         accountOptions = driver.findElement(By.cssSelector("a.login-button"));
-        messageControls = driver.findElement(By.className("controls"));
     }
     //coming soon
 

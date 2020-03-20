@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class UNInboxPage extends UNRightContentPanelBasePart {
+
     private WebElement forwardButton;
     private WebElement deleteButton;
     private WebElement spamButton;
@@ -21,6 +22,9 @@ public class UNInboxPage extends UNRightContentPanelBasePart {
 
     private void initElements(){
         emailList = new UNEmailListComponent(driver, EmailBoxName.INBOX);
+
+        messageControls = driver.findElement(By.className("controls"));
+
         forwardButton = messageControls.findElement(By.xpath(".//a[contains(@class, 'mforward')]"));
         deleteButton = messageControls.findElement(By.xpath(".//a[contains(@class, 'remove')]"));
         spamButton = messageControls.findElement(By.xpath(".//a[contains(@class, 'spam')]"));
