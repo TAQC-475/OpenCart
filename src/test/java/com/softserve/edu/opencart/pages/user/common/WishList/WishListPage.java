@@ -3,6 +3,8 @@ package com.softserve.edu.opencart.pages.user.common.WishList;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.pages.user.account.AccountSidebarLoggedPart;
 import com.softserve.edu.opencart.pages.user.account.MyAccountPage;
+import com.softserve.edu.opencart.pages.user.search.SearchSuccessAlertPage;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -58,14 +60,38 @@ public class WishListPage extends AccountSidebarLoggedPart {
     return new WishLIstMessagePage(driver);
   }
 
+  public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
+    for (Product product: products){
+      successfulSearch(product)
+          .AddToWishButtonByName(product);
+    }
+    return new SearchSuccessAlertPage(driver);
+  }
+
+
+
+//  public WishListEmptyPage removeAllProducts(){
+//    removeAllProductFromWishList();
+//    return new WishListEmptyPage(driver);
+//  }
+
   public WishLIstMessagePage addProductToCart(Product product) {
     wishListProductsContainerComponent
         .clickWishListComponentAddToCartButtonByName(product);
     return new WishLIstMessagePage(driver);
   }
 
-  public WishLIstMessagePage gotToWishListMessagePage() {
+  public WishLIstMessagePage goToWishListMessagePage() {
     return new WishLIstMessagePage(driver);
+  }
+
+  public WishListEmptyPage removeAllProductFromWishList(){
+    List<WebElement> closeButtons = driver.findElements(By.cssSelector(".text-right .fa.fa-times"));
+    while (closeButtons.size() > 0) {
+      closeButtons.get(0).click();
+      closeButtons = driver.findElements(By.cssSelector(".text-right .fa.fa-times"));
+    }
+    return new WishListEmptyPage(driver);
   }
 
 

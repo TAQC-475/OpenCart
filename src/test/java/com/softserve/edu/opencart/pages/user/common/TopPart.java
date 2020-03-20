@@ -11,6 +11,7 @@ import com.softserve.edu.opencart.pages.user.common.WishList.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
 import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
 import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
+import com.softserve.edu.opencart.pages.user.search.SearchSuccessAlertPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
 import com.softserve.edu.opencart.pages.user.search.SearchUnsuccessPage;
 import com.softserve.edu.opencart.tools.RegularExpression;
@@ -566,6 +567,13 @@ public abstract class TopPart {
         }
         getViewCartComponent().removeViewProductComponent(product);
         setViewCartOpened(false);
+    }
+    public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
+        for (Product product: products){
+            successfulSearch(product)
+                .AddToWishButtonByName(product);
+        }
+        return new SearchSuccessAlertPage(driver);
     }
 
 }
