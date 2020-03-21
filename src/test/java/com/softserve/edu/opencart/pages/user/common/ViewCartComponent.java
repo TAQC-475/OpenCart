@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewCartComponent {
+    private final String REPLACEMENT_REGEX = "[^0123456789.,]";
     private final String EMPTY_MESSAGE_XPATH = "//p[@class='text-center']";
     private final String PRODUCT_TABLE_XPATH = "//table[@class='table table-striped']//tbody/tr";
     private final String SUB_TOTAL_XPATH = "//td/strong[text()='Sub-Total']/../following-sibling::td";
@@ -55,7 +56,7 @@ public class ViewCartComponent {
     }
 
     public String getSubTotalText() {
-        return getSubTotal().getText();
+        return getSubTotal().getText().replaceAll(REPLACEMENT_REGEX,"");
     }
 
     public WebElement getEcoTax() {
@@ -64,7 +65,7 @@ public class ViewCartComponent {
     }
 
     public String getEcoTaxText() {
-        return getEcoTax().getText();
+        return getEcoTax().getText().replaceAll(REPLACEMENT_REGEX,"");
     }
 
     public WebElement getVatTax() {
@@ -73,7 +74,7 @@ public class ViewCartComponent {
     }
 
     public String getVatTaxText() {
-        return getVatTax().getText();
+        return getVatTax().getText().replaceAll(REPLACEMENT_REGEX,"");
     }
 
     public WebElement getTotalPrice() {
@@ -82,7 +83,7 @@ public class ViewCartComponent {
     }
 
     public String getTotalPriceText() {
-        return getTotalPrice().getText();
+        return getTotalPrice().getText().replaceAll(REPLACEMENT_REGEX,"");
     }
 
     public WebElement getEmptyCartMsg() {
@@ -104,6 +105,11 @@ public class ViewCartComponent {
 
     public String getCartTotalAmount() {
         return getCartTotalText().split("")[0];
+    }
+
+    public String getCartTotalSum() {
+        String totalSum = getCartTotalText().substring(getCartTotalText().lastIndexOf(" ") + 1);
+        return totalSum.replaceAll(REPLACEMENT_REGEX,"");
     }
 
     protected ViewCartProductComponent getViewProductComponentByName(Product product)

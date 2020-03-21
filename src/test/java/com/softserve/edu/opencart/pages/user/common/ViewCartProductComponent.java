@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class ViewCartProductComponent {
+    private final String REPLACEMENT_REGEX = "[^0123456789.,]";
 
     private WebElement product;
     //
@@ -55,7 +56,7 @@ public class ViewCartProductComponent {
     }
 
     public String getPriceText() {
-        return getPrice().getText();
+        return getPrice().getText().replaceAll(REPLACEMENT_REGEX,"");
     }
 
     public WebElement getRemoveButton() {

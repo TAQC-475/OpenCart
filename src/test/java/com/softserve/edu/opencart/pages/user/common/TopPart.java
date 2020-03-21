@@ -506,6 +506,10 @@ public abstract class TopPart {
         return getViewCartComponent().getCartTotalAmount();
     }
 
+    public String getViewCartComponentTotalSum() {
+        return getViewCartComponent().getCartTotalSum();
+    }
+
     public String getViewCartEmptyMsgText() {
         if(!isViewCartOpened()) {
             openViewCartComponent();
@@ -548,7 +552,7 @@ public abstract class TopPart {
         return getViewCartComponent().getEcoTaxText();
     }
 
-    public String getVATPriceFromViewCart() {
+    public String getVATFromViewCart() {
         if(!isViewCartOpened()) {
             openViewCartComponent();
         }
@@ -569,6 +573,7 @@ public abstract class TopPart {
         getViewCartComponent().removeViewProductComponent(product);
         setViewCartOpened(false);
     }
+
     public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
 
         int i = 1;
