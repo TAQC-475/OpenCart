@@ -1,7 +1,6 @@
 package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.*;
-import com.softserve.edu.opencart.pages.user.account.LoginPage;
 import com.softserve.edu.opencart.pages.user.account.MyAccountPage;
 import com.softserve.edu.opencart.pages.user.account.SuccessfulUpdatePasswordLoginPage;
 import org.testng.annotations.DataProvider;

@@ -15,7 +15,8 @@ public class SuccessfulUpdatePasswordLoginPage extends LoginPage{
     }
 
     private void initElements(){
-        alertUpdate = driver.findElement(By.cssSelector("alert.alert-success"));
+
+        alertUpdate = driver.findElement(By.cssSelector(".alert.alert-success"));
     }
 
     public WebElement getAlertUpdate() {
