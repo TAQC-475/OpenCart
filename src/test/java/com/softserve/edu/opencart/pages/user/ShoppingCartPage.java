@@ -57,6 +57,12 @@ public class ShoppingCartPage extends BreadCrumbPart {
     }
 
     public ShoppingCartShippingAndTaxesComponent goToShippingAndTaxesComponent() {
+        By shippingAndTaxesComponentExpanded = By.xpath("//a[@aria-expanded = 'true' and contains (text(), 'Estimate Shipping & Taxes')]");
+        driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
+        if(isElementPresent(shippingAndTaxesComponentExpanded)){
+            return new ShoppingCartShippingAndTaxesComponent(driver);
+        }
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         getShippingAndTaxes().click();
         return new ShoppingCartShippingAndTaxesComponent(driver);
     }
