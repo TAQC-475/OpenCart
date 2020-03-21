@@ -13,16 +13,21 @@ import org.testng.asserts.SoftAssert;
 public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
 
     @DataProvider
-    public Object[][] dataForSumRefreshAndRemoveTest() {
-        return new Object[][]{{UserRepository.get().getDefault(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart()}};
+    public Object[][] dataForSumAndRefreshTest() {
+        return new Object[][]{{UserRepository.get().getShoppingCartUser(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart()}};
     }
 
     @DataProvider
-    public Object[][] dataForRemoveTest(){
-        return new Object[][]{{UserRepository.get().getDefault(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart(), 2}};
+    public Object[][] dataForFunctionalityTest() {
+        return new Object[][]{{UserRepository.get().getShoppingCartUser(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart(), 2}};
     }
 
-    @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
+    @DataProvider
+    public Object[][] dataForShippingAndTaxesTest() {
+        return new Object[][]{{UserRepository.get().getShoppingCartUser(), ProductRepository.getIPhoneForShoppingCart()}};
+    }
+
+    @Test(dataProvider = "dataForSumAndRefreshTest")
     public void checkSumTest(User testUser, Product product1, Product product2) {
         ShoppingCartPage shoppingCartPage = loadApplication().gotoLoginPage()
                 .successfulLogin(testUser)
@@ -35,10 +40,10 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .goToShoppingCartFromAlert()
                 .setQuantity(product1, product1.getQuantity())
                 .setQuantity(product2, product2.getQuantity());
-        Assert.assertTrue(shoppingCartPage.areCorrectAndActualTotalPricesEqual());
+        Assert.assertTrue(shoppingCartPage.areCorrectAndActualSubTotalPricesEqual());
     }
 
-    @Test(dataProvider = "dataForSumRefreshAndRemoveTest")
+    @Test(dataProvider = "dataForSumAndRefreshTest")
     public void refreshButtonTest(User testUser, Product product1, Product product2) {
         ShoppingCartPage shoppingCartPage = loadApplication()
                 .gotoLoginPage()
@@ -55,7 +60,7 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
         Assert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
     }
 
-    @Test(dataProvider = "dataForRemoveTest")
+    @Test(dataProvider = "dataForFunctionalityTest")
     public void removeButtonTest(User testUser, Product product1, Product product2, int numberBeforeRemoving) {
         ShoppingCartPage shoppingCartPage = loadApplication()
                 .gotoLoginPage()
@@ -72,8 +77,8 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
         Assert.assertEquals(shoppingCartPage.sizeDifferenceBeforeAndAfterRemoving(numberBeforeRemoving), 1);
     }
 
-    @Test(dataProvider = "dataForRemoveTest")
-    public void shoppingCartFunctionalityTest(User testUser, Product product1, Product product2, int sizeBeforeRemoving){
+    @Test(dataProvider = "dataForFunctionalityTest")
+    public void shoppingCartFunctionalityTest(User testUser, Product product1, Product product2, int sizeBeforeRemoving) {
 
         ShoppingCartPage shoppingCartPage = loadApplication().gotoLoginPage()
                 .successfulLogin(testUser)
@@ -89,7 +94,7 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
 
         SoftAssert softAssert = new SoftAssert();
 
-        softAssert.assertTrue(shoppingCartPage.areCorrectAndActualTotalPricesEqual());
+        softAssert.assertTrue(shoppingCartPage.areCorrectAndActualSubTotalPricesEqual());
 
         shoppingCartPage = shoppingCartPage.refreshShoppingCartPageByProduct(product2);
         softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
@@ -97,15 +102,32 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
         shoppingCartPage = shoppingCartPage.removeShoppingCartComponentFromContainerByProduct(product1);
         softAssert.assertEquals(shoppingCartPage.sizeDifferenceBeforeAndAfterRemoving(sizeBeforeRemoving), 1);
 
-        shoppingCartPage =
-                shoppingCartPage
+        softAssert.assertAll();
+    }
+
+    @Test(dataProvider = "dataForShippingAndTaxesTest")
+    public void shippingAndTaxesTest(User testUser, Product product) {
+        ShoppingCartPage shoppingCartPage =
+                loadApplication()
+                .gotoLoginPage()
+                .successfulLogin(testUser)
+                .gotoHomePage()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product)
+                .goToShoppingCartFromAlert()
                 .goToShippingAndTaxesComponent()
-                .selectCountryByName("United States")
-                .selectRegionStateByName("Oregon")
-                .inputPostCode("79000")
+                .selectCountryByName(testUser.getCountry())
+                .selectRegionStateByName(testUser.getRegionState())
+                .inputPostCode(testUser.getPostCode())
                 .switchToSelectShippingMethodPage()
                 .selectFlatShippingRate()
                 .clickApplyShippingButton();
+
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod()));
+
+        softAssert.assertTrue(shoppingCartPage.areCorrectAndActualTotalPricesEqual());
 
         softAssert.assertAll();
     }

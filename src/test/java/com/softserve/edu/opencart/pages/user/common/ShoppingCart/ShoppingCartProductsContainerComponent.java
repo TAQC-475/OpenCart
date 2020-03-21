@@ -120,7 +120,7 @@ public class ShoppingCartProductsContainerComponent {
         return getShoppingCartProductComponentByProduct(product.getName());
     }
 
-    public BigDecimal calculateOrderCorrectTotalPrice() {
+    public BigDecimal calculateCorrectSubTotalPrice() {
         List<BigDecimal> productsCorrectTotalPrices = new ArrayList<>();
         for(ShoppingCartProductComponent component: getShoppingCartProductComponents()){
             productsCorrectTotalPrices.add(component.calculateProductCorrectTotalPrice());
