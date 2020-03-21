@@ -18,7 +18,7 @@ public class WishListEmptyPage extends AccountSidebarLoggedPart {
     initElements();
   }
   private void initElements(){
-    label = driver.findElement(By.xpath("//div//h2[text() ='My Wish List']"));
+    label = driver.findElement(By.xpath("//div//p[text() ='Your wish list is empty.']"));
     continueButton = driver.findElement(By.xpath("//div[@class = 'pull-right']//a[text()= 'Continue']"));
   }
 

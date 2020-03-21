@@ -85,6 +85,7 @@ public class ProductsContainerComponent {
 
     // TODO Change to Product
     public void clickProductComponentAddToWishButtonByName(String productName) {
+
         getProductComponentByName(productName).clickAddToWishButton();
     }
 

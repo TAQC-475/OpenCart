@@ -465,6 +465,7 @@ public abstract class TopPart {
 
     // wishList
     public WishListPage gotoWishListPage(){
+        new WaitUtils(driver,10).waitForAlertVisibility();
         clickWishList();
         return new WishListPage(driver);
     }
@@ -571,14 +572,10 @@ public abstract class TopPart {
     public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
 
         int i = 1;
-
-//        SearchSuccessAlertPage search =  successfulSearch(products.get(0))
-//            .AddToWishButtonByName(products.get(0));
         SearchSuccessAlertPage search = getAddProductsToWishList(products.get(0));
 
         while (i != products.size()){
            search = search.getAddProductsToWishList(products.get(i));
-
         i++;}
 
         return new SearchSuccessAlertPage(driver);

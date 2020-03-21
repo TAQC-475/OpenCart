@@ -45,6 +45,10 @@ public class WishListPage extends AccountSidebarLoggedPart {
   public void getProductModel(Product product) {
     wishListProductsContainerComponent.getWishListComponentModelByName(product);
   }
+
+  public int getAmountComponentsInWishList(){
+    return wishListProductsContainerComponent.getWishListComponentsCount();
+  }
   // Page Object
 
   // Functional
@@ -69,11 +73,6 @@ public class WishListPage extends AccountSidebarLoggedPart {
   }
 
 
-
-//  public WishListEmptyPage removeAllProducts(){
-//    removeAllProductFromWishList();
-//    return new WishListEmptyPage(driver);
-//  }
 
   public WishListMessagePage addProductToCart(Product product) {
     wishListProductsContainerComponent
