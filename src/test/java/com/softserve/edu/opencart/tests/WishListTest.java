@@ -43,8 +43,8 @@ public class WishListTest extends EpizyUserTestRunner {
 
     String actual =
         loadApplication()
-            .gotoLoginPage()
-            .successfulLogin(UserRepository.get().getMrAndersonUser())
+//            .gotoLoginPage()
+//            .successfulLogin(UserRepository.get().getMrAndersonUser())
         .successfulSearch(ProductRepository.getIPodClassic())
         .AddToWishButtonByName(ProductRepository.getIPodClassic())
 //        .successfulSearch(ProductRepository.getIPhone())
