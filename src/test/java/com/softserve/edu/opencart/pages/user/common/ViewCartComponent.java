@@ -12,16 +12,18 @@ import java.util.List;
 public class ViewCartComponent {
     private final String EMPTY_MESSAGE_XPATH = "//p[@class='text-center']";
     private final String PRODUCT_TABLE_XPATH = "//table[@class='table table-striped']//tbody/tr";
-    private final String TOTAL_SUMMARY_XPATH = "//table[@class='table table-bordered']//tbody/tr";
-    private final String TOTAL_ELEMENT_XPATH = "./td[2]";
+    private final String SUB_TOTAL_XPATH = "//td/strong[text()='Sub-Total']/../following-sibling::td";
+    private final String ECO_TAX_XPATH = "//td/strong[text()='Eco Tax (-2.00)']/../following-sibling::td";
+    private final String VAT_XPATH = "//td/strong[text()='VAT (20%)']/../following-sibling::td";
+    private final String TOTAL_XPATH = "//td/strong[text()='Total']/../following-sibling::td";
     //
     protected WebDriver driver;
     //
     private WaitUtils cartWait;
     private WebElement cartTotalMsg;
     //
+    private WebElement cartEmptyMessage;
     private List<ViewCartProductComponent> cartProductTable;
-    private List<WebElement> cartSummary;
     private WebElement subTotal;
     private WebElement ecoTax;
     private WebElement vatTax;
@@ -41,29 +43,14 @@ public class ViewCartComponent {
         for (WebElement product : driver.findElements(By.xpath(PRODUCT_TABLE_XPATH))) {
             cartProductTable.add(new ViewCartProductComponent(product));
         }
-
-        cartSummary = new ArrayList<>();
-        for (WebElement summaryPart : driver.findElements(By.xpath(TOTAL_SUMMARY_XPATH))) {
-            cartSummary.add(summaryPart);
-        }
-        if (!cartSummary.isEmpty()){
-            subTotal = cartSummary.get(0).findElement(By.xpath(TOTAL_ELEMENT_XPATH));
-            ecoTax = cartSummary.get(1).findElement(By.xpath(TOTAL_ELEMENT_XPATH));
-            vatTax = cartSummary.get(2).findElement(By.xpath(TOTAL_ELEMENT_XPATH));
-            totalPrice = cartSummary.get(3).findElement(By.xpath(TOTAL_ELEMENT_XPATH));
-        }
-
     }
 
     public List<ViewCartProductComponent> getCartProductTable() {
         return cartProductTable;
     }
 
-    public List<WebElement> getCartSummary() {
-        return cartSummary;
-    }
-
     public WebElement getSubTotal() {
+        subTotal = driver.findElement(By.xpath(SUB_TOTAL_XPATH));
         return subTotal;
     }
 
@@ -72,6 +59,7 @@ public class ViewCartComponent {
     }
 
     public WebElement getEcoTax() {
+        ecoTax = driver.findElement(By.xpath(ECO_TAX_XPATH));
         return ecoTax;
     }
 
@@ -80,6 +68,7 @@ public class ViewCartComponent {
     }
 
     public WebElement getVatTax() {
+        vatTax = driver.findElement(By.xpath(VAT_XPATH));
         return vatTax;
     }
 
@@ -88,6 +77,7 @@ public class ViewCartComponent {
     }
 
     public WebElement getTotalPrice() {
+        totalPrice = driver.findElement(By.xpath(TOTAL_XPATH));
         return totalPrice;
     }
 
@@ -96,11 +86,12 @@ public class ViewCartComponent {
     }
 
     public WebElement getEmptyCartMsg() {
-        return driver.findElement(By.xpath(EMPTY_MESSAGE_XPATH));
+        cartEmptyMessage = driver.findElement(By.xpath(EMPTY_MESSAGE_XPATH));
+        return cartEmptyMessage;
     }
 
     public String getEmptyCartMsgText() {
-        return driver.findElement(By.xpath(EMPTY_MESSAGE_XPATH)).getText();
+        return getEmptyCartMsg().getText();
     }
 
     public WebElement getCartTotal() {
