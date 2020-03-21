@@ -55,9 +55,9 @@ public class WishListPage extends AccountSidebarLoggedPart {
   }
 
 
-  public WishLIstMessagePage deleteProductFromWishList(Product product) {
+  public WishListMessagePage deleteProductFromWishList(Product product) {
     wishListProductsContainerComponent.clickWishListComponentRemoveButtonByName(product);
-    return new WishLIstMessagePage(driver);
+    return new WishListMessagePage(driver);
   }
 
   public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
@@ -75,14 +75,14 @@ public class WishListPage extends AccountSidebarLoggedPart {
 //    return new WishListEmptyPage(driver);
 //  }
 
-  public WishLIstMessagePage addProductToCart(Product product) {
+  public WishListMessagePage addProductToCart(Product product) {
     wishListProductsContainerComponent
         .clickWishListComponentAddToCartButtonByName(product);
-    return new WishLIstMessagePage(driver);
+    return new WishListMessagePage(driver);
   }
 
-  public WishLIstMessagePage goToWishListMessagePage() {
-    return new WishLIstMessagePage(driver);
+  public WishListMessagePage goToWishListMessagePage() {
+    return new WishListMessagePage(driver);
   }
 
   public WishListEmptyPage removeAllProductFromWishList(){
