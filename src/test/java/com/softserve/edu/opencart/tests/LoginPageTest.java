@@ -3,6 +3,7 @@ package com.softserve.edu.opencart.tests;
 import com.softserve.edu.opencart.data.*;
 import com.softserve.edu.opencart.pages.user.account.LoginPage;
 import com.softserve.edu.opencart.pages.user.account.MyAccountPage;
+import com.softserve.edu.opencart.pages.user.account.SuccessfulUpdatePasswordLoginPage;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
@@ -24,7 +25,7 @@ public class LoginPageTest extends EpizyUserTestRunner{
 
     @Test(priority = 3, dataProvider = "emailClientDataProvider")
     public void resetPasswordTest(EmailUser emailUser, ResetEmailEntity resetEmail, IUser user){
-        LoginPage loginPageAfterReset = loadApplication()
+        SuccessfulUpdatePasswordLoginPage loginPage = loadApplication()
                 .gotoLoginPage()
                 .gotoForgottenPasswordRight()
                 .requestResetEmail(emailUser)
@@ -33,7 +34,7 @@ public class LoginPageTest extends EpizyUserTestRunner{
                 .goToChangePasswordPage(resetEmail)
                 .resetPassword(user);
 
-        assertEquals(loginPageAfterReset.getAlertText(), AlertMessagesRepository.getUpdatePasswordSuccess());
+        assertEquals(loginPage.getAlertText(), loginPage.EXPECTED_UPDATE_MESSAGE);
     }
 
     @Test(priority = 1, dataProvider = "validUserDataProvider")
