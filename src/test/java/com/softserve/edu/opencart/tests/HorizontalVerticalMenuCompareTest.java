@@ -10,16 +10,17 @@ public class HorizontalVerticalMenuCompareTest extends EpizyUserTestRunner {
 
         loadApplication()
                 .getMainMenuComponent()
-//                .clickMenuTopByCategoryPartialName("Desktops")
-//                .clickMenuTopByPartialName("Desktops","Show All Desktops")
-                .chooseCategory1(MenuItems.TV)
+                .chooseCategory(MenuItems.TV)
                 .chooseCategory(MenuItems.DESKTOPS)
-//                .chooseCategory(MenuItems.TV)
+                .chooseCategory(MenuItems.LAPTOPS_AND_NOTEBOOKS)
+                .chooseCategory(MenuItems.COMPONENTS)
+                .chooseCategory(MenuItems.TABLETS)
+                .chooseCategory(MenuItems.SOFTWARE)
+                .chooseCategory(MenuItems.PHONES_AND_PDAS)
+                .chooseCategory(MenuItems.CAMERAS)
+                .chooseCategory(MenuItems.MP3_PLAYERS)
         ;
         Thread.sleep(1000);
-
-//        boolean b = true;
-//        Assert.assertTrue(b);
 
 //        loadApplication().clickMenuTopByCategoryPartialName("Laptops");
 //        Thread.sleep(1000);
