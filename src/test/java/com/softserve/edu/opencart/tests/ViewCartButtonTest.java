@@ -17,15 +17,36 @@ public class ViewCartButtonTest extends EpizyUserTestRunner {
     String ukSubTotal = "306.25";
     String ukEcoTax = "1.23";
     String ukVat = "61.25";
+    String emptyCartMessage = "Your shopping cart is empty!";
+    String emptyCartSummary = "0 item(s) - $0.00";
 
     @DataProvider
-    public Object[][] dataForChangeCurrencyTest() {
+    public Object[][] dataForCurrencyChangeTest() {
         return new Object[][]{{mac, usSubTotal, usEcoTax, usVat, ukSubTotal, ukEcoTax, ukVat}};
     }
 
+    @DataProvider
+    public Object[][] dataForProductRemovingTest() {
+        return new Object[][]{{mac, emptyCartSummary, emptyCartMessage}};
+    }
 
-    @Test(dataProvider = "dataForChangeCurrencyTest")
-    public void checkProductRemoving(Product mac, String usSubTotal, String usEcoTax, String usVat, String ukSubTotal, String ukEcoTax, String ukVat) {
+    @Test(dataProvider = "dataForProductRemovingTest")
+    public void productRemovingTest(Product mac, String emptyCartSummary, String emptyCartMessage){
+        HomePage home = loadApplication()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(mac)
+                .goToHomePageFromAlert();
+        home.removeProductFromViewCart(mac);
+        softAssert.assertEquals(home.getViewCartProductSize(), 0);
+        softAssert.assertEquals(home.getViewCartComponentTotalText(), emptyCartSummary);
+        softAssert.assertEquals(home.getViewCartComponentTotalAmount(), "0");
+        softAssert.assertEquals(home.getViewCartComponentTotalSum(), "0.00");
+        softAssert.assertTrue(home.getViewCartEmptyMsg().isDisplayed());
+        softAssert.assertEquals(home.getViewCartEmptyMsgText(), emptyCartMessage);
+        softAssert.assertAll();
+    }
+    @Test(dataProvider = "dataForCurrencyChangeTest")
+    public void currencyCahngeTest(Product mac, String usSubTotal, String usEcoTax, String usVat, String ukSubTotal, String ukEcoTax, String ukVat) {
         HomePage usHome = loadApplication()
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(mac)

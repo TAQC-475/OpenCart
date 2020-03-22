@@ -517,6 +517,17 @@ public abstract class TopPart {
         return getViewCartComponent().getEmptyCartMsgText();
     }
 
+    public WebElement getViewCartEmptyMsg() {
+        if(!isViewCartOpened()) {
+            openViewCartComponent();
+        }
+        return getViewCartComponent().getEmptyCartMsg();
+    }
+
+    public int getViewCartProductSize(){
+        return getViewCartComponent().getCartProductTable().size();
+    }
+
     public String getProductNameFromViewCart(Product product) {
         if(!isViewCartOpened()) {
             openViewCartComponent();
@@ -572,6 +583,7 @@ public abstract class TopPart {
         }
         getViewCartComponent().removeViewProductComponent(product);
         setViewCartOpened(false);
+        viewCartComponent = null;
     }
 
     public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
