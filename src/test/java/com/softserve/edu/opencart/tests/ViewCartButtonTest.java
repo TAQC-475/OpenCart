@@ -46,7 +46,7 @@ public class ViewCartButtonTest extends EpizyUserTestRunner {
         softAssert.assertAll();
     }
     @Test(dataProvider = "dataForCurrencyChangeTest")
-    public void currencyCahngeTest(Product mac, String usSubTotal, String usEcoTax, String usVat, String ukSubTotal, String ukEcoTax, String ukVat) {
+    public void currencyChangeTest(Product mac, String usSubTotal, String usEcoTax, String usVat, String ukSubTotal, String ukEcoTax, String ukVat) {
         HomePage usHome = loadApplication()
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(mac)
