@@ -2,6 +2,7 @@ package com.softserve.edu.opencart.pages.user;
 
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -66,6 +67,7 @@ public class HomePage extends TopPart {
     }
 	public HomePage addProductToWishList(Product product) {
 		productsContainerComponent.clickProductComponentAddToWishButtonByName(product.getName());
+		new WaitUtils(driver,10).waitForAlertVisibility();
 		return new HomePage(driver);
 	}
 }
