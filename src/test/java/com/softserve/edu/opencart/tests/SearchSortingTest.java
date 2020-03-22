@@ -30,7 +30,7 @@ public class SearchSortingTest extends SearchTestRunner {
 
     @DataProvider
     private Object[][] dataForPagination() {
-        return new Object[][]{{Pagination.NEXT_PAGE, 2}};
+        return new Object[][]{{Pagination.NEXT_PAGE, "2"}};
     }
 
     @Test(dataProvider = "dataForSortByFilter", description = "verify 'Sort by:' drop down filter")
@@ -61,7 +61,7 @@ public class SearchSortingTest extends SearchTestRunner {
         softAssert.assertAll();
     }
 
-    @Test(description = "verify pagination")
+    @Test(dataProvider = "dataForPagination", description = "verify pagination")
     public void checkPagination(Pagination actualPage, String expectedPage) {
         successPage()
                 .clickNeededPage(actualPage);
