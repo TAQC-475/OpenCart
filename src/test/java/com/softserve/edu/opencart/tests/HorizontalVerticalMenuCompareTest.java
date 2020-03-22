@@ -1,35 +1,26 @@
 package com.softserve.edu.opencart.tests;
 
-import com.softserve.edu.opencart.pages.user.common.DropdownComponent;
-import com.softserve.edu.opencart.pages.user.common.TopPart;
-import com.softserve.edu.opencart.pages.user.search.ProductsSidebarPart;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import com.softserve.edu.opencart.data.MenuItems;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class HorizontalVerticalMenuCompareTest extends EpizyUserTestRunner {
     @Test
     public void menuTest() throws InterruptedException {
 
-//        try {
-//            loadApplication().gotoProductsSidebarEmptyPage().myMethod1();//checkFullEmptyPage();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-        //System.out.println(""+mainMenuItems1);
-
-//        for(WebElement w:loadApplication().getMainMenuComponent().getMenuItemList()){
-//
-//        }
-
         loadApplication()
                 .getMainMenuComponent()
-                .clickMenuTopByCategoryPartialName("Desktops")
+//                .clickMenuTopByCategoryPartialName("Desktops")
+//                .clickMenuTopByPartialName("Desktops","Show All Desktops")
+                .chooseCategory1(MenuItems.TV)
+                .chooseCategory(MenuItems.DESKTOPS)
+//                .chooseCategory(MenuItems.TV)
         ;
         Thread.sleep(1000);
+
+//        boolean b = true;
+//        Assert.assertTrue(b);
+
 //        loadApplication().clickMenuTopByCategoryPartialName("Laptops");
 //        Thread.sleep(1000);
 //        loadApplication().clickMenuTopByPartialName("Desktops", "Mac (1)");

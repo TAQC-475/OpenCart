@@ -13,6 +13,8 @@ public class MainMenuComponent {
 
     protected final String LIST_SUB_CATEGOIES_CSSSELECTOR = "div.dropdown-inner ul.list-unstyled li";
     protected final String DROPDOWN_TOP_MENU_CSSSELECTOR = "#menu .dropdown-menu";
+    protected final String DROPDOWN_SHOW_ALL_XPATH = "//li[@class='dropdown open']//a[@class='see-all']";
+    protected final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
 
     private MenuItems categoryItem;
     private List<WebElement> menuItemList;
@@ -43,10 +45,6 @@ public class MainMenuComponent {
     private DropdownComponent createDropdownComponent(By searchLocator) {
         dropdownComponent = new DropdownComponent(driver, searchLocator);
         return getDropdownComponent();
-    }
-
-    private Integer getMenuItemNumber(MenuItems categoryItem) {
-        return getMenuItemList().indexOf(categoryItem);
     }
 
     public DropdownComponent getDropdownComponent() {
@@ -81,21 +79,48 @@ public class MainMenuComponent {
             }
         }
         ErrorUtils.createCustomException(!isClickable,
-                String.format("OPTION_NOT_FOUND_MESSAGE",
-                        categoryName, getMenuTopText().toString()));
+                String.format(OPTION_NOT_FOUND_MESSAGE, categoryName, getMenuTopText().toString()));
         getMenuTopByCategoryPartialName(categoryName).click();
     }
 
 //    public void clickMenuTopByPartialName(String categoryName, String optionName) {
-//        System.out.println("categoryName : "+categoryName);
-//        clickMenuTopByCategoryPartialName(categoryName);
+    public void clickMenuTopByPartialName(String categoryName) {
+        System.out.println("categoryName : "+categoryName);
+        clickMenuTopByCategoryPartialName(categoryName);
 //        System.out.println("optionName : "+optionName);
-//        createDropdownComponent(By.cssSelector(DROPDOWN_TOP_MENU_CSSSELECTOR));
+        createDropdownComponent(By.xpath(DROPDOWN_SHOW_ALL_XPATH));
+//        getListSubCategoryNames();
+        clickDropdownComponentByPartialName("Show All "+categoryName);
 //        clickDropdownComponentByPartialName(optionName);
-//    }
+    }
 
+    private void clickDropdownComponentByPartialName(String optionName) {
+        if (!getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
+            // TODO Develop Custom Exception
+            throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName, getDropdownComponent().getListOptionsText().toString()));
+        }
+        getDropdownComponent().clickDropdownOptionByPartialName(optionName);
+        dropdownComponent = null;
+        //closeDropdownComponent();
+    }
 
+    public List<String> getListSubCategoryNames() {
+        List<String> result = getDropdownComponent().getListOptionsText();
+        System.out.println("sub categories : "+result.toString());
+        return result;
+    }
 
+    public MainMenuComponent chooseCategory(MenuItems menuItem)
+    {
+        clickMenuTopByPartialName(menuItem.toString());
+        return new MainMenuComponent(driver);
+    }
+
+    public MainMenuComponent chooseCategory1(MenuItems menuItem) throws InterruptedException {
+        clickMenuTopByCategoryPartialName(menuItem.toString());
+        Thread.sleep(1000);
+        return new MainMenuComponent(driver);
+    }
     // Functional
 
     // Business Logic
