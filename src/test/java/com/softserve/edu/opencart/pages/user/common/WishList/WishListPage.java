@@ -3,6 +3,8 @@ package com.softserve.edu.opencart.pages.user.common.WishList;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.pages.user.account.AccountSidebarLoggedPart;
 import com.softserve.edu.opencart.pages.user.account.MyAccountPage;
+import com.softserve.edu.opencart.pages.user.search.SearchSuccessAlertPage;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,6 +45,10 @@ public class WishListPage extends AccountSidebarLoggedPart {
   public void getProductModel(Product product) {
     wishListProductsContainerComponent.getWishListComponentModelByName(product);
   }
+
+  public int getAmountComponentsInWishList(){
+    return wishListProductsContainerComponent.getWishListComponentsCount();
+  }
   // Page Object
 
   // Functional
@@ -53,19 +59,38 @@ public class WishListPage extends AccountSidebarLoggedPart {
   }
 
 
-  public WishLIstMessagePage deleteProductFromWishList(Product product) {
+  public WishListMessagePage deleteProductFromWishList(Product product) {
     wishListProductsContainerComponent.clickWishListComponentRemoveButtonByName(product);
-    return new WishLIstMessagePage(driver);
+    return new WishListMessagePage(driver);
   }
 
-  public WishLIstMessagePage addProductToCart(Product product) {
+  public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
+    for (Product product: products){
+      successfulSearch(product)
+          .AddToWishButtonByName(product);
+    }
+    return new SearchSuccessAlertPage(driver);
+  }
+
+
+
+  public WishListMessagePage addProductToCart(Product product) {
     wishListProductsContainerComponent
         .clickWishListComponentAddToCartButtonByName(product);
-    return new WishLIstMessagePage(driver);
+    return new WishListMessagePage(driver);
   }
 
-  public WishLIstMessagePage gotToWishListMessagePage() {
-    return new WishLIstMessagePage(driver);
+  public WishListMessagePage goToWishListMessagePage() {
+    return new WishListMessagePage(driver);
+  }
+
+  public WishListEmptyPage removeAllProductFromWishList(){
+    List<WebElement> closeButtons = driver.findElements(By.cssSelector(".text-right .fa.fa-times"));
+    while (closeButtons.size() > 0) {
+      closeButtons.get(0).click();
+      closeButtons = driver.findElements(By.cssSelector(".text-right .fa.fa-times"));
+    }
+    return new WishListEmptyPage(driver);
   }
 
 

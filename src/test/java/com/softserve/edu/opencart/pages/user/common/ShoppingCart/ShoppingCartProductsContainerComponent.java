@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.user.common;
+package com.softserve.edu.opencart.pages.user.common.ShoppingCart;
 
 import com.softserve.edu.opencart.data.Product;
 import org.openqa.selenium.By;
@@ -120,7 +120,7 @@ public class ShoppingCartProductsContainerComponent {
         return getShoppingCartProductComponentByProduct(product.getName());
     }
 
-    public BigDecimal calculateOrderCorrectTotalPrice() {
+    public BigDecimal calculateCorrectSubTotalPrice() {
         List<BigDecimal> productsCorrectTotalPrices = new ArrayList<>();
         for(ShoppingCartProductComponent component: getShoppingCartProductComponents()){
             productsCorrectTotalPrices.add(component.calculateProductCorrectTotalPrice());

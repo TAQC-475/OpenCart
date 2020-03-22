@@ -63,11 +63,11 @@ public class ChangePasswordPage extends AccountSidebarLoggedPart {
 		setConfirmPassword(confirmPassword);
 	}
 
-	public LoginPage resetPassword(IUser user){
+	public SuccessfulUpdatePasswordLoginPage resetPassword(IUser user){
 		enterPassword(user.getPassword());
 		enterConfirmPassword(user.getPassword());
 		clickContinue();
-		return new LoginPage(driver);
+		return new SuccessfulUpdatePasswordLoginPage(driver);
 	}
 
 }

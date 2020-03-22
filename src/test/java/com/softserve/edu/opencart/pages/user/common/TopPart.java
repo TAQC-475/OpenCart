@@ -11,6 +11,7 @@ import com.softserve.edu.opencart.pages.user.common.WishList.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
 import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
 import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
+import com.softserve.edu.opencart.pages.user.search.SearchSuccessAlertPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
 import com.softserve.edu.opencart.pages.user.search.SearchUnsuccessPage;
 import com.softserve.edu.opencart.tools.RegularExpression;
@@ -464,6 +465,7 @@ public abstract class TopPart {
 
     // wishList
     public WishListPage gotoWishListPage(){
+        new WaitUtils(driver,10).waitForAlertVisibility();
         clickWishList();
         return new WishListPage(driver);
     }
@@ -502,6 +504,10 @@ public abstract class TopPart {
 
     public String getViewCartComponentTotalAmount() {
         return getViewCartComponent().getCartTotalAmount();
+    }
+
+    public String getViewCartComponentTotalSum() {
+        return getViewCartComponent().getCartTotalSum();
     }
 
     public String getViewCartEmptyMsgText() {
@@ -546,7 +552,7 @@ public abstract class TopPart {
         return getViewCartComponent().getEcoTaxText();
     }
 
-    public String getVATPriceFromViewCart() {
+    public String getVATFromViewCart() {
         if(!isViewCartOpened()) {
             openViewCartComponent();
         }
@@ -566,6 +572,23 @@ public abstract class TopPart {
         }
         getViewCartComponent().removeViewProductComponent(product);
         setViewCartOpened(false);
+    }
+
+    public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
+
+        int i = 1;
+        SearchSuccessAlertPage search = getAddProductsToWishList(products.get(0));
+
+        while (i != products.size()){
+           search = search.getAddProductsToWishList(products.get(i));
+        i++;}
+
+        return new SearchSuccessAlertPage(driver);
+    }
+    public SearchSuccessAlertPage getAddProductsToWishList(Product product){
+        successfulSearch(product)
+            .AddToWishButtonByName(product);
+        return new  SearchSuccessAlertPage(driver);
     }
 
 }

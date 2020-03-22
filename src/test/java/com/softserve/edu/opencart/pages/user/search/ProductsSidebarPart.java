@@ -1,8 +1,8 @@
 package com.softserve.edu.opencart.pages.user.search;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-
 import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
 import org.openqa.selenium.WebElement;
 
@@ -23,23 +23,52 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
     private void initElements() {
         // init elements
         menuItemList = driver.findElements(By.xpath("//div[@class='list-group']/a"));
+
     }
 
     // Page Object
-
-    public List<WebElement> getMenuItemList() {
+    public List<WebElement> getLeftMenuItemList() {
         return menuItemList;
     }
 
-    public List<String> getMenuItemListText() {
+    // check if the page is full or not
+    public boolean checkFullEmptyPage(){
+        try {
+            return driver.findElement(By.cssSelector("#content h3")).isDisplayed();
+        } catch (NoSuchElementException e){
+            return false;
+        }
+
+    }
+
+    // Functional
+
+    private String withoutNumbers(String strInput) {
+        String strResult = "";
+        Pattern p = Pattern.compile("[a-zA-Z].+[^ (0-9)]");
+        Matcher m = p.matcher(strInput);
+        while (m.find()) {
+            strResult = String.valueOf(m.group());
+        }
+
+        return strResult;
+    }
+
+
+    public List<String> getLeftMenuItemListText() {
         List<String> result = new ArrayList<>();
-        for (WebElement menuItem : getMenuItemList()) {
-            result.add(menuItem.getText());
+        for (WebElement menuItem : getLeftMenuItemList()) {
+            result.add(withoutNumbers(menuItem.getText()));
         }
         return result;
     }
 
-    // Functional
+    public void gotoLeftMenuBar() {                      // hardcoded num of element to click on!
+        getMainMenuComponent()
+                .getMenuItemList()
+                .get(0)
+                .click();
+    }
 
     // Business Logic
 }

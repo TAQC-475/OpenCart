@@ -5,7 +5,7 @@ import com.softserve.edu.opencart.data.UserRepository;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class AddingCategoryFromAdminTest extends LocalAdminTestRunner{
+public class AddCategoryFromAdminTest extends LocalAdminTestRunner{
 
     @DataProvider // (parallel = true)
     public Object[][] correctUsers() {
@@ -25,6 +25,7 @@ public class AddingCategoryFromAdminTest extends LocalAdminTestRunner{
                 .typeTitle("test")
                 .clickDataButton()
                 .typeParent("test")
+                .clickAddToTopMenu()
                 .gotoModifiedCatalogPage()
                 .getSuccessText();
 

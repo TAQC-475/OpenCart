@@ -2,8 +2,9 @@ package com.softserve.edu.opencart.pages.user;
 
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
-import com.softserve.edu.opencart.pages.user.common.ShoppingCartProductComponent;
-import com.softserve.edu.opencart.pages.user.common.ShoppingCartProductsContainerComponent;
+import com.softserve.edu.opencart.pages.user.common.ShoppingCart.ShoppingCartProductComponent;
+import com.softserve.edu.opencart.pages.user.common.ShoppingCart.ShoppingCartProductsContainerComponent;
+import com.softserve.edu.opencart.pages.user.common.ShoppingCart.ShoppingCartShippingAndTaxesComponent;
 import com.softserve.edu.opencart.tools.RegularExpression;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -11,15 +12,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
 public class ShoppingCartPage extends BreadCrumbPart {
     private WebElement shoppingCartExpectedText;
+    private WebElement shippingAndTaxes;
 
     private By messageAboutSuccessfulRefresh = By.xpath("//div[contains (text(), 'Success: You have modified your shopping cart!')]");
+    private By messageAboutApplyingShippingMethod = By.xpath("//div[contains (text(), 'Success: Your shipping estimate has been applied')]");
 
     private ShoppingCartProductsContainerComponent shoppingCartProductsContainerComponent;
 
@@ -30,6 +32,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     public void initElements() {
         shoppingCartExpectedText = driver.findElement(By.xpath("//div[@id = 'content']/h1[contains (text(), 'Shopping Cart')]"));
+        shippingAndTaxes = driver.findElement(By.xpath("//a[contains (text(), 'Shipping & Taxes')]"));
         shoppingCartProductsContainerComponent = new ShoppingCartProductsContainerComponent(driver);
     }
 
@@ -37,12 +40,31 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return messageAboutSuccessfulRefresh;
     }
 
+    public By getMessageAboutApplyingShippingMethod() {
+        return messageAboutApplyingShippingMethod;
+    }
+
     public WebElement getShoppingCartExpectedText() {
         return shoppingCartExpectedText;
     }
 
+    public WebElement getShippingAndTaxes() {
+        return shippingAndTaxes;
+    }
+
     public ShoppingCartProductsContainerComponent getShoppingCartProductsContainerComponent() {
         return shoppingCartProductsContainerComponent;
+    }
+
+    public ShoppingCartShippingAndTaxesComponent goToShippingAndTaxesComponent() {
+        By shippingAndTaxesComponentExpanded = By.xpath("//a[@aria-expanded = 'true' and contains (text(), 'Estimate Shipping & Taxes')]");
+        driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
+        if(isElementPresent(shippingAndTaxesComponentExpanded)){
+            return new ShoppingCartShippingAndTaxesComponent(driver);
+        }
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        getShippingAndTaxes().click();
+        return new ShoppingCartShippingAndTaxesComponent(driver);
     }
 
     public ShoppingCartPage refreshShoppingCartPageByProduct(Product product) {
@@ -74,7 +96,6 @@ public class ShoppingCartPage extends BreadCrumbPart {
         shoppingCartProductComponent.getQuantity().clear();
         shoppingCartProductComponent.getQuantity().sendKeys(quantity);
         return refreshShoppingCartPageByProduct(product);
-
     }
 
     public boolean isElementPresent(By by) {
@@ -86,16 +107,35 @@ public class ShoppingCartPage extends BreadCrumbPart {
         }
     }
 
-    public BigDecimal getOrderSubTotalPrice() {
+    public BigDecimal getActualSubTotalPrice() {
         WebElement subTotal = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Sub-Total')]/parent::td/following-sibling::td"));
         return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(subTotal.getText());
     }
 
-    public boolean areCorrectAndActualTotalPricesEqual(){
-        return getShoppingCartProductsContainerComponent().calculateOrderCorrectTotalPrice().equals(getOrderSubTotalPrice());
+    public BigDecimal getOrderFlatShippingRate(){
+        WebElement flatShippingRate = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Flat Shipping Rate')]/parent::td/following-sibling::td"));
+        return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(flatShippingRate.getText());
     }
 
-    public int sizeDifferenceBeforeAndAfterRemoving(int sizeBeforeRemoving){
+    public BigDecimal getActualTotalPrice(){
+        WebElement total = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//tr[last()]/td[not (child::strong)]"));
+        return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(total.getText());
+    }
+
+    public BigDecimal getCorrectSubTotalPrice(){
+        return getShoppingCartProductsContainerComponent().calculateCorrectSubTotalPrice();
+    }
+
+    public boolean areCorrectAndActualSubTotalPricesEqual() {
+        return getShoppingCartProductsContainerComponent().calculateCorrectSubTotalPrice().equals(getActualSubTotalPrice());
+    }
+
+    public boolean areCorrectAndActualTotalPricesEqual(){
+        BigDecimal totalPrice = getCorrectSubTotalPrice().add(getOrderFlatShippingRate());
+        return totalPrice.equals(getActualTotalPrice());
+    }
+
+    public int sizeDifferenceBeforeAndAfterRemoving(int sizeBeforeRemoving) {
         return sizeBeforeRemoving - getShoppingCartProductsContainerComponent().getShoppingCartProductComponentCount();
     }
 

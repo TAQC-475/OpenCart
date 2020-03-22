@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.user.common;
+package com.softserve.edu.opencart.pages.user.common.ShoppingCart;
 
 import com.softserve.edu.opencart.tools.RegularExpression;
 import org.openqa.selenium.By;

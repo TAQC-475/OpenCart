@@ -125,6 +125,24 @@ public final class UserRepository {
 				.setAddress2("address2")
 				.build();
 	}
+	public IUser getShoppingCartUser() {
+		return User.get()
+				.setFirstName("hahaha")
+				.setLastName("hahaha")
+				.setEmail("hahaha@gmail.com")
+				.setTelephone("telephone_5")
+				.setAddress1("address1_5")
+				.setCity("Oregon")
+				.setPostCode("79000")
+				.setCountry("United States")
+				.setRegionState("Oregon")
+				.setPassword(System.getenv().get("TEST_USER_PASSWORD"))
+				.setSubscribe(true)
+				.setFax("fax_5")
+				.setCompany("company_5")
+				.setAddress2("address2_5")
+				.build();
+	}
 
 	public List<IUser> fromCsv(String filename) {
 		return User.getByLists(new CSVReader(filename).getAllCells());

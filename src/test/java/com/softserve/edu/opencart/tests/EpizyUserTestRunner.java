@@ -1,9 +1,8 @@
 package com.softserve.edu.opencart.tests;
 
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 import com.softserve.edu.opencart.pages.user.HomePage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -41,35 +40,35 @@ public abstract class EpizyUserTestRunner {
         return currentWebDriver;
     }
 
-	
-	@BeforeSuite
-	public void beforeSuite() {
-		drivers = new HashMap<>();
-	}
+
+    @BeforeSuite
+    public void beforeSuite() {
+        drivers = new HashMap<>();
+    }
 
     @Parameters({"url", "serverUrlLogout"})
-	@BeforeClass
-	public void     beforeClass(ITestContext context, String serverUrl, String serverUrlLogout) {
-		//System.setProperty("webdriver.chrome.driver",
-		//		EpizyUserTestRunner.class.getResource("/chromedriver-windows-32bit.exe").getPath());
-		// TODO Check Exist ChromeDriver
-		//driver = new ChromeDriver();
-		//driver.manage().window().maximize();
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//
-		for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
-			System.out.println("Key: " + entry.getKey() + "  Value: " + entry.getValue());
-			if (entry.getKey().toLowerCase().equals("url")) {
-				serverUrl = entry.getValue();
-			//	break;
-			}
+    @BeforeClass
+    public void     beforeClass(ITestContext context, String serverUrl, String serverUrlLogout) {
+        //System.setProperty("webdriver.chrome.driver",
+        //		EpizyUserTestRunner.class.getResource("/chromedriver-windows-32bit.exe").getPath());
+        // TODO Check Exist ChromeDriver
+        //driver = new ChromeDriver();
+        //driver.manage().window().maximize();
+        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //
+        for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
+            System.out.println("Key: " + entry.getKey() + "  Value: " + entry.getValue());
+            if (entry.getKey().toLowerCase().equals("url")) {
+                serverUrl = entry.getValue();
+                //	break;
+            }
             if (entry.getKey().toLowerCase().equals("urllogout")) {
                 serverUrlLogout = entry.getValue();
             }
-		}
-		WebDriverManager.chromedriver().setup();
-		getDriver().manage().window().maximize();
-	}
+        }
+        WebDriverManager.chromedriver().setup();
+        getDriver().manage().window().maximize();
+    }
 
 
     @AfterClass(alwaysRun = true)
