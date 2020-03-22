@@ -49,7 +49,7 @@ public abstract class EpizyUserTestRunner {
 
     @Parameters({"url", "serverUrlLogout"})
 	@BeforeClass
-	public void beforeClass(ITestContext context, String serverUrl, String serverUrlLogout) {
+	public void     beforeClass(ITestContext context, String serverUrl, String serverUrlLogout) {
 		//System.setProperty("webdriver.chrome.driver",
 		//		EpizyUserTestRunner.class.getResource("/chromedriver-windows-32bit.exe").getPath());
 		// TODO Check Exist ChromeDriver

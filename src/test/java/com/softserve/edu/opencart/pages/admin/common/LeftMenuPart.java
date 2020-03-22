@@ -193,11 +193,8 @@ public class LeftMenuPart extends HeaderPart {
 
     public CurrenciesPage gotoCurrencyPage() throws InterruptedException {
         activeNavigatePannel();
-        Thread.sleep(500);
         clickSystem();
-        Thread.sleep(2500);
         clickLocalisation();
-        Thread.sleep(1500);
         clickCurrencies();
         return new CurrenciesPage(driver);
     }

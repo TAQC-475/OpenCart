@@ -3,12 +3,13 @@ package com.softserve.edu.opencart.tests;
 import org.testng.annotations.BeforeMethod;
 
 import com.softserve.edu.opencart.pages.admin.account.SigninPage;
+import org.testng.annotations.Parameters;
 
 public abstract class LocalAdminTestRunner extends EpizyUserTestRunner {
-	private String adminServerUrl = "http://192.168.174.130/opencart/upload/admin";
-	
+
+	@Parameters({"adminServerUrl"})
 	@BeforeMethod
-	public void beforeMethod() {
+	public void beforeMethod(String adminServerUrl) {
 		//driver.get(adminServerUrl);
 		getDriver().get(adminServerUrl);
 	}

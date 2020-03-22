@@ -20,7 +20,7 @@ public class CurrencyRepository {
 
     }
 
-    private ICurrency getUACurrency() {
+    public ICurrency getUACurrency() {
         return Currency.get()
                 .setCurrencyTitleField("hrn")
                 .setCurrencyCodeField("UAH")
