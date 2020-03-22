@@ -43,8 +43,8 @@ public class WishListTest extends EpizyUserTestRunner {
 
     String actual =
         loadApplication()
-//            .gotoLoginPage()
-//            .successfulLogin(UserRepository.get().getMrAndersonUser())
+            .gotoLoginPage()
+            .successfulLogin(UserRepository.get().getMrAndersonUser())
         .successfulSearch(ProductRepository.getIPodClassic())
         .AddToWishButtonByName(ProductRepository.getIPodClassic())
 //        .successfulSearch(ProductRepository.getIPhone())
@@ -61,8 +61,8 @@ public class WishListTest extends EpizyUserTestRunner {
   @Test(priority = 2)
   public void addToCartFromWishListTest() {
     String actual = loadApplication()
-//          .gotoLoginPage()
-//          .successfulLogin(UserRepository.get().getMrAndersonUser())
+          .gotoLoginPage()
+          .successfulLogin(UserRepository.get().getMrAndersonUser())
         .gotoHomePage()
         .addProductToWishList(ProductRepository.getMacBook())
         .gotoWishListPage()
