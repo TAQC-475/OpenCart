@@ -12,6 +12,8 @@ import static com.softserve.edu.opencart.pages.user.search.SearchSuccessPage.isL
 
 public class SearchSortingTest extends SearchTestRunner {
 
+    //TODO error messages
+
     @DataProvider
     private Object[][] dataForSortByFilter() {
         return new Object[][]{{

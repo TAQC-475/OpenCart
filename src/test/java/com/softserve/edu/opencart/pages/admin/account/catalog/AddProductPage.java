@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.admin.account.catalog;
 
+import com.softserve.edu.opencart.data.creationProductAdminPanel.NewProduct;
 import com.softserve.edu.opencart.pages.admin.common.LeftMenuPart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,9 +25,10 @@ public class AddProductPage extends LeftMenuPart {
         inputTitle = driver.findElement(By.id("input-meta-title1"));
         dataButton = driver.findElement(By.xpath("//a[@href='#tab-data']"));
         inputModel = driver.findElement(By.id("input-model"));
-        saveButton = driver.findElement(By.cssSelector(".btn-primary > .fa"));
+        saveButton = driver.findElement(By.cssSelector(".btn-primary > .fa-save"));
     }
 
+//    public AddProductPage typeName(NewProduct product) {
     public AddProductPage typeName(String arg) {
         inputName.click();
         inputName.clear();
@@ -34,6 +36,7 @@ public class AddProductPage extends LeftMenuPart {
         return this;
     }
 
+//    public AddProductPage typeTitle(NewProduct product) {
     public AddProductPage typeTitle(String arg) {
         inputTitle.click();
         inputTitle.clear();
@@ -46,6 +49,7 @@ public class AddProductPage extends LeftMenuPart {
         return this;
     }
 
+//    public AddProductPage typeModel(NewProduct product) {
     public AddProductPage typeModel(String arg) {
         inputModel.click();
         inputModel.clear();
