@@ -1,12 +1,11 @@
 package com.softserve.edu.opencart.tests.WishList;
 
 import com.softserve.edu.opencart.data.Product;
-import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.data.User;
+import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListMessagePage;
 import com.softserve.edu.opencart.tests.EpizyUserTestRunner;
-import com.softserve.edu.opencart.tests.WishList.WishListTest;
 import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,23 +13,23 @@ import org.testng.annotations.Test;
 public class WishListTest extends EpizyUserTestRunner {
 
 
-  @Test(priority = 1,dataProvider = "validUser",dataProviderClass = WishListDataProvider.class)
-  public void removeFromWishListTest(User validUser) {
+  @Test(priority = 1,dataProvider = "iPodClassic",dataProviderClass = WishListDataProvider.class)
+  public void removeFromWishListTest(Product iPodClassic) {
 
     String actual =
         loadApplication()
             .gotoLoginPage()
-            .successfulLogin(validUser)
-            .successfulSearch(ProductRepository.getIPodClassic())
-            .AddToWishButtonByName(ProductRepository.getIPodClassic())
+            .successfulLogin(UserRepository.get().getMrAndersonUser())
+            .successfulSearch(iPodClassic)
+            .AddToWishButtonByName(iPodClassic)
             .gotoWishListPage()
-            .deleteProductFromWishList(ProductRepository.getIPodClassic()).getRemoveMessageText();
+            .deleteProductFromWishList(iPodClassic).getRemoveMessageText();
 
     Assert.assertTrue(actual.contains(WishListMessagePage.PRODUCT_REMOVED));
   }
 
 
-  @Test(priority = 2, dataProvider = "data",dataProviderClass = WishListDataProvider.class)
+  @Test(priority = 2, dataProvider = "productsList",dataProviderClass = WishListDataProvider.class)
   public void emptyWishListTest(List<Product> products) {
     String actual = loadApplication()
         .searchAndAddProductsToWishList(products)
@@ -42,27 +41,26 @@ public class WishListTest extends EpizyUserTestRunner {
 
   }
 
-  @Test(priority = 3)
-  public void addToCartFromWishListTest() {
+  @Test(priority = 3, dataProvider = "macBook",dataProviderClass = WishListDataProvider.class)
+  public void addToCartFromWishListTest(Product macBook) {
     String actual = loadApplication()
 
         .gotoHomePage()
-        .addProductToWishList(ProductRepository.getMacBook())
+        .addProductToWishList(macBook)
         .gotoWishListPage()
-        .addProductToCart(ProductRepository.getMacBook())
+        .addProductToCart(macBook)
         .getAddToCartMessageText();
 
     //check message
     Assert.assertTrue(actual.contains
-        (String.format(WishListMessagePage.PRODUCT_ADDED_TO_CART,
-            ProductRepository.getProductName(ProductRepository.getMacBook()))));
+        (String.format(WishListMessagePage.PRODUCT_ADDED_TO_CART, macBook.getName())));
 
   }
 
   //
 
 
-  @Test(priority = 4, dataProvider = "data",dataProviderClass = WishListDataProvider.class)
+  @Test(priority = 4, dataProvider = "productsList",dataProviderClass = WishListDataProvider.class)
   public void numberEqualityTest(List<Product> products) {
     int actual = loadApplication()
         .searchAndAddProductsToWishList(products)
