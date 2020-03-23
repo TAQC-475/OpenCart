@@ -1,15 +1,13 @@
 package com.softserve.edu.opencart.pages.user.common;
 
 import com.softserve.edu.opencart.pages.user.HomePage;
-import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
+import com.softserve.edu.opencart.pages.user.common.shopping_cart.ShoppingCartPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
 public class AddProductAlertPage extends BreadCrumbPart {
-
-    public static final String ADDED_PRODUCT_ALERT_MSG = "Success: You have added %s to your shopping cart! ";
     //
     private WebElement alertMessage;
     private WebElement alertButton;
@@ -37,7 +35,8 @@ public class AddProductAlertPage extends BreadCrumbPart {
     }
 
     public String getAlertMessageText() {
-        return getAlertMessage().getText();
+        String alert = getAlertMessage().getText();
+        return alert.substring(0, alert.lastIndexOf("!")+1);
     }
 
     // alertButton

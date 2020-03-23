@@ -98,7 +98,7 @@ public final class UserRepository {
 				.setPostCode("1212")
 				.setCountry("United Kingdom")
 				.setRegionState("Bristol")
-				.setPassword(System.getenv().get("VASYLS_EMAIL_PASSWORD"))
+				.setPassword(System.getenv().get("VASYLS_PASSWORD"))
 				.setSubscribe(true)
 				.setFax("fax")
 				.setCompany("company")

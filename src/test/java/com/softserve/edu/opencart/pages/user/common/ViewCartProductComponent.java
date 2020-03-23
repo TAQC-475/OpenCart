@@ -21,7 +21,7 @@ public class ViewCartProductComponent {
 
     private void initElements() {
         image = product.findElement(By.xpath("./td[@class='text-center']/a"));
-        name = product.findElement(By.xpath("./td[@class='text-left']"));
+        name = product.findElement(By.xpath("./td[@class='text-left']/a"));
         quantity = product.findElement(By.xpath("./td[@class='text-right'][1]"));
         price = product.findElement(By.xpath("./td[@class='text-right'][2]"));
         removeButton = product.findElement(By.xpath("./td[@class='text-center']/button"));

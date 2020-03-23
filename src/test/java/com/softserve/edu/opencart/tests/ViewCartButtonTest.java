@@ -61,6 +61,7 @@ public class ViewCartButtonTest extends EpizyUserTestRunner {
         softAssert.assertEquals(home.getViewCartComponentTotalSum(), emptyPrice);
         softAssert.assertTrue(home.getViewCartEmptyMsg().isDisplayed());
         softAssert.assertEquals(home.getViewCartEmptyMsgText(), emptyCartMessage);
+
         softAssert.assertAll();
     }
 
