@@ -3,13 +3,11 @@ package com.softserve.edu.opencart.tests;
 import com.softserve.edu.opencart.data.CurrencyRepository;
 import com.softserve.edu.opencart.data.ICurrency;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.UserRepository;
-import com.softserve.edu.opencart.pages.admin.account.SigninPage;
 import com.softserve.edu.opencart.pages.admin.currencies.CurrenciesPage;
 
 public class AddNewCurrencyFromAdminTest extends LocalAdminTestRunner {
@@ -23,7 +21,7 @@ public class AddNewCurrencyFromAdminTest extends LocalAdminTestRunner {
 
 	@Test(dataProvider = "adminAddCurrency")
 	public void checkSuccessful(IUser validAdmin, ICurrency currency) throws Exception {
-		CurrenciesPage currenciesPage = loadSigninPage()
+		CurrenciesPage currenciesPage = loadSignInPage()
 				.successfulLogin(validAdmin)
 				.gotoCurrencyPage()
 				.goToAddNewCurrecyPage()

@@ -35,7 +35,6 @@ public class AddProductPage extends LeftMenuPart {
         inputPrice = driver.findElement(By.id("input-price"));
     }
 
-//    public AddProductPage typeName(NewProduct product) {
     public AddProductPage typeName(String arg) {
         inputName.click();
         inputName.clear();
@@ -43,7 +42,6 @@ public class AddProductPage extends LeftMenuPart {
         return this;
     }
 
-//    public AddProductPage typeTitle(NewProduct product) {
     public AddProductPage typeTitle(String arg) {
         inputTitle.click();
         inputTitle.clear();
@@ -56,7 +54,6 @@ public class AddProductPage extends LeftMenuPart {
         return this;
     }
 
-//    public AddProductPage typeModel(NewProduct product) {
     public AddProductPage typeModel(String arg) {
         inputModel.click();
         inputModel.clear();
@@ -64,12 +61,12 @@ public class AddProductPage extends LeftMenuPart {
         return this;
     }
 
-    public AddProductPage clickLinkButton(){
+    public AddProductPage clickLinkButton() {
         linkButton.click();
         return this;
     }
 
-    public AddProductPage typeCategory(String arg){
+    public AddProductPage typeCategory(String arg) {
         inputCategory.click();
         inputCategory.clear();
         inputCategory.sendKeys(arg);
@@ -83,21 +80,19 @@ public class AddProductPage extends LeftMenuPart {
         return this;
     }
 
-    public AddProductPage typePrice(String arg){
+    public AddProductPage typePrice(String arg) {
         inputPrice.click();
         inputPrice.clear();
         inputPrice.sendKeys(arg);
         return this;
     }
 
-    public AddProductPage clickCategoryDropdown(){
+    public AddProductPage clickCategoryDropdown() {
         List<WebElement> dropdown = driver.findElements(By.xpath("//ul[@class='dropdown-menu']/li/a"));///"//input[@id='input-manufacturer']/../ul"));
-        for (WebElement option : dropdown)
-        {
-            System.out.println("1 "+option.getText());
-            if (option.getText().equals("Routers"))
-            {
-                System.out.println("2 "+option.getText());
+        for (WebElement option : dropdown) {
+            System.out.println("1 " + option.getText());
+            if (option.getText().equals("Routers")) {
+                System.out.println("2 " + option.getText());
                 option.click(); // click the desired option
                 break;
             }
