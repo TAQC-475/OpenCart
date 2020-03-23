@@ -2,20 +2,13 @@ package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.ProductRepository;
-import com.softserve.edu.opencart.pages.user.common.ProductComponent;
 import com.softserve.edu.opencart.pages.user.search.ProductInfoPage;
-import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
-import com.softserve.edu.opencart.tools.WaitUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SearchCriteriaTest extends LocalTestRunner {
+public class SearchCriteriaTest extends SearchTestRunner {
 
 
     @Test(description = "Check if search fields have the same input")
@@ -40,6 +33,19 @@ public class SearchCriteriaTest extends LocalTestRunner {
 
         Assert.assertEquals(actualProductName, expectedProductName);
     }
+
+    @Test(description = "Check Search in subcategories button")
+    public void checkSubcategoriesButton()
+    {
+        SearchSuccessPage successPage=this.successPage();
+        WebElement firstOption = successPage.getCriteriaCategory().getOptions().get(0);
+        Assert.assertTrue(firstOption.isSelected());
+        Assert.assertFalse(successPage.getCriteriaSubCategory().isEnabled());
+        successPage.getCriteriaCategory().selectByIndex(1);
+
+        Assert.assertTrue(successPage.getCriteriaSubCategory().isEnabled());
+    }
+
 
     @Test(description = "Search in product descriptions")
     public void checkingSearchingInDescription()

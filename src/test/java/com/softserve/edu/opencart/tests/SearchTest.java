@@ -1,5 +1,14 @@
 package com.softserve.edu.opencart.tests;
 
+import com.softserve.edu.opencart.data.Currencies;
+import com.softserve.edu.opencart.data.Product;
+import com.softserve.edu.opencart.data.ProductRepository;
+import com.softserve.edu.opencart.pages.user.HomePage;
+import com.softserve.edu.opencart.pages.user.common.ProductComponent;
+import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
+import org.testng.annotations.Test;
+import org.testng.Assert;
+
 public class SearchTest extends LocalTestRunner {
 
 //	@Test
@@ -10,7 +19,7 @@ public class SearchTest extends LocalTestRunner {
 //		Currencies currency = Currencies.EURO;
 //		//
 //		// Steps
-//		SearchSuccessPage searchSuccessPage = loadApplication()
+//		SearchSuccessPage searchSuccessPage = this.loadApplication()
 //				.successfulSearch(validProduct)
 //				.chooseCurrency(currency);
 //		presentationSleep();
