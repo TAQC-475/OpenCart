@@ -45,7 +45,12 @@ public class ShoppingCartProductsContainerComponent {
         return shoppingCartProductComponentNames;
     }
 
-    protected ShoppingCartProductComponent getShoppingCartProductComponentByProduct(String productName) {
+    /**
+     * goes trough the list of components present at the page, and check if component with name from param is present
+     * @param productName
+     * returns component with name from param
+     */
+    protected ShoppingCartProductComponent getProductComponentByName(String productName) {
         ShoppingCartProductComponent result = null;
 
         for (ShoppingCartProductComponent current : getShoppingCartProductComponents()) {
@@ -61,31 +66,31 @@ public class ShoppingCartProductsContainerComponent {
     }
 
     public String getShoppingCartProductModelByName(String productName) {
-        return getShoppingCartProductComponentByProduct(productName).getModelText();
+        return getProductComponentByName(productName).getModelText();
     }
 
     public String getShoppingCartProductQuantityByName(String productName) {
-        return getShoppingCartProductComponentByProduct(productName).getQuantityText();
+        return getProductComponentByName(productName).getQuantityText();
     }
 
     public String getShoppingCartProductUnitPriceByName(String productName) {
-        return getShoppingCartProductComponentByProduct(productName).getUnitPriceText();
+        return getProductComponentByName(productName).getUnitPriceText();
     }
 
     public String getShoppingCartProductTotalPriceByName(String productName) {
-        return getShoppingCartProductComponentByProduct(productName).getTotalPriceText();
+        return getProductComponentByName(productName).getTotalPriceText();
     }
 
     public void clickOnShoppingCartProductComponentNameButtonByName(String productName) {
-        getShoppingCartProductComponentByProduct(productName).clickOnProductName();
+        getProductComponentByName(productName).clickOnProductName();
     }
 
     public void clickOnShoppingCartProductComponentRefreshButtonByName(String productName) {
-        getShoppingCartProductComponentByProduct(productName).clickRefreshButton();
+        getProductComponentByName(productName).clickRefreshButton();
     }
 
     public void clickOnShoppingCartProductComponentRemoveButtonByName(String productName) {
-        getShoppingCartProductComponentByProduct(productName).clickRemoveButton();
+        getProductComponentByName(productName).clickRemoveButton();
     }
 
     public String getShoppingCartProductComponentModelByProduct(Product product) {
@@ -116,8 +121,12 @@ public class ShoppingCartProductsContainerComponent {
         clickOnShoppingCartProductComponentRemoveButtonByName(product.getName());
     }
 
-    public ShoppingCartProductComponent getShoppingCartProductComponentByProduct(Product product) {
-        return getShoppingCartProductComponentByProduct(product.getName());
+    /**
+     * @param product
+     * returns product component from page by product from param
+     */
+    public ShoppingCartProductComponent getProductComponentByProduct(Product product) {
+        return getProductComponentByName(product.getName());
     }
 
     /**

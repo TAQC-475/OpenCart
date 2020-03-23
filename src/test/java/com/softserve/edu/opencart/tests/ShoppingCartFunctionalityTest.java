@@ -72,7 +72,7 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(product2)
                 .goToShoppingCartFromAlert()
-                .removeShoppingCartComponentFromContainerByProduct(product1);
+                .removeComponentByProduct(product1);
 
         verifyProductRemoved(product1.getName());
     }
@@ -99,7 +99,7 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
         shoppingCartPage = shoppingCartPage.refreshShoppingCartPageByProduct(product2);
         softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()), "There is no refresh success message");
 
-        shoppingCartPage = shoppingCartPage.removeShoppingCartComponentFromContainerByProduct(product1);
+        shoppingCartPage = shoppingCartPage.removeComponentByProduct(product1);
         softAssert.assertEquals(shoppingCartPage.sizeDifferenceBeforeAndAfterRemoving(sizeBeforeRemoving), 1, "Difference before and after removing is not 1");
 
         softAssert.assertAll();

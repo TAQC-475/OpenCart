@@ -98,6 +98,10 @@ public class ShoppingCartProductComponent {
         getRemoveButton().click();
     }
 
+    /**
+     * multiplies product quantity and unit price
+     * returns total price of the product
+     */
     public BigDecimal calculateExpectedComponentTotalPrice() {
         BigDecimal quantity = new BigDecimal(this.getQuantityText());
         BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(this.getUnitPriceText());

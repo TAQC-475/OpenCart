@@ -53,6 +53,10 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return shoppingCartProductsContainerComponent;
     }
 
+    /**
+     * checks if shipping and taxes accordion is expanded, if no, clicks on it and returns page,
+     * if yes just returns new page
+     */
     public ShoppingCartShippingAndTaxesComponent goToShippingAndTaxesComponent() {
         By shippingAndTaxesComponentExpanded = By.xpath("//a[@aria-expanded = 'true' and contains (text(), 'Estimate Shipping & Taxes')]");
         driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
@@ -64,9 +68,14 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return new ShoppingCartShippingAndTaxesComponent(driver);
     }
 
+    /**
+     * finds product component by product from param and clicks refresh button
+     * @param product
+     * returns refreshed page
+     */
     public ShoppingCartPage refreshShoppingCartPageByProduct(Product product) {
         this.getShoppingCartProductsContainerPage()
-                .getShoppingCartProductComponentByProduct(product)
+                .getProductComponentByProduct(product)
                 .clickRefreshButton();
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         new WebDriverWait(driver, 5)
@@ -75,21 +84,32 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return new ShoppingCartPage(driver);
     }
 
-    public ShoppingCartPage removeShoppingCartComponentFromContainerByProduct(Product product) {
+    /**
+     * finds product component by product from param and clicks remove button
+     * @param product
+     * returns new page after removing a component
+     */
+    public ShoppingCartPage removeComponentByProduct(Product product) {
         this.getShoppingCartProductsContainerPage()
-                .getShoppingCartProductComponentByProduct(product)
+                .getProductComponentByProduct(product)
                 .clickRemoveButton();
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        (new WebDriverWait(driver, 5))
+        new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.stalenessOf(this.getShoppingCartProductsContainerPage()
-                        .getShoppingCartProductComponentByProduct(product).getProductName()));
+                        .getProductComponentByProduct(product).getProductName()));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return new ShoppingCartPage(driver);
     }
 
+    /**
+     * finds product component by product from param, clears current quantity and sets quantity from param
+     * @param product
+     * @param quantity
+     * returns refreshed page
+     */
     public ShoppingCartPage setQuantity(Product product, String quantity) {
         ShoppingCartProductComponent shoppingCartProductComponent = this.getShoppingCartProductsContainerPage()
-                .getShoppingCartProductComponentByProduct(product);
+                .getProductComponentByProduct(product);
         shoppingCartProductComponent.getQuantity().clear();
         shoppingCartProductComponent.getQuantity().sendKeys(quantity);
         return refreshShoppingCartPageByProduct(product);
