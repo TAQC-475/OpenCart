@@ -5,7 +5,7 @@ import com.softserve.edu.opencart.data.Currencies;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.pages.user.HomePage;
-import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
+import com.softserve.edu.opencart.pages.user.common.shopping_cart.ShoppingCartPage;
 import com.softserve.edu.opencart.pages.user.account.*;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;

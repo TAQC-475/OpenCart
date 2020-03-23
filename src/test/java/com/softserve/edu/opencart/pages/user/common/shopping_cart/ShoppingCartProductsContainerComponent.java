@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.user.common.ShoppingCart;
+package com.softserve.edu.opencart.pages.user.common.shopping_cart;
 
 import com.softserve.edu.opencart.data.Product;
 import org.openqa.selenium.By;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartProductsContainerComponent {
-    private final String SHOPPING_CART_PRODUCT_COMPONENT_XPATH = "//div[@class = 'table-responsive']//table[@class = 'table table-bordered']/tbody/tr";
+    private final String shoppingCartProductComponentXpath = "//div[@class = 'table-responsive']//table[@class = 'table table-bordered']/tbody/tr";
 
     protected WebDriver driver;
 
@@ -24,7 +24,7 @@ public class ShoppingCartProductsContainerComponent {
     public void initElements() {
         shoppingCartProductComponents = new ArrayList<>();
 
-        for (WebElement current : driver.findElements(By.xpath(SHOPPING_CART_PRODUCT_COMPONENT_XPATH))) {
+        for (WebElement current : driver.findElements(By.xpath(shoppingCartProductComponentXpath))) {
             shoppingCartProductComponents.add(new ShoppingCartProductComponent(current));
         }
     }
@@ -120,15 +120,19 @@ public class ShoppingCartProductsContainerComponent {
         return getShoppingCartProductComponentByProduct(product.getName());
     }
 
-    public BigDecimal calculateCorrectSubTotalPrice() {
-        List<BigDecimal> productsCorrectTotalPrices = new ArrayList<>();
+    /**
+     * Calculating shopping page order expected sub total price
+     * return calculated expected subTotal price
+     */
+    public BigDecimal calculateExpectedSubTotalPrice() {
+        List<BigDecimal> productsExpectedTotalPrices = new ArrayList<>();
         for(ShoppingCartProductComponent component: getShoppingCartProductComponents()){
-            productsCorrectTotalPrices.add(component.calculateProductCorrectTotalPrice());
+            productsExpectedTotalPrices.add(component.calculateExpectedComponentTotalPrice());
         }
-        BigDecimal totalPrice = new BigDecimal(0);
-        for (BigDecimal decimal : productsCorrectTotalPrices) {
-            totalPrice = totalPrice.add(decimal);
+        BigDecimal subTotalPrice = new BigDecimal(0);
+        for (BigDecimal decimal : productsExpectedTotalPrices) {
+            subTotalPrice = subTotalPrice.add(decimal);
         }
-        return totalPrice;
+        return subTotalPrice;
     }
 }

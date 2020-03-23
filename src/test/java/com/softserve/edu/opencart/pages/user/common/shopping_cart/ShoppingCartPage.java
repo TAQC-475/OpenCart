@@ -1,10 +1,7 @@
-package com.softserve.edu.opencart.pages.user;
+package com.softserve.edu.opencart.pages.user.common.shopping_cart;
 
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
-import com.softserve.edu.opencart.pages.user.common.ShoppingCart.ShoppingCartProductComponent;
-import com.softserve.edu.opencart.pages.user.common.ShoppingCart.ShoppingCartProductsContainerComponent;
-import com.softserve.edu.opencart.pages.user.common.ShoppingCart.ShoppingCartShippingAndTaxesComponent;
 import com.softserve.edu.opencart.tools.RegularExpression;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -52,7 +49,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return shippingAndTaxes;
     }
 
-    public ShoppingCartProductsContainerComponent getShoppingCartProductsContainerComponent() {
+    public ShoppingCartProductsContainerComponent getShoppingCartProductsContainerPage() {
         return shoppingCartProductsContainerComponent;
     }
 
@@ -68,30 +65,30 @@ public class ShoppingCartPage extends BreadCrumbPart {
     }
 
     public ShoppingCartPage refreshShoppingCartPageByProduct(Product product) {
-        this.getShoppingCartProductsContainerComponent()
+        this.getShoppingCartProductsContainerPage()
                 .getShoppingCartProductComponentByProduct(product)
                 .clickRefreshButton();
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        (new WebDriverWait(driver, 5))
+        new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(messageAboutSuccessfulRefresh));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return new ShoppingCartPage(driver);
     }
 
     public ShoppingCartPage removeShoppingCartComponentFromContainerByProduct(Product product) {
-        this.getShoppingCartProductsContainerComponent()
+        this.getShoppingCartProductsContainerPage()
                 .getShoppingCartProductComponentByProduct(product)
                 .clickRemoveButton();
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         (new WebDriverWait(driver, 5))
-                .until(ExpectedConditions.stalenessOf(this.getShoppingCartProductsContainerComponent()
+                .until(ExpectedConditions.stalenessOf(this.getShoppingCartProductsContainerPage()
                         .getShoppingCartProductComponentByProduct(product).getProductName()));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return new ShoppingCartPage(driver);
     }
 
     public ShoppingCartPage setQuantity(Product product, String quantity) {
-        ShoppingCartProductComponent shoppingCartProductComponent = this.getShoppingCartProductsContainerComponent()
+        ShoppingCartProductComponent shoppingCartProductComponent = this.getShoppingCartProductsContainerPage()
                 .getShoppingCartProductComponentByProduct(product);
         shoppingCartProductComponent.getQuantity().clear();
         shoppingCartProductComponent.getQuantity().sendKeys(quantity);
@@ -123,11 +120,11 @@ public class ShoppingCartPage extends BreadCrumbPart {
     }
 
     public BigDecimal getCorrectSubTotalPrice(){
-        return getShoppingCartProductsContainerComponent().calculateCorrectSubTotalPrice();
+        return getShoppingCartProductsContainerPage().calculateExpectedSubTotalPrice();
     }
 
     public boolean areCorrectAndActualSubTotalPricesEqual() {
-        return getShoppingCartProductsContainerComponent().calculateCorrectSubTotalPrice().equals(getActualSubTotalPrice());
+        return getShoppingCartProductsContainerPage().calculateExpectedSubTotalPrice().equals(getActualSubTotalPrice());
     }
 
     public boolean areCorrectAndActualTotalPricesEqual(){
@@ -136,14 +133,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
     }
 
     public int sizeDifferenceBeforeAndAfterRemoving(int sizeBeforeRemoving) {
-        return sizeBeforeRemoving - getShoppingCartProductsContainerComponent().getShoppingCartProductComponentCount();
+        return sizeBeforeRemoving - getShoppingCartProductsContainerPage().getShoppingCartProductComponentCount();
     }
 
-//    public ShoppingCartPage assertThatSizeOfContainerComponentsIsReducingAfterDeleting(Product product){
-//        int numberOfProductsBeforeRemoving = getShoppingCartProductsContainerComponent().getShoppingCartProductComponentCount();
-//        ShoppingCartPage shoppingCartPage= removeShoppingCartComponentFromContainerByProduct(product);
-//        int numberOfProductsAfterRemoving = shoppingCartPage.getShoppingCartProductsContainerComponent().getShoppingCartProductComponentCount();
-//        Assert.assertTrue(numberOfProductsAfterRemoving < numberOfProductsBeforeRemoving);
-//        return new ShoppingCartPage(driver);
-//    }
 }
