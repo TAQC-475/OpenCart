@@ -125,7 +125,6 @@ public class LeftMenuPart extends HeaderPart {
 
     //System
     public WebElement getSystem() {
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.elementToBeClickable(system));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return system;
@@ -141,7 +140,6 @@ public class LeftMenuPart extends HeaderPart {
 //	}
     //Localisation
     public WebElement getLocalisation() {
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.elementToBeClickable(localisation));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return localisation;
@@ -153,7 +151,6 @@ public class LeftMenuPart extends HeaderPart {
 
     //Currencies
 	public WebElement getCurrencies() {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.elementToBeClickable(currencies));
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return currencies;
@@ -194,7 +191,7 @@ public class LeftMenuPart extends HeaderPart {
         return new CurrenciesPage(driver);
     }
 
-    public CurrenciesPage gotoCurrencyPage() throws InterruptedException {
+    public CurrenciesPage gotoCurrencyPage() {
         activeNavigatePannel();
         clickSystem();
         clickLocalisation();

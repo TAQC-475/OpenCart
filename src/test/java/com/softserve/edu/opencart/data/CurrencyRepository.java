@@ -22,7 +22,7 @@ public class CurrencyRepository {
 
     public ICurrency getUACurrency() {
         return Currency.get()
-                .setCurrencyTitleField("hrn")
+                .setCurrencyTitleField("Hryvnia")
                 .setCurrencyCodeField("UAH")
                 .setCurrencySymbolLeftField("")
                 .setCurrencySymbolRightField("₴")

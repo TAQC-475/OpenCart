@@ -12,7 +12,7 @@ import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.admin.account.SigninPage;
 import com.softserve.edu.opencart.pages.admin.currencies.CurrenciesPage;
 
-public class AdminMenuTest extends LocalAdminTestRunner {
+public class AddNewCurrencyFromAdminTest extends LocalAdminTestRunner {
 
 	@DataProvider//(parallel = true)
 	public Object[][] adminAddCurrency() {
@@ -28,20 +28,8 @@ public class AdminMenuTest extends LocalAdminTestRunner {
 				.gotoCurrencyPage()
 				.goToAddNewCurrecyPage()
 				.addNewCurrency(currency);
-		Assert.assertTrue(currenciesPage.getCurrencyHryvniaText().toLowerCase()
-				.contains(CurrenciesPage.CURRENCY_UAH.toLowerCase()));
-//		presentationSleep(2);
-		//
-		// Return to Previous State
-//		SigninPage signinPage = currenciesPage
-//				.logout();
-//		presentationSleep(2);
-//		//
-//		// Check (optional)
-//		Assert.assertTrue(signinPage.getPanelTitleText().toLowerCase()
-//				.contains(SigninPage.EXPECTED_PANEL_TITLE_MESSAGE.toLowerCase()));
-//		presentationSleep(2);
-
+//		Assert.assertTrue(currenciesPage.getCurrencyHryvniaText().toLowerCase()
+//				.contains(CurrenciesPage.CURRENCY_UAH.toLowerCase()));
 	}
 	
 }

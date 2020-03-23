@@ -8,11 +8,10 @@ import com.softserve.edu.opencart.pages.admin.common.LeftMenuPart;
 
 public class CurrenciesPage extends LeftMenuPart {
 
-    public static final String EXPECTED_TITLE_MESSAGE = "Currencies";
+    public static final String CURRENCY_UAH = "Hryvnia";
     //
-	private WebDriver driver;
 
-    private WebElement title;
+  //  private WebElement currencyHryvnia;
     private WebElement refreshButton;
     private WebElement addNewButton;
     private WebElement deleteButton;
@@ -24,20 +23,19 @@ public class CurrenciesPage extends LeftMenuPart {
 
     private void initElements() {
         // init elements
-        title = driver.findElement(By.cssSelector("div.page-header h1"));
+//        currencyHryvnia = driver.findElement(By.xpath("//td[@class='text-left'][contains(text(),'Hryvnia')]"));
         refreshButton = driver.findElement(By.xpath("//*[@data-original-title='Refresh Currency Values']"));
-        addNewButton = driver.findElement(By.xpath("//*[@data-original-title='Add New']"));
+        addNewButton = driver.findElement(By.cssSelector(".pull-right a.btn.btn-primary"));
         deleteButton = driver.findElement(By.xpath("//*[@data-original-title='Delete']"));
     }
 
-
-    public WebElement getTitle() {
-        return title;
-    }
-
-    public String getTitleText() {
-        return getTitle().getText();
-    }
+//    public WebElement getCurrencyHryvnia() {
+//        return currencyHryvnia;
+//    }
+//
+//    public String getCurrencyHryvniaText() {
+//        return getCurrencyHryvnia().getText();
+//    }
 
     public WebElement getRefreshButton() {
         return refreshButton;
