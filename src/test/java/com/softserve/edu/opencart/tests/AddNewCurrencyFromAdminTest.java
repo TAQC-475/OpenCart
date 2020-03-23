@@ -28,8 +28,8 @@ public class AddNewCurrencyFromAdminTest extends LocalAdminTestRunner {
 				.gotoCurrencyPage()
 				.goToAddNewCurrecyPage()
 				.addNewCurrency(currency);
-//		Assert.assertTrue(currenciesPage.getCurrencyHryvniaText().toLowerCase()
-//				.contains(CurrenciesPage.CURRENCY_UAH.toLowerCase()));
+		Assert.assertTrue(currenciesPage.getCurrencyHryvniaText().toLowerCase()
+				.contains(CurrenciesPage.CURRENCY_UAH.toLowerCase()));
 	}
 	
 }

@@ -21,7 +21,7 @@ public class WaitUtils {
         this.wait = new WebDriverWait(driver, seconds);
     }
 
-    private boolean waitForJSandJQueryToLoad() {
+    public boolean waitForJSandJQueryToLoad() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         // wait for jQuery to load
         ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {

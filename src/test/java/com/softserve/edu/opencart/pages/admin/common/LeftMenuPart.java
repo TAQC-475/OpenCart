@@ -2,6 +2,7 @@ package com.softserve.edu.opencart.pages.admin.common;
 
 import com.softserve.edu.opencart.pages.admin.account.catalog.CategoriesPage;
 import com.softserve.edu.opencart.pages.admin.account.catalog.ProductPage;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -125,8 +126,9 @@ public class LeftMenuPart extends HeaderPart {
 
     //System
     public WebElement getSystem() {
-        wait.until(ExpectedConditions.elementToBeClickable(system));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        new WaitUtils(driver, 5).waitForJSandJQueryToLoad();
+        wait.until(ExpectedConditions.visibilityOf(system));
+ //       driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return system;
     }
 
@@ -140,8 +142,8 @@ public class LeftMenuPart extends HeaderPart {
 //	}
     //Localisation
     public WebElement getLocalisation() {
-        wait.until(ExpectedConditions.elementToBeClickable(localisation));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.visibilityOf(localisation));
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return localisation;
     }
 
@@ -152,7 +154,7 @@ public class LeftMenuPart extends HeaderPart {
     //Currencies
 	public WebElement getCurrencies() {
 		wait.until(ExpectedConditions.elementToBeClickable(currencies));
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return currencies;
 	}
 

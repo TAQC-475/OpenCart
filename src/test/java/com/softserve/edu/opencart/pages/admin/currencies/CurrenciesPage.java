@@ -10,8 +10,7 @@ public class CurrenciesPage extends LeftMenuPart {
 
     public static final String CURRENCY_UAH = "Hryvnia";
     //
-
-  //  private WebElement currencyHryvnia;
+    
     private WebElement refreshButton;
     private WebElement addNewButton;
     private WebElement deleteButton;
@@ -23,19 +22,18 @@ public class CurrenciesPage extends LeftMenuPart {
 
     private void initElements() {
         // init elements
-//        currencyHryvnia = driver.findElement(By.xpath("//td[@class='text-left'][contains(text(),'Hryvnia')]"));
         refreshButton = driver.findElement(By.xpath("//*[@data-original-title='Refresh Currency Values']"));
         addNewButton = driver.findElement(By.cssSelector(".pull-right a.btn.btn-primary"));
         deleteButton = driver.findElement(By.xpath("//*[@data-original-title='Delete']"));
     }
 
-//    public WebElement getCurrencyHryvnia() {
-//        return currencyHryvnia;
-//    }
-//
-//    public String getCurrencyHryvniaText() {
-//        return getCurrencyHryvnia().getText();
-//    }
+    public WebElement getCurrencyHryvnia() {
+        return driver.findElement(By.xpath("//td[@class='text-left'][contains(text(),'Hryvnia')]"));
+    }
+
+    public String getCurrencyHryvniaText() {
+        return getCurrencyHryvnia().getText();
+    }
 
     public WebElement getRefreshButton() {
         return refreshButton;
