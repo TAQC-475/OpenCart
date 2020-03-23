@@ -1,29 +1,43 @@
 package com.softserve.edu.opencart.tests;
 
-import com.softserve.edu.opencart.pages.user.common.DropdownComponent;
-import com.softserve.edu.opencart.pages.user.common.TopPart;
-import com.softserve.edu.opencart.pages.user.search.ProductsSidebarPart;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import com.softserve.edu.opencart.data.MenuItems;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-public class HorizontalVerticalMenuCompareTest extends EpizyUserTestRunner {
+public class HorizontalVerticalMenuCompareTest extends LocalTestRunner {
     @Test
-    public void menuTest() {
+    public void menuTest() throws InterruptedException {
+
+        loadApplication()
+                .getMainMenuComponent()
+                .chooseCategory(MenuItems.TV)
+                .chooseCategory(MenuItems.DESKTOPS)
+                .chooseCategory(MenuItems.LAPTOPS_AND_NOTEBOOKS)
+                .chooseCategory(MenuItems.COMPONENTS)
+                .chooseCategory(MenuItems.TABLETS)
+                .chooseCategory(MenuItems.SOFTWARE)
+                .chooseCategory(MenuItems.PHONES_AND_PDAS)
+                .chooseCategory(MenuItems.CAMERAS)
+                .chooseCategory(MenuItems.MP3_PLAYERS)
+        ;
+        Thread.sleep(1000);
+
+//        loadApplication().clickMenuTopByCategoryPartialName("Laptops");
+//        Thread.sleep(1000);
+//        loadApplication().clickMenuTopByPartialName("Desktops", "Mac (1)");
+//        Thread.sleep(1000);
 
         // reading mainMenuItems
-        List<String> mainMenuItems = loadApplication().getMainMenuComponent().getMenuItemListText();
-        System.out.println(mainMenuItems);
-
-        // reading leftProductSideBarItems
-        List<String> leftMenuItems = loadApplication().gotoProductsSidebarEmptyPage().getProductsSidebarEmptyPage().getLeftMenuItemListText();
-        System.out.println(leftMenuItems);
+//        System.out.println("Top menu");
+//        List<String> mainMenuItems = loadApplication().getMainMenuComponent().getMenuItemListText();
+//        System.out.println(mainMenuItems);
+//
+//        // reading leftProductSideBarItems
+//        System.out.println("Left menu");
+//        List<String> leftMenuItems = loadApplication().gotoProductsSidebarEmptyPage().getProductsSidebarEmptyPage().getLeftMenuItemListText();
+//        System.out.println(leftMenuItems);
 
         // assert
-        Assert.assertEquals(mainMenuItems.toString(), leftMenuItems.toString());
+//        Assert.assertEquals(mainMenuItems.toString(), leftMenuItems.toString());
     }
 
 }

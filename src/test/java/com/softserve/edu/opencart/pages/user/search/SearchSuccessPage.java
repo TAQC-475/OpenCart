@@ -45,11 +45,11 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return new SearchSuccessPage(driver);
     }
 
-    public static boolean isSortByCorrectCriteria(SortByFilter filter){
+    public boolean isSortByCorrectCriteria(SortByFilter filter) {
         return productsDisplay.isSortByCorrectTextSelected(filter);
     }
 
-    public static boolean isShowCorrectQuantity(CountOfProducts count){
+    public boolean isShowCorrectQuantity(CountOfProducts count) {
         return productsDisplay.isShowCorrectQuantitySelected(count);
     }
 
@@ -71,14 +71,18 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return productsDisplay.isListViewDisplayed();
     }
 
-    public SearchSuccessPage clickNeededPage(Pagination page){
+    public boolean isPageActive(String page) {
+        return productsDisplay.isPageActive(page);
+    }
+
+    public SearchSuccessPage clickNeededPage(Pagination page) {
         productsDisplay.clickNeedPage(page);
         return new SearchSuccessPage(driver);
     }
 
     public SearchSuccessAlertPage AddToWishButtonByName(Product product) {
         productsDisplay.clickProductComponentAddToWishButtonByName(product.getName());
-        new WaitUtils(driver,10).waitForAlertVisibility();
+        new WaitUtils(driver, 10).waitForAlertVisibility();
         return new SearchSuccessAlertPage(driver);
     }
 

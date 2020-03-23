@@ -4,13 +4,13 @@ import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.data.UserRepository;
-import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
+import com.softserve.edu.opencart.pages.user.common.shopping_cart.ShoppingCartPage;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
+public class ShoppingCartFunctionalityTest extends LocalTestRunner {
 
     @DataProvider
     public Object[][] dataForSumAndRefreshTest() {
@@ -72,9 +72,9 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(product2)
                 .goToShoppingCartFromAlert()
-                .removeShoppingCartComponentFromContainerByProduct(product1);
+                .removeComponentByProduct(product1);
 
-        Assert.assertEquals(shoppingCartPage.sizeDifferenceBeforeAndAfterRemoving(numberBeforeRemoving), 1);
+        verifyProductRemoved(product1.getName());
     }
 
     @Test(dataProvider = "dataForFunctionalityTest")
@@ -92,15 +92,15 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .setQuantity(product1, product1.getQuantity())
                 .setQuantity(product2, product2.getQuantity());
 
-        SoftAssert softAssert = new SoftAssert();
+//        SoftAssert softAssert = new SoftAssert();
 
-        softAssert.assertTrue(shoppingCartPage.areCorrectAndActualSubTotalPricesEqual());
+        softAssert.assertTrue(shoppingCartPage.areCorrectAndActualSubTotalPricesEqual(), "Expected and Actual Sub Total prices are not equal");
 
         shoppingCartPage = shoppingCartPage.refreshShoppingCartPageByProduct(product2);
-        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
+        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()), "There is no refresh success message");
 
-        shoppingCartPage = shoppingCartPage.removeShoppingCartComponentFromContainerByProduct(product1);
-        softAssert.assertEquals(shoppingCartPage.sizeDifferenceBeforeAndAfterRemoving(sizeBeforeRemoving), 1);
+        shoppingCartPage = shoppingCartPage.removeComponentByProduct(product1);
+        verifyProductRemoved(product1.getName());
 
         softAssert.assertAll();
     }
@@ -109,26 +109,36 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
     public void shippingAndTaxesTest(User testUser, Product product) {
         ShoppingCartPage shoppingCartPage =
                 loadApplication()
-                .gotoLoginPage()
-                .successfulLogin(testUser)
-                .gotoHomePage()
-                .getProductComponentsContainer()
-                .addProductToCartDirectly(product)
-                .goToShoppingCartFromAlert()
-                .goToShippingAndTaxesComponent()
-                .selectCountryByName(testUser.getCountry())
-                .selectRegionStateByName(testUser.getRegionState())
-                .inputPostCode(testUser.getPostCode())
-                .switchToSelectShippingMethodPage()
-                .selectFlatShippingRate()
-                .clickApplyShippingButton();
+                        .gotoLoginPage()
+                        .successfulLogin(testUser)
+                        .gotoHomePage()
+                        .getProductComponentsContainer()
+                        .addProductToCartDirectly(product)
+                        .goToShoppingCartFromAlert()
+                        .goToShippingAndTaxesComponent()
+                        .selectCountryByName(testUser.getCountry())
+                        .selectRegionStateByName(testUser.getRegionState())
+                        .inputPostCode(testUser.getPostCode())
+                        .switchToSelectShippingMethodPage()
+                        .selectFlatShippingRate()
+                        .clickApplyShippingButton();
 
         SoftAssert softAssert = new SoftAssert();
 
-        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod()));
+        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod()), "There is no apply shipping message");
 
-        softAssert.assertTrue(shoppingCartPage.areCorrectAndActualTotalPricesEqual());
+        softAssert.assertTrue(shoppingCartPage.areExpectedAndActualTotalPricesEqual(), "Expected and actual prices are not equal");
 
         softAssert.assertAll();
+    }
+
+    private void verifyProductRemoved(String expectedRemovedItem) {
+        new ShoppingCartPage(getDriver())
+                .getShoppingCartProductsContainerPage()
+                .getShoppingCartProductComponents()
+                .forEach(shoppingCartProductComponent ->
+                        Assert.assertNotEquals(shoppingCartProductComponent.getProductNameText(),
+                                expectedRemovedItem,
+                                String.format("Product %s was not removed", expectedRemovedItem)));
     }
 }

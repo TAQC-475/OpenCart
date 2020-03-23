@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
-public class LoginPageTest extends EpizyUserTestRunner{
+public class LoginPageTest extends LocalTestRunner {
     @DataProvider(name = "emailClientDataProvider")
     public Object[][] getEmailClient(){
         return new Object[][] {{

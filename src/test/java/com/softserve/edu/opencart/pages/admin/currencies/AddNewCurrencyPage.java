@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class AddNewCurrencyPage extends LeftMenuPart {
-    private WebDriver driver;
 
     private WebElement saveButton;
     private WebElement cancelButton;

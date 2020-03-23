@@ -16,7 +16,9 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
 
     private String productsGridView = ".product-grid";
     private String productsListView = ".product-list";
-    private String pagination = "//a[text()='%s']";
+    private String paginationArrow = "//a[text()='%s']";
+    private String paginationPage = "//li[@class='active']/span[text()='%s']";
+
 
     private WebElement listViewButton;
     private WebElement gridViewButton;
@@ -107,11 +109,17 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     //Pagination
 
     public void clickNeedPage(Pagination page) {
-        WebElement result = driver.findElement(By.xpath(String.format(pagination, page)));
+        WebElement result = driver.findElement(By.xpath(String.format(paginationArrow, page)));
         scrollUntilButtonsVisible(result);
         if (!result.isSelected()) {
             result.click();
         }
+    }
+
+    public boolean isPageActive(String page) {
+        WebElement result = driver.findElement(By.xpath(String.format(paginationPage, page)));
+        scrollUntilButtonsVisible(result);
+        return result.isEnabled();
     }
 
     // Functional

@@ -1,6 +1,5 @@
-package com.softserve.edu.opencart.pages.user.common.ShoppingCart;
+package com.softserve.edu.opencart.pages.user.common.shopping_cart;
 
-import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -57,7 +56,7 @@ public class ShoppingCartShippingAndTaxesComponent {
         return this;
     }
 
-    public SelectShippingMethodPage switchToSelectShippingMethodPage() {
+    public SelectShippingMethodModalPage switchToSelectShippingMethodPage() {
         String shoppingCartWindow = driver.getWindowHandle();
         driver.findElement(By.xpath("//button[@id = 'button-quote']")).click();
         for (String windowHandle : driver.getWindowHandles()) {
@@ -65,7 +64,7 @@ public class ShoppingCartShippingAndTaxesComponent {
                 driver.switchTo().window(windowHandle);
             }
         }
-        return new SelectShippingMethodPage(driver);
+        return new SelectShippingMethodModalPage(driver);
     }
 
     public ShoppingCartPage goToShoppingCartFromShippingAndTaxes(){

@@ -19,7 +19,7 @@ import com.softserve.edu.opencart.pages.user.account.UnsuccessfulLoginPage;
 import com.softserve.edu.opencart.tools.DataBaseUtils;
 import com.softserve.edu.opencart.tools.ListUtils;
 
-public class LoginTest extends EpizyUserTestRunner {
+public class LoginTest extends LocalTestRunner {
 
 	// some staff here
 	@DataProvider//(parallel = true)
