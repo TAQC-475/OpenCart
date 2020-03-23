@@ -22,7 +22,7 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
 
     private void initElements() {
         // init elements
-        menuItemList = driver.findElements(By.xpath("//div[@class='list-group']/a"));
+        menuItemList = driver.findElements(By.xpath("//div[@class='list-group']"));
 
     }
 
@@ -32,10 +32,10 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
     }
 
     // check if the page is full or not
-    public boolean checkFullEmptyPage(){
+    public boolean checkFullEmptyPage() {
         try {
             return driver.findElement(By.cssSelector("#content h3")).isDisplayed();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
 
@@ -50,7 +50,6 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
         while (m.find()) {
             strResult = String.valueOf(m.group());
         }
-
         return strResult;
     }
 

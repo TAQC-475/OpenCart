@@ -11,13 +11,15 @@ import java.util.List;
 
 public class MainMenuComponent {
 
-    protected final String LIST_SUB_CATEGOIES_CSSSELECTOR = "div.dropdown-inner ul.list-unstyled li";
+    protected final String LIST_SUB_CATEGORIES_CSSSELECTOR = "div.dropdown-inner ul.list-unstyled li";
+    protected final String LIST_SUB_CATEGORIES_XPATH = "//div[@class='dropdown-inner']/ul[@class='list-unstyled']/li/a";
     protected final String DROPDOWN_TOP_MENU_CSSSELECTOR = "#menu .dropdown-menu";
     protected final String DROPDOWN_SHOW_ALL_XPATH = "//li[@class='dropdown open']//a[@class='see-all']";
     protected final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
 
     private MenuItems categoryItem;
     private List<WebElement> menuItemList;
+    private List<WebElement> subMenuItemList;
 
     private WebDriver driver;
 
@@ -43,6 +45,14 @@ public class MainMenuComponent {
 
     public void setDropdownComponent(DropdownComponent dropdownComponent) {
         this.dropdownComponent = dropdownComponent;
+    }
+
+    public List<WebElement> getSubMenuItemList() {
+        return subMenuItemList;
+    }
+
+    public void setSubMenuItemList(List<WebElement> subMenuItemList) {
+        this.subMenuItemList = subMenuItemList;
     }
 
     private void createDropdownComponent(By searchLocator) {
@@ -97,8 +107,14 @@ public class MainMenuComponent {
         try {
             if (getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
                 getDropdownComponent().clickDropdownOptionByPartialName(optionName);
-                dropdownComponent = null;
 
+//                System.out.print("try to find sub menu item : ");
+//                WebElement el = (searchSubMenuItems(By.xpath("#menu .dropdown-menu a")));
+//                setSubMenuItemList(searchSubMenuItems(By.xpath(LIST_SUB_CATEGORIES_XPATH)));
+//                System.out.println(subMenuItemList.toString());
+
+//                System.out.println(getListSubCategoryNames().toString());
+                dropdownComponent = null;
             }
         } catch (Exception e) {
             throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName, getDropdownComponent().getListOptionsText().toString()));
@@ -121,6 +137,17 @@ public class MainMenuComponent {
         }
 
         return new MainMenuComponent(driver);
+    }
+
+    public WebElement searchSubMenuItems(By searchLocator){
+        WebElement element = null;
+        try {
+            element = driver.findElement(searchLocator);
+        }catch (Exception e){
+            System.out.println("error");
+        }
+        System.out.println(element.getText());
+        return element;
     }
 
     // Functional
