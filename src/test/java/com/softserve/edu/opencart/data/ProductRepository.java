@@ -72,6 +72,10 @@ public final class ProductRepository {
         return new Product("%");
     }
 
+    public static Product getProductWithProcessor() {
+        return new Product("Processor");
+    }
+
     public static Product getInvalid() {
         return new Product("Bok", "Intel", "100");
     }

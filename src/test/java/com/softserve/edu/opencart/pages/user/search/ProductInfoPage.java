@@ -18,6 +18,7 @@ public class ProductInfoPage extends BreadCrumbPart {
 	private WebElement productPrice;
 	private WebElement productQuantity;
 	private WebElement addToCartButton;
+	private WebElement productDescription;
 	private ProductInfoOptionsComponent productInfoOptions;
 
 	public ProductInfoPage(WebDriver driver) {
@@ -31,6 +32,7 @@ public class ProductInfoPage extends BreadCrumbPart {
 		productPrice = driver.findElement(By.cssSelector(".col-sm-4 h2"));
 		productQuantity = driver.findElement(By.cssSelector("#input-quantity"));
 		addToCartButton = driver.findElement(By.cssSelector("#button-cart"));
+		productDescription=driver.findElement(By.cssSelector(".tab-content .tab-pane.active"));
 		alertPageWait = new WaitUtils(driver, 10);
 	}
 
@@ -59,6 +61,8 @@ public class ProductInfoPage extends BreadCrumbPart {
 	public WebElement getAddToCartButton() {
 		return addToCartButton;
 	}
+
+	public WebElement getProductDescription(){return productDescription;}
 
 	public ProductInfoOptionsComponent getProductInfoOptions() {
 		if (productInfoOptions == null) {
@@ -93,7 +97,10 @@ public class ProductInfoPage extends BreadCrumbPart {
 	public void setProductOptions(ProductOptionsSet optionsSet){
 		getProductInfoOptions().setProductOptionsFull(optionsSet);
 	}
-
+	public String getDescriptionText()
+	{
+		return getProductDescription().getText();
+	}
 	// Business Logic
 	public AddProductAlertPage addProductDefaultQuantity(){
 		clickAddToCartButton();

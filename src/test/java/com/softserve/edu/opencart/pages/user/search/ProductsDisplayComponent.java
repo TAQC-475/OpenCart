@@ -29,10 +29,19 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     }
 
     private void initElements() {
-        listViewButton = driver.findElement(By.xpath("//*[@id='list-view']"));
-        gridViewButton = driver.findElement(By.xpath("//*[@id='grid-view']"));
+        if(driver.findElements(By.xpath("//*[@id='list-view']")).size() > 0) {
+            listViewButton = driver.findElement(By.xpath("//*[@id='list-view']"));
+        }
+
+        if(driver.findElements(By.xpath("//*[@id='grid-view']")).size() > 0) {
+            gridViewButton = driver.findElement(By.xpath("//*[@id='grid-view']"));
+        }
+        if(driver.findElements(By.id("input-sort")).size()>0) {
         sortByDropDownMenu = new Select(driver.findElement(By.id("input-sort")));
+        }
+        if(driver.findElements(By.id("input-limit")).size()>0) {
         showDropDownMenu = new Select(driver.findElement(By.id("input-limit")));
+        }
     }
 
     // Page Object

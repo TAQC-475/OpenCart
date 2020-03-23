@@ -25,8 +25,8 @@ public abstract class SearchCriteriaPart extends BreadCrumbPart {
 		criteriaSearchField = driver.findElement(By.id("input-search"));
 		criteriaCategory = new Select(driver.findElement(By.name("category_id")));
 		criteriaSubCategory = driver.findElement(By.name("sub_category"));
-		criteriaDescription = driver.findElement(By.id("description"));
-		criteriaSearchButton = driver.findElement(By.id("description"));
+		criteriaDescription = driver.findElement(By.cssSelector(".checkbox-inline #description"));
+		criteriaSearchButton = driver.findElement(By.cssSelector(".btn.btn-primary"));
 	}
 
 	// Page Object
@@ -104,7 +104,7 @@ public abstract class SearchCriteriaPart extends BreadCrumbPart {
 		return criteriaSearchButton;
 	}
 
-	public void ClickCriteriaSearchButton() {
+	public void clickCriteriaSearchButton() {
 		getCriteriaSearchButton().click();
 	}
 
