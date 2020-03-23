@@ -28,8 +28,8 @@ public class AdminMenuTest extends LocalAdminTestRunner {
 				.gotoCurrencyPage()
 				.goToAddNewCurrecyPage()
 				.addNewCurrency(currency);
-		Assert.assertTrue(currenciesPage.getTitleText().toLowerCase()
-				.contains(CurrenciesPage.EXPECTED_TITLE_MESSAGE.toLowerCase()));
+		Assert.assertTrue(currenciesPage.getCurrencyHryvniaText().toLowerCase()
+				.contains(CurrenciesPage.CURRENCY_UAH.toLowerCase()));
 //		presentationSleep(2);
 		//
 		// Return to Previous State
