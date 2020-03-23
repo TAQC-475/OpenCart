@@ -30,7 +30,9 @@ public class WishListTest extends LocalTestRunner {
     }
   }
 
-
+  /**
+   * This method check if button 'Remove from wish list' works.
+   */
   @Test(priority = 1, dataProvider = "iPodClassic", dataProviderClass = WishListDataProvider.class)
   public void removeFromWishListTest(Product iPodClassic) {
 
@@ -43,7 +45,9 @@ public class WishListTest extends LocalTestRunner {
     Assert.assertTrue(actual.contains(WishListMessagePage.PRODUCT_REMOVED));
   }
 
-
+  /**
+   * This method check if Wish List is empty after removed all products.
+   */
   @Test(priority = 2, dataProvider = "productsList", dataProviderClass = WishListDataProvider.class)
   public void emptyWishListTest(List<Product> products) {
     String actual = loadApplication()
@@ -56,6 +60,9 @@ public class WishListTest extends LocalTestRunner {
 
   }
 
+  /**
+   * This method check if button 'Add to shopping cart' works.
+   */
   @Test(priority = 3, dataProvider = "macBook", dataProviderClass = WishListDataProvider.class)
   public void addToCartFromWishListTest(Product macBook) {
 
@@ -72,7 +79,11 @@ public class WishListTest extends LocalTestRunner {
 
   }
 
-
+  /**
+   * This method verify whether the number of added elements
+   * are the same to the number of items that are displayed on
+   * the page.
+   */
   @Test(priority = 4, dataProvider = "productsList", dataProviderClass = WishListDataProvider.class)
   public void numberEqualityTest(List<Product> products) {
 

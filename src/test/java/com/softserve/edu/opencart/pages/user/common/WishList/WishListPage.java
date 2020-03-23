@@ -24,7 +24,7 @@ public class WishListPage extends AccountSidebarLoggedPart {
   }
 
   /**
-   * This method initialization all elements on page.
+   * This method initializations all elements on page.
    */
   private void initElements() {
     continueButton = driver.findElement(By.xpath("//a[text()='Continue']"));

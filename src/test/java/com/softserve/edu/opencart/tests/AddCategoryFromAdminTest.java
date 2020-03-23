@@ -17,7 +17,7 @@ public class AddCategoryFromAdminTest extends LocalAdminTestRunner{
     @Test(dataProvider = "correctUsers")
     public void addNewCategory(IUser validAdmin) throws InterruptedException {
 
-        loadSigninPage()
+        loadSignInPage()
                 .successfulLogin(validAdmin)
                 .gotoCategoriesPage()
                 .gotoAddCategoryPage()
