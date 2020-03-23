@@ -21,7 +21,7 @@ public class AddCategoryFromAdminTest extends LocalAdminTestRunner{
                 .successfulLogin(validAdmin)
                 .gotoCategoriesPage()
                 .gotoAddCategoryPage()
-                .typeName("TV")
+                .typeName("Routers")
                 .typeTitle("test")
                 .clickDataButton()
                 .typeParent("test")
