@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class AddProductToCartTest extends EpizyUserTestRunner{
+public class AddProductToCartTest extends LocalTestRunner {
     SoftAssert softAssert = new SoftAssert();
     //Products
     Product iphone = ProductRepository.getIPhone();

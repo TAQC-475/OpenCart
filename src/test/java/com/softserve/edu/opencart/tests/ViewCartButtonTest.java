@@ -8,7 +8,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class ViewCartButtonTest extends EpizyUserTestRunner {
+public class ViewCartButtonTest extends LocalTestRunner {
     SoftAssert softAssert = new SoftAssert();
     //Products
     Product mac = ProductRepository.getMacBook();

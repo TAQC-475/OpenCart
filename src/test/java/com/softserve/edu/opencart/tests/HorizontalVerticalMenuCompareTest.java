@@ -1,10 +1,9 @@
 package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.MenuItems;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class HorizontalVerticalMenuCompareTest extends EpizyUserTestRunner {
+public class HorizontalVerticalMenuCompareTest extends LocalTestRunner {
     @Test
     public void menuTest() throws InterruptedException {
 

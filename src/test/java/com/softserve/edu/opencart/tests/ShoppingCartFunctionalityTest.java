@@ -10,7 +10,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
+public class ShoppingCartFunctionalityTest extends LocalTestRunner {
 
     @DataProvider
     public Object[][] dataForSumAndRefreshTest() {

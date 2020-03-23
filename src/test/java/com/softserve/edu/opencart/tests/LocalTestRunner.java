@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public abstract class EpizyUserTestRunner {
+public abstract class LocalTestRunner {
     private String url = "http://127.0.0.1/opencart/";
     private String serverUrlLogout = "http://localhost/opencart/index.php?route=account/logout";
     private final Long ONE_SECOND_DELAY = 1000L;

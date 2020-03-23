@@ -5,14 +5,14 @@ import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListMessagePage;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
-import com.softserve.edu.opencart.tests.EpizyUserTestRunner;
+import com.softserve.edu.opencart.tests.LocalTestRunner;
 import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class WishListTest extends EpizyUserTestRunner {
+public class WishListTest extends LocalTestRunner {
 
   @BeforeMethod
   public void logIn() {
