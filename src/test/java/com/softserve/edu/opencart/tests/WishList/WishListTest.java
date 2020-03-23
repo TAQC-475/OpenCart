@@ -1,45 +1,26 @@
-package com.softserve.edu.opencart.tests;
+package com.softserve.edu.opencart.tests.WishList;
 
-import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.ProductRepository;
-import com.softserve.edu.opencart.data.UserRepository;
+import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListMessagePage;
-import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
-import java.util.ArrayList;
+import com.softserve.edu.opencart.tests.EpizyUserTestRunner;
+import com.softserve.edu.opencart.tests.WishList.WishListTest;
 import java.util.List;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class WishListTest extends EpizyUserTestRunner {
-//  @BeforeClass
-//  private void logIn(){
-//    loadApplication()
-//        .gotoLoginPage()
-//        .successfulLogin(UserRepository.get().getMrAndersonUser());
-//  }
 
-  @DataProvider(name = "data")
-  private Object[] data() {
-    List<Product> products = new ArrayList<>();
-    products.add(ProductRepository.getIPodClassic());
-    products.add(ProductRepository.getMacBook());
-    products.add(ProductRepository.getIPhone());
-    return new Object[]{products};
-  }
 
-  @Test(priority = 1)
-  public void removeFromWishListTest() {
+  @Test(priority = 1,dataProvider = "validUser",dataProviderClass = WishListDataProvider.class)
+  public void removeFromWishListTest(User validUser) {
 
     String actual =
         loadApplication()
             .gotoLoginPage()
-            .successfulLogin(UserRepository.get().getMrAndersonUser())
+            .successfulLogin(validUser)
             .successfulSearch(ProductRepository.getIPodClassic())
             .AddToWishButtonByName(ProductRepository.getIPodClassic())
             .gotoWishListPage()
@@ -49,7 +30,7 @@ public class WishListTest extends EpizyUserTestRunner {
   }
 
 
-  @Test(priority = 2, dataProvider = "data")
+  @Test(priority = 2, dataProvider = "data",dataProviderClass = WishListDataProvider.class)
   public void emptyWishListTest(List<Product> products) {
     String actual = loadApplication()
         .searchAndAddProductsToWishList(products)
@@ -64,8 +45,7 @@ public class WishListTest extends EpizyUserTestRunner {
   @Test(priority = 3)
   public void addToCartFromWishListTest() {
     String actual = loadApplication()
-//          .gotoLoginPage()
-//          .successfulLogin(UserRepository.get().getMrAndersonUser())
+
         .gotoHomePage()
         .addProductToWishList(ProductRepository.getMacBook())
         .gotoWishListPage()
@@ -75,14 +55,14 @@ public class WishListTest extends EpizyUserTestRunner {
     //check message
     Assert.assertTrue(actual.contains
         (String.format(WishListMessagePage.PRODUCT_ADDED_TO_CART,
-            ProductRepository.getMacBook().getName())));
+            ProductRepository.getProductName(ProductRepository.getMacBook()))));
 
   }
 
   //
 
 
-  @Test(priority = 4, dataProvider = "data")
+  @Test(priority = 4, dataProvider = "data",dataProviderClass = WishListDataProvider.class)
   public void numberEqualityTest(List<Product> products) {
     int actual = loadApplication()
         .searchAndAddProductsToWishList(products)
