@@ -1,12 +1,11 @@
-package com.softserve.edu.opencart.pages.user.common.ShoppingCart;
+package com.softserve.edu.opencart.pages.user.common.shopping_cart;
 
-import com.softserve.edu.opencart.pages.user.ShoppingCartPage;
 import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class SelectShippingMethodPage {
+public class SelectShippingMethodModalPage {
     private WebElement flatShippingRate;
     private WebElement applyShippingButton;
     private WebElement cancelButton;
@@ -19,7 +18,7 @@ public class SelectShippingMethodPage {
         cancelButton = driver.findElement(By.xpath("//button[text() =  'Cancel']"));
     }
 
-    public SelectShippingMethodPage(WebDriver driver) {
+    public SelectShippingMethodModalPage(WebDriver driver) {
         this.driver = driver;
         initElements();
     }
@@ -36,7 +35,7 @@ public class SelectShippingMethodPage {
         return cancelButton;
     }
 
-    public SelectShippingMethodPage selectFlatShippingRate(){
+    public SelectShippingMethodModalPage selectFlatShippingRate(){
         driver.findElement(By.xpath("//input[@value =  'flat.flat']")).click();
         return this;
     }
@@ -53,14 +52,4 @@ public class SelectShippingMethodPage {
         return new ShoppingCartPage(driver);
     }
 
-    public ShoppingCartShippingAndTaxesComponent clickCancelButton(){
-        String selectShippingMethodPageWindow = driver.getWindowHandle();
-        driver.findElement(By.xpath("//button[text() =  'Cancel']")).click();
-        for(String windowHandle: driver.getWindowHandles()){
-            if(!windowHandle.equals(selectShippingMethodPageWindow)){
-                driver.switchTo().window(windowHandle);
-            }
-        }
-        return new ShoppingCartShippingAndTaxesComponent(driver);
-    }
 }

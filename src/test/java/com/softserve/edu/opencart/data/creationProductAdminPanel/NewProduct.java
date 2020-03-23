@@ -5,11 +5,19 @@ public class NewProduct {
     private String productName;
     private String metaTagTitle;
     private String model;
+    private String category;
 
     public NewProduct(String productName, String metaTagTitle, String model) {
         this.productName = productName;
         this.metaTagTitle = metaTagTitle;
         this.model = model;
+    }
+
+    public NewProduct(String productName, String metaTagTitle, String model, String category) {
+        this.productName = productName;
+        this.metaTagTitle = metaTagTitle;
+        this.model = model;
+        this.category = category;
     }
 
     //setters
@@ -25,6 +33,10 @@ public class NewProduct {
         this.model = model;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     //getters
 
     public String getProductName() {
@@ -37,5 +49,9 @@ public class NewProduct {
 
     public String getModel() {
         return model;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }
