@@ -42,6 +42,8 @@ public class LoginPageTest extends LocalTestRunner {
                 .resetPassword(user);
 
         assertEquals(loginPage.getAlertText(), loginPage.EXPECTED_UPDATE_MESSAGE);
+        loginPage.successfulLogin(user);
+        assertTrue(ApplicationStatus.get().isLogged());
     }
 
     @Test(priority = 1, dataProvider = "validUserDataProvider")
