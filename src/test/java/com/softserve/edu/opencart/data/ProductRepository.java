@@ -76,4 +76,8 @@ public final class ProductRepository {
         return new Product("Bok", "Intel", "100");
     }
 
+    public static String getProductName(Product product){
+        return product.getName();
+    }
+
 }
