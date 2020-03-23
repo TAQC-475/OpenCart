@@ -4,6 +4,7 @@ import com.softserve.edu.opencart.data.*;
 import com.softserve.edu.opencart.pages.user.account.MyAccountPage;
 import com.softserve.edu.opencart.pages.user.account.SuccessfulUpdatePasswordLoginPage;
 import com.softserve.edu.opencart.pages.user.account.UnsuccessfulLoginPage;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
@@ -64,6 +65,21 @@ public class LoginPageTest extends LocalTestRunner {
         assertFalse(ApplicationStatus.get().isLogged());
         assertTrue(loginPage.getAlertWarningText()
                 .contains(UnsuccessfulLoginPage.EXPECTED_LOGIN_MESSAGE));
+    }
+
+    @Test(priority = 4, dataProvider = "invalidUserDataProvider")
+    public void blockLoginTest(IUser invalidUser){
+        UnsuccessfulLoginPage unsuccessfulLoginPage = loadApplication()
+                .gotoLoginPage()
+                .unsuccessfulLoginPage(invalidUser)
+                .unsuccessfulLoginPage(invalidUser)
+                .unsuccessfulLoginPage(invalidUser)
+                .unsuccessfulLoginPage(invalidUser)
+                .unsuccessfulLoginPage(invalidUser)
+                .unsuccessfulLoginPage(invalidUser);
+
+        Assert.assertTrue(unsuccessfulLoginPage.getAlertWarningText()
+                .contains(UnsuccessfulLoginPage.EXPECTED_LOCK_MESSAGE));
     }
 
 
