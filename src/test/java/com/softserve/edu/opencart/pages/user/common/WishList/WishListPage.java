@@ -9,6 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * Wish list page.
+ */
 public class WishListPage extends AccountSidebarLoggedPart {
 
   private WebElement continueButton;
@@ -20,50 +23,88 @@ public class WishListPage extends AccountSidebarLoggedPart {
     initElements();
   }
 
+  /**
+   * This method initialization all elements on page.
+   */
   private void initElements() {
     continueButton = driver.findElement(By.xpath("//a[text()='Continue']"));
     wishListProductsContainerComponent = new WishListProductsContainerComponent(driver);
   }
 
+  // Page Object
+
+  /**
+   * This method gets continue button.
+   */
   public WebElement getContinueButton() {
     return continueButton;
   }
 
+  /**
+   * This method clicks on continue button.
+   */
+  public void clickContinueButton() {
+    getContinueButton().click();
+  }
 
+  /**
+   * This method gets Wish List Table Container Component.
+   */
   public WishListProductsContainerComponent getWishListProductsContainerComponent() {
     return wishListProductsContainerComponent;
   }
 
+  //Functional
+
+  /**
+   * This method gets product name.
+   */
   public String getProductName(Product product) {
     return wishListProductsContainerComponent.getWishListComponentByName(product).getNameText();
   }
 
+  /**
+   * This method gets product price.
+   */
   public void getProductPrice(Product product) {
     wishListProductsContainerComponent.getWishListComponentPriceByName(product);
   }
 
+  /**
+   * This method gets product module.
+   */
   public void getProductModel(Product product) {
     wishListProductsContainerComponent.getWishListComponentModelByName(product);
   }
 
+  /**
+   * This method gets products amount.
+   */
   public int getAmountComponentsInWishList(){
     return wishListProductsContainerComponent.getWishListComponentsCount();
   }
-  // Page Object
 
-  // Functional
+  //BL
 
+  /**
+   * This method is written to go to MyAccountPage.
+   */
   public MyAccountPage goToMyAccountPage() {
-    getContinueButton().click();
+    clickContinueButton();
     return new MyAccountPage(driver);
   }
 
-
+  /**
+   * This method deletes product from wish list.
+   */
   public WishListMessagePage deleteProductFromWishList(Product product) {
     wishListProductsContainerComponent.clickWishListComponentRemoveButtonByName(product);
     return new WishListMessagePage(driver);
   }
 
+  /**
+   * This method add list of products to wish list.
+   */
   public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
     for (Product product: products){
       successfulSearch(product)
@@ -72,18 +113,25 @@ public class WishListPage extends AccountSidebarLoggedPart {
     return new SearchSuccessAlertPage(driver);
   }
 
-
-
+  /**
+   * This method add product to shopping cart .
+   */
   public WishListMessagePage addProductToCart(Product product) {
     wishListProductsContainerComponent
         .clickWishListComponentAddToCartButtonByName(product);
     return new WishListMessagePage(driver);
   }
 
+  /**
+   * This method is written to go to WishListMessagePage.
+   */
   public WishListMessagePage goToWishListMessagePage() {
     return new WishListMessagePage(driver);
   }
 
+  /**
+   * This method clears wish list.
+   */
   public WishListEmptyPage removeAllProductFromWishList(){
     List<WebElement> closeButtons = driver.findElements(By.cssSelector(".text-right .fa.fa-times"));
     while (closeButtons.size() > 0) {
@@ -98,6 +146,6 @@ public class WishListPage extends AccountSidebarLoggedPart {
 
 
 
-// Business Logic
+
 
 
