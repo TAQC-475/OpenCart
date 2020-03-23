@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.tests;
 
 
+import com.softserve.edu.opencart.data.ApplicationStatus;
 import com.softserve.edu.opencart.pages.user.HomePage;
 import com.softserve.edu.opencart.tools.ScreenShotHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -16,7 +17,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public abstract class LocalTestRunner {
-    private String url = "http://192.168.132.130/opencart/upload/";
+    private String url = "http://localhost/opencart/";
     private String serverUrlLogout = "http://localhost/opencart/index.php?route=account/logout";
     private final Long ONE_SECOND_DELAY = 1000L;
     private Map<Long, WebDriver> drivers;
@@ -74,6 +75,7 @@ public abstract class LocalTestRunner {
             new ScreenShotHelper(getDriver()).keepPageSourceStatus();
             // previous state, logout, etc.
         }
+        ApplicationStatus.get().setLogged(false);
         getDriver().get(serverUrlLogout);
     }
 

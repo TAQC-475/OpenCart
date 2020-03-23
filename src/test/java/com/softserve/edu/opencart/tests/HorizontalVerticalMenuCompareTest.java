@@ -9,7 +9,7 @@ public class HorizontalVerticalMenuCompareTest extends LocalTestRunner {
 
         loadApplication()
                 .getMainMenuComponent()
-                .chooseCategory(MenuItems.TV)
+                .chooseCategory(MenuItems.ROUTERS)
                 .chooseCategory(MenuItems.DESKTOPS)
                 .chooseCategory(MenuItems.LAPTOPS_AND_NOTEBOOKS)
                 .chooseCategory(MenuItems.COMPONENTS)

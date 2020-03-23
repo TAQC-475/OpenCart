@@ -5,6 +5,7 @@ public class NewProduct {
     private String productName;
     private String metaTagTitle;
     private String model;
+    private String price;
     private String category;
 
     public NewProduct(String productName, String metaTagTitle, String model) {
@@ -13,10 +14,11 @@ public class NewProduct {
         this.model = model;
     }
 
-    public NewProduct(String productName, String metaTagTitle, String model, String category) {
+    public NewProduct(String productName, String metaTagTitle, String model, String price, String category) {
         this.productName = productName;
         this.metaTagTitle = metaTagTitle;
         this.model = model;
+        this.price = price;
         this.category = category;
     }
 
@@ -32,6 +34,8 @@ public class NewProduct {
     public void setModel(String model) {
         this.model = model;
     }
+
+    public void setPrice(String price) { this.price = price; }
 
     public void setCategory(String category) {
         this.category = category;
@@ -51,7 +55,7 @@ public class NewProduct {
         return model;
     }
 
-    public String getCategory() {
-        return category;
-    }
+    public String getPrice() { return price; }
+
+    public String getCategory() { return category; }
 }

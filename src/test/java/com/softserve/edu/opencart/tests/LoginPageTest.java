@@ -3,6 +3,8 @@ package com.softserve.edu.opencart.tests;
 import com.softserve.edu.opencart.data.*;
 import com.softserve.edu.opencart.pages.user.account.MyAccountPage;
 import com.softserve.edu.opencart.pages.user.account.SuccessfulUpdatePasswordLoginPage;
+import com.softserve.edu.opencart.pages.user.account.UnsuccessfulLoginPage;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
@@ -22,6 +24,13 @@ public class LoginPageTest extends LocalTestRunner {
         return new Object[]{UserRepository.get().getDefault()};
     }
 
+    @DataProvider(name = "invalidUserDataProvider")
+    public Object[][] invalidUsers() {
+        return new Object[][] {
+                { UserRepository.get().getInvalid() },
+        };
+    }
+
     @Test(priority = 3, dataProvider = "emailClientDataProvider")
     public void resetPasswordTest(EmailUser emailUser, ResetEmailEntity resetEmail, IUser user){
         SuccessfulUpdatePasswordLoginPage loginPage = loadApplication()
@@ -34,6 +43,8 @@ public class LoginPageTest extends LocalTestRunner {
                 .resetPassword(user);
 
         assertEquals(loginPage.getAlertText(), loginPage.EXPECTED_UPDATE_MESSAGE);
+        loginPage.successfulLogin(user);
+        assertTrue(ApplicationStatus.get().isLogged());
     }
 
     @Test(priority = 1, dataProvider = "validUserDataProvider")
@@ -44,6 +55,34 @@ public class LoginPageTest extends LocalTestRunner {
 
         assertTrue(ApplicationStatus.get().isLogged());
     }
+
+    @Test(priority = 2, dataProvider = "invalidUserDataProvider")
+    public void unsuccessfulLoginTest(IUser invalidUser){
+        UnsuccessfulLoginPage loginPage = loadApplication()
+                .gotoLoginPage()
+                .unsuccessfulLoginPage(invalidUser);
+
+        assertFalse(ApplicationStatus.get().isLogged());
+        assertTrue(loginPage.getAlertWarningText()
+                .contains(UnsuccessfulLoginPage.EXPECTED_LOGIN_MESSAGE));
+    }
+
+    @Test(priority = 4, dataProvider = "invalidUserDataProvider")
+    public void blockLoginTest(IUser invalidUser){
+        UnsuccessfulLoginPage unsuccessfulLoginPage = loadApplication()
+                .gotoLoginPage()
+                .unsuccessfulLoginPage(invalidUser)
+                .unsuccessfulLoginPage(invalidUser)
+                .unsuccessfulLoginPage(invalidUser)
+                .unsuccessfulLoginPage(invalidUser)
+                .unsuccessfulLoginPage(invalidUser)
+                .unsuccessfulLoginPage(invalidUser);
+
+        Assert.assertTrue(unsuccessfulLoginPage.getAlertWarningText()
+                .contains(UnsuccessfulLoginPage.EXPECTED_LOCK_MESSAGE));
+    }
+
+
 
 
 }

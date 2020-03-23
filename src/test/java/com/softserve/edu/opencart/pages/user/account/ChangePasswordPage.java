@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ChangePasswordPage extends AccountSidebarLoggedPart {
+public class ChangePasswordPage extends AccountSidebarGuestPart {
 
 	private WebElement password;
 	private WebElement confirmPassword;

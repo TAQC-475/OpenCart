@@ -1,6 +1,5 @@
 package com.softserve.edu.opencart.pages.user.common.WishList;
 
-import com.softserve.edu.opencart.pages.user.search.ProductInfoPage;
 import com.softserve.edu.opencart.tools.RegularExpression;
 import java.math.BigDecimal;
 import org.openqa.selenium.By;
@@ -72,7 +71,7 @@ public final class WishListProductComponent {
   }
 
   public BigDecimal getPriceText(){
-    return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(getPrice().getText());
+    return new RegularExpression().getBigDecimalFromTheShoppingCartField(getPrice().getText());
   }
 
 
