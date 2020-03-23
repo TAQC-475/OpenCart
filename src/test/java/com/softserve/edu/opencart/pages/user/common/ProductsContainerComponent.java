@@ -118,10 +118,10 @@ public class ProductsContainerComponent {
         return new ProductInfoPage(driver);
     }
 
-    public ProductComponent getFirstProduct()
-    {
-        WebElement firstProduct = driver.findElement(By.cssSelector("#content .product-layout:nth-child(1)"));
-        return new ProductComponent(firstProduct);
-    }
+//    public ProductComponent getFirstProduct()
+//    {
+//        WebElement firstProduct = driver.findElement(By.cssSelector("#content .product-layout:nth-child(1)"));
+//        return new ProductComponent(firstProduct);
+//    }
 
 }

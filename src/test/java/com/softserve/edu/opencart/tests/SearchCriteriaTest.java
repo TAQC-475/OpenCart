@@ -6,6 +6,7 @@ import com.softserve.edu.opencart.pages.user.common.ProductComponent;
 import com.softserve.edu.opencart.pages.user.search.ProductInfoPage;
 import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -14,31 +15,41 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchCriteriaTest extends SearchTestRunner{
+public class SearchCriteriaTest extends LocalTestRunner {
 
-    public SearchCriteriaTest() {
-        this.setSearchProduct(ProductRepository.getProductWithProcessor());
+
+    @Test(description = "Check if search fields have the same input")
+    public void checkSearchFieldsInputValues() {
+        Product expectedProduct = new Product("Samsung");
+
+        SearchSuccessPage successPage = this.loadApplication().successfulSearch(expectedProduct);
+        String actualProductName = successPage.getCriteriaSearchFieldText();
+
+        Assert.assertEquals(actualProductName, expectedProduct.getName());
     }
 
-@Test(description = "Search in product descriptions")
-public void checkingSearchingInDescription()
-{
-    SearchSuccessPage successPage = this.successPage();
-    getDriver().findElement(By.cssSelector(".checkbox-inline #description")).click();
-//    successPage.clickCriteriaDescription();
-//    successPage.clickCriteriaSearchButton();
+    @Test(description = "Check if search button works correctly")
+    public void checkSearchButton() {
+        String expectedProductName = "Mac";
+        SearchSuccessPage successPage = this.loadApplication().successfulSearch(ProductRepository.getAllProducts());
+        successPage.clearCriteriaSearchField();
+        successPage.setCriteriaSearchField(expectedProductName);
+        successPage.clickCriteriaSearchButton();
+        SearchSuccessPage updatedPage = new SearchSuccessPage(getDriver());
+        String actualProductName = updatedPage.getCriteriaSearchFieldText();
 
-//    ProductsDisplayComponent displayProduct = successPage.getProductsDisplay();
-//    List<ProductComponent> productComponents = displayProduct.getProductComponents();
+        Assert.assertEquals(actualProductName, expectedProductName);
+    }
 
-//    ArrayList<ProductComponent> productComponents = new ArrayList<>();
-//    for (WebElement current : getDriver().findElements(By.cssSelector(".product-layout"))) {
-//        productComponents.add(new ProductComponent(current));
-//    }
-//
-//    String productName = productComponents.get(0).getNameText();
-//
-//    ProductInfoPage productPage = successPage.gotoProductInfo(new Product(productName));
-//    Assert.assertTrue(productPage.getDescriptionText().contains(this.getSearchProduct().getName()));
-}
+    @Test(description = "Search in product descriptions")
+    public void checkingSearchingInDescription()
+    {
+        Product product = new Product("touch");
+        SearchSuccessPage successPage = this.loadApplication().successfulSearch(product);
+        successPage.clickCriteriaDescription()
+                    .clickCriteriaSearchButton();
+        successPage.getFirstProduct().clickName();
+        ProductInfoPage productPage = new ProductInfoPage(getDriver());
+        Assert.assertTrue(productPage.getDescriptionText().contains(product.getName()));
+    }
 }
