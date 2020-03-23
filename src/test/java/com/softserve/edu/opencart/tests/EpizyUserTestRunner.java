@@ -2,80 +2,57 @@ package com.softserve.edu.opencart.tests;
 
 
 import com.softserve.edu.opencart.pages.user.HomePage;
+import com.softserve.edu.opencart.tools.ScreenShotHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public abstract class EpizyUserTestRunner {
+    private String url = "http://127.0.0.1/opencart/";
+    private String serverUrlLogout = "http://localhost/opencart/index.php?route=account/logout";
     private final Long ONE_SECOND_DELAY = 1000L;
-    private final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss";
     private Map<Long, WebDriver> drivers;
+    protected SoftAssert softAssert;
 
     protected WebDriver getDriver() {
         WebDriver currentWebDriver = drivers.get(Thread.currentThread().getId());
         if (currentWebDriver == null) {
             currentWebDriver = new ChromeDriver();
-            //driver.manage().window().maximize();
+            currentWebDriver.manage().window().maximize();
             currentWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             drivers.put(Thread.currentThread().getId(), currentWebDriver);
         }
         return currentWebDriver;
     }
 
-
     @BeforeSuite
     public void beforeSuite() {
         drivers = new HashMap<>();
+        WebDriverManager.chromedriver().setup();
     }
 
-    @Parameters({"url", "serverUrlLogout"})
     @BeforeClass
-    public void     beforeClass(ITestContext context, String serverUrl, String serverUrlLogout) {
-        //System.setProperty("webdriver.chrome.driver",
-        //		EpizyUserTestRunner.class.getResource("/chromedriver-windows-32bit.exe").getPath());
-        // TODO Check Exist ChromeDriver
-        //driver = new ChromeDriver();
-        //driver.manage().window().maximize();
-        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //
+    public void beforeClass(ITestContext context) {
         for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
-            System.out.println("Key: " + entry.getKey() + "  Value: " + entry.getValue());
             if (entry.getKey().toLowerCase().equals("url")) {
-                serverUrl = entry.getValue();
-                //	break;
+                url = entry.getValue();
             }
-            if (entry.getKey().toLowerCase().equals("urllogout")) {
+            if (entry.getKey().toLowerCase().equals("serverurllogout")) {
                 serverUrlLogout = entry.getValue();
             }
         }
-        WebDriverManager.chromedriver().setup();
-        getDriver().manage().window().maximize();
     }
-
 
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-        //if (driver != null) {
-        //	driver.quit();
-        //}
         for (Map.Entry<Long, WebDriver> currentWebDriver : drivers.entrySet()) {
             if (currentWebDriver.getValue() != null) {
                 currentWebDriver.getValue().quit();
@@ -83,30 +60,24 @@ public abstract class EpizyUserTestRunner {
         }
     }
 
-    // @Before
-    @Parameters({"url"})
     @BeforeMethod
-    public void beforeMethod(String serverUrl) {
-        getDriver().get(serverUrl);
+    public void beforeMethod() {
+        softAssert = new SoftAssert();
+        getDriver().get(url);
     }
 
-    // @After
-    @Parameters({"serverUrlLogout"})
     @AfterMethod
-    public void afterMethod(ITestResult result, String serverUrlLogout) throws IOException {
-        // TODO Logout
+    public void afterMethod(ITestResult result) {
         if (!result.isSuccess()) {
             System.out.println("***Test " + result.getName() + " ERROR");
             // Take Screenshot, save sourceCode, save to log, prepare report, Return to
-            takePageSource(takeScreenShot());
+            new ScreenShotHelper(getDriver()).keepPageSourceStatus();
             // previous state, logout, etc.
         }
         getDriver().get(serverUrlLogout);
-        // driver.get(SERVER_URL);
     }
 
     public HomePage loadApplication() {
-        //return new HomePage(driver);
         return new HomePage(getDriver());
     }
 
@@ -118,29 +89,6 @@ public abstract class EpizyUserTestRunner {
         try {
             Thread.sleep(seconds * ONE_SECOND_DELAY); // For Presentation ONLY
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    private String takeScreenShot() throws IOException {
-        String currentTime = new SimpleDateFormat(TIME_TEMPLATE).format(new Date());
-        //File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File("./img/" + currentTime + "_screenshot.png"));
-        // log.info("Screenshot was taken");
-        return "./img/" + currentTime + "_screenshot";
-    }
-
-    private void takePageSource(String fileName) {
-        //String pageSource = driver.getPageSource();
-        String pageSource = getDriver().getPageSource();
-        Path path = Paths.get(fileName + ".txt");
-        byte[] strToBytes = pageSource.getBytes();
-        try {
-            Files.write(path, strToBytes, StandardOpenOption.CREATE);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

@@ -147,7 +147,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return getShoppingCartProductsContainerPage().calculateExpectedSubTotalPrice().equals(getActualSubTotalPrice());
     }
 
-    public boolean areCorrectAndActualTotalPricesEqual(){
+    public boolean areExpectedAndActualTotalPricesEqual(){
         BigDecimal totalPrice = getCorrectSubTotalPrice().add(getOrderFlatShippingRate());
         return totalPrice.equals(getActualTotalPrice());
     }

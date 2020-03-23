@@ -92,7 +92,7 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
                 .setQuantity(product1, product1.getQuantity())
                 .setQuantity(product2, product2.getQuantity());
 
-        SoftAssert softAssert = new SoftAssert();
+//        SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertTrue(shoppingCartPage.areCorrectAndActualSubTotalPricesEqual(), "Expected and Actual Sub Total prices are not equal");
 
@@ -100,7 +100,7 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
         softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()), "There is no refresh success message");
 
         shoppingCartPage = shoppingCartPage.removeComponentByProduct(product1);
-        softAssert.assertEquals(shoppingCartPage.sizeDifferenceBeforeAndAfterRemoving(sizeBeforeRemoving), 1, "Difference before and after removing is not 1");
+        verifyProductRemoved(product1.getName());
 
         softAssert.assertAll();
     }
@@ -125,9 +125,9 @@ public class ShoppingCartFunctionalityTest extends EpizyUserTestRunner {
 
         SoftAssert softAssert = new SoftAssert();
 
-        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod()));
+        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod()), "There is no apply shipping message");
 
-        softAssert.assertTrue(shoppingCartPage.areCorrectAndActualTotalPricesEqual());
+        softAssert.assertTrue(shoppingCartPage.areExpectedAndActualTotalPricesEqual(), "Expected and actual prices are not equal");
 
         softAssert.assertAll();
     }
