@@ -1,8 +1,11 @@
 package com.softserve.edu.opencart.pages.user.search;
 
 import com.softserve.edu.opencart.data.*;
+import com.softserve.edu.opencart.pages.user.common.ProductComponent;
 import com.softserve.edu.opencart.tools.WaitUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class SearchSuccessPage extends SearchCriteriaPart {
 
@@ -15,7 +18,7 @@ public class SearchSuccessPage extends SearchCriteriaPart {
 
     private void initElements() {
         // init elements
-        productsDisplay = new ProductsDisplayComponent(driver);
+        //productsDisplay = new ProductsDisplayComponent(driver);
     }
 
     // Page Object
@@ -91,5 +94,11 @@ public class SearchSuccessPage extends SearchCriteriaPart {
                 .getProductComponentByName(product)
                 .clickName();
         return new ProductInfoPage(driver);
+    }
+
+    public ProductComponent getFirstProduct()
+    {
+        WebElement firstProduct = driver.findElement(By.cssSelector("#content .product-layout:nth-child(1)"));
+        return new ProductComponent(firstProduct);
     }
 }

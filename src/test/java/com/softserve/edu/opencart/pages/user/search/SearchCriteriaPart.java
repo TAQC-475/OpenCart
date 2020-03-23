@@ -95,8 +95,9 @@ public abstract class SearchCriteriaPart extends BreadCrumbPart {
 		return criteriaDescription;
 	}
 
-	public void clickCriteriaDescription() {
+	public SearchCriteriaPart clickCriteriaDescription() {
 		getCriteriaDescription().click();
+		return this;
 	}
 
 	// criteriaSearchButton
@@ -104,8 +105,9 @@ public abstract class SearchCriteriaPart extends BreadCrumbPart {
 		return criteriaSearchButton;
 	}
 
-	public void clickCriteriaSearchButton() {
+	public SearchCriteriaPart clickCriteriaSearchButton() {
 		getCriteriaSearchButton().click();
+		return this;
 	}
 
 	// Functional
