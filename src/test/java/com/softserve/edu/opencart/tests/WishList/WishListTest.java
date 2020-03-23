@@ -1,25 +1,48 @@
 package com.softserve.edu.opencart.tests.WishList;
 
+import com.softserve.edu.opencart.data.ApplicationStatus;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.data.UserRepository;
+import com.softserve.edu.opencart.pages.user.HomePage;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.WishList.WishListMessagePage;
+import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
 import com.softserve.edu.opencart.tests.EpizyUserTestRunner;
+import com.softserve.edu.opencart.tools.RegularExpression;
 import java.util.List;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class WishListTest extends EpizyUserTestRunner {
 
+  @BeforeMethod
+  public void logIn() {
+    loadApplication()
+        .gotoLoginPage()
+        .successfulLogin(UserRepository.get().getMrAndersonUser())
+        .gotoHomePage();
+  }
 
-  @Test(priority = 1,dataProvider = "iPodClassic",dataProviderClass = WishListDataProvider.class)
+  @AfterMethod
+  public void cleanWishList(){
+    int i = new WishListPage(getDriver()).getWishListComponentNumber();
+    if (i > 0){
+      new WishListPage(getDriver()).removeAllProductFromWishList();
+    }
+  }
+
+
+  @Test(priority = 1, dataProvider = "iPodClassic", dataProviderClass = WishListDataProvider.class)
   public void removeFromWishListTest(Product iPodClassic) {
 
     String actual =
         loadApplication()
-            .gotoLoginPage()
-            .successfulLogin(UserRepository.get().getMrAndersonUser())
+//            .gotoLoginPage()
+//            .successfulLogin(UserRepository.get().getMrAndersonUser())
             .successfulSearch(iPodClassic)
             .AddToWishButtonByName(iPodClassic)
             .gotoWishListPage()
@@ -29,7 +52,7 @@ public class WishListTest extends EpizyUserTestRunner {
   }
 
 
-  @Test(priority = 2, dataProvider = "productsList",dataProviderClass = WishListDataProvider.class)
+  @Test(priority = 2, dataProvider = "productsList", dataProviderClass = WishListDataProvider.class)
   public void emptyWishListTest(List<Product> products) {
     String actual = loadApplication()
         .searchAndAddProductsToWishList(products)
@@ -41,7 +64,7 @@ public class WishListTest extends EpizyUserTestRunner {
 
   }
 
-  @Test(priority = 3, dataProvider = "macBook",dataProviderClass = WishListDataProvider.class)
+  @Test(priority = 3, dataProvider = "macBook", dataProviderClass = WishListDataProvider.class)
   public void addToCartFromWishListTest(Product macBook) {
     String actual = loadApplication()
 
@@ -57,10 +80,8 @@ public class WishListTest extends EpizyUserTestRunner {
 
   }
 
-  //
 
-
-  @Test(priority = 4, dataProvider = "productsList",dataProviderClass = WishListDataProvider.class)
+  @Test(priority = 4, dataProvider = "productsList", dataProviderClass = WishListDataProvider.class)
   public void numberEqualityTest(List<Product> products) {
     int actual = loadApplication()
         .searchAndAddProductsToWishList(products)
