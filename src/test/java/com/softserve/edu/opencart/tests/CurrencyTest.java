@@ -27,6 +27,7 @@ public class CurrencyTest extends EpizyUserTestRunner {
 				.chooseCurrency(Currencies.EURO)
 				.getProductComponentsContainer()
 				.getProductComponentPriceByName("MacBook");
+				Thread.sleep(3000);
 
 //		Assert.assertTrue(actual.contains());
 	}

@@ -10,7 +10,7 @@ public class CurrenciesPage extends LeftMenuPart {
 
     public static final String CURRENCY_UAH = "Hryvnia";
     //
-    
+
     private WebElement refreshButton;
     private WebElement addNewButton;
     private WebElement deleteButton;
