@@ -5,21 +5,13 @@ import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.user.common.shopping_cart.ShoppingCartPage;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 public class ShoppingCartFunctionalityTest extends LocalTestRunner {
-
-    @DataProvider
-    public Object[][] dataForSumAndRefreshTest() {
-        return new Object[][]{{UserRepository.get().getShoppingCartUser(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart()}};
-    }
-
     @DataProvider
     public Object[][] dataForFunctionalityTest() {
-        return new Object[][]{{UserRepository.get().getShoppingCartUser(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart(), 2}};
+        return new Object[][]{{UserRepository.get().getShoppingCartUser(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart()}};
     }
 
     @DataProvider
@@ -27,58 +19,8 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
         return new Object[][]{{UserRepository.get().getShoppingCartUser(), ProductRepository.getIPhoneForShoppingCart()}};
     }
 
-    @Test(dataProvider = "dataForSumAndRefreshTest")
-    public void checkSumTest(User testUser, Product product1, Product product2) {
-        ShoppingCartPage shoppingCartPage = loadApplication().gotoLoginPage()
-                .successfulLogin(testUser)
-                .gotoHomePage()
-                .getProductComponentsContainer()
-                .addProductToCartDirectly(product1)
-                .goToHomePageFromAlert()
-                .getProductComponentsContainer()
-                .addProductToCartDirectly(product2)
-                .goToShoppingCartFromAlert()
-                .setQuantity(product1, product1.getQuantity())
-                .setQuantity(product2, product2.getQuantity());
-        Assert.assertTrue(shoppingCartPage.areCorrectAndActualSubTotalPricesEqual());
-    }
-
-    @Test(dataProvider = "dataForSumAndRefreshTest")
-    public void refreshButtonTest(User testUser, Product product1, Product product2) {
-        ShoppingCartPage shoppingCartPage = loadApplication()
-                .gotoLoginPage()
-                .successfulLogin(testUser)
-                .gotoHomePage()
-                .getProductComponentsContainer()
-                .addProductToCartDirectly(product1)
-                .goToHomePageFromAlert()
-                .getProductComponentsContainer()
-                .addProductToCartDirectly(product2)
-                .goToShoppingCartFromAlert()
-                .refreshShoppingCartPageByProduct(product1);
-
-        Assert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
-    }
-
     @Test(dataProvider = "dataForFunctionalityTest")
-    public void removeButtonTest(User testUser, Product product1, Product product2, int numberBeforeRemoving) {
-        ShoppingCartPage shoppingCartPage = loadApplication()
-                .gotoLoginPage()
-                .successfulLogin(testUser)
-                .gotoHomePage()
-                .getProductComponentsContainer()
-                .addProductToCartDirectly(product1)
-                .goToHomePageFromAlert()
-                .getProductComponentsContainer()
-                .addProductToCartDirectly(product2)
-                .goToShoppingCartFromAlert()
-                .removeComponentByProduct(product1);
-
-        verifyProductRemoved(product1.getName());
-    }
-
-    @Test(dataProvider = "dataForFunctionalityTest")
-    public void shoppingCartFunctionalityTest(User testUser, Product product1, Product product2, int sizeBeforeRemoving) {
+    public void shoppingCartFunctionalityTest(User testUser, Product product1, Product product2) {
 
         ShoppingCartPage shoppingCartPage = loadApplication().gotoLoginPage()
                 .successfulLogin(testUser)
@@ -92,9 +34,7 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
                 .setQuantity(product1, product1.getQuantity())
                 .setQuantity(product2, product2.getQuantity());
 
-//        SoftAssert softAssert = new SoftAssert();
-
-        softAssert.assertTrue(shoppingCartPage.areCorrectAndActualSubTotalPricesEqual(), "Expected and Actual Sub Total prices are not equal");
+        softAssert.assertTrue(shoppingCartPage.areExpectedAndActualSubTotalPricesEqual(), "Expected and Actual Sub Total prices are not equal");
 
         shoppingCartPage = shoppingCartPage.refreshShoppingCartPageByProduct(product2);
         softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()), "There is no refresh success message");
@@ -123,8 +63,6 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
                         .selectFlatShippingRate()
                         .clickApplyShippingButton();
 
-        SoftAssert softAssert = new SoftAssert();
-
         softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod()), "There is no apply shipping message");
 
         softAssert.assertTrue(shoppingCartPage.areExpectedAndActualTotalPricesEqual(), "Expected and actual prices are not equal");
@@ -134,11 +72,61 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
 
     private void verifyProductRemoved(String expectedRemovedItem) {
         new ShoppingCartPage(getDriver())
-                .getShoppingCartProductsContainerPage()
-                .getShoppingCartProductComponents()
+                .getShoppingCartProductsContainer()
+                .getContainerComponents()
                 .forEach(shoppingCartProductComponent ->
-                        Assert.assertNotEquals(shoppingCartProductComponent.getProductNameText(),
+                        softAssert.assertNotEquals(shoppingCartProductComponent.getProductNameText(),
                                 expectedRemovedItem,
                                 String.format("Product %s was not removed", expectedRemovedItem)));
     }
+
+//    @Test(dataProvider = "dataForFunctionalityTest")
+//    public void checkSumTest(User testUser, Product product1, Product product2) {
+//        ShoppingCartPage shoppingCartPage = loadApplication().gotoLoginPage()
+//                .successfulLogin(testUser)
+//                .gotoHomePage()
+//                .getProductComponentsContainer()
+//                .addProductToCartDirectly(product1)
+//                .goToHomePageFromAlert()
+//                .getProductComponentsContainer()
+//                .addProductToCartDirectly(product2)
+//                .goToShoppingCartFromAlert()
+//                .setQuantity(product1, product1.getQuantity())
+//                .setQuantity(product2, product2.getQuantity());
+//        Assert.assertTrue(shoppingCartPage.areCorrectAndActualSubTotalPricesEqual());
+//    }
+//
+//    @Test(dataProvider = "dataForFunctionalityTest")
+//    public void refreshButtonTest(User testUser, Product product1, Product product2) {
+//        ShoppingCartPage shoppingCartPage = loadApplication()
+//                .gotoLoginPage()
+//                .successfulLogin(testUser)
+//                .gotoHomePage()
+//                .getProductComponentsContainer()
+//                .addProductToCartDirectly(product1)
+//                .goToHomePageFromAlert()
+//                .getProductComponentsContainer()
+//                .addProductToCartDirectly(product2)
+//                .goToShoppingCartFromAlert()
+//                .refreshShoppingCartPageByProduct(product1);
+//
+//        Assert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
+//    }
+//
+//    @Test(dataProvider = "dataForFunctionalityTest")
+//    public void removeButtonTest(User testUser, Product product1, Product product2) {
+//        ShoppingCartPage shoppingCartPage = loadApplication()
+//                .gotoLoginPage()
+//                .successfulLogin(testUser)
+//                .gotoHomePage()
+//                .getProductComponentsContainer()
+//                .addProductToCartDirectly(product1)
+//                .goToHomePageFromAlert()
+//                .getProductComponentsContainer()
+//                .addProductToCartDirectly(product2)
+//                .goToShoppingCartFromAlert()
+//                .removeComponentByProduct(product1);
+//
+//        verifyProductRemoved(product1.getName());
+//    }
 }

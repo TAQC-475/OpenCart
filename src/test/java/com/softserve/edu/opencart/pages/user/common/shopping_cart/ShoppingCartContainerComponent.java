@@ -6,10 +6,9 @@ import org.openqa.selenium.WebElement;
 
 import java.math.BigDecimal;
 
-public class ShoppingCartProductComponent {
+public class ShoppingCartContainerComponent {
     private WebElement shoppingCartProductComponent;
 
-    private WebElement image;
     private WebElement productName;
     private WebElement model;
     private WebElement quantity;
@@ -18,13 +17,12 @@ public class ShoppingCartProductComponent {
     private WebElement refreshButton;
     private WebElement removeButton;
 
-    public ShoppingCartProductComponent(WebElement shoppingCartProductLayout) {
-        this.shoppingCartProductComponent = shoppingCartProductLayout;
+    public ShoppingCartContainerComponent(WebElement shoppingCartProductComponent) {
+        this.shoppingCartProductComponent = shoppingCartProductComponent;
         initElements();
     }
 
     public void initElements() {
-        image = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-center']/a"));
         productName = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-left']/a"));
         model = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-left']/a/../following-sibling::td[@class = 'text-left' and not (div)]"));
         quantity = shoppingCartProductComponent.findElement(By.xpath(".//input[@type = 'text']"));
@@ -32,10 +30,6 @@ public class ShoppingCartProductComponent {
         removeButton = shoppingCartProductComponent.findElement(By.xpath(".//button[@data-original-title = 'Remove']"));
         unitPrice = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-right'][last()-1]"));
         totalPrice = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-right'][last()]"));
-    }
-
-    public WebElement getImage() {
-        return image;
     }
 
     public WebElement getProductName() {
@@ -100,12 +94,11 @@ public class ShoppingCartProductComponent {
 
     /**
      * multiplies product quantity and unit price
-     * returns total price of the product
+     * @return total price of the product
      */
-    public BigDecimal calculateExpectedComponentTotalPrice() {
-        BigDecimal quantity = new BigDecimal(this.getQuantityText());
-        BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(this.getUnitPriceText());
-        BigDecimal totalPrice = bdPrice.multiply(quantity);
-        return totalPrice;
+    public BigDecimal calculateContainerComponentExpectedTotalPrice() {
+        BigDecimal quantity = new BigDecimal(getQuantityText());
+        BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartField(getUnitPriceText());
+        return bdPrice.multiply(quantity);
     }
 }

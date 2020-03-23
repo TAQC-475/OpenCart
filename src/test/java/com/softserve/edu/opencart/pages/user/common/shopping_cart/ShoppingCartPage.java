@@ -20,7 +20,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
     private By messageAboutSuccessfulRefresh = By.xpath("//div[contains (text(), 'Success: You have modified your shopping cart!')]");
     private By messageAboutApplyingShippingMethod = By.xpath("//div[contains (text(), 'Success: Your shipping estimate has been applied')]");
 
-    private ShoppingCartProductsContainerComponent shoppingCartProductsContainerComponent;
+    private ShoppingCartProductsContainer shoppingCartProductsContainer;
 
     public ShoppingCartPage(WebDriver driver) {
         super(driver);
@@ -30,7 +30,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
     public void initElements() {
         shoppingCartExpectedText = driver.findElement(By.xpath("//div[@id = 'content']/h1[contains (text(), 'Shopping Cart')]"));
         shippingAndTaxes = driver.findElement(By.xpath("//a[contains (text(), 'Shipping & Taxes')]"));
-        shoppingCartProductsContainerComponent = new ShoppingCartProductsContainerComponent(driver);
+        shoppingCartProductsContainer = new ShoppingCartProductsContainer(driver);
     }
 
     public By getMessageAboutSuccessfulRefresh() {
@@ -49,33 +49,36 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return shippingAndTaxes;
     }
 
-    public ShoppingCartProductsContainerComponent getShoppingCartProductsContainerPage() {
-        return shoppingCartProductsContainerComponent;
+    public ShoppingCartProductsContainer getShoppingCartProductsContainer() {
+        return shoppingCartProductsContainer;
     }
 
     /**
-     * checks if shipping and taxes accordion is expanded, if no, clicks on it and returns page,
-     * if yes just returns new page
+     * checks if shipping and taxes accordion is expanded, if not, clicks on it and returns page, if expanded just returns new page
+     * @return new ShippingAndTaxesComponent page
      */
-    public ShoppingCartShippingAndTaxesComponent goToShippingAndTaxesComponent() {
+    public ShippingAndTaxesComponent goToShippingAndTaxesComponent() {
         By shippingAndTaxesComponentExpanded = By.xpath("//a[@aria-expanded = 'true' and contains (text(), 'Estimate Shipping & Taxes')]");
-        driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
-        if(isElementPresent(shippingAndTaxesComponentExpanded)){
-            return new ShoppingCartShippingAndTaxesComponent(driver);
+        if(!driver.findElements(shippingAndTaxesComponentExpanded).isEmpty()){
+            return new ShippingAndTaxesComponent(driver);
         }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
+//        if(isElementPresent(shippingAndTaxesComponentExpanded)){
+//            return new ShippingAndTaxesComponent(driver);
+//        }
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         getShippingAndTaxes().click();
-        return new ShoppingCartShippingAndTaxesComponent(driver);
+        return new ShippingAndTaxesComponent(driver);
     }
 
     /**
      * finds product component by product from param and clicks refresh button
      * @param product
-     * returns refreshed page
+     * @return refreshed ShoppingCartPage
      */
     public ShoppingCartPage refreshShoppingCartPageByProduct(Product product) {
-        this.getShoppingCartProductsContainerPage()
-                .getProductComponentByProduct(product)
+        this.getShoppingCartProductsContainer()
+                .getContainerComponentByProduct(product)
                 .clickRefreshButton();
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         new WebDriverWait(driver, 5)
@@ -87,16 +90,16 @@ public class ShoppingCartPage extends BreadCrumbPart {
     /**
      * finds product component by product from param and clicks remove button
      * @param product
-     * returns new page after removing a component
+     * @return new ShoppingCartPage after removing a component
      */
     public ShoppingCartPage removeComponentByProduct(Product product) {
-        this.getShoppingCartProductsContainerPage()
-                .getProductComponentByProduct(product)
+        this.getShoppingCartProductsContainer()
+                .getContainerComponentByProduct(product)
                 .clickRemoveButton();
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.stalenessOf(this.getShoppingCartProductsContainerPage()
-                        .getProductComponentByProduct(product).getProductName()));
+                .until(ExpectedConditions.stalenessOf(this.getShoppingCartProductsContainer()
+                        .getContainerComponentByProduct(product).getProductName()));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return new ShoppingCartPage(driver);
     }
@@ -105,11 +108,11 @@ public class ShoppingCartPage extends BreadCrumbPart {
      * finds product component by product from param, clears current quantity and sets quantity from param
      * @param product
      * @param quantity
-     * returns refreshed page
+     * @return refreshed ShoppingCartPage
      */
     public ShoppingCartPage setQuantity(Product product, String quantity) {
-        ShoppingCartProductComponent shoppingCartProductComponent = this.getShoppingCartProductsContainerPage()
-                .getProductComponentByProduct(product);
+        ShoppingCartContainerComponent shoppingCartProductComponent = getShoppingCartProductsContainer()
+                .getContainerComponentByProduct(product);
         shoppingCartProductComponent.getQuantity().clear();
         shoppingCartProductComponent.getQuantity().sendKeys(quantity);
         return refreshShoppingCartPageByProduct(product);
@@ -126,34 +129,29 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     public BigDecimal getActualSubTotalPrice() {
         WebElement subTotal = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Sub-Total')]/parent::td/following-sibling::td"));
-        return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(subTotal.getText());
+        return new RegularExpression().getBigDecimalFromTheShoppingCartField(subTotal.getText());
     }
 
     public BigDecimal getOrderFlatShippingRate(){
         WebElement flatShippingRate = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Flat Shipping Rate')]/parent::td/following-sibling::td"));
-        return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(flatShippingRate.getText());
+        return new RegularExpression().getBigDecimalFromTheShoppingCartField(flatShippingRate.getText());
     }
 
     public BigDecimal getActualTotalPrice(){
         WebElement total = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//tr[last()]/td[not (child::strong)]"));
-        return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(total.getText());
+        return new RegularExpression().getBigDecimalFromTheShoppingCartField(total.getText());
     }
 
-    public BigDecimal getCorrectSubTotalPrice(){
-        return getShoppingCartProductsContainerPage().calculateExpectedSubTotalPrice();
+    public BigDecimal getExpectedSubTotalPrice(){
+        return getShoppingCartProductsContainer().calculateExpectedSubTotalPrice();
     }
 
-    public boolean areCorrectAndActualSubTotalPricesEqual() {
-        return getShoppingCartProductsContainerPage().calculateExpectedSubTotalPrice().equals(getActualSubTotalPrice());
+    public boolean areExpectedAndActualSubTotalPricesEqual() {
+        return getShoppingCartProductsContainer().calculateExpectedSubTotalPrice().equals(getActualSubTotalPrice());
     }
 
     public boolean areExpectedAndActualTotalPricesEqual(){
-        BigDecimal totalPrice = getCorrectSubTotalPrice().add(getOrderFlatShippingRate());
-        return totalPrice.equals(getActualTotalPrice());
+        BigDecimal expectedTotalPrice = getExpectedSubTotalPrice().add(getOrderFlatShippingRate());
+        return expectedTotalPrice.equals(getActualTotalPrice());
     }
-
-    public int sizeDifferenceBeforeAndAfterRemoving(int sizeBeforeRemoving) {
-        return sizeBeforeRemoving - getShoppingCartProductsContainerPage().getShoppingCartProductComponentCount();
-    }
-
 }

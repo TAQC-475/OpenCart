@@ -5,14 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class ShoppingCartShippingAndTaxesComponent {
+public class ShippingAndTaxesComponent {
     private WebElement country;
     private WebElement regionState;
     private WebElement postCode;
     private WebElement getQuotesButton;
     protected WebDriver driver;
 
-    public ShoppingCartShippingAndTaxesComponent(WebDriver driver) {
+    public ShippingAndTaxesComponent(WebDriver driver) {
         this.driver = driver;
         initElements();
     }
@@ -40,17 +40,17 @@ public class ShoppingCartShippingAndTaxesComponent {
         return getQuotesButton;
     }
 
-    public ShoppingCartShippingAndTaxesComponent selectCountryByName(String countryName) {
+    public ShippingAndTaxesComponent selectCountryByName(String countryName) {
         new Select(driver.findElement(By.xpath("//select[@id = 'input-country']"))).selectByVisibleText(countryName);
         return this;
     }
 
-    public ShoppingCartShippingAndTaxesComponent selectRegionStateByName(String regionStateName) {
+    public ShippingAndTaxesComponent selectRegionStateByName(String regionStateName) {
         new Select(driver.findElement(By.xpath("//select[@id = 'input-zone']"))).selectByVisibleText(regionStateName);
         return this;
     }
 
-    public ShoppingCartShippingAndTaxesComponent inputPostCode(String postCode) {
+    public ShippingAndTaxesComponent inputPostCode(String postCode) {
         driver.findElement(By.xpath("//input[@name = 'postcode']")).clear();
         driver.findElement(By.xpath("//input[@name = 'postcode']")).sendKeys(postCode);
         return this;

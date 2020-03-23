@@ -20,7 +20,7 @@ public final class RegularExpression {
         return stringNumber;
     }
 
-    public BigDecimal getBigDecimalFromTheShoppingCartPriceField(String field) {
+    public BigDecimal getBigDecimalFromTheShoppingCartField(String field) {
         String stringValue = "";
         Pattern pattern = Pattern.compile("(\\d{1,3},)*\\d{1,3}\\.\\d{2}");
         Matcher matcher = pattern.matcher(field);
