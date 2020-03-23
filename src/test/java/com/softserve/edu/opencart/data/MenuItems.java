@@ -2,7 +2,7 @@ package com.softserve.edu.opencart.data;
 
     public enum MenuItems {
 
-        TV("TV"),
+        ROUTERS("Routers"),
         DESKTOPS("Desktops"),
         LAPTOPS_AND_NOTEBOOKS("Laptops & Notebooks"),
         COMPONENTS("Components"),
