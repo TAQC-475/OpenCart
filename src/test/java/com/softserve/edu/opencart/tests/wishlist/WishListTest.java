@@ -2,6 +2,7 @@ package com.softserve.edu.opencart.tests.wishlist;
 
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.UserRepository;
+import com.softserve.edu.opencart.data.data_provider_repository.WishListDataProvider;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListMessagePage;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListPage;
