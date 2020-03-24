@@ -48,7 +48,7 @@ public class ShoppingCartProductsContainer {
     /**
      * goes trough the list of components present at the page, and check if component with name from param is present
      * @param productName
-     * returns component with name from param
+     * @return  component with name from param
      */
     protected ShoppingCartContainerComponent getContainerComponentByName(String productName) {
         ShoppingCartContainerComponent result = null;

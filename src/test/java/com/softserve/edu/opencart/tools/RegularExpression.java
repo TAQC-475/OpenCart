@@ -20,12 +20,17 @@ public final class RegularExpression {
         return stringNumber;
     }
 
-    public BigDecimal getBigDecimalFromTheShoppingCartField(String field) {
+    /**
+     * gets text from price field, using regex extracts number value from text, and converts it to BigDecimal
+     * @param priceFieldText text from some price field at the page
+     * @return BigDecimal value from the price field text
+     */
+    public BigDecimal getBigDecimalFromTheShoppingCartPriceField(String priceFieldText) {
         String stringValue = "";
         Pattern pattern = Pattern.compile("(\\d{1,3},)*\\d{1,3}\\.\\d{2}");
-        Matcher matcher = pattern.matcher(field);
+        Matcher matcher = pattern.matcher(priceFieldText);
         while (matcher.find()) {
-            stringValue = field.substring(matcher.start(), matcher.end());
+            stringValue = priceFieldText.substring(matcher.start(), matcher.end());
             stringValue = stringValue.replace(",", "");
         }
         return new BigDecimal(stringValue);

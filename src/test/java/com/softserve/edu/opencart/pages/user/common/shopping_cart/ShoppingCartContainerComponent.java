@@ -98,7 +98,7 @@ public class ShoppingCartContainerComponent {
      */
     public BigDecimal calculateContainerComponentExpectedTotalPrice() {
         BigDecimal quantity = new BigDecimal(getQuantityText());
-        BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartField(getUnitPriceText());
+        BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(getUnitPriceText());
         return bdPrice.multiply(quantity);
     }
 }
