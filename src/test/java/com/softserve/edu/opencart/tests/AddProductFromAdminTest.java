@@ -2,7 +2,7 @@ package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.MenuItems;
-import com.softserve.edu.opencart.data.dataproviderrepository.DataForAdminTests;
+import com.softserve.edu.opencart.data.data_provider_repository.DataForAdminTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
