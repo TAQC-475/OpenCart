@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.tests;
 
 
+import com.softserve.edu.opencart.data.ApplicationStatus;
 import com.softserve.edu.opencart.pages.user.HomePage;
 import com.softserve.edu.opencart.tools.ScreenShotHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -75,6 +76,7 @@ public abstract class LocalTestRunner {
             // previous state, logout, etc.
         }
         getDriver().get(serverUrlLogout);
+        ApplicationStatus.get().setLogged(false);
     }
 
     public HomePage loadApplication() {

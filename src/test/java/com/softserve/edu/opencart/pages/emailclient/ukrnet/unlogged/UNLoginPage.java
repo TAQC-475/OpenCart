@@ -63,7 +63,7 @@ public class UNLoginPage extends UNParentBasePart {
     //business logic
 
     private void enterLogin(String login){
-        clickLoginField();
+        //clickLoginField();
         clearLoginField();
         setLogin(login);
     }
