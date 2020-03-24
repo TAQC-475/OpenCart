@@ -88,7 +88,7 @@ public class AddProductPage extends LeftMenuPart {
     }
 
     public AddProductPage clickCategoryDropdown() {
-        List<WebElement> dropdown = driver.findElements(By.xpath("//ul[@class='dropdown-menu']/li/a"));///"//input[@id='input-manufacturer']/../ul"));
+        List<WebElement> dropdown = driver.findElements(By.xpath("//ul[@class='dropdown-menu']/li/a"));
         for (WebElement option : dropdown)
         {
             if (option.getText().equals("Routers"))

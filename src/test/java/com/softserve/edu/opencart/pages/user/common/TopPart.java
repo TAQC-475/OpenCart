@@ -5,15 +5,14 @@ import com.softserve.edu.opencart.data.Currencies;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.pages.user.HomePage;
+import com.softserve.edu.opencart.pages.user.account.AccountLogoutPage;
+import com.softserve.edu.opencart.pages.user.account.LoginPage;
+import com.softserve.edu.opencart.pages.user.account.MyAccountPage;
+import com.softserve.edu.opencart.pages.user.account.RegisterPage;
 import com.softserve.edu.opencart.pages.user.common.shopping_cart.ShoppingCartPage;
-import com.softserve.edu.opencart.pages.user.account.*;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListPage;
-import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
-import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
-import com.softserve.edu.opencart.pages.user.search.SearchSuccessAlertPage;
-import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
-import com.softserve.edu.opencart.pages.user.search.SearchUnsuccessPage;
+import com.softserve.edu.opencart.pages.user.search.*;
 import com.softserve.edu.opencart.tools.RegularExpression;
 import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
@@ -397,7 +396,6 @@ public abstract class TopPart {
         return new HomePage(driver);
     }
 
-    //TODO class for parameter
     public SearchSuccessPage successfulSearch(Product product) {
         fillSearchTopField(product);
         clickSearchTopButton();
@@ -409,6 +407,7 @@ public abstract class TopPart {
         clickSearchTopButton();
         return new SearchSuccessPage(driver);
     }
+
     public SearchUnsuccessPage unsuccessfulSearch(Product product) {
         //public SearchUnsuccessPage unsuccessfulSearch(Product product){
         fillSearchTopField(product);
@@ -469,8 +468,8 @@ public abstract class TopPart {
     }
 
     // wishList
-    public WishListPage gotoWishListPage(){
-        new WaitUtils(driver,10).waitForAlertVisibility();
+    public WishListPage gotoWishListPage() {
+        new WaitUtils(driver, 10).waitForAlertVisibility();
         clickWishList();
         return new WishListPage(driver);
     }
@@ -480,7 +479,8 @@ public abstract class TopPart {
         defaultLogin(user);
         return new WishListPage(driver);
     }
-    public WishListEmptyPage gotToWishListEmptyPage(){
+
+    public WishListEmptyPage gotToWishListEmptyPage() {
         clickWishList();
         return new WishListEmptyPage(driver);
     }
@@ -494,7 +494,7 @@ public abstract class TopPart {
 
     public void closeViewCartComponent() {
         clickCartButton();
-        if(isViewCartOpened()){
+        if (isViewCartOpened()) {
             clickCartButton();
             viewCartComponent = null;
             setViewCartOpened(false);
@@ -516,74 +516,74 @@ public abstract class TopPart {
     }
 
     public String getEmptyMsgTextFromViewCart() {
-        if(!isViewCartOpened()) {
+        if (!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getEmptyCartMsgText();
     }
 
     public WebElement getEmptyMsgFromViewCart() {
-        if(!isViewCartOpened()) {
+        if (!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getEmptyCartMsg();
     }
 
-    public int getProductsSizeFromViewCart(){
+    public int getProductsSizeFromViewCart() {
         return getViewCartComponent().getCartProductTable().size();
     }
 
     public String getProductNameFromViewCart(Product product) {
-        if(!isViewCartOpened()) {
+        if (!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getViewCartProductName(product);
     }
 
     public String getProductPriceFromViewCart(Product product) {
-        if(!isViewCartOpened()) {
+        if (!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getViewCartProductPrice(product);
     }
 
     public String getProductQuantityFromViewCart(Product product) {
-        if(!isViewCartOpened()) {
+        if (!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getViewCartProductQuantity(product);
     }
 
     public String getSubTotalPriceFromViewCart() {
-        if(!isViewCartOpened()) {
+        if (!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getSubTotalText();
     }
 
     public String getEcoTaxPriceFromViewCart() {
-        if(!isViewCartOpened()) {
+        if (!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getEcoTaxText();
     }
 
     public String getVATFromViewCart() {
-        if(!isViewCartOpened()) {
+        if (!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getVatTaxText();
     }
 
     public String getTotalSumFromViewCart() {
-        if(!isViewCartOpened()) {
+        if (!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getTotalPriceText();
     }
 
     public void removeProductFromViewCart(Product product) {
-        if(!isViewCartOpened()) {
+        if (!isViewCartOpened()) {
             openViewCartComponent();
         }
         getViewCartComponent().removeViewCartProduct(product);
@@ -594,22 +594,23 @@ public abstract class TopPart {
     /**
      * This method added List products to wish list.
      */
-    public SearchSuccessAlertPage addProductsToWishList(List<Product> products){
+    public SearchSuccessAlertPage addProductsToWishList(List<Product> products) {
 
         int i = 1;
         SearchSuccessAlertPage search = getAddProductsToWishList(products.get(0));
 
-        while (i != products.size()){
-           search = search.getAddProductsToWishList(products.get(i));
-        i++;}
+        while (i != products.size()) {
+            search = search.getAddProductsToWishList(products.get(i));
+            i++;
+        }
 
         return new SearchSuccessAlertPage(driver);
     }
 
-    public SearchSuccessAlertPage getAddProductsToWishList(Product product){
+    public SearchSuccessAlertPage getAddProductsToWishList(Product product) {
         successfulSearch(product)
-            .AddToWishButtonByName(product);
-        return new  SearchSuccessAlertPage(driver);
+                .AddToWishButtonByName(product);
+        return new SearchSuccessAlertPage(driver);
     }
 
 }

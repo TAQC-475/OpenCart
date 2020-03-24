@@ -23,6 +23,11 @@ public class ModifiedCatalogPage extends CategoriesPage {
         return success.getText();
     }
 
+    public boolean isSuccessTextDisplayed(){
+        return success.isDisplayed();
+    }
+
+
     private void changeUrl(){
         String homePage = (driver.getCurrentUrl());
         homePage = homePage.substring(0,39);
