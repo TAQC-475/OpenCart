@@ -95,24 +95,24 @@ public class ViewCartComponent {
         return getEmptyCartMsg().getText();
     }
 
-    public WebElement getCartTotal() {
+    public WebElement getCartTotalMsg() {
         return cartTotalMsg;
     }
 
-    public String getCartTotalText() {
-        return getCartTotal().getText();
+    public String getCartTotalMsgText() {
+        return getCartTotalMsg().getText();
     }
 
     public String getCartTotalAmount() {
-        return getCartTotalText().split("")[0];
+        return getCartTotalMsgText().split("")[0];
     }
 
     public String getCartTotalSum() {
-        String totalSum = getCartTotalText().substring(getCartTotalText().lastIndexOf(" ") + 1);
+        String totalSum = getCartTotalMsgText().substring(getCartTotalMsgText().lastIndexOf(" ") + 1);
         return totalSum.replaceAll(REPLACEMENT_REGEX,"");
     }
 
-    protected ViewCartProductComponent getViewProductComponentByName(Product product)
+    protected ViewCartProductComponent getViewCartProductByName(Product product)
     {
         ViewCartProductComponent result = null;
         for (ViewCartProductComponent current : getCartProductTable())
@@ -133,24 +133,24 @@ public class ViewCartComponent {
         return result;
     }
 
-    public void removeViewProductComponent(Product product)
+    public void removeViewCartProduct(Product product)
     {
-        getViewProductComponentByName(product).removeProductFromCart();
+        getViewCartProductByName(product).removeProductFromCart();
         cartWait.waitForViewCartButtonLoading();
     }
 
-    public String getViewProductComponentName(Product product)
+    public String getViewCartProductName(Product product)
     {
-        return getViewProductComponentByName(product).getNameText();
+        return getViewCartProductByName(product).getNameText();
     }
 
-    public String getViewProductComponentQuantity(Product product)
+    public String getViewCartProductQuantity(Product product)
     {
-        return getViewProductComponentByName(product).getQuantityText();
+        return getViewCartProductByName(product).getQuantityText();
     }
 
-    public String getViewProductComponentPrice(Product product)
+    public String getViewCartProductPrice(Product product)
     {
-        return getViewProductComponentByName(product).getPriceText();
+        return getViewCartProductByName(product).getPriceText();
     }
 }

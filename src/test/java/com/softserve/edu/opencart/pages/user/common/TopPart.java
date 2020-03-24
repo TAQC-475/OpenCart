@@ -498,33 +498,33 @@ public abstract class TopPart {
         setViewCartOpened(false);
     }
 
-    public String getViewCartComponentTotalText() {
-        return getViewCartComponent().getCartTotalText();
+    public String getViewCartButtonTotalText() {
+        return getViewCartComponent().getCartTotalMsgText();
     }
 
-    public String getViewCartComponentTotalAmount() {
+    public String getViewCartButtonTotalAmount() {
         return getViewCartComponent().getCartTotalAmount();
     }
 
-    public String getViewCartComponentTotalSum() {
+    public String getViewCartButtonTotalSum() {
         return getViewCartComponent().getCartTotalSum();
     }
 
-    public String getViewCartEmptyMsgText() {
+    public String getEmptyMsgTextFromViewCart() {
         if(!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getEmptyCartMsgText();
     }
 
-    public WebElement getViewCartEmptyMsg() {
+    public WebElement getEmptyMsgFromViewCart() {
         if(!isViewCartOpened()) {
             openViewCartComponent();
         }
         return getViewCartComponent().getEmptyCartMsg();
     }
 
-    public int getViewCartProductSize(){
+    public int getProductsSizeFromViewCart(){
         return getViewCartComponent().getCartProductTable().size();
     }
 
@@ -532,21 +532,21 @@ public abstract class TopPart {
         if(!isViewCartOpened()) {
             openViewCartComponent();
         }
-        return getViewCartComponent().getViewProductComponentName(product);
+        return getViewCartComponent().getViewCartProductName(product);
     }
 
     public String getProductPriceFromViewCart(Product product) {
         if(!isViewCartOpened()) {
             openViewCartComponent();
         }
-        return getViewCartComponent().getViewProductComponentPrice(product);
+        return getViewCartComponent().getViewCartProductPrice(product);
     }
 
     public String getProductQuantityFromViewCart(Product product) {
         if(!isViewCartOpened()) {
             openViewCartComponent();
         }
-        return getViewCartComponent().getViewProductComponentQuantity(product);
+        return getViewCartComponent().getViewCartProductQuantity(product);
     }
 
     public String getSubTotalPriceFromViewCart() {
@@ -570,7 +570,7 @@ public abstract class TopPart {
         return getViewCartComponent().getVatTaxText();
     }
 
-    public String getTotalFromViewCart() {
+    public String getTotalSumFromViewCart() {
         if(!isViewCartOpened()) {
             openViewCartComponent();
         }
@@ -581,7 +581,7 @@ public abstract class TopPart {
         if(!isViewCartOpened()) {
             openViewCartComponent();
         }
-        getViewCartComponent().removeViewProductComponent(product);
+        getViewCartComponent().removeViewCartProduct(product);
         setViewCartOpened(false);
         viewCartComponent = null;
     }

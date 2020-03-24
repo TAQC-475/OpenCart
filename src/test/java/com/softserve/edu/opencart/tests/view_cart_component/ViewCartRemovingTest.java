@@ -14,12 +14,12 @@ public class ViewCartRemovingTest extends LocalTestRunner {
                 .addProductToCartDirectly(mac)
                 .goToHomePageFromAlert();
         home.removeProductFromViewCart(mac);
-        softAssert.assertEquals(home.getViewCartProductSize(), emptySize);
-        softAssert.assertEquals(home.getViewCartComponentTotalText(), emptyCartSummary);
-        softAssert.assertEquals(home.getViewCartComponentTotalAmount(), emptyQuantity);
-        softAssert.assertEquals(home.getViewCartComponentTotalSum(), emptyPrice);
-        softAssert.assertTrue(home.getViewCartEmptyMsg().isDisplayed());
-        softAssert.assertEquals(home.getViewCartEmptyMsgText(), emptyCartMessage);
+        softAssert.assertEquals(home.getProductsSizeFromViewCart(), emptySize);
+        softAssert.assertEquals(home.getViewCartButtonTotalText(), emptyCartSummary);
+        softAssert.assertEquals(home.getViewCartButtonTotalAmount(), emptyQuantity);
+        softAssert.assertEquals(home.getViewCartButtonTotalSum(), emptyPrice);
+        softAssert.assertTrue(home.getEmptyMsgFromViewCart().isDisplayed());
+        softAssert.assertEquals(home.getEmptyMsgTextFromViewCart(), emptyCartMessage);
 
         softAssert.assertAll();
     }

@@ -17,13 +17,13 @@ public class ViewCartTotalValuesTest extends LocalTestRunner {
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(iphone)
                 .goToHomePageFromAlert();
-        softAssert.assertEquals(home.getViewCartProductSize(), productsSize);
+        softAssert.assertEquals(home.getProductsSizeFromViewCart(), productsSize);
         softAssert.assertEquals(home.getProductNameFromViewCart(mac), mac.getName());
         softAssert.assertEquals(home.getProductNameFromViewCart(iphone), iphone.getName());
         softAssert.assertEquals(home.getSubTotalPriceFromViewCart(), allSubTotal);
         softAssert.assertEquals(home.getEcoTaxPriceFromViewCart(), allEcoTax);
         softAssert.assertEquals(home.getVATFromViewCart(), allVat);
-        softAssert.assertEquals(home.getTotalFromViewCart(), allTotal);
+        softAssert.assertEquals(home.getTotalSumFromViewCart(), allTotal);
 
         softAssert.assertAll();
     }
