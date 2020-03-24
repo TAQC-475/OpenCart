@@ -10,11 +10,11 @@ import com.softserve.edu.opencart.data.IUser;
 
 public final class DataBaseUtils {
 
-	private static final String DATABASE_SERVER_IP = "192.168.220.130";
+	private static final String DATABASE_SERVER_IP = "127.0.0.1";
 	private static final String DATABASE_URL = "jdbc:mysql://" + DATABASE_SERVER_IP
 			+ "/opencart?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
-	private static final String USERNAME = "lv475";
-	private static final String PASSWORD = "Lv475_taqc"; // TODO remove
+	private static final String USERNAME = "admin";
+	private static final String PASSWORD = System.getenv().get("ADMIN_PASSWORD");
 	//
 	private static final String SET_LOGINED_USERS_TO_NULL = "TRUNCATE opencart.oc_customer_login;";
 	//private static final String SELECT_LOGINED_USERS = "SELECT * FROM opencart.oc_customer_login WHERE email LIKE ?;";
@@ -55,10 +55,8 @@ public final class DataBaseUtils {
 		} catch (SQLException e) {
 			// TODO Develop Custom Exceptions
 			System.out.println(e.getMessage());
-		} 
-//		finally {
-//			closeConnection();
-//		}
+		}
+
 	}
 
 	public static void clearLoginedUsers(IUser user) {
