@@ -105,7 +105,7 @@ public class WishListPage extends AccountSidebarLoggedPart {
   /**
    * This method add list of products to wish list.
    */
-  public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
+  public SearchSuccessAlertPage addProductsToWishList(List<Product> products){
     for (Product product: products){
       successfulSearch(product)
           .AddToWishButtonByName(product);
