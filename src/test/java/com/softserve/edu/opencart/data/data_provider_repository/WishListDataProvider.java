@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.tests.wishlist;
+package com.softserve.edu.opencart.data.data_provider_repository;
 
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.ProductRepository;
