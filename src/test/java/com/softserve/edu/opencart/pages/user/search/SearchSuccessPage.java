@@ -101,4 +101,9 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         WebElement firstProduct = driver.findElement(By.cssSelector("#content .product-layout:nth-child(1)"));
         return new ProductComponent(firstProduct);
     }
+    public ProductInfoPage clickFirstProduct()
+    {
+        getFirstProduct().clickName();
+        return new ProductInfoPage(driver);
+    }
 }

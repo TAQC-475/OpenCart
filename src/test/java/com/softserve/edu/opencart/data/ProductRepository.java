@@ -64,9 +64,11 @@ public final class ProductRepository {
     public static Product getAllProducts() {
         return new Product("%");
     }
-
-    public static Product getProductWithProcessor() {
-        return new Product("Processor");
+    public static Product getSamsungProduct() {
+        return new Product("Samsung");
+    }
+    public static Product getProductWithDescription() {
+        return new Product("touch");
     }
 
     public static Product getInvalid() {

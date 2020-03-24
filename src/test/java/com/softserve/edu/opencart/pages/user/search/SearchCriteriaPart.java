@@ -1,5 +1,7 @@
 package com.softserve.edu.opencart.pages.user.search;
 
+import com.softserve.edu.opencart.data.Product;
+import com.softserve.edu.opencart.data.ProductRepository;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -95,9 +97,10 @@ public abstract class SearchCriteriaPart extends BreadCrumbPart {
 		return criteriaDescription;
 	}
 
-	public SearchCriteriaPart clickCriteriaDescription() {
+	public SearchSuccessPage clickCriteriaDescription() {
 		getCriteriaDescription().click();
-		return this;
+		getCriteriaSearchButton().click();
+		return new SearchSuccessPage(driver);
 	}
 
 	// criteriaSearchButton
@@ -108,6 +111,12 @@ public abstract class SearchCriteriaPart extends BreadCrumbPart {
 	public SearchCriteriaPart clickCriteriaSearchButton() {
 		getCriteriaSearchButton().click();
 		return this;
+	}
+	public SearchSuccessPage searchNewProduct(Product product) {
+		getCriteriaSearchField().clear();
+		setCriteriaSearchField(product.getName());
+		getCriteriaSearchButton().click();
+		return new SearchSuccessPage(driver);
 	}
 
 	// Functional
