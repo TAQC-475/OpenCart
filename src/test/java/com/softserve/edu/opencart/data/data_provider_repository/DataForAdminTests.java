@@ -30,8 +30,8 @@ public class DataForAdminTests {
         };
     }
 
-    @DataProvider(name = "dataAdmin")
-    public Object[][] NewProductsData(Method method) {
+    @DataProvider
+    public Object[][] cyrillicProductData() {
         return new Object[][]{
                 {UserRepository.get().getAdmin(),
                         NewProductRepository.cyrillicProduct().getProductName(),

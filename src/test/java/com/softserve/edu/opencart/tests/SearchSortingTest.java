@@ -3,36 +3,13 @@ package com.softserve.edu.opencart.tests;
 import com.softserve.edu.opencart.data.CountOfProducts;
 import com.softserve.edu.opencart.data.Pagination;
 import com.softserve.edu.opencart.data.SortByFilter;
+import com.softserve.edu.opencart.data.data_provider_repository.DataForSearchTests;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class SearchSortingTest extends SearchTestRunner {
 
-    //TODO error messages
-
-    @DataProvider
-    private Object[][] dataForSortByFilter() {
-        return new Object[][]{{
-                SortByFilter.MODEL_AZ,
-                SortByFilter.MODEL_AZ
-        }};
-    }
-
-    @DataProvider
-    private Object[][] dataForShowFilter() {
-        return new Object[][]{{
-                CountOfProducts.FIFTY,
-                CountOfProducts.FIFTY
-        }};
-    }
-
-    @DataProvider
-    private Object[][] dataForPagination() {
-        return new Object[][]{{Pagination.NEXT_PAGE, "2"}};
-    }
-
-    @Test(dataProvider = "dataForSortByFilter",
+    @Test(dataProvider = "dataForSortSearchingTests", dataProviderClass = DataForSearchTests.class,
             description = "verify 'Sort by:' drop down filter")
     public void checkSortByDropDownMenu(SortByFilter actualFilter, SortByFilter expectedFilter) {
         successPage()
@@ -42,7 +19,8 @@ public class SearchSortingTest extends SearchTestRunner {
                 String.format("Expect: %s, but found: %s", actualFilter, expectedFilter));
     }
 
-    @Test(dataProvider = "dataForShowFilter", description = "verify 'Show:' drop down filter")
+    @Test(dataProvider = "dataForSortSearchingTests", dataProviderClass = DataForSearchTests.class,
+            description = "verify 'Show:' drop down filter")
     public void checkShowDropDownMenu(CountOfProducts actualInput, CountOfProducts expectedInput) {
         successPage()
                 .showProductsByCount(actualInput);
@@ -55,7 +33,7 @@ public class SearchSortingTest extends SearchTestRunner {
         successPage()
                 .viewProductsByGrid();
         softAssert.assertTrue(successPage().isGridViewDisplayed());
-        
+
         successPage()
                 .viewProductsByList();
         softAssert.assertTrue(successPage().isListViewDisplayed());
@@ -63,7 +41,8 @@ public class SearchSortingTest extends SearchTestRunner {
         softAssert.assertAll();
     }
 
-    @Test(dataProvider = "dataForPagination", description = "verify pagination on 'Search' page")
+    @Test(dataProvider = "dataForSortSearchingTests", dataProviderClass = DataForSearchTests.class,
+            description = "verify pagination on 'Search' page")
     public void checkPagination(Pagination actualPage, String expectedPage) {
         successPage()
                 .clickNeededPage(actualPage);
