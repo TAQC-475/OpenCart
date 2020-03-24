@@ -151,7 +151,10 @@ public class MainMenuComponent {
     }
 
     // Functional
-
+    public String checkFirstProduct(){
+        WebElement product = driver.findElement(By.xpath("//h4/a"));
+        return product.getText();
+    }
     // Business Logic
 
 }

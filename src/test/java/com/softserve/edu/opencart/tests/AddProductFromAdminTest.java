@@ -4,6 +4,7 @@ import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.MenuItems;
 import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.data.creationProductAdminPanel.NewProductRepository;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -42,7 +43,7 @@ public class AddProductFromAdminTest extends LocalAdminTestRunner {
                           String price,
                           String category) {
 
-        loadSignInPage()
+       String expectedProduct = loadSignInPage()
                 .successfulLogin(validAdmin)
                 .gotoProductPage()
                 .gotoAddProductPage()
@@ -58,7 +59,9 @@ public class AddProductFromAdminTest extends LocalAdminTestRunner {
                 .gotoHomePage()
                 .getMainMenuComponent()
                 .chooseCategory(MenuItems.ROUTERS)
-        ;
+                .checkFirstProduct();
+
+        Assert.assertEquals(expectedProduct,name);
 
     }
 
