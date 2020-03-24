@@ -104,7 +104,7 @@ public class WishListPage extends AccountSidebarLoggedPart  {
 
   //BL
 
-  public WishListPage chooseCurrency(Currencies currency) throws InterruptedException {
+  public WishListPage chooseCurrency(Currencies currency) {
     clickCurrencyByPartialName(currency);
     return new WishListPage(driver);
   }

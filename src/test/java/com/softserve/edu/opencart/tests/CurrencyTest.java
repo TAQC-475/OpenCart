@@ -28,7 +28,7 @@ public class CurrencyTest extends LocalTestRunner {
 	}
 
 	@Test(dataProvider = "currency")
-	public void checkChangeCurrency(IUser validUser) throws Exception {
+	public void checkChangeCurrency(IUser validUser) {
 		// Steps
 		WishListPage actual = loadApplication()
 				.gotoLoginPage()
@@ -37,11 +37,9 @@ public class CurrencyTest extends LocalTestRunner {
 				.addProductToWishList(getMacBook())
 				.gotoWishListPage()
 				.chooseCurrency(Currencies.EURO);
-		Thread.sleep(2000);
 		Assert.assertTrue(actual.getPriceText().contains(SYMBOL_EURO));
-
-				Thread.sleep(3000);
-
-//		Assert.assertTrue(actual.contains());
 	}
+
+
+
 }
