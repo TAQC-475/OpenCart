@@ -52,12 +52,13 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * checks if shipping and taxes accordion is expanded, if not, clicks on it and returns page, if expanded just returns new page
+     *
      * @return new ShippingAndTaxesComponent page
      */
     public ShippingAndTaxesComponent goToShippingAndTaxesComponent() {
         By shippingAndTaxesComponentExpanded = By.xpath("//a[@aria-expanded = 'true' and contains (text(), 'Estimate Shipping & Taxes')]");
         driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
-        if(isElementPresent(shippingAndTaxesComponentExpanded)){
+        if (isElementPresent(shippingAndTaxesComponentExpanded)) {
             return new ShippingAndTaxesComponent(driver);
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -67,6 +68,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * finds product component by product from param and clicks refresh button
+     *
      * @param product
      * @return refreshed ShoppingCartPage
      */
@@ -83,6 +85,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * finds product component by product from param and clicks remove button
+     *
      * @param product
      * @return new ShoppingCartPage after removing a component
      */
@@ -100,6 +103,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * finds product component by product from param, clears current quantity and sets quantity from param
+     *
      * @param product
      * @param quantity quantity of products
      * @return refreshed ShoppingCartPage
@@ -114,6 +118,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * driver adds element lo list if element is found, if not list is empty
+     *
      * @param by element to check
      * @return true if element is found, false if not
      */
@@ -123,6 +128,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * gets text from sub-total price field and returns BigDecimal value
+     *
      * @return BigDecimal value from sub-total price field
      */
     public BigDecimal getActualSubTotalPrice() {
@@ -132,32 +138,36 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * gets text from flat shipping rate field and returns BigDecimal value
+     *
      * @return BigDecimal value from flat shipping rate field
      */
-    public BigDecimal getOrderFlatShippingRate(){
+    public BigDecimal getOrderFlatShippingRate() {
         WebElement flatShippingRate = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Flat Shipping Rate')]/parent::td/following-sibling::td"));
         return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(flatShippingRate.getText());
     }
 
     /**
      * gets text from total price field and returns BigDecimal value
+     *
      * @return BigDecimal value from total price field
      */
-    public BigDecimal getActualTotalPrice(){
+    public BigDecimal getActualTotalPrice() {
         WebElement total = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//tr[last()]/td[not (child::strong)]"));
         return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(total.getText());
     }
 
     /**
      * gets product container from ShoppingCartPage and returns total price of products in it
+     *
      * @return BigDecimal value of calculated orders total price
      */
-    public BigDecimal getExpectedSubTotalPrice(){
+    public BigDecimal getExpectedSubTotalPrice() {
         return getShoppingCartProductsContainer().calculateExpectedSubTotalPrice();
     }
 
     /**
      * checks if expected and actual sub-total prices are equal
+     *
      * @return true if sub-total prices are equal, false if they don't
      */
     public boolean areExpectedAndActualSubTotalPricesEqual() {
@@ -166,10 +176,20 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * checks if expected and actual total prices are equal
+     *
      * @return true if total prices are equal, false if they don't
      */
-    public boolean areExpectedAndActualTotalPricesEqual(){
+    public boolean areExpectedAndActualTotalPricesEqual() {
         BigDecimal expectedTotalPrice = getExpectedSubTotalPrice().add(getOrderFlatShippingRate());
         return expectedTotalPrice.equals(getActualTotalPrice());
+    }
+
+    public boolean verifyProductRemoved(String expectedRemovedItem) {
+        for (ShoppingCartContainerComponent component : getShoppingCartProductsContainer().getContainerComponents()) {
+            if (component.getProductNameText().equals(expectedRemovedItem)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
