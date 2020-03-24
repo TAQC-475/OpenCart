@@ -35,7 +35,7 @@ public class CurrencyTest extends LocalTestRunner {
 		};
 	}
 
-	@Test(dataProvider = "currencyWishList", priority = 1)
+	@Test(dataProvider = "currencyWishList")
 	public void changeCurrencyInWishList(IUser validUser) {
 		// Steps
 		WishListPage actual = loadApplication()
@@ -48,21 +48,13 @@ public class CurrencyTest extends LocalTestRunner {
 		Assert.assertTrue(actual.getPriceText().contains(SYMBOL_EURO));
 	}
 
-	@Test(dataProvider = "currencyCart", priority = 2)
+	@Test(dataProvider = "currencyCart")
 	public void changeCurrencyInCart(IUser validUser) throws InterruptedException {
 		ShoppingCartPage actual = loadApplication()
 				.gotoHomePage()
 				.getProductComponentsContainer()
 				.addProductToCartDirectly(getIPhone())
 				.goToShoppingCartFromAlert();
-
-		//Assert.assertTrue(actual.getPriceText().contains(SYMBOL_EURO));
-
-
-
-				Thread.sleep(2000);
-
-//		Assert.assertTrue(actual.getPriceText().contains(SYMBOL_EURO));
 	}
 
 
