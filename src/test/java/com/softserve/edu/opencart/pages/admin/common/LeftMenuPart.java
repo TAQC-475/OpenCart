@@ -126,9 +126,9 @@ public class LeftMenuPart extends HeaderPart {
 
     //System
     public WebElement getSystem() {
-        new WaitUtils(driver, 5).waitForJSandJQueryToLoad();
+//        new WaitUtils(driver, 5).waitForJSandJQueryToLoad();
         wait.until(ExpectedConditions.visibilityOf(system));
- //       driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return system;
     }
 
@@ -186,15 +186,15 @@ public class LeftMenuPart extends HeaderPart {
 
     // Business Logic
 
-    public CurrenciesPage gotoCurrenciesPage() {
-        activeNavigatePannel();
-        getNavigationComponent()
-                .clickNavigationOptionByPartialName("System", "Localisation", "Currencies"); // TODO Use Enum
-        return new CurrenciesPage(driver);
-    }
+//    public CurrenciesPage gotoCurrenciesPage() {
+//        activeNavigatePannel();
+//        getNavigationComponent()
+//                .clickNavigationOptionByPartialName("System", "Localisation", "Currencies"); // TODO Use Enum
+//        return new CurrenciesPage(driver);
+//    }
 
     public CurrenciesPage gotoCurrencyPage() {
-        activeNavigatePannel();
+        //activeNavigatePannel();
         clickSystem();
         clickLocalisation();
         clickCurrencies();
