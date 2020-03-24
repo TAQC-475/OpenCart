@@ -1,6 +1,5 @@
 package com.softserve.edu.opencart.tests;
 
-import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.pages.user.search.ProductInfoPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
@@ -47,10 +46,15 @@ public class SearchCriteriaTest extends SearchTestRunner {
     @Test(description = "Search in category")
     public void checkingSearchingInCategories()
     {
-        successPage();
+//        successPage()
+//                .successfulSearch(ProductRepository.getMac())
+//                .chooseCategory(MenuItems.TABLETS.toString());
+
+        Assert.assertTrue(unsuccessPage().getNoProductMessage().isDisplayed());
     }
+
     @Test(description = "Search in product descriptions")
-    public void checkingSearchingInDescription() throws InterruptedException {
+    public void checkingSearchingInDescription() {
         ProductInfoPage productPage =
                 successPage()
                         .successfulSearch(ProductRepository.getProductWithDescription())

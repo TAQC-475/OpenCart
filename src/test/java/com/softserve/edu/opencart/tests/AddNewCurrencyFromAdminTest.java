@@ -10,10 +10,12 @@ import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.pages.admin.currencies.CurrenciesPage;
 
+import java.lang.reflect.Method;
+
 public class AddNewCurrencyFromAdminTest extends LocalAdminTestRunner {
 
 	@DataProvider//(parallel = true)
-	public Object[][] adminAddCurrency() {
+	public Object[][] adminAddCurrency(Method method) {
 		return new Object[][] {
 			{ UserRepository.get().getAdmin(), CurrencyRepository.get().getUACurrency()},
 		};

@@ -2,6 +2,7 @@ package com.softserve.edu.opencart.tests.wishlist;
 
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.UserRepository;
+import com.softserve.edu.opencart.data.data_provider_repository.WishListDataProvider;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListEmptyPage;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListMessagePage;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListPage;
@@ -51,7 +52,7 @@ public class WishListTest extends LocalTestRunner {
   @Test(priority = 2, dataProvider = "productsList", dataProviderClass = WishListDataProvider.class)
   public void emptyWishListTest(List<Product> products) {
     String actual = loadApplication()
-        .searchAndAddProductsToWishList(products)
+        .addProductsToWishList(products)
         .gotoWishListPage()
         .removeAllProductFromWishList()
         .getLabelText();
@@ -88,7 +89,7 @@ public class WishListTest extends LocalTestRunner {
   public void numberEqualityTest(List<Product> products) {
 
     int actual = loadApplication()
-        .searchAndAddProductsToWishList(products)
+        .addProductsToWishList(products)
         .gotoWishListPage()
         .getAmountComponentsInWishList();
 
