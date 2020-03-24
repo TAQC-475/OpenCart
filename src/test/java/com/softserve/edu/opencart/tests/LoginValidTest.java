@@ -22,7 +22,7 @@ public class LoginValidTest extends LocalTestRunner {
         return new Object[]{UserRepository.get().getDefault()};
     }
 
-    @Test(priority = 3, dataProvider = "emailClientDataProvider")
+    @Test(priority = 2, dataProvider = "emailClientDataProvider")
     public void resetPasswordTest(IUser user, EmailUser emailUser, ResetEmailEntity resetEmail ){
         SuccessfulUpdatePasswordLoginPage loginPage = loadApplication()
                 .gotoLoginPage()

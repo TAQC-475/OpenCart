@@ -35,7 +35,7 @@ public class LoginInvalidTest extends LocalTestRunner{
         DataBaseUtils.closeConnection();
     }
 
-    @Test(priority = 2, dataProvider = "invalidUserDataProvider", groups = {"customer_login_clear"})
+    @Test(priority = 3, dataProvider = "invalidUserDataProvider", groups = {"customer_login_clear"})
     public void unsuccessfulLoginTest(IUser invalidUser){
         UnsuccessfulLoginPage loginPage = loadApplication()
                 .gotoLoginPage()
@@ -45,7 +45,7 @@ public class LoginInvalidTest extends LocalTestRunner{
                 .contains(UnsuccessfulLoginPage.EXPECTED_LOGIN_MESSAGE));
     }
 
-    @Test(priority = 4, dataProvider = "invalidUserDataProvider")
+    @Test( priority = 4, dataProvider = "invalidUserDataProvider")
     public void blockLoginTest(IUser invalidUser){
         UnsuccessfulLoginPage unsuccessfulLoginPage = loadApplication()
                 .gotoLoginPage()
