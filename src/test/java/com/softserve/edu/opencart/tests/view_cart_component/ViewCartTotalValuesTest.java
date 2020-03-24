@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.tests.view_cart_component;
 
 import com.softserve.edu.opencart.data.Product;
+import com.softserve.edu.opencart.data.data_provider_repository.ViewCartDataProvider;
 import com.softserve.edu.opencart.pages.user.HomePage;
 import com.softserve.edu.opencart.tests.LocalTestRunner;
 import org.testng.annotations.Test;
@@ -9,7 +10,13 @@ public class ViewCartTotalValuesTest extends LocalTestRunner {
 
 
     @Test(dataProvider = "dataForMultiplyProductsTest", dataProviderClass = ViewCartDataProvider.class)
-    public void checkMultiplyProductsTotalTest(Product mac, Product iphone, int productsSize, String allSubTotal, String allEcoTax, String allVat, String allTotal){
+    public void checkMultiplyProductsTotalTest(Product mac,
+                                               Product iphone,
+                                               int productsSize,
+                                               String allSubTotal,
+                                               String allEcoTax,
+                                               String allVat,
+                                               String allTotal){
         HomePage home = loadApplication()
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(mac)
