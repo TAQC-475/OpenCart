@@ -18,14 +18,14 @@ public class ViewCartCurrencyChangeTest extends LocalTestRunner {
         softAssert.assertEquals(usHome.getSubTotalPriceFromViewCart(), usSubTotal);
         softAssert.assertEquals(usHome.getEcoTaxPriceFromViewCart(), usEcoTax);
         softAssert.assertEquals(usHome.getVATFromViewCart(), usVat);
-        softAssert.assertEquals(usHome.getTotalFromViewCart(), mac.getPrice(Currencies.US_DOLLAR));
+        softAssert.assertEquals(usHome.getTotalSumFromViewCart(), mac.getPrice(Currencies.US_DOLLAR));
 
         HomePage ukHome = usHome.chooseCurrency(Currencies.POUND_STERLING);
         softAssert.assertEquals(ukHome.getProductPriceFromViewCart(mac), mac.getPrice(Currencies.POUND_STERLING));
         softAssert.assertEquals(ukHome.getSubTotalPriceFromViewCart(), ukSubTotal);
         softAssert.assertEquals(ukHome.getEcoTaxPriceFromViewCart(), ukEcoTax);
         softAssert.assertEquals(ukHome.getVATFromViewCart(), ukVat);
-        softAssert.assertEquals(ukHome.getTotalFromViewCart(),mac.getPrice(Currencies.POUND_STERLING));
+        softAssert.assertEquals(ukHome.getTotalSumFromViewCart(),mac.getPrice(Currencies.POUND_STERLING));
 
         softAssert.assertAll();
     }

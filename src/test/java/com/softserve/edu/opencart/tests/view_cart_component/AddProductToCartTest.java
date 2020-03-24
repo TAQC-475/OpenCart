@@ -29,9 +29,9 @@ public class AddProductToCartTest extends LocalTestRunner {
                 .addProductWithOptionsSetQuantity(appleCinemaOptions, appleCinema.getQuantity());
         softAssert.assertTrue(appleAlert.getAlertMessage().isDisplayed());
         softAssert.assertEquals(appleAlert.getAlertMessageText(), String.format(alertMessage, appleCinema.getName()));
-        softAssert.assertEquals(appleAlert.getViewCartProductSize(), productsSize);
+        softAssert.assertEquals(appleAlert.getProductsSizeFromViewCart(), productsSize);
         //ViewCart Summary
-        softAssert.assertEquals(appleAlert.getViewCartComponentTotalAmount(), amount);
+        softAssert.assertEquals(appleAlert.getViewCartButtonTotalAmount(), amount);
         softAssert.assertEquals(appleAlert.getProductNameFromViewCart(iphone), iphone.getName());
         softAssert.assertEquals(appleAlert.getProductNameFromViewCart(mac), mac.getName());
         softAssert.assertEquals(appleAlert.getProductNameFromViewCart(appleCinema), appleCinema.getName());
