@@ -35,11 +35,19 @@ public class SelectShippingMethodModalPage {
         return cancelButton;
     }
 
+    /**
+     * selects flat shipping rate button
+     * @return SelectShippingMethodModalPage with selected flat shipping rate button
+     */
     public SelectShippingMethodModalPage selectFlatShippingRate(){
         driver.findElement(By.xpath("//input[@value =  'flat.flat']")).click();
         return this;
     }
 
+    /**
+     * clicking apply shipping button and switching driver to shopping cart page
+     * @return ShoppingCartPage
+     */
     public ShoppingCartPage clickApplyShippingButton(){
         String selectShippingMethodPageWindow = driver.getWindowHandle();
         driver.findElement(By.xpath("//input[@id =  'button-shipping']")).click();

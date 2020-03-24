@@ -40,22 +40,41 @@ public class ShippingAndTaxesComponent {
         return getQuotesButton;
     }
 
+    /**
+     * selects country in country dropdown
+     * @param countryName name of country which should be selected
+     * @return ShippingAndTaxesComponent page with selected country
+     */
     public ShippingAndTaxesComponent selectCountryByName(String countryName) {
         new Select(driver.findElement(By.xpath("//select[@id = 'input-country']"))).selectByVisibleText(countryName);
         return this;
     }
 
+    /**
+     * selects region/state in region/state dropdown
+     * @param regionStateName name of region/state which should be selected
+     * @return ShippingAndTaxesComponent page with selected region/state
+     */
     public ShippingAndTaxesComponent selectRegionStateByName(String regionStateName) {
         new Select(driver.findElement(By.xpath("//select[@id = 'input-zone']"))).selectByVisibleText(regionStateName);
         return this;
     }
 
+    /**
+     * clears field and inputs new postcode
+     * @param postCode
+     * @return ShippingAndTaxesComponent page with entered postcode
+     */
     public ShippingAndTaxesComponent inputPostCode(String postCode) {
         driver.findElement(By.xpath("//input[@name = 'postcode']")).clear();
         driver.findElement(By.xpath("//input[@name = 'postcode']")).sendKeys(postCode);
         return this;
     }
 
+    /**
+     * clicking getQuotes button and switches to SelectShippingMethodModalPage window
+     * @return SelectShippingMethodModalPage
+     */
     public SelectShippingMethodModalPage switchToSelectShippingMethodPage() {
         String shoppingCartWindow = driver.getWindowHandle();
         driver.findElement(By.xpath("//button[@id = 'button-quote']")).click();
@@ -67,6 +86,10 @@ public class ShippingAndTaxesComponent {
         return new SelectShippingMethodModalPage(driver);
     }
 
+    /**
+     * refreshes page and returns ShoppingCartPage
+     * @return ShoppingCartPage
+     */
     public ShoppingCartPage goToShoppingCartFromShippingAndTaxes(){
         driver.navigate().refresh();
         return new ShoppingCartPage(driver);
