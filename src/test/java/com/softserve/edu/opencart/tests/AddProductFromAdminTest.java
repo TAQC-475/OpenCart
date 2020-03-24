@@ -4,6 +4,7 @@ import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.MenuItems;
 import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.data.creationProductAdminPanel.NewProductRepository;
+import com.softserve.edu.opencart.data.dataproviderrepository.DataForAdminTests;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -12,30 +13,7 @@ import java.lang.reflect.Method;
 
 public class AddProductFromAdminTest extends LocalAdminTestRunner {
 
-    @DataProvider(name = "addRouterFromAdmin")
-    public Object[][] ProductsData(Method method) {
-        return new Object[][]{
-                {UserRepository.get().getAdmin(),
-                        NewProductRepository.router().getProductName(),
-                        NewProductRepository.router().getMetaTagTitle(),
-                        NewProductRepository.router().getModel(),
-                        NewProductRepository.router().getPrice(),
-                        NewProductRepository.router().getCategory()}
-        };
-    }
-
-    @DataProvider(name = "dataAdmin")
-    public Object[][] NewProductsData(Method method) {
-        return new Object[][]{
-                {UserRepository.get().getAdmin(),
-                        NewProductRepository.cyrillicProduct().getProductName(),
-                        NewProductRepository.cyrillicProduct().getMetaTagTitle(),
-                        NewProductRepository.cyrillicProduct().getModel()}
-        };
-    }
-
-
-    @Test(dataProvider = "addRouterFromAdmin")
+    @Test(dataProvider = "addRouterFromAdmin", dataProviderClass = DataForAdminTests.class)
     public void addRouter(IUser validAdmin,
                           String name,
                           String tagTitle,
@@ -65,7 +43,7 @@ public class AddProductFromAdminTest extends LocalAdminTestRunner {
 
     }
 
-    @Test(dataProvider = "dataAdmin",
+    @Test(dataProvider = "dataAdmin", dataProviderClass = DataForAdminTests.class,
             description = "This test verifies adding new product on cyrillic")
     public void addCyrillicProduct(IUser validAdmin,
                                    String name,
