@@ -35,12 +35,12 @@ public abstract class LocalTestRunner {
 
     @BeforeSuite
     public void beforeSuite() {
-        drivers = new HashMap<>();
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeClass
     public void beforeClass(ITestContext context) {
+        drivers = new HashMap<>();
         for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
             if (entry.getKey().toLowerCase().equals("url")) {
                 url = entry.getValue();
