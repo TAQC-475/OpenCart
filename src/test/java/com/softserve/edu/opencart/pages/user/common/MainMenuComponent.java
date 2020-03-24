@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.pages.user.common;
 
-import com.softserve.edu.opencart.data.MenuItems;
+import com.softserve.edu.opencart.data.Categories;
+import com.softserve.edu.opencart.data.creation_product_admin_panel.NewProductRepository;
 import com.softserve.edu.opencart.tools.ErrorUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,15 +12,13 @@ import java.util.List;
 
 public class MainMenuComponent {
 
-    protected final String LIST_SUB_CATEGORIES_CSSSELECTOR = "div.dropdown-inner ul.list-unstyled li";
-    protected final String LIST_SUB_CATEGORIES_XPATH = "//div[@class='dropdown-inner']/ul[@class='list-unstyled']/li/a";
-    protected final String DROPDOWN_TOP_MENU_CSSSELECTOR = "#menu .dropdown-menu";
+    protected final String LIST_SUB_CATEGORIES_XPATH = "//li[@class='dropdown open']/div/div";
     protected final String DROPDOWN_SHOW_ALL_XPATH = "//li[@class='dropdown open']//a[@class='see-all']";
     protected final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
 
-    private MenuItems categoryItem;
+    private Categories categoryItem;
     private List<WebElement> menuItemList;
-    private List<WebElement> subMenuItemList;
+    private List<List<WebElement>> allTopMenuItems;
 
     private WebDriver driver;
 
@@ -47,12 +46,12 @@ public class MainMenuComponent {
         this.dropdownComponent = dropdownComponent;
     }
 
-    public List<WebElement> getSubMenuItemList() {
-        return subMenuItemList;
+    public List<List<WebElement>> getAllTopMenuItems() {
+        return allTopMenuItems;
     }
 
-    public void setSubMenuItemList(List<WebElement> subMenuItemList) {
-        this.subMenuItemList = subMenuItemList;
+    public void setAllTopMenuItems(List<List<WebElement>> allTopMenuItems) {
+        this.allTopMenuItems = allTopMenuItems;
     }
 
     private void createDropdownComponent(By searchLocator) {
@@ -98,6 +97,11 @@ public class MainMenuComponent {
     public void clickMenuTopByPartialName(String categoryName) {
         clickMenuTopByCategoryPartialName(categoryName);
 
+        createDropdownComponent(By.xpath(LIST_SUB_CATEGORIES_XPATH));
+        System.out.println(getDropdownComponent().getListOptionsText());
+
+//        clickDropdownComponentByPartialName("Show All " + categoryName);
+
         createDropdownComponent(By.xpath(DROPDOWN_SHOW_ALL_XPATH));
         clickDropdownComponentByPartialName("Show All " + categoryName);
     }
@@ -107,13 +111,6 @@ public class MainMenuComponent {
         try {
             if (getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
                 getDropdownComponent().clickDropdownOptionByPartialName(optionName);
-
-//                System.out.print("try to find sub menu item : ");
-//                WebElement el = (searchSubMenuItems(By.xpath("#menu .dropdown-menu a")));
-//                setSubMenuItemList(searchSubMenuItems(By.xpath(LIST_SUB_CATEGORIES_XPATH)));
-//                System.out.println(subMenuItemList.toString());
-
-//                System.out.println(getListSubCategoryNames().toString());
                 dropdownComponent = null;
             }
         } catch (Exception e) {
@@ -127,7 +124,7 @@ public class MainMenuComponent {
         return result;
     }
 
-    public MainMenuComponent chooseCategory(MenuItems menuItem) {
+    public MainMenuComponent chooseCategory(Categories menuItem) {
         clickMenuTopByPartialName(menuItem.toString());
 
         try {
@@ -146,15 +143,19 @@ public class MainMenuComponent {
         }catch (Exception e){
             System.out.println("error");
         }
+        assert element != null;
         System.out.println(element.getText());
         return element;
     }
 
     // Functional
+
     public String checkFirstProduct(){
-        WebElement product = driver.findElement(By.xpath("//h4/a"));
+        String productName = NewProductRepository.router().getProductName();
+        WebElement product = driver.findElement(By.xpath(String.format("//h4/a[text()='%s']", productName)));
         return product.getText();
     }
+
     // Business Logic
 
 }

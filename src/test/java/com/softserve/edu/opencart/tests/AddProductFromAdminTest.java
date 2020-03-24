@@ -1,7 +1,7 @@
 package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.IUser;
-import com.softserve.edu.opencart.data.MenuItems;
+import com.softserve.edu.opencart.data.Categories;
 import com.softserve.edu.opencart.data.data_provider_repository.DataForAdminTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -26,7 +26,8 @@ public class AddProductFromAdminTest extends LocalAdminTestRunner {
                 .typeModel(model);
     }
 
-    @Test(dataProvider = "addRouterProduct", dataProviderClass = DataForAdminTests.class)
+    @Test(dataProvider = "addRouterProduct", dataProviderClass = DataForAdminTests.class, priority = 2)
+
     public void addRouter(IUser validAdmin,
                           String name,
                           String tagTitle,
@@ -49,14 +50,14 @@ public class AddProductFromAdminTest extends LocalAdminTestRunner {
                 .gotoModifiedCategoriesPage()
                 .gotoHomePage()
                 .getMainMenuComponent()
-                .chooseCategory(MenuItems.ROUTERS)
+                .chooseCategory(Categories.ROUTERS)
                 .checkFirstProduct();
 
         Assert.assertEquals(expectedProduct,name);
     }
 
-    @Test(dataProvider = "addRoutersCategory",  dataProviderClass = DataForAdminTests.class)
-    public void addNewCategory(IUser validAdmin, String name, String title, String parent) throws InterruptedException {
+    @Test(dataProvider = "addRoutersCategory",  dataProviderClass = DataForAdminTests.class, priority = 1)
+    public void addNewCategory(IUser validAdmin, String name, String title, String parent){
 
         loadSignInPage()
                 .successfulLogin(validAdmin)
@@ -70,6 +71,6 @@ public class AddProductFromAdminTest extends LocalAdminTestRunner {
                 .gotoModifiedCatalogPage()
                 .getSuccessText();
 
-        Thread.sleep(3000);
+//        Thread.sleep(3000);
     }
 }
