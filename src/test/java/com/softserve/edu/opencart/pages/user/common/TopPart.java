@@ -404,6 +404,11 @@ public abstract class TopPart {
         return new SearchSuccessPage(driver);
     }
 
+    public SearchSuccessPage successfulCriteriaSearch(Product product) {
+        fillSearchTopField(product);
+        clickSearchTopButton();
+        return new SearchSuccessPage(driver);
+    }
     public SearchUnsuccessPage unsuccessfulSearch(Product product) {
         //public SearchUnsuccessPage unsuccessfulSearch(Product product){
         fillSearchTopField(product);
