@@ -3,7 +3,6 @@ package com.softserve.edu.opencart.tests;
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.data.creationProductAdminPanel.NewProductRepository;
-import com.softserve.edu.opencart.data.dataproviderrepository.DataForAdminTests;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -19,8 +18,7 @@ public class AddCyrillicProductByAdmin extends LocalAdminTestRunner {
         };
     }
 
-    @Test(dataProvider = "dataAdmin", dataProviderClass = DataForAdminTests.class,
-            description = "This test verifies adding new product on cyrillic")
+    @Test(dataProvider = "dataAdmin")
     public void AddCyrillicProduct(IUser validAdmin,
                                    String name,
                                    String tagTitle,

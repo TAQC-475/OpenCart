@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.data.creationProductAdminPanel;
+package com.softserve.edu.opencart.data.creation_product_admin_panel;
 
 public final class NewProductRepository {
 

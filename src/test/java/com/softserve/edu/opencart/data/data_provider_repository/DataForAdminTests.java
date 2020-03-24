@@ -1,8 +1,8 @@
-package com.softserve.edu.opencart.data.dataproviderrepository;
+package com.softserve.edu.opencart.data.data_provider_repository;
 
 import com.softserve.edu.opencart.data.UserRepository;
 import com.softserve.edu.opencart.data.categories.MenuCategoryRepository;
-import com.softserve.edu.opencart.data.creationProductAdminPanel.NewProductRepository;
+import com.softserve.edu.opencart.data.creation_product_admin_panel.NewProductRepository;
 import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
