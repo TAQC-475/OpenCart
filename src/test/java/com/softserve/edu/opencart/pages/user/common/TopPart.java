@@ -586,7 +586,10 @@ public abstract class TopPart {
         viewCartComponent = null;
     }
 
-    public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
+    /**
+     * This method added List products to wish list.
+     */
+    public SearchSuccessAlertPage addProductsToWishList(List<Product> products){
 
         int i = 1;
         SearchSuccessAlertPage search = getAddProductsToWishList(products.get(0));
@@ -597,6 +600,7 @@ public abstract class TopPart {
 
         return new SearchSuccessAlertPage(driver);
     }
+
     public SearchSuccessAlertPage getAddProductsToWishList(Product product){
         successfulSearch(product)
             .AddToWishButtonByName(product);
