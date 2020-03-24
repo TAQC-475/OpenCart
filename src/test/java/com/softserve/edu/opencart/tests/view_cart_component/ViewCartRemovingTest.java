@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.tests.view_cart_component;
 
 import com.softserve.edu.opencart.data.*;
+import com.softserve.edu.opencart.data.data_provider_repository.ViewCartDataProvider;
 import com.softserve.edu.opencart.pages.user.HomePage;
 import com.softserve.edu.opencart.tests.LocalTestRunner;
 import org.testng.annotations.Test;
@@ -8,7 +9,12 @@ import org.testng.annotations.Test;
 public class ViewCartRemovingTest extends LocalTestRunner {
 
     @Test(dataProvider = "dataForProductRemovingTest", dataProviderClass = ViewCartDataProvider.class)
-    public void productRemovingTest(Product mac, int emptySize, String emptyQuantity, String emptyPrice, String emptyCartSummary, String emptyCartMessage){
+    public void productRemovingTest(Product mac,
+                                    int emptySize,
+                                    String emptyQuantity,
+                                    String emptyPrice,
+                                    String emptyCartSummary,
+                                    String emptyCartMessage){
         HomePage home = loadApplication()
                 .getProductComponentsContainer()
                 .addProductToCartDirectly(mac)

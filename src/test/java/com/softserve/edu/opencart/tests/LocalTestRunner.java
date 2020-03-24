@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public abstract class LocalTestRunner {
-    private String url = "http://192.168.132.131/opencart/upload/";
+    private String url = "http://192.168.112.130/opencart/upload/";
     private String serverUrlLogout = "http://192.168.132.131/opencart/index.php?route=account/logout";
     private final Long ONE_SECOND_DELAY = 1000L;
     private Map<Long, WebDriver> drivers;
@@ -35,12 +35,12 @@ public abstract class LocalTestRunner {
 
     @BeforeSuite
     public void beforeSuite() {
-        drivers = new HashMap<>();
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeClass
     public void beforeClass(ITestContext context) {
+        drivers = new HashMap<>();
         for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
             if (entry.getKey().toLowerCase().equals("url")) {
                 url = entry.getValue();

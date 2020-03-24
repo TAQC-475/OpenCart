@@ -7,8 +7,8 @@ import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.pages.user.HomePage;
 import com.softserve.edu.opencart.pages.user.common.shopping_cart.ShoppingCartPage;
 import com.softserve.edu.opencart.pages.user.account.*;
-import com.softserve.edu.opencart.pages.user.common.WishList.WishListEmptyPage;
-import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
+import com.softserve.edu.opencart.pages.user.common.wishlist.WishListEmptyPage;
+import com.softserve.edu.opencart.pages.user.common.wishlist.WishListPage;
 import com.softserve.edu.opencart.pages.user.search.ProductsDisplayComponent;
 import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessAlertPage;
@@ -591,7 +591,10 @@ public abstract class TopPart {
         viewCartComponent = null;
     }
 
-    public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
+    /**
+     * This method added List products to wish list.
+     */
+    public SearchSuccessAlertPage addProductsToWishList(List<Product> products){
 
         int i = 1;
         SearchSuccessAlertPage search = getAddProductsToWishList(products.get(0));
@@ -602,6 +605,7 @@ public abstract class TopPart {
 
         return new SearchSuccessAlertPage(driver);
     }
+
     public SearchSuccessAlertPage getAddProductsToWishList(Product product){
         successfulSearch(product)
             .AddToWishButtonByName(product);

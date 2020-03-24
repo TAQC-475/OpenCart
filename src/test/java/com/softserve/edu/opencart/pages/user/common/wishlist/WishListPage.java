@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.user.common.WishList;
+package com.softserve.edu.opencart.pages.user.common.wishlist;
 
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.pages.user.account.AccountSidebarLoggedPart;
@@ -105,7 +105,7 @@ public class WishListPage extends AccountSidebarLoggedPart {
   /**
    * This method add list of products to wish list.
    */
-  public SearchSuccessAlertPage searchAndAddProductsToWishList(List<Product> products){
+  public SearchSuccessAlertPage addProductsToWishList(List<Product> products){
     for (Product product: products){
       successfulSearch(product)
           .AddToWishButtonByName(product);

@@ -1,6 +1,6 @@
 package com.softserve.edu.opencart.pages.user.account;
 
-import com.softserve.edu.opencart.pages.user.common.WishList.WishListPage;
+import com.softserve.edu.opencart.pages.user.common.wishlist.WishListPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

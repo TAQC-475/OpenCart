@@ -1,6 +1,6 @@
 package com.softserve.edu.opencart.data;
 
-    public enum MenuItems {
+    public enum Categories {
 
         ROUTERS("Routers"),
         DESKTOPS("Desktops"),
@@ -14,7 +14,7 @@ package com.softserve.edu.opencart.data;
 
         private String name;
 
-        private MenuItems(String name) {
+        private Categories(String name) {
 
             this.name = name;
         }

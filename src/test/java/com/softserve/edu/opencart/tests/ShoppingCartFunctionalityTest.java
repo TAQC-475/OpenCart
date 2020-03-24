@@ -41,7 +41,6 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
 
         shoppingCartPage = shoppingCartPage.removeComponentByProduct(product1);
         verifyProductRemoved(product1.getName());
-
         softAssert.assertAll();
     }
 
@@ -64,9 +63,7 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
                         .clickApplyShippingButton();
 
         softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod()), "There is no apply shipping message");
-
         softAssert.assertTrue(shoppingCartPage.areExpectedAndActualTotalPricesEqual(), "Expected and actual prices are not equal");
-
         softAssert.assertAll();
     }
 
