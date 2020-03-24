@@ -1,6 +1,6 @@
 package com.softserve.edu.opencart.tests;
 
-import com.softserve.edu.opencart.data.MenuItems;
+import com.softserve.edu.opencart.data.Categories;
 import org.testng.annotations.Test;
 
 public class HorizontalVerticalMenuCompareTest extends LocalTestRunner {
@@ -9,15 +9,15 @@ public class HorizontalVerticalMenuCompareTest extends LocalTestRunner {
 
         loadApplication()
                 .getMainMenuComponent()
-                .chooseCategory(MenuItems.ROUTERS)
-                .chooseCategory(MenuItems.DESKTOPS)
-                .chooseCategory(MenuItems.LAPTOPS_AND_NOTEBOOKS)
-                .chooseCategory(MenuItems.COMPONENTS)
-                .chooseCategory(MenuItems.TABLETS)
-                .chooseCategory(MenuItems.SOFTWARE)
-                .chooseCategory(MenuItems.PHONES_AND_PDAS)
-                .chooseCategory(MenuItems.CAMERAS)
-                .chooseCategory(MenuItems.MP3_PLAYERS)
+                .chooseCategory(Categories.ROUTERS)
+                .chooseCategory(Categories.DESKTOPS)
+                .chooseCategory(Categories.LAPTOPS_AND_NOTEBOOKS)
+                .chooseCategory(Categories.COMPONENTS)
+                .chooseCategory(Categories.TABLETS)
+                .chooseCategory(Categories.SOFTWARE)
+                .chooseCategory(Categories.PHONES_AND_PDAS)
+                .chooseCategory(Categories.CAMERAS)
+                .chooseCategory(Categories.MP3_PLAYERS)
         ;
         Thread.sleep(1000);
 
@@ -28,7 +28,7 @@ public class HorizontalVerticalMenuCompareTest extends LocalTestRunner {
 
         // reading mainMenuItems
 //        System.out.println("Top menu");
-//        List<String> mainMenuItems = loadApplication().getMainMenuComponent().getMenuItemListText();
+//        List<String> mainMenuItems = loadApplication().getMainMenuComponent().getMenuTopText();
 //        System.out.println(mainMenuItems);
 //
 //        // reading leftProductSideBarItems

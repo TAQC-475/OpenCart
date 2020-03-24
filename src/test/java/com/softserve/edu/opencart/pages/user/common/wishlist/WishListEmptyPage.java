@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.pages.user.common.WishList;
+package com.softserve.edu.opencart.pages.user.common.wishlist;
 
 import com.softserve.edu.opencart.pages.user.account.AccountSidebarLoggedPart;
 import com.softserve.edu.opencart.pages.user.account.MyAccountPage;

@@ -1,71 +1,15 @@
 package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.IUser;
-import com.softserve.edu.opencart.data.MenuItems;
-import com.softserve.edu.opencart.data.UserRepository;
-import com.softserve.edu.opencart.data.creationProductAdminPanel.NewProductRepository;
+import com.softserve.edu.opencart.data.Categories;
+import com.softserve.edu.opencart.data.data_provider_repository.DataForAdminTests;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
 
 public class AddProductFromAdminTest extends LocalAdminTestRunner {
 
-    @DataProvider(name = "addRouterFromAdmin")
-    public Object[][] ProductsData(Method method) {
-        return new Object[][]{
-                {UserRepository.get().getAdmin(),
-                        NewProductRepository.router().getProductName(),
-                        NewProductRepository.router().getMetaTagTitle(),
-                        NewProductRepository.router().getModel(),
-                        NewProductRepository.router().getPrice(),
-                        NewProductRepository.router().getCategory()}
-        };
-    }
-
-    @DataProvider(name = "dataAdmin")
-    public Object[][] NewProductsData(Method method) {
-        return new Object[][]{
-                {UserRepository.get().getAdmin(),
-                        NewProductRepository.cyrillicProduct().getProductName(),
-                        NewProductRepository.cyrillicProduct().getMetaTagTitle(),
-                        NewProductRepository.cyrillicProduct().getModel()}
-        };
-    }
-
-
-    @Test(dataProvider = "addRouterFromAdmin")
-    public void addRouter(IUser validAdmin,
-                          String name,
-                          String tagTitle,
-                          String model,
-                          String price,
-                          String category) {
-
-       String expectedProduct = loadSignInPage()
-                .successfulLogin(validAdmin)
-                .gotoProductPage()
-                .gotoAddProductPage()
-                .typeName(name)
-                .typeTitle(tagTitle)
-                .clickDataButton()
-                .typeModel(model)
-                .typePrice(price)
-                .clickLinkButton()
-                .typeCategory(category)
-                .clickCategoryDropdown()
-                .gotoModifiedCategoriesPage()
-                .gotoHomePage()
-                .getMainMenuComponent()
-                .chooseCategory(MenuItems.ROUTERS)
-                .checkFirstProduct();
-
-        Assert.assertEquals(expectedProduct,name);
-
-    }
-
-    @Test(dataProvider = "dataAdmin",
+    @Test(dataProvider = "dataAdmin", dataProviderClass = DataForAdminTests.class,
             description = "This test verifies adding new product on cyrillic")
     public void addCyrillicProduct(IUser validAdmin,
                                    String name,
@@ -80,5 +24,53 @@ public class AddProductFromAdminTest extends LocalAdminTestRunner {
                 .typeTitle(tagTitle)
                 .clickDataButton()
                 .typeModel(model);
+    }
+
+    @Test(dataProvider = "addRouterProduct", dataProviderClass = DataForAdminTests.class, priority = 2)
+
+    public void addRouter(IUser validAdmin,
+                          String name,
+                          String tagTitle,
+                          String model,
+                          String price,
+                          String category) {
+
+        String expectedProduct = loadSignInPage()
+                .successfulLogin(validAdmin)
+                .gotoProductPage()
+                .gotoAddProductPage()
+                .typeName(name)
+                .typeTitle(tagTitle)
+                .clickDataButton()
+                .typeModel(model)
+                .typePrice(price)
+                .clickLinkButton()
+                .typeCategory(category)
+                .clickCategoryDropdown()
+                .gotoModifiedCategoriesPage()
+                .gotoHomePage()
+                .getMainMenuComponent()
+                .chooseCategory(Categories.ROUTERS)
+                .checkFirstProduct();
+
+        Assert.assertEquals(expectedProduct,name);
+    }
+
+    @Test(dataProvider = "addRoutersCategory",  dataProviderClass = DataForAdminTests.class, priority = 1)
+    public void addNewCategory(IUser validAdmin, String name, String title, String parent){
+
+        loadSignInPage()
+                .successfulLogin(validAdmin)
+                .gotoCategoriesPage()
+                .gotoAddCategoryPage()
+                .typeName(name)
+                .typeTitle(title)
+                .clickDataButton()
+                .typeParent(parent)
+                .clickAddToTopMenu()
+                .gotoModifiedCatalogPage()
+                .getSuccessText();
+
+//        Thread.sleep(3000);
     }
 }

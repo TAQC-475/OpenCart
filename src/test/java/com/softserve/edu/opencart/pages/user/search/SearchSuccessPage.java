@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 public class SearchSuccessPage extends SearchCriteriaPart {
 
-    private static ProductsDisplayComponent productsDisplay;
+    private ProductsDisplayComponent productsDisplay;
 
     public SearchSuccessPage(WebDriver driver) {
         super(driver);
@@ -17,8 +17,7 @@ public class SearchSuccessPage extends SearchCriteriaPart {
     }
 
     private void initElements() {
-        // init elements
-        //productsDisplay = new ProductsDisplayComponent(driver);
+        productsDisplay = new ProductsDisplayComponent(driver);
     }
 
     // Page Object
@@ -66,11 +65,11 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return new SearchSuccessPage(driver);
     }
 
-    public static boolean isGridViewDisplayed() {
+    public boolean isGridViewDisplayed() {
         return productsDisplay.isGridViewDisplayed();
     }
 
-    public static boolean isListViewDisplayed() {
+    public boolean isListViewDisplayed() {
         return productsDisplay.isListViewDisplayed();
     }
 
@@ -96,9 +95,13 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return new ProductInfoPage(driver);
     }
 
-    public ProductComponent getFirstProduct()
-    {
+    public ProductComponent getFirstProduct() {
         WebElement firstProduct = driver.findElement(By.cssSelector("#content .product-layout:nth-child(1)"));
         return new ProductComponent(firstProduct);
+    }
+    public ProductInfoPage clickFirstProduct()
+    {
+        getFirstProduct().clickName();
+        return new ProductInfoPage(driver);
     }
 }

@@ -2,23 +2,14 @@ package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.UserRepository;
-import com.softserve.edu.opencart.data.creationProductAdminPanel.NewProductRepository;
+import com.softserve.edu.opencart.data.creation_product_admin_panel.NewProductRepository;
+import com.softserve.edu.opencart.data.data_provider_repository.DataForAdminTests;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class AddCyrillicProductByAdmin extends LocalAdminTestRunner {
 
-    @DataProvider
-    public Object[][] dataAdmin() {
-        return new Object[][]{
-                {UserRepository.get().getAdmin(),
-                        NewProductRepository.cyrillicProduct().getProductName(),
-                        NewProductRepository.cyrillicProduct().getMetaTagTitle(),
-                        NewProductRepository.cyrillicProduct().getModel()}
-        };
-    }
-
-    @Test(dataProvider = "dataAdmin")
+    @Test(dataProvider = "cyrillicProductData", dataProviderClass = DataForAdminTests.class)
     public void AddCyrillicProduct(IUser validAdmin,
                                    String name,
                                    String tagTitle,
