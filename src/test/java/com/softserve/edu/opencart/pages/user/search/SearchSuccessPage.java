@@ -23,7 +23,7 @@ public class SearchSuccessPage extends SearchCriteriaPart {
 
     // productsDisplay page
 
-    public ProductsDisplayComponent getProductsDisplay() {
+    private ProductsDisplayComponent getProductsDisplay() {
         return productsDisplay;
     }
 
@@ -35,7 +35,7 @@ public class SearchSuccessPage extends SearchCriteriaPart {
     }
 
     /**
-     * Click on 'Sort by:' drop down and choose criteria
+     * Click on 'Sort by:' drop down and choose criteria for search result list
      */
     public SearchSuccessPage sortProductsByCriteria(SortByFilter filter) {
         productsDisplay.setSortByDropDownMenu(filter);
@@ -43,7 +43,7 @@ public class SearchSuccessPage extends SearchCriteriaPart {
     }
 
     /**
-     * Click on 'Show:' drop down and choose count of products on page
+     * Click on 'Show:' drop down and choose count of products on page from search result list
      */
     public SearchSuccessPage showProductsByCount(CountOfProducts count) {
         productsDisplay.setShowDropDownMenu(count);
@@ -59,7 +59,7 @@ public class SearchSuccessPage extends SearchCriteriaPart {
     }
 
     /**
-     * Click list button
+     * Click list button and
      */
     public SearchSuccessPage viewProductsByList() {
         productsDisplay.viewProductsByList();
@@ -110,11 +110,17 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return new ProductInfoPage(driver);
     }
 
+    /**
+     * @return first product from search result list
+     */
     public ProductComponent getFirstProduct() {
         WebElement firstProduct = driver.findElement(By.cssSelector(firstProductFromList));
         return new ProductComponent(firstProduct);
     }
 
+    /**
+     * Click on first product from search result list
+     */
     public ProductInfoPage clickFirstProduct() {
         getFirstProduct().clickName();
         return new ProductInfoPage(driver);

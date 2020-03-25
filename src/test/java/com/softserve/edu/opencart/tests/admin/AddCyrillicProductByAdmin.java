@@ -1,7 +1,8 @@
-package com.softserve.edu.opencart.tests;
+package com.softserve.edu.opencart.tests.admin;
 
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.data_provider_repository.DataForAdminTests;
+import com.softserve.edu.opencart.tests.admin.LocalAdminTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

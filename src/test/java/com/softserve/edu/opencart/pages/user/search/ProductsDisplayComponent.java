@@ -48,9 +48,9 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         }
     }
 
-    // Page Object
-
-    // listViewButton
+    /**
+     * Click List button
+     */
     public void clickListViewButton() {
         waitUtils.visibilityOfElement(listViewButton);
         if (!listViewButton.isSelected()) {
@@ -62,7 +62,9 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         return driver.findElement(By.cssSelector(productsListView)).isDisplayed();
     }
 
-    // gridViewButton
+    /**
+     * Click Grid button
+     */
     public void clickGridViewButton() {
         waitUtils.visibilityOfElement(gridViewButton);
         if (!gridViewButton.isSelected()) {
@@ -132,11 +134,17 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
 
     // Functional
 
+    /**
+     * Choose needed number of products which will display
+     */
     public void setShowDropDownMenu(CountOfProducts count) {
         clickShowDropDownButton();
         showDropDownMenu.selectByVisibleText(String.valueOf(count));
     }
 
+    /**
+     * Choose Criteria filter value of products on page
+     */
     public void setSortByDropDownMenu(SortByFilter filter) {
         clickSortByDropDownMenuButton();
         sortByDropDownMenu.selectByVisibleText(filter.toString());

@@ -1,8 +1,9 @@
-package com.softserve.edu.opencart.tests;
+package com.softserve.edu.opencart.tests.admin;
 
 import com.softserve.edu.opencart.pages.admin.account.SigninPage;
 import com.softserve.edu.opencart.pages.admin.account.catalog.ModifiedCatalogPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
+import com.softserve.edu.opencart.tests.LocalTestRunner;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
@@ -14,7 +15,7 @@ public abstract class LocalAdminTestRunner extends LocalTestRunner {
         getDriver().get(adminServerUrl);
     }
 
-    public SigninPage loadSignInPage() {
+    protected SigninPage loadSignInPage() {
         return new SigninPage(getDriver());
     }
     public SearchSuccessPage successPage() {

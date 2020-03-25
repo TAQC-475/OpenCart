@@ -2,7 +2,6 @@ package com.softserve.edu.opencart.data.data_provider_repository;
 
 import com.softserve.edu.opencart.data.CountOfProducts;
 import com.softserve.edu.opencart.data.Pagination;
-import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.data.SortByFilter;
 import org.testng.annotations.DataProvider;
 

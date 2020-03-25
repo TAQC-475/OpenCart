@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.tests;
+package com.softserve.edu.opencart.tests.admin;
 
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.Categories;
