@@ -3,6 +3,7 @@ package com.softserve.edu.opencart.tools;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -52,5 +53,19 @@ public class WaitUtils {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(LOADING_CART_BUTTON_CSS)));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    public void setImplicitWait(int seconds){
+        driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+    }
+
+    public void scrollUntilElementVisible(WebElement element) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].scrollIntoView();", element);
+    }
+
+    public void visibilityOfElement(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 }

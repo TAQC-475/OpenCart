@@ -23,6 +23,32 @@ public class LoginInvalidTest extends LocalTestRunner{
         DataBaseUtils.setLoginedUsersToNull();
     }
 
+
+    @Test(priority = 3, dataProvider = "invalidUserDataProvider", groups = {"customer_login_clear"})
+    public void unsuccessfulLoginTest(IUser invalidUser){
+        UnsuccessfulLoginPage loginPage = loadApplication()
+                .gotoLoginPage()
+                .unsuccessfulLogin(invalidUser);
+
+        assertTrue(loginPage.getAlertWarningText()
+                .contains(UnsuccessfulLoginPage.EXPECTED_LOGIN_MESSAGE));
+    }
+
+    @Test( priority = 4, dataProvider = "invalidUserDataProvider")
+    public void blockLoginTest(IUser invalidUser){
+        UnsuccessfulLoginPage unsuccessfulLoginPage = loadApplication()
+                .gotoLoginPage()
+                .unsuccessfulLogin(invalidUser)
+                .unsuccessfulLogin(invalidUser)
+                .unsuccessfulLogin(invalidUser)
+                .unsuccessfulLogin(invalidUser)
+                .unsuccessfulLogin(invalidUser)
+                .unsuccessfulLogin(invalidUser);
+
+        Assert.assertTrue(unsuccessfulLoginPage.getAlertWarningText()
+                .contains(UnsuccessfulLoginPage.EXPECTED_LOCK_MESSAGE));
+    }
+
     @AfterMethod
     public void afterMethodInvalidUser(ITestResult result){
         Object[] inputArgs = result.getParameters();
@@ -35,28 +61,4 @@ public class LoginInvalidTest extends LocalTestRunner{
         DataBaseUtils.closeConnection();
     }
 
-    @Test(priority = 3, dataProvider = "invalidUserDataProvider", groups = {"customer_login_clear"})
-    public void unsuccessfulLoginTest(IUser invalidUser){
-        UnsuccessfulLoginPage loginPage = loadApplication()
-                .gotoLoginPage()
-                .unsuccessfulLoginPage(invalidUser);
-
-        assertTrue(loginPage.getAlertWarningText()
-                .contains(UnsuccessfulLoginPage.EXPECTED_LOGIN_MESSAGE));
-    }
-
-    @Test( priority = 4, dataProvider = "invalidUserDataProvider")
-    public void blockLoginTest(IUser invalidUser){
-        UnsuccessfulLoginPage unsuccessfulLoginPage = loadApplication()
-                .gotoLoginPage()
-                .unsuccessfulLoginPage(invalidUser)
-                .unsuccessfulLoginPage(invalidUser)
-                .unsuccessfulLoginPage(invalidUser)
-                .unsuccessfulLoginPage(invalidUser)
-                .unsuccessfulLoginPage(invalidUser)
-                .unsuccessfulLoginPage(invalidUser);
-
-        Assert.assertTrue(unsuccessfulLoginPage.getAlertWarningText()
-                .contains(UnsuccessfulLoginPage.EXPECTED_LOCK_MESSAGE));
-    }
 }

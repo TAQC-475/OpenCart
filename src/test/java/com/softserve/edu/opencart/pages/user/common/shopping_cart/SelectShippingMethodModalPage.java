@@ -12,15 +12,15 @@ public class SelectShippingMethodModalPage {
 
     protected WebDriver driver;
 
+    public SelectShippingMethodModalPage(WebDriver driver) {
+        this.driver = driver;
+        initElements();
+    }
+
     public void initElements(){
         flatShippingRate = driver.findElement(By.xpath("//input[@value =  'flat.flat']"));
         applyShippingButton = driver.findElement(By.xpath("//input[@id =  'button-shipping']"));
         cancelButton = driver.findElement(By.xpath("//button[text() =  'Cancel']"));
-    }
-
-    public SelectShippingMethodModalPage(WebDriver driver) {
-        this.driver = driver;
-        initElements();
     }
 
     public WebElement getFlatShippingRate() {
@@ -36,7 +36,7 @@ public class SelectShippingMethodModalPage {
     }
 
     /**
-     * selects flat shipping rate button
+     * clicks flat shipping rate button
      * @return SelectShippingMethodModalPage with selected flat shipping rate button
      */
     public SelectShippingMethodModalPage selectFlatShippingRate(){
@@ -45,7 +45,7 @@ public class SelectShippingMethodModalPage {
     }
 
     /**
-     * clicking apply shipping button and switching driver to shopping cart page
+     * clicking apply shipping button and switching driver to shopping cart page window
      * @return ShoppingCartPage
      */
     public ShoppingCartPage clickApplyShippingButton(){
@@ -59,5 +59,4 @@ public class SelectShippingMethodModalPage {
         new WaitUtils(driver, 10).waitForAlertVisibility();
         return new ShoppingCartPage(driver);
     }
-
 }

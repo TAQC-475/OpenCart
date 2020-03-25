@@ -34,12 +34,13 @@ public class DataForAdminTests {
     @DataProvider(name = "DataForCyrillicProductTests")
     public Object[][] cyrillicProductData(Method method) {
         String testCase = method.getName();
-        if ("AddCyrillicProduct".equalsIgnoreCase(testCase)) {
+        if ("addCyrillicProduct".equalsIgnoreCase(testCase)) {
             return new Object[][]{
                     {UserRepository.get().getAdmin(),
                             NewProductRepository.cyrillicProduct().getProductName(),
                             NewProductRepository.cyrillicProduct().getMetaTagTitle(),
-                            NewProductRepository.cyrillicProduct().getModel()}};
+                            NewProductRepository.cyrillicProduct().getModel(),
+                            NewProductRepository.cyrillicProduct().getCategory()}};
         } else if ("searchCyrillicProduct".equalsIgnoreCase(testCase)) {
             return new Object[][]{{
                     ProductRepository.getCyrikicProduct()

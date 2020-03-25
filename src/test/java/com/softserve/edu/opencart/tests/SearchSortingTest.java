@@ -13,9 +13,8 @@ public class SearchSortingTest extends SearchTestRunner {
 
     @Test(dataProvider = "dataForSortSearchingTests", dataProviderClass = DataForSearchTests.class,
             description = "verify 'Sort by:' drop down filter")
-    public void checkSortByDropDownMenu(Product product, SortByFilter actualFilter, SortByFilter expectedFilter) {
-        loadApplication()
-                .successfulSearch(product)
+    public void checkSortByDropDownMenu(SortByFilter actualFilter, SortByFilter expectedFilter) {
+        successPage()
                 .sortProductsByCriteria(actualFilter);
 
         Assert.assertTrue(successPage().isSortByCorrectCriteria(expectedFilter),
@@ -24,20 +23,17 @@ public class SearchSortingTest extends SearchTestRunner {
 
     @Test(dataProvider = "dataForSortSearchingTests", dataProviderClass = DataForSearchTests.class,
             description = "verify 'Show:' drop down filter")
-    public void checkShowDropDownMenu(Product product, CountOfProducts actualInput, CountOfProducts expectedInput) {
-        loadApplication()
-                .successfulSearch(product)
+    public void checkShowDropDownMenu(CountOfProducts actualInput, CountOfProducts expectedInput) {
+        successPage()
                 .showProductsByCount(actualInput);
 
         Assert.assertTrue(successPage().isShowCorrectQuantity(expectedInput),
                 String.format("Expect: %s, but found: %s", actualInput, expectedInput));
     }
 
-    @Test(dataProvider = "dataForSortSearchingTests", dataProviderClass = DataForSearchTests.class,
-            description = "verify that 'Grid and List' button works properly")
-    public void checkGridAndListView(Product product) {
-        loadApplication()
-                .successfulSearch(product)
+    @Test(description = "verify that 'Grid and List' button works properly")
+    public void checkGridAndListView() {
+        successPage()
                 .viewProductsByGrid();
         softAssert.assertTrue(successPage().isGridViewDisplayed(),
                 "Grid view button isn't displayed");
@@ -52,9 +48,8 @@ public class SearchSortingTest extends SearchTestRunner {
 
     @Test(dataProvider = "dataForSortSearchingTests", dataProviderClass = DataForSearchTests.class,
             description = "verify pagination on 'Search' page")
-    public void checkPagination(Product product, Pagination actualPage, String expectedPage) {
-        loadApplication()
-                .successfulSearch(product)
+    public void checkPagination(Pagination actualPage, String expectedPage) {
+        successPage()
                 .clickNeededPage(actualPage);
 
         Assert.assertTrue(successPage().isPageActive(expectedPage),
@@ -62,9 +57,9 @@ public class SearchSortingTest extends SearchTestRunner {
     }
 
     @Test(dataProvider = "DataForCyrillicProductTests", dataProviderClass = DataForAdminTests.class)
-    public void searchCyrillicProduct(Product cyrillicProduct){
-        String actual = loadApplication()
-                .successfulSearch(cyrillicProduct)
+    public void searchCyrillicProduct(Product cyrillicProduct) {
+        String actual = successPage()
+                .searchNewProduct(cyrillicProduct)
                 .getFirstProduct().getNameText();
 
         Assert.assertEquals(actual, cyrillicProduct.getName(),

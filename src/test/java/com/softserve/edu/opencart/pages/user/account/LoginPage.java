@@ -12,6 +12,7 @@ public class LoginPage extends AccountSidebarGuestPart {
 	private WebElement email;
 	private WebElement password;
 	private WebElement loginButton;
+	private WebElement forgottenPassword;
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -22,6 +23,7 @@ public class LoginPage extends AccountSidebarGuestPart {
 		email = driver.findElement(By.name("email"));
 		password = driver.findElement(By.name("password"));
 		loginButton = driver.findElement(By.cssSelector("input.btn.btn-primary"));
+		forgottenPassword = driver.findElement(By.xpath("//form//a[contains(@href, 'account/forgotten')]"));
 	}
 
 	// Page Object
@@ -29,6 +31,11 @@ public class LoginPage extends AccountSidebarGuestPart {
 	// Functional
 	
 	// email
+
+	public WebElement getForgottenPassword() {
+		return forgottenPassword;
+	}
+
 	public WebElement getEmail() {
 		return email;
 	}
@@ -83,6 +90,10 @@ public class LoginPage extends AccountSidebarGuestPart {
 		getLoginButton().click();
 	}
 
+	public void clickForgottenPassword(){
+		getForgottenPassword().click();
+	}
+
 	// Functional
 
 	private void enterEmail(String email) {
@@ -110,8 +121,13 @@ public class LoginPage extends AccountSidebarGuestPart {
 		return new MyAccountPage(driver);
 	}
 
-	public UnsuccessfulLoginPage unsuccessfulLoginPage(IUser invalidUser){
+	public UnsuccessfulLoginPage unsuccessfulLogin(IUser invalidUser){
 		fillLogin(invalidUser);
 		return new UnsuccessfulLoginPage(driver);
+	}
+
+	public ForgotPasswordPage gotoForgotPasswordPage(){
+		clickForgottenPassword();
+		return new ForgotPasswordPage(driver);
 	}
 }

@@ -4,6 +4,7 @@ import com.softserve.edu.opencart.data.CountOfProducts;
 import com.softserve.edu.opencart.data.Pagination;
 import com.softserve.edu.opencart.data.SortByFilter;
 import com.softserve.edu.opencart.pages.user.common.ProductsContainerComponent;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductsDisplayComponent extends ProductsContainerComponent {
+    private WaitUtils waitUtils = new WaitUtils(driver, 5);
 
     private String productsGridView = ".product-grid";
     private String productsListView = ".product-list";
@@ -50,7 +52,7 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
 
     // listViewButton
     public void clickListViewButton() {
-        visibilityOfElement(listViewButton);
+        waitUtils.visibilityOfElement(listViewButton);
         if (!listViewButton.isSelected()) {
             listViewButton.click();
         }
@@ -62,6 +64,7 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
 
     // gridViewButton
     public void clickGridViewButton() {
+        waitUtils.visibilityOfElement(gridViewButton);
         if (!gridViewButton.isSelected()) {
             gridViewButton.click();
         }
@@ -71,7 +74,9 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         return driver.findElement(By.cssSelector(productsGridView)).isDisplayed();
     }
 
-    // sortByDropDownMenu
+    /**
+     * Sort by: DropDown menu functionality methods
+     */
     public WebElement getInputSortWebElement() {
         return sortByDropDownMenu.getWrappedElement();
     }
@@ -89,7 +94,9 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
     }
 
 
-    // showDropDownMenu
+    /**
+     * Show: dropDown menu functionality methods
+     */
     public WebElement getShowDropDownMenuWebElement() {
         return showDropDownMenu.getWrappedElement();
     }
@@ -106,11 +113,12 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
         return getShowDropDownMenuText().contains(count.toString());
     }
 
-    //Pagination
-
+    /**
+     * Pagination functionality methods
+     */
     public void clickNeedPage(Pagination page) {
         WebElement result = driver.findElement(By.xpath(String.format(paginationArrow, page)));
-        scrollUntilButtonsVisible(result);
+        waitUtils.scrollUntilElementVisible(result);
         if (!result.isSelected()) {
             result.click();
         }
@@ -118,31 +126,21 @@ public class ProductsDisplayComponent extends ProductsContainerComponent {
 
     public boolean isPageActive(String page) {
         WebElement result = driver.findElement(By.xpath(String.format(paginationPage, page)));
-        scrollUntilButtonsVisible(result);
+        waitUtils.scrollUntilElementVisible(result);
         return result.isEnabled();
     }
 
     // Functional
-
-    private void visibilityOfElement(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    private void scrollUntilButtonsVisible(WebElement element) {
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].scrollIntoView();", element);
-    }
 
     public void setShowDropDownMenu(CountOfProducts count) {
         clickShowDropDownButton();
         showDropDownMenu.selectByVisibleText(String.valueOf(count));
     }
 
-    public ProductsDisplayComponent setSortByDropDownMenu(SortByFilter filter) {
+    public void setSortByDropDownMenu(SortByFilter filter) {
         clickSortByDropDownMenuButton();
         sortByDropDownMenu.selectByVisibleText(filter.toString());
-        return new ProductsDisplayComponent(driver);
+
     }
 
     // Business Logic
