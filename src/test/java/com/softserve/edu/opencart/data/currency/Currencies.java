@@ -1,4 +1,4 @@
-package com.softserve.edu.opencart.data;
+package com.softserve.edu.opencart.data.currency;
 
 public enum Currencies {
 	EURO("Euro"),

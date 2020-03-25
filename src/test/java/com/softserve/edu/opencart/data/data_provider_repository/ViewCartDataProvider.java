@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.data.data_provider_repository;
 
 import com.softserve.edu.opencart.data.*;
+import com.softserve.edu.opencart.data.currency.Currencies;
 import org.testng.annotations.DataProvider;
 
 public class ViewCartDataProvider {

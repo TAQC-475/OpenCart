@@ -1,13 +1,12 @@
 package com.softserve.edu.opencart.pages.user;
 
 import com.softserve.edu.opencart.data.Product;
-import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
 import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.softserve.edu.opencart.data.Currencies;
+import com.softserve.edu.opencart.data.currency.Currencies;
 import com.softserve.edu.opencart.pages.user.common.ProductsContainerComponent;
 import com.softserve.edu.opencart.pages.user.common.TopPart;
 

@@ -1,4 +1,6 @@
-package com.softserve.edu.opencart.data;
+package com.softserve.edu.opencart.data.currency;
+
+import com.softserve.edu.opencart.data.UserRepository;
 
 public class CurrencyRepository {
     private static volatile CurrencyRepository instance = null;

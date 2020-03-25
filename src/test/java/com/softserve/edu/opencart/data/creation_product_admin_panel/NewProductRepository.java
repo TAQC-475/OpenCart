@@ -6,7 +6,10 @@ public final class NewProductRepository {
     }
 
     public static NewProduct cyrillicProduct() {
-        return new NewProduct("Самсунг", "Самсунг", "Цьогорічний");
+        return new NewProduct("Самсунг",
+                "Самсунг",
+                "Цьогорічний",
+                "Components");
     }
 
     public static NewProduct router() {

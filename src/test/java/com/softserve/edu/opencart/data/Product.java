@@ -1,5 +1,7 @@
 package com.softserve.edu.opencart.data;
 
+import com.softserve.edu.opencart.data.currency.Currencies;
+
 import java.util.HashMap;
 import java.util.Map;
 

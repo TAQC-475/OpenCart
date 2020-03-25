@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.tests;
 
+import com.softserve.edu.opencart.data.Categories;
 import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.pages.user.search.ProductInfoPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
@@ -46,9 +47,9 @@ public class SearchCriteriaTest extends SearchTestRunner {
     @Test(description = "Search in category")
     public void checkingSearchingInCategories()
     {
-//        successPage()
-//                .successfulSearch(ProductRepository.getMac())
-//                .chooseCategory(MenuItems.TABLETS.toString());
+        successPage()
+                .searchNewProduct(ProductRepository.getMac())
+                .chooseCategory(Categories.TABLETS.toString());
 
         Assert.assertTrue(unsuccessPage().getNoProductMessage().isDisplayed());
     }
@@ -57,7 +58,7 @@ public class SearchCriteriaTest extends SearchTestRunner {
     public void checkingSearchingInDescription() {
         ProductInfoPage productPage =
                 successPage()
-                        .successfulSearch(ProductRepository.getProductWithDescription())
+                        .searchNewProduct(ProductRepository.getProductWithDescription())
                         .clickCriteriaDescription()
                         .clickFirstProduct();
 

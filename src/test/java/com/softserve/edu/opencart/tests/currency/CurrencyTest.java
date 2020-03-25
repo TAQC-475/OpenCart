@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.tests.currency;
 
 import com.softserve.edu.opencart.data.*;
+import com.softserve.edu.opencart.data.currency.Currencies;
 import com.softserve.edu.opencart.pages.user.common.shopping_cart.ShoppingCartPage;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListPage;
 
@@ -8,7 +9,7 @@ import com.softserve.edu.opencart.tests.LocalTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.softserve.edu.opencart.data.data_provider_repository.DataForCurrencyTest;
-import com.softserve.edu.opencart.data.CurrenciesSymbol;
+import com.softserve.edu.opencart.data.currency.CurrenciesSymbol;
 
 import static com.softserve.edu.opencart.data.ProductRepository.getIPhone;
 import static com.softserve.edu.opencart.data.ProductRepository.getMacBook;
@@ -53,7 +54,7 @@ public class CurrencyTest extends LocalTestRunner {
 				.selectCountryByName(validUser.getCountry())
 				.selectRegionStateByName(validUser.getRegionState())
 				.inputPostCode(validUser.getPostCode())
-				.switchToSelectShippingMethodPage()
+				.switchToSelectShippingMethodModalPage()
 				.selectFlatShippingRate()
 				.clickApplyShippingButton();
 		Assert.assertTrue(actual.getTaxRateText().contains(CurrenciesSymbol.US_DOLLAR));
@@ -70,7 +71,7 @@ public class CurrencyTest extends LocalTestRunner {
 				.selectCountryByName(validUser.getCountry())
 				.selectRegionStateByName(validUser.getRegionState())
 				.inputPostCode(validUser.getPostCode())
-				.switchToSelectShippingMethodPage()
+				.switchToSelectShippingMethodModalPage()
 				.selectFlatShippingRate()
 				.clickApplyShippingButton()
 				.chooseCurrency(Currencies.EURO);

@@ -1,9 +1,8 @@
-package com.softserve.edu.opencart.tests;
+package com.softserve.edu.opencart.tests.admin;
 
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.Categories;
 import com.softserve.edu.opencart.data.data_provider_repository.DataForAdminTests;
-import com.softserve.edu.opencart.tests.LocalAdminTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,7 +10,6 @@ import org.testng.annotations.Test;
 public class AddProductFromAdminTest extends LocalAdminTestRunner {
 
     @Test(dataProvider = "addRouterProduct", dataProviderClass = DataForAdminTests.class, priority = 2)
-
     public void addRouter(IUser validAdmin,
                           String name,
                           String tagTitle,

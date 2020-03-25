@@ -59,7 +59,7 @@ public abstract class SearchCriteriaPart extends BreadCrumbPart {
 	}
 	public SearchSuccessPage chooseCategory(String category)
 	{
-		getCriteriaCategory().selectByValue(category);
+		getCriteriaCategory().selectByVisibleText(category);
 		getCriteriaSearchButton().click();
 		return new SearchSuccessPage(driver);
 	}

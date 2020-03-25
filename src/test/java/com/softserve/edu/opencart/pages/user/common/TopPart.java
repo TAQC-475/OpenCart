@@ -1,7 +1,7 @@
 package com.softserve.edu.opencart.pages.user.common;
 
 import com.softserve.edu.opencart.data.ApplicationStatus;
-import com.softserve.edu.opencart.data.Currencies;
+import com.softserve.edu.opencart.data.currency.Currencies;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.User;
 import com.softserve.edu.opencart.pages.user.HomePage;

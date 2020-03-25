@@ -117,7 +117,7 @@ public final class WishListProductComponent {
    * This method gets product price text.
    */
   public BigDecimal getPriceText(){
-    return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(getPrice().getText());
+    return new RegularExpression().getBigDecimalFromPriceField(getPrice().getText());
   }
 
   /**

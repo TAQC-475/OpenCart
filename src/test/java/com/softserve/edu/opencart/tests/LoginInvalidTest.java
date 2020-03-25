@@ -28,7 +28,7 @@ public class LoginInvalidTest extends LocalTestRunner{
     public void unsuccessfulLoginTest(IUser invalidUser){
         UnsuccessfulLoginPage loginPage = loadApplication()
                 .gotoLoginPage()
-                .unsuccessfulLoginPage(invalidUser);
+                .unsuccessfulLogin(invalidUser);
 
         assertTrue(loginPage.getAlertWarningText()
                 .contains(UnsuccessfulLoginPage.EXPECTED_LOGIN_MESSAGE));
@@ -38,12 +38,12 @@ public class LoginInvalidTest extends LocalTestRunner{
     public void blockLoginTest(IUser invalidUser){
         UnsuccessfulLoginPage unsuccessfulLoginPage = loadApplication()
                 .gotoLoginPage()
-                .unsuccessfulLoginPage(invalidUser)
-                .unsuccessfulLoginPage(invalidUser)
-                .unsuccessfulLoginPage(invalidUser)
-                .unsuccessfulLoginPage(invalidUser)
-                .unsuccessfulLoginPage(invalidUser)
-                .unsuccessfulLoginPage(invalidUser);
+                .unsuccessfulLogin(invalidUser)
+                .unsuccessfulLogin(invalidUser)
+                .unsuccessfulLogin(invalidUser)
+                .unsuccessfulLogin(invalidUser)
+                .unsuccessfulLogin(invalidUser)
+                .unsuccessfulLogin(invalidUser);
 
         Assert.assertTrue(unsuccessfulLoginPage.getAlertWarningText()
                 .contains(UnsuccessfulLoginPage.EXPECTED_LOCK_MESSAGE));

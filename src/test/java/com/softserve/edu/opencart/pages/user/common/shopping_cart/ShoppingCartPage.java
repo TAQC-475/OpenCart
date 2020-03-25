@@ -1,11 +1,9 @@
 package com.softserve.edu.opencart.pages.user.common.shopping_cart;
 
-import com.softserve.edu.opencart.data.Currencies;
+import com.softserve.edu.opencart.data.currency.Currencies;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
-import com.softserve.edu.opencart.pages.user.common.wishlist.WishListPage;
 import com.softserve.edu.opencart.tools.RegularExpression;
-import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.math.BigDecimal;
-import java.util.concurrent.TimeUnit;
 
 public class ShoppingCartPage extends BreadCrumbPart {
     private WebElement shoppingCartExpectedText;
@@ -93,11 +90,11 @@ public class ShoppingCartPage extends BreadCrumbPart {
      */
     public ShippingAndTaxesComponent goToShippingAndTaxesComponent() {
         By shippingAndTaxesComponentExpanded = By.xpath("//a[@aria-expanded = 'true' and contains (text(), 'Estimate Shipping & Taxes')]");
-        driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
+        waitUtils.setImplicitWait(1);
         if (isElementPresent(shippingAndTaxesComponentExpanded)) {
             return new ShippingAndTaxesComponent(driver);
         }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        waitUtils.setImplicitWait(10);
         getShippingAndTaxes().click();
         return new ShippingAndTaxesComponent(driver);
     }
@@ -129,11 +126,11 @@ public class ShoppingCartPage extends BreadCrumbPart {
         this.getShoppingCartProductsContainer()
                 .getContainerComponentByProduct(product)
                 .clickRemoveButton();
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        waitUtils.setImplicitWait(0);
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.stalenessOf(this.getShoppingCartProductsContainer()
                         .getContainerComponentByProduct(product).getProductName()));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        waitUtils.setImplicitWait(10);
         return new ShoppingCartPage(driver);
     }
 
@@ -142,7 +139,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
      *
      * @param product
      * @param quantity quantity of products
-     * @return refreshed ShoppingCartPage with entered input quantity
+     * @return refreshed ShoppingCartPage with entered quantity
      */
     public ShoppingCartPage setQuantity(Product product, String quantity) {
         ShoppingCartContainerComponent shoppingCartProductComponent = getShoppingCartProductsContainer()
@@ -169,7 +166,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
      */
     public BigDecimal getActualSubTotalPrice() {
         WebElement subTotal = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Sub-Total')]/parent::td/following-sibling::td"));
-        return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(subTotal.getText());
+        return new RegularExpression().getBigDecimalFromPriceField(subTotal.getText());
     }
 
     /**
@@ -179,7 +176,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
      */
     public BigDecimal getOrderFlatShippingRate() {
         WebElement flatShippingRate = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Flat Shipping Rate')]/parent::td/following-sibling::td"));
-        return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(flatShippingRate.getText());
+        return new RegularExpression().getBigDecimalFromPriceField(flatShippingRate.getText());
     }
 
     /**
@@ -189,13 +186,13 @@ public class ShoppingCartPage extends BreadCrumbPart {
      */
     public BigDecimal getActualTotalPrice() {
         WebElement total = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//tr[last()]/td[not (child::strong)]"));
-        return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(total.getText());
+        return new RegularExpression().getBigDecimalFromPriceField(total.getText());
     }
 
     /**
      * gets product container from ShoppingCartPage and returns total price of products in it
      *
-     * @return BigDecimal value of calculated orders total price
+     * @return BigDecimal value of calculated orders sub-total price
      */
     public BigDecimal getExpectedSubTotalPrice() {
         return getShoppingCartProductsContainer().calculateExpectedSubTotalPrice();
@@ -222,7 +219,14 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     //Currency
     /**
+<<<<<<< HEAD
      * This method is changed currency and return this page with choose currency
+=======
+     * goes through container components list and checks if product from param is not present in it
+     *
+     * @param expectedRemovedItem product expected to be removed
+     * @return false if product is present in list, true if not present
+>>>>>>> 257dc6c7ce80ad1c95d0d4e3baed0ad199050e1b
      */
     public ShoppingCartPage chooseCurrency(Currencies currency) {
         clickCurrencyByPartialName(currency);

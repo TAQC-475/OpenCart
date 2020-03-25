@@ -8,10 +8,12 @@ public class NewProduct {
     private String price;
     private String category;
 
-    public NewProduct(String productName, String metaTagTitle, String model) {
+
+    public NewProduct(String productName, String metaTagTitle, String model, String category) {
         this.productName = productName;
         this.metaTagTitle = metaTagTitle;
         this.model = model;
+        this.category = category;
     }
 
     public NewProduct(String productName, String metaTagTitle, String model, String price, String category) {

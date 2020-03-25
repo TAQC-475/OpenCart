@@ -1,20 +1,20 @@
-package com.softserve.edu.opencart.tests;
-
-import com.softserve.edu.opencart.data.*;
-import com.softserve.edu.opencart.pages.user.account.SuccessfulUpdatePasswordLoginPage;
-import com.softserve.edu.opencart.tools.PropertiesUtils;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
-import java.util.HashMap;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
+//package com.softserve.edu.opencart.tests;
+//
+//import com.softserve.edu.opencart.data.*;
+//import com.softserve.edu.opencart.pages.user.account.SuccessfulUpdatePasswordLoginPage;
+//import com.softserve.edu.opencart.tools.PropertiesUtils;
+//import org.testng.ITestContext;
+//import org.testng.ITestResult;
+//import org.testng.annotations.AfterClass;
+//import org.testng.annotations.AfterMethod;
+//import org.testng.annotations.DataProvider;
+//import org.testng.annotations.Test;
+//
+//import java.util.HashMap;
+//
+//import static org.testng.Assert.assertEquals;
+//import static org.testng.Assert.assertTrue;
+//
 //public class ResetPasswordTest extends LocalTestRunner {
 //    @DataProvider(name = "emailClientDataProvider")
 //    public Object[][] getEmailClient(){
@@ -29,7 +29,7 @@ import static org.testng.Assert.assertTrue;
 //    public void resetPasswordTest(IUser user, EmailUser emailUser, ResetEmailEntity resetEmail ){
 //        SuccessfulUpdatePasswordLoginPage loginPage = loadApplication()
 //                .gotoLoginPage()
-//                .gotoForgottenPasswordRight()
+//                .gotoForgotPasswordPage()
 //                .requestResetEmail(emailUser)
 //                .login(emailUser)
 //                .gotoResetPasswordEmail(resetEmail)

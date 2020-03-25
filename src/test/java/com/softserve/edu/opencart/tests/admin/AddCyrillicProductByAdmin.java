@@ -1,23 +1,20 @@
-package com.softserve.edu.opencart.tests;
+package com.softserve.edu.opencart.tests.admin;
 
 import com.softserve.edu.opencart.data.IUser;
-import com.softserve.edu.opencart.data.Product;
-import com.softserve.edu.opencart.data.UserRepository;
-import com.softserve.edu.opencart.data.creation_product_admin_panel.NewProductRepository;
 import com.softserve.edu.opencart.data.data_provider_repository.DataForAdminTests;
-import com.softserve.edu.opencart.pages.admin.account.catalog.ModifiedCatalogPage;
+import com.softserve.edu.opencart.tests.admin.LocalAdminTestRunner;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class AddCyrillicProductByAdmin extends LocalAdminTestRunner {
 
     @Test(dataProvider = "DataForCyrillicProductTests", dataProviderClass = DataForAdminTests.class,
             description = "This test verifies adding new product on cyrillic")
-    public void AddCyrillicProduct(IUser validAdmin,
+    public void addCyrillicProduct(IUser validAdmin,
                                    String name,
                                    String tagTitle,
-                                   String model) {
+                                   String model,
+                                   String category) {
         loadSignInPage()
                 .successfulLogin(validAdmin)
                 .gotoProductPage()
@@ -26,6 +23,8 @@ public class AddCyrillicProductByAdmin extends LocalAdminTestRunner {
                 .typeTitle(tagTitle)
                 .clickDataButton()
                 .typeModel(model)
+                .clickLinkButton()
+                .typeCategory(category)
                 .gotoModifiedCategoriesPage();
 
         Assert.assertTrue(modifiedCatalogPage().isSuccessTextDisplayed());

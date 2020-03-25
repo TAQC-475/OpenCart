@@ -1,18 +1,15 @@
 package com.softserve.edu.opencart.pages.user.common.wishlist;
 
-import com.softserve.edu.opencart.data.Currencies;
+import com.softserve.edu.opencart.data.currency.Currencies;
 import com.softserve.edu.opencart.data.Product;
-import com.softserve.edu.opencart.pages.user.HomePage;
 import com.softserve.edu.opencart.pages.user.account.AccountSidebarLoggedPart;
 import com.softserve.edu.opencart.pages.user.account.MyAccountPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessAlertPage;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * Wish list page.
