@@ -45,26 +45,6 @@ public class ShoppingCartProductsContainer {
         return containerComponentNames;
     }
 
-    /**
-     * goes trough the list of components present at the page, and check if component with name from param is present
-     * @param productName
-     * @return  component with name from param
-     */
-    protected ShoppingCartContainerComponent getContainerComponentByName(String productName) {
-        ShoppingCartContainerComponent result = null;
-
-        for (ShoppingCartContainerComponent current : getContainerComponents()) {
-            if (current.getProductNameText().toLowerCase().equals(productName.toLowerCase())) {
-                result = current;
-                break;
-            }
-        }
-        if (result == null) {
-            throw new RuntimeException(String.format("Product with name: %s not found", productName));
-        }
-        return result;
-    }
-
     public String getContainerComponentModelByName(String productName) {
         return getContainerComponentByName(productName).getModelText();
     }
@@ -122,15 +102,35 @@ public class ShoppingCartProductsContainer {
     }
 
     /**
+     * goes trough the list of components present at the page, and check if component with name from param is present
+     * @param productName
+     * @return component with name from param
+     */
+    protected ShoppingCartContainerComponent getContainerComponentByName(String productName) {
+        ShoppingCartContainerComponent result = null;
+
+        for (ShoppingCartContainerComponent current : getContainerComponents()) {
+            if (current.getProductNameText().toLowerCase().equals(productName.toLowerCase())) {
+                result = current;
+                break;
+            }
+        }
+        if (result == null) {
+            throw new RuntimeException(String.format("Product with name: %s not found", productName));
+        }
+        return result;
+    }
+
+    /**
      * @param product
-     * @return product component from page by product from param
+     * @return container component by product from param
      */
     public ShoppingCartContainerComponent getContainerComponentByProduct(Product product) {
         return getContainerComponentByName(product.getName());
     }
 
     /**
-     * Calculating shopping page order expected sub-total price
+     * Calculating expected sub-total price by adding total prices of all components from the list
      * @return calculated expected subTotal price
      */
     public BigDecimal calculateExpectedSubTotalPrice() {

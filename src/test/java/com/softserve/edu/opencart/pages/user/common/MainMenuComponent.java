@@ -16,10 +16,9 @@ public class MainMenuComponent {
     protected final String DROPDOWN_SHOW_ALL_XPATH = "//li[@class='dropdown open']//a[@class='see-all']";
     protected final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
 
-    private Categories categoryItem;
     private List<WebElement> menuItemList;
-    private List<List<WebElement>> allTopMenuItems;
-
+    private List<WebElement> subMenuItems;
+    private String allCategories;
     private WebDriver driver;
 
     private DropdownComponent dropdownComponent;
@@ -42,24 +41,28 @@ public class MainMenuComponent {
         return menuItemList;
     }
 
-    public void setDropdownComponent(DropdownComponent dropdownComponent) {
-        this.dropdownComponent = dropdownComponent;
-    }
-
-    public List<List<WebElement>> getAllTopMenuItems() {
-        return allTopMenuItems;
-    }
-
-    public void setAllTopMenuItems(List<List<WebElement>> allTopMenuItems) {
-        this.allTopMenuItems = allTopMenuItems;
-    }
-
     private void createDropdownComponent(By searchLocator) {
         dropdownComponent = new DropdownComponent(driver, searchLocator);
     }
 
     public DropdownComponent getDropdownComponent() {
         return dropdownComponent;
+    }
+
+    public void setSubMenuItems(List<WebElement> subMenuItems) {
+        this.subMenuItems = subMenuItems;
+    }
+
+    public List<WebElement> getSubMenuItems() {
+        return subMenuItems;
+    }
+
+    public void setAllCategories(String input) {
+        allCategories += input;
+    }
+
+    public String getAllCategories(){
+        return allCategories;
     }
 
     public WebElement getMenuTopByCategoryPartialName(String categoryName) {
@@ -69,6 +72,14 @@ public class MainMenuComponent {
                 result = current;
                 break;
             }
+        }
+        return result;
+    }
+
+    public List<String> getSubMenuTopText() {
+        List<String> result = new ArrayList<>();
+        for (WebElement menuItem : getSubMenuItems()) {
+            result.add(menuItem.getText());
         }
         return result;
     }
@@ -94,13 +105,22 @@ public class MainMenuComponent {
         getMenuTopByCategoryPartialName(categoryName).click();
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     public void clickMenuTopByPartialName(String categoryName) {
         clickMenuTopByCategoryPartialName(categoryName);
 
         createDropdownComponent(By.xpath(LIST_SUB_CATEGORIES_XPATH));
-        System.out.println(getDropdownComponent().getListOptionsText());
+//        System.out.println(categoryName);
+        setAllCategories(categoryName);
 
-//        clickDropdownComponentByPartialName("Show All " + categoryName);
+
+        if (getDropdownComponent().isExistDropdownOption()) {
+
+            setSubMenuItems(getDropdownComponent().getListOptions());
+//            System.out.println(getSubMenuTopText());
+            setAllCategories(""+getSubMenuTopText());
+
+        }
 
         createDropdownComponent(By.xpath(DROPDOWN_SHOW_ALL_XPATH));
         clickDropdownComponentByPartialName("Show All " + categoryName);
@@ -126,9 +146,10 @@ public class MainMenuComponent {
 
     public MainMenuComponent chooseCategory(Categories menuItem) {
         clickMenuTopByPartialName(menuItem.toString());
+        System.out.println(getAllCategories());
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1000);  // for demo prezentation
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -136,21 +157,9 @@ public class MainMenuComponent {
         return new MainMenuComponent(driver);
     }
 
-    public WebElement searchSubMenuItems(By searchLocator){
-        WebElement element = null;
-        try {
-            element = driver.findElement(searchLocator);
-        }catch (Exception e){
-            System.out.println("error");
-        }
-        assert element != null;
-        System.out.println(element.getText());
-        return element;
-    }
-
     // Functional
 
-    public String checkFirstProduct(){
+    public String checkFirstProduct() {
         String productName = NewProductRepository.router().getProductName();
         WebElement product = driver.findElement(By.xpath(String.format("//h4/a[text()='%s']", productName)));
         return product.getText();

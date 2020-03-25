@@ -23,17 +23,6 @@ public class LoginInvalidTest extends LocalTestRunner{
         DataBaseUtils.setLoginedUsersToNull();
     }
 
-    @AfterMethod
-    public void afterMethodInvalidUser(ITestResult result){
-        Object[] inputArgs = result.getParameters();
-        IUser invalidUser = (IUser) inputArgs[0];
-        DataBaseUtils.clearLoginedUsers(invalidUser);
-    }
-
-    @AfterClass
-    public void closeDataBaseConnection(){
-        DataBaseUtils.closeConnection();
-    }
 
     @Test(priority = 3, dataProvider = "invalidUserDataProvider", groups = {"customer_login_clear"})
     public void unsuccessfulLoginTest(IUser invalidUser){
@@ -59,4 +48,17 @@ public class LoginInvalidTest extends LocalTestRunner{
         Assert.assertTrue(unsuccessfulLoginPage.getAlertWarningText()
                 .contains(UnsuccessfulLoginPage.EXPECTED_LOCK_MESSAGE));
     }
+
+    @AfterMethod
+    public void afterMethodInvalidUser(ITestResult result){
+        Object[] inputArgs = result.getParameters();
+        IUser invalidUser = (IUser) inputArgs[0];
+        DataBaseUtils.clearLoginedUsers(invalidUser);
+    }
+
+    @AfterClass
+    public void closeDataBaseConnection(){
+        DataBaseUtils.closeConnection();
+    }
+
 }

@@ -9,23 +9,6 @@ import org.testng.annotations.Test;
 
 public class AddProductFromAdminTest extends LocalAdminTestRunner {
 
-    @Test(dataProvider = "dataAdmin", dataProviderClass = DataForAdminTests.class,
-            description = "This test verifies adding new product on cyrillic")
-    public void addCyrillicProduct(IUser validAdmin,
-                                   String name,
-                                   String tagTitle,
-                                   String model) {
-
-        loadSignInPage()
-                .successfulLogin(validAdmin)
-                .gotoProductPage()
-                .gotoAddProductPage()
-                .typeName(name)
-                .typeTitle(tagTitle)
-                .clickDataButton()
-                .typeModel(model);
-    }
-
     @Test(dataProvider = "addRouterProduct", dataProviderClass = DataForAdminTests.class, priority = 2)
 
     public void addRouter(IUser validAdmin,
@@ -49,7 +32,7 @@ public class AddProductFromAdminTest extends LocalAdminTestRunner {
                 .clickCategoryDropdown()
                 .gotoModifiedCategoriesPage()
                 .gotoHomePage()
-                .getMainMenuComponent()
+                .gotoMainMenuComponent()
                 .chooseCategory(Categories.ROUTERS)
                 .checkFirstProduct();
 

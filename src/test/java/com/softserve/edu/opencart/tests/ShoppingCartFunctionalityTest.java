@@ -23,12 +23,14 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
                 .goToShoppingCartFromAlert()
                 .refreshShoppingCartPageByProduct(product1);
 
-        Assert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
+        Assert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh())
+                , "Message about successful refresh is not present");
     }
 
     @Test(dataProvider = "dataForFunctionalityTest", dataProviderClass = DataForShoppingCartFunctionalityTest.class)
     public void verifySubTotalPriceCalculatesCorrectly(User testUser, Product product1, Product product2) {
-        ShoppingCartPage shoppingCartPage = loadApplication().gotoLoginPage()
+        ShoppingCartPage shoppingCartPage = loadApplication()
+                .gotoLoginPage()
                 .successfulLogin(testUser)
                 .gotoHomePage()
                 .getProductComponentsContainer()
@@ -39,7 +41,9 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
                 .goToShoppingCartFromAlert()
                 .setQuantity(product1, product1.getQuantity())
                 .setQuantity(product2, product2.getQuantity());
-        Assert.assertTrue(shoppingCartPage.areExpectedAndActualSubTotalPricesEqual());
+
+        Assert.assertTrue(shoppingCartPage.areExpectedAndActualSubTotalPricesEqual()
+                , "Expected and actual sub-total prices aren't equal");
     }
 
     @Test(dataProvider = "dataForFunctionalityTest", dataProviderClass = DataForShoppingCartFunctionalityTest.class)
@@ -56,13 +60,12 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
                 .goToShoppingCartFromAlert()
                 .removeComponentByProduct(product1);
 
-        verifyProductRemoved(product1.getName());
+        Assert.assertTrue(shoppingCartPage.verifyProductRemoved(product1),String.format("Product %s was not removed", product1));
     }
 
     @Test(dataProvider = "dataForShippingAndTaxesTest", dataProviderClass = DataForShoppingCartFunctionalityTest.class)
-    public void verifyApplyingShippingAndTotalPriceCalculatesCorrectly(User testUser, Product product) {
-        ShoppingCartPage shoppingCartPage =
-                loadApplication()
+    public void verifyApplyingShippingMethodAndTotalPriceCalculatesCorrectly(User testUser, Product product) {
+        ShoppingCartPage shoppingCartPage = loadApplication()
                         .gotoLoginPage()
                         .successfulLogin(testUser)
                         .gotoHomePage()
@@ -77,18 +80,9 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
                         .selectFlatShippingRate()
                         .clickApplyShippingButton();
 
-        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod()), "There is no apply shipping message");
+        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod())
+                , "There is no apply shipping message");
         softAssert.assertTrue(shoppingCartPage.areExpectedAndActualTotalPricesEqual(), "Expected and actual prices are not equal");
         softAssert.assertAll();
-    }
-
-    private void verifyProductRemoved(String expectedRemovedItem) {
-        new ShoppingCartPage(getDriver())
-                .getShoppingCartProductsContainer()
-                .getContainerComponents()
-                .forEach(shoppingCartProductComponent ->
-                        Assert.assertNotEquals(shoppingCartProductComponent.getProductNameText(),
-                                expectedRemovedItem,
-                                String.format("Product %s was not removed", expectedRemovedItem)));
     }
 }

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 public class SuccessfulUpdatePasswordLoginPage extends LoginPage{
     public static final String EXPECTED_UPDATE_MESSAGE = "Success: Your password has been successfully updated.";
 
-    private WebElement alertUpdate;
+    private WebElement updatePasswordMessage;
 
     public SuccessfulUpdatePasswordLoginPage(WebDriver driver){
         super(driver);
@@ -16,14 +16,14 @@ public class SuccessfulUpdatePasswordLoginPage extends LoginPage{
 
     private void initElements(){
 
-        alertUpdate = driver.findElement(By.cssSelector(".alert.alert-success"));
+        updatePasswordMessage = driver.findElement(By.cssSelector(".alert.alert-success"));
     }
 
-    public WebElement getAlertUpdate() {
-        return alertUpdate;
+    public WebElement getUpdatePasswordMessage() {
+        return updatePasswordMessage;
     }
 
-    public String getAlertText(){
-        return getAlertUpdate().getText();
+    public String getMessageText(){
+        return getUpdatePasswordMessage().getText();
     }
 }

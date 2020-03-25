@@ -10,6 +10,7 @@ public class ShippingAndTaxesComponent {
     private WebElement regionState;
     private WebElement postCode;
     private WebElement getQuotesButton;
+
     protected WebDriver driver;
 
     public ShippingAndTaxesComponent(WebDriver driver) {
@@ -41,7 +42,7 @@ public class ShippingAndTaxesComponent {
     }
 
     /**
-     * selects country in country dropdown
+     * selects country from param in country dropdown
      * @param countryName name of country which should be selected
      * @return ShippingAndTaxesComponent page with selected country
      */
@@ -51,7 +52,7 @@ public class ShippingAndTaxesComponent {
     }
 
     /**
-     * selects region/state in region/state dropdown
+     * selects region/state form param in region/state dropdown
      * @param regionStateName name of region/state which should be selected
      * @return ShippingAndTaxesComponent page with selected region/state
      */
@@ -72,7 +73,7 @@ public class ShippingAndTaxesComponent {
     }
 
     /**
-     * clicking getQuotes button and switches to SelectShippingMethodModalPage window
+     * clicking getQuotes button and switches driver to SelectShippingMethodModalPage window
      * @return SelectShippingMethodModalPage
      */
 

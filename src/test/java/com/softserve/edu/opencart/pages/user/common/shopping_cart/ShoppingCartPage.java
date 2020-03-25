@@ -5,6 +5,7 @@ import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListPage;
 import com.softserve.edu.opencart.tools.RegularExpression;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,6 +50,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
     }
 
     //Currency
+
     /**
      * This method gets a web element where is the sub-total price
      * and currency of products which is in the cart
@@ -56,6 +58,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
     public WebElement getSubTotalPrice() {
         return driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Sub-Total')]/parent::td/following-sibling::td"));
     }
+
     /**
      * This method gets a text of price and currency from sub-total webelement
      * of products which is in cart
@@ -64,12 +67,14 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return getSubTotalPrice().getText();
     }
     //Currency
+
     /**
      * This method gets a web element where is the tax rate
      */
     public WebElement getTaxRate() {
         return driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Flat Shipping Rate')]/parent::td/following-sibling::td"));
     }
+
     /**
      * This method gets a text from tax rate webelement
      */
@@ -83,12 +88,13 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * checks if shipping and taxes accordion is expanded, if not, clicks on it and returns page, if expanded just returns new page
+     *
      * @return new ShippingAndTaxesComponent page
      */
     public ShippingAndTaxesComponent goToShippingAndTaxesComponent() {
         By shippingAndTaxesComponentExpanded = By.xpath("//a[@aria-expanded = 'true' and contains (text(), 'Estimate Shipping & Taxes')]");
         driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
-        if(isElementPresent(shippingAndTaxesComponentExpanded)){
+        if (isElementPresent(shippingAndTaxesComponentExpanded)) {
             return new ShippingAndTaxesComponent(driver);
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -97,23 +103,25 @@ public class ShoppingCartPage extends BreadCrumbPart {
     }
 
     /**
-     * finds product component by product from param and clicks refresh button
+     * finds container component by product from param and clicks refresh button
+     *
      * @param product
      * @return refreshed ShoppingCartPage
      */
     public ShoppingCartPage refreshShoppingCartPageByProduct(Product product) {
-        this.getShoppingCartProductsContainer()
+        getShoppingCartProductsContainer()
                 .getContainerComponentByProduct(product)
                 .clickRefreshButton();
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        waitUtils.setImplicitWait(0);
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(messageAboutSuccessfulRefresh));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        waitUtils.setImplicitWait(10);
         return new ShoppingCartPage(driver);
     }
 
     /**
-     * finds product component by product from param and clicks remove button
+     * finds container component by product from param and clicks remove button
+     *
      * @param product
      * @return new ShoppingCartPage after removing a component
      */
@@ -130,10 +138,11 @@ public class ShoppingCartPage extends BreadCrumbPart {
     }
 
     /**
-     * finds product component by product from param, clears current quantity and sets quantity from param
+     * finds container component by product from param, clears current quantity and sets quantity from param
+     *
      * @param product
      * @param quantity quantity of products
-     * @return refreshed ShoppingCartPage
+     * @return refreshed ShoppingCartPage with entered input quantity
      */
     public ShoppingCartPage setQuantity(Product product, String quantity) {
         ShoppingCartContainerComponent shoppingCartProductComponent = getShoppingCartProductsContainer()
@@ -145,8 +154,9 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * driver adds element lo list if element is found, if not list is empty
+     *
      * @param by element to check
-     * @return true if element is found, false if not
+     * @return true if list is not empty, false if empty
      */
     public boolean isElementPresent(By by) {
         return !driver.findElements(by).isEmpty();
@@ -154,6 +164,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * gets text from sub-total price field and returns BigDecimal value
+     *
      * @return BigDecimal value from sub-total price field
      */
     public BigDecimal getActualSubTotalPrice() {
@@ -163,32 +174,36 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * gets text from flat shipping rate field and returns BigDecimal value
+     *
      * @return BigDecimal value from flat shipping rate field
      */
-    public BigDecimal getOrderFlatShippingRate(){
+    public BigDecimal getOrderFlatShippingRate() {
         WebElement flatShippingRate = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Flat Shipping Rate')]/parent::td/following-sibling::td"));
         return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(flatShippingRate.getText());
     }
 
     /**
      * gets text from total price field and returns BigDecimal value
+     *
      * @return BigDecimal value from total price field
      */
-    public BigDecimal getActualTotalPrice(){
+    public BigDecimal getActualTotalPrice() {
         WebElement total = driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//tr[last()]/td[not (child::strong)]"));
         return new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(total.getText());
     }
 
     /**
      * gets product container from ShoppingCartPage and returns total price of products in it
+     *
      * @return BigDecimal value of calculated orders total price
      */
-    public BigDecimal getExpectedSubTotalPrice(){
+    public BigDecimal getExpectedSubTotalPrice() {
         return getShoppingCartProductsContainer().calculateExpectedSubTotalPrice();
     }
 
     /**
      * checks if expected and actual sub-total prices are equal
+     *
      * @return true if sub-total prices are equal, false if they don't
      */
     public boolean areExpectedAndActualSubTotalPricesEqual() {
@@ -197,9 +212,10 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * checks if expected and actual total prices are equal
+     *
      * @return true if total prices are equal, false if they don't
      */
-    public boolean areExpectedAndActualTotalPricesEqual(){
+    public boolean areExpectedAndActualTotalPricesEqual() {
         BigDecimal expectedTotalPrice = getExpectedSubTotalPrice().add(getOrderFlatShippingRate());
         return expectedTotalPrice.equals(getActualTotalPrice());
     }
@@ -211,5 +227,18 @@ public class ShoppingCartPage extends BreadCrumbPart {
     public ShoppingCartPage chooseCurrency(Currencies currency) {
         clickCurrencyByPartialName(currency);
         return new ShoppingCartPage(driver);
+    }
+        /**
+         * goes through container components list and checks if product form param is not present in it
+         * @param expectedRemovedItem product expected to be removed
+         * @return false if product is present in  list, true if don't
+         */
+    public boolean verifyProductRemoved(Product expectedRemovedItem) {
+        for (ShoppingCartContainerComponent component : getShoppingCartProductsContainer().getContainerComponents()) {
+            if (component.getProductNameText().equals(expectedRemovedItem.getName())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -68,6 +68,21 @@ public class DropdownComponent {
         return result;
     }
 
+    public boolean isExistDropdownOption()
+    {
+        boolean isFound = false;
+        for (String current : getListOptionsText())
+        {
+            if (!current.toLowerCase()
+                    .equals(""))
+            {
+                isFound = true;
+                break;
+            }
+        }
+        return isFound;
+    }
+
     public boolean isExistDropdownOptionByPartialName(String optionName)
     {
     	boolean isFound = false;

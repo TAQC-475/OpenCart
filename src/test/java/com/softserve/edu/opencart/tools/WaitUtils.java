@@ -53,4 +53,8 @@ public class WaitUtils {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(LOADING_CART_BUTTON_CSS)));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
+
+    public void setImplicitWait(int seconds){
+        driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+    }
 }
