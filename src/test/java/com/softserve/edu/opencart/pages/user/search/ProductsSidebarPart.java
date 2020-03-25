@@ -44,7 +44,7 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
         }
     }
 
-    private String withoutNumbers(String strInput) {
+    public String withoutNumbers(String strInput) {
         String strResult = "";
         Pattern p = Pattern.compile("[a-zA-Z].+[^ (0-9)]");
         Matcher m = p.matcher(strInput);
