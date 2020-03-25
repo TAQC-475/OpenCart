@@ -10,20 +10,20 @@ public class TopAndLeftMenuTest extends LocalTestRunner {
     @Test
     public void menuTest() {
 
-        Map<String, List<String>> topMenuCategories = loadApplication()
-                .gotoMainMenuComponent()
-                .getMenuCategoriesMap();
-
-//        List<String> leftMenuItems = loadApplication()
+//        Map<String, List<String>> topMenuCategories = loadApplication()
 //                .gotoMainMenuComponent()
-//                .gotoEmptyLeftMenu()
-//                .getLeftMenuItemListText();
+//                .getMenuCategoriesMap();
 
-//        System.out.println(leftMenuItems);
+        Map<String, List<String>> leftMenuItems = loadApplication()
+                .gotoMainMenuComponent()
+                .gotoEmptyLeftMenu()
+                .getLeftMenuCategoriesMap();
 
-        System.out.println(topMenuCategories);
+        System.out.println(leftMenuItems);
 
-        Assert.assertEquals(topMenuCategories, topMenuCategories);
+//        System.out.println(topMenuCategories);
+
+        Assert.assertEquals(leftMenuItems, leftMenuItems);
         ;
 
 //        MainMenuComponent menuComponent = loadApplication().gotoMainMenuComponent()
