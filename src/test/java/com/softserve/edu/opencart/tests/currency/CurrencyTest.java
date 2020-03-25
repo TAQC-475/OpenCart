@@ -1,37 +1,23 @@
-package com.softserve.edu.opencart.tests;
+package com.softserve.edu.opencart.tests.currency;
 
-import com.softserve.edu.opencart.data.CurrencyRepository;
-import com.softserve.edu.opencart.data.IUser;
-import com.softserve.edu.opencart.data.UserRepository;
-import com.softserve.edu.opencart.pages.admin.currencies.CurrenciesPage;
-import com.softserve.edu.opencart.pages.user.common.TopPart;
+import com.softserve.edu.opencart.data.*;
 import com.softserve.edu.opencart.pages.user.common.shopping_cart.ShoppingCartPage;
 import com.softserve.edu.opencart.pages.user.common.wishlist.WishListPage;
-import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
-import com.softserve.edu.opencart.data.Currencies;
-import com.softserve.edu.opencart.pages.user.HomePage;
+import com.softserve.edu.opencart.tests.LocalTestRunner;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import com.softserve.edu.opencart.data.data_provider_repository.DataForCurrencyTest;
+import com.softserve.edu.opencart.data.CurrenciesSymbol;
 
 import static com.softserve.edu.opencart.data.ProductRepository.getIPhone;
 import static com.softserve.edu.opencart.data.ProductRepository.getMacBook;
 
 
 public class CurrencyTest extends LocalTestRunner {
-	final String SYMBOL_DOLAR = "$";
-	final String SYMBOL_EURO = "€";
-	final String POUND_STERLING = "£";
-
-	@DataProvider
-	public Object[][] currency() {
-		return new Object[][]{
-				{UserRepository.get().getShoppingCartUser()},
-		};
-	}
 
 	//тест перевіряє чи зміниться валюта у вішлісті
-	@Test(dataProvider = "currency")
+	@Test(dataProvider = "currency", dataProviderClass = DataForCurrencyTest.class, priority = 2)
 	public void changeCurrencyInWishList(IUser validUser) {
 		// Steps
 		WishListPage actual = loadApplication()
@@ -41,10 +27,10 @@ public class CurrencyTest extends LocalTestRunner {
 				.addProductToWishList(getMacBook())
 				.gotoWishListPage()
 				.chooseCurrency(Currencies.EURO);
-		Assert.assertTrue(actual.getPriceText().contains(SYMBOL_EURO));
+		Assert.assertTrue(actual.getPriceText().contains(CurrenciesSymbol.EURO));
 	}
 	//тест перевіряє чи зміниться валюта у кошику
-	@Test(dataProvider = "currency")
+	@Test(dataProvider = "currency", dataProviderClass = DataForCurrencyTest.class, priority = 1)
 	public void changeCurrencyInCart(IUser validUser) {
 		ShoppingCartPage actual = loadApplication()
 				.gotoHomePage()
@@ -52,19 +38,17 @@ public class CurrencyTest extends LocalTestRunner {
 				.addProductToCartDirectly(getIPhone())
 				.goToShoppingCartFromAlert()
 				.chooseCurrency(Currencies.POUND_STERLING);
-		Assert.assertTrue(actual.getSubTotalPriceText().contains(POUND_STERLING));
+		Assert.assertTrue(actual.getSubTotalPriceText().contains(CurrenciesSymbol.POUND_STERLING));
 	}
 	//вибір валюти перед встановдення податку
-	@Test(dataProvider = "currency")
-	public void checkIfCurrencyChengedInCartForTax(IUser validUser) throws InterruptedException {
+	@Test(dataProvider = "currency", dataProviderClass = DataForCurrencyTest.class, priority = 3)
+	public void checkIfCurrencyChengedInCartForTax(IUser validUser) {
 		ShoppingCartPage actual = loadApplication()
-				.gotoLoginPage()
-				.successfulLogin(validUser)
 				.gotoHomePage()
 				.getProductComponentsContainer()
 				.addProductToCartDirectly(getIPhone())
 				.goToShoppingCartFromAlert()
-				.chooseCurrency(Currencies.EURO)
+				.chooseCurrency(Currencies.US_DOLLAR)
 				.goToShippingAndTaxesComponent()
 				.selectCountryByName(validUser.getCountry())
 				.selectRegionStateByName(validUser.getRegionState())
@@ -72,18 +56,15 @@ public class CurrencyTest extends LocalTestRunner {
 				.switchToSelectShippingMethodPage()
 				.selectFlatShippingRate()
 				.clickApplyShippingButton();
-		Thread.sleep(2000);
-		Assert.assertTrue(actual.getTaxRateText().contains(SYMBOL_EURO));
+		Assert.assertTrue(actual.getTaxRateText().contains(CurrenciesSymbol.US_DOLLAR));
 	}
 	//вибір валюти після всьановдення податку(податок пропадає)
-	@Test(dataProvider = "currency")
-	public void checkIfCurrencyChengedInCartForTaxAfterChange(IUser validUser) throws InterruptedException {
+	@Test(dataProvider = "currency", dataProviderClass = DataForCurrencyTest.class, priority = 4)
+	public void checkIfCurrencyChengedInCartForTaxAfterChange(IUser validUser){
 		ShoppingCartPage actual = loadApplication()
-				.gotoLoginPage()
-				.successfulLogin(validUser)
 				.gotoHomePage()
 				.getProductComponentsContainer()
-				.addProductToCartDirectly(getIPhone())
+				.addProductToCartDirectly(getMacBook())
 				.goToShoppingCartFromAlert()
 				.goToShippingAndTaxesComponent()
 				.selectCountryByName(validUser.getCountry())
@@ -93,12 +74,6 @@ public class CurrencyTest extends LocalTestRunner {
 				.selectFlatShippingRate()
 				.clickApplyShippingButton()
 				.chooseCurrency(Currencies.EURO);
-		Thread.sleep(2000);
-		Assert.assertTrue(actual.getTaxRateText().contains(SYMBOL_EURO));
+		Assert.assertTrue(actual.getTaxRateText().contains(CurrenciesSymbol.EURO));
 	}
-
-
-
-
-
 }

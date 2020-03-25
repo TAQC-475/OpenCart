@@ -2,7 +2,6 @@ package com.softserve.edu.opencart.data;
 
 import java.util.List;
 
-import com.github.javafaker.Faker;
 import com.softserve.edu.opencart.tools.CSVReader;
 import com.softserve.edu.opencart.tools.ExcelReader;
 import com.softserve.edu.opencart.tools.PropertiesUtils;
@@ -108,24 +107,24 @@ public final class UserRepository {
 				.setAddress2("address_2")
 				.build();
 	}
-	public IUser getFakeVasyl(){
-		return User.get()
-				.setFirstName("Vasyl")
-				.setLastName("Shchuka")
-				.setEmail("test.user.vasyl@ukr.net")
-				.setTelephone("1234567")
-				.setAddress1("address")
-				.setCity("Fish and Chips")
-				.setPostCode("1212")
-				.setCountry("United Kingdom")
-				.setRegionState("Bristol")
-				.setPassword(new Faker().internet().password())
-				.setSubscribe(true)
-				.setFax("fax")
-				.setCompany("company")
-				.setAddress2("address_2")
-				.build();
-	}
+//	public IUser getFakeVasyl(){
+//		return User.get()
+//				.setFirstName("Vasyl")
+//				.setLastName("Shchuka")
+//				.setEmail("test.user.vasyl@ukr.net")
+//				.setTelephone("1234567")
+//				.setAddress1("address")
+//				.setCity("Fish and Chips")
+//				.setPostCode("1212")
+//				.setCountry("United Kingdom")
+//				.setRegionState("Bristol")
+//				.setPassword(new Faker().internet().password())
+//				.setSubscribe(true)
+//				.setFax("fax")
+//				.setCompany("company")
+//				.setAddress2("address_2")
+//				.build();
+//	}
 
 	public IUser getMrAndersonUser(){
 		return User.get()

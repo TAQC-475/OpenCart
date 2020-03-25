@@ -1,7 +1,8 @@
-package com.softserve.edu.opencart.tests;
+package com.softserve.edu.opencart.tests.currency;
 
 import com.softserve.edu.opencart.data.CurrencyRepository;
 import com.softserve.edu.opencart.data.ICurrency;
+import com.softserve.edu.opencart.tests.LocalAdminTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

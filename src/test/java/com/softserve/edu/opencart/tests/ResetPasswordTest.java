@@ -15,40 +15,40 @@ import java.util.HashMap;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class ResetPasswordTest extends LocalTestRunner {
-    @DataProvider(name = "emailClientDataProvider")
-    public Object[][] getEmailClient(){
-        return new Object[][] {{
-                UserRepository.get().getFakeVasyl()
-                , EmailUserRepository.getVasyl()
-                , EmailRepository.getOpencartResetEmail()}};
-
-    }
-
-    @Test(priority = 2, dataProvider = "emailClientDataProvider")
-    public void resetPasswordTest(IUser user, EmailUser emailUser, ResetEmailEntity resetEmail ){
-        SuccessfulUpdatePasswordLoginPage loginPage = loadApplication()
-                .gotoLoginPage()
-                .gotoForgottenPasswordRight()
-                .requestResetEmail(emailUser)
-                .login(emailUser)
-                .gotoResetPasswordEmail(resetEmail)
-                .goToChangePasswordPage(resetEmail)
-                .resetPassword(user);
-
-        assertEquals(loginPage.getMessageText(), SuccessfulUpdatePasswordLoginPage.EXPECTED_UPDATE_MESSAGE);
-
-        loginPage.successfulLogin(user);
-
-        assertTrue(ApplicationStatus.get().isLogged());
-    }
-
-    @AfterMethod
-    public void updateProperty(ITestResult result){
-        Object[] inputArgs = result.getParameters();
-        IUser fakeVasyl = (IUser) inputArgs[0];
-
-        PropertiesUtils.getInstance().setPropertiesValue("./config.properties",
-                "VASYLS_PASSWORD", fakeVasyl.getPassword());
-    }
-}
+//public class ResetPasswordTest extends LocalTestRunner {
+//    @DataProvider(name = "emailClientDataProvider")
+//    public Object[][] getEmailClient(){
+//        return new Object[][] {{
+//                UserRepository.get().getFakeVasyl()
+//                , EmailUserRepository.getVasyl()
+//                , EmailRepository.getOpencartResetEmail()}};
+//
+//    }
+//
+//    @Test(priority = 2, dataProvider = "emailClientDataProvider")
+//    public void resetPasswordTest(IUser user, EmailUser emailUser, ResetEmailEntity resetEmail ){
+//        SuccessfulUpdatePasswordLoginPage loginPage = loadApplication()
+//                .gotoLoginPage()
+//                .gotoForgottenPasswordRight()
+//                .requestResetEmail(emailUser)
+//                .login(emailUser)
+//                .gotoResetPasswordEmail(resetEmail)
+//                .goToChangePasswordPage(resetEmail)
+//                .resetPassword(user);
+//
+//        assertEquals(loginPage.getMessageText(), SuccessfulUpdatePasswordLoginPage.EXPECTED_UPDATE_MESSAGE);
+//
+//        loginPage.successfulLogin(user);
+//
+//        assertTrue(ApplicationStatus.get().isLogged());
+//    }
+//
+//    @AfterMethod
+//    public void updateProperty(ITestResult result){
+//        Object[] inputArgs = result.getParameters();
+//        IUser fakeVasyl = (IUser) inputArgs[0];
+//
+//        PropertiesUtils.getInstance().setPropertiesValue("./config.properties",
+//                "VASYLS_PASSWORD", fakeVasyl.getPassword());
+//    }
+//}

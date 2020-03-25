@@ -3,6 +3,7 @@ package com.softserve.edu.opencart.tests;
 import com.softserve.edu.opencart.data.IUser;
 import com.softserve.edu.opencart.data.Categories;
 import com.softserve.edu.opencart.data.data_provider_repository.DataForAdminTests;
+import com.softserve.edu.opencart.tests.LocalAdminTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
