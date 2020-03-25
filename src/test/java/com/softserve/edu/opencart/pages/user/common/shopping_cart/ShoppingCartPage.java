@@ -72,7 +72,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
      * @return refreshed ShoppingCartPage
      */
     public ShoppingCartPage refreshShoppingCartPageByProduct(Product product) {
-                getShoppingCartProductsContainer()
+        getShoppingCartProductsContainer()
                 .getContainerComponentByProduct(product)
                 .clickRefreshButton();
         waitUtils.setImplicitWait(0);
@@ -185,6 +185,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     /**
      * goes through container components list and checks if product from param is not present in it
+     *
      * @param expectedRemovedItem product expected to be removed
      * @return false if product is present in list, true if not present
      */

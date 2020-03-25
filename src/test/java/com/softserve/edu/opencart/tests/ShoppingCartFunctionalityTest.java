@@ -12,6 +12,7 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
     /**
      * loading application, logging in, adding products to shopping cart, going to shopping cart,
      * clicking update button and verifying that message about successful refresh is present
+     *
      * @param testUser testUser from UserRepository
      * @param product1 product form ProductRepository
      * @param product2 product form ProductRepository
@@ -37,6 +38,7 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
     /**
      * loading application, logging in, adding products to shopping cart, going to shopping cart, setting quantity for each product,
      * calculating expected sub-total price and verifying that expected and actual sub-total prices are equal
+     *
      * @param testUser testUser from UserRepository
      * @param product1 product form ProductRepository
      * @param product2 product form ProductRepository
@@ -63,6 +65,7 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
     /**
      * loading application, logging in, adding products to shopping cart, going to shopping cart,
      * clicking remove button and verifying that product is actually removed
+     *
      * @param testUser testUser from UserRepository
      * @param product1 product form ProductRepository
      * @param product2 product form ProductRepository
@@ -81,7 +84,7 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
                 .goToShoppingCartFromAlert()
                 .removeComponentByProduct(product1);
 
-        Assert.assertTrue(shoppingCartPage.verifyProductRemoved(product1),String.format("Product %s was not removed", product1));
+        Assert.assertTrue(shoppingCartPage.verifyProductRemoved(product1), String.format("Product %s was not removed", product1));
     }
 
     /**
@@ -89,25 +92,26 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
      * entering user shipping data, choosing shipping method,
      * verifying that message about applying shipping method is present
      * and verifying that expected and actual total prices are equal
+     *
      * @param testUser testUser from UserRepository
-     * @param product product form ProductRepository
+     * @param product  product form ProductRepository
      */
     @Test(dataProvider = "dataForShippingAndTaxesTest", dataProviderClass = DataForShoppingCartFunctionalityTest.class)
     public void verifyApplyingShippingMethodAndTotalPriceCalculatesCorrectly(User testUser, Product product) {
         ShoppingCartPage shoppingCartPage = loadApplication()
-                        .gotoLoginPage()
-                        .successfulLogin(testUser)
-                        .gotoHomePage()
-                        .getProductComponentsContainer()
-                        .addProductToCartDirectly(product)
-                        .goToShoppingCartFromAlert()
-                        .goToShippingAndTaxesComponent()
-                        .selectCountryByName(testUser.getCountry())
-                        .selectRegionStateByName(testUser.getRegionState())
-                        .inputPostCode(testUser.getPostCode())
-                        .switchToSelectShippingMethodModalPage()
-                        .selectFlatShippingRate()
-                        .clickApplyShippingButton();
+                .gotoLoginPage()
+                .successfulLogin(testUser)
+                .gotoHomePage()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product)
+                .goToShoppingCartFromAlert()
+                .goToShippingAndTaxesComponent()
+                .selectCountryByName(testUser.getCountry())
+                .selectRegionStateByName(testUser.getRegionState())
+                .inputPostCode(testUser.getPostCode())
+                .switchToSelectShippingMethodModalPage()
+                .selectFlatShippingRate()
+                .clickApplyShippingButton();
 
         softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod())
                 , "There is no apply shipping message");

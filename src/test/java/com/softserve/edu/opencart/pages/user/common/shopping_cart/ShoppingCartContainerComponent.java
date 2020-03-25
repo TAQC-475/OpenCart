@@ -94,6 +94,7 @@ public class ShoppingCartContainerComponent {
 
     /**
      * multiplies product quantity and unit price
+     *
      * @return BigDecimal value of products total price
      */
     public BigDecimal calculateContainerComponentExpectedTotalPrice() {

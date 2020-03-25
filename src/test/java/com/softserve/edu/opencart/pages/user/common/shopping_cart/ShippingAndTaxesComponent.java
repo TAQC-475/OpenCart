@@ -43,6 +43,7 @@ public class ShippingAndTaxesComponent {
 
     /**
      * selects country from param in country dropdown
+     *
      * @param countryName name of country which should be selected
      * @return ShippingAndTaxesComponent page with selected country
      */
@@ -53,6 +54,7 @@ public class ShippingAndTaxesComponent {
 
     /**
      * selects region/state form param in region/state dropdown
+     *
      * @param regionStateName name of region/state which should be selected
      * @return ShippingAndTaxesComponent page with selected region/state
      */
@@ -63,6 +65,7 @@ public class ShippingAndTaxesComponent {
 
     /**
      * clears field and inputs new postcode value
+     *
      * @param postCode
      * @return ShippingAndTaxesComponent page with entered postcode
      */
@@ -74,6 +77,7 @@ public class ShippingAndTaxesComponent {
 
     /**
      * clicking getQuotes button and switches driver to SelectShippingMethodModalPage window
+     *
      * @return SelectShippingMethodModalPage
      */
     public SelectShippingMethodModalPage switchToSelectShippingMethodModalPage() {
@@ -89,9 +93,10 @@ public class ShippingAndTaxesComponent {
 
     /**
      * refreshes page and returns ShoppingCartPage
+     *
      * @return ShoppingCartPage
      */
-    public ShoppingCartPage goToShoppingCartFromShippingAndTaxes(){
+    public ShoppingCartPage goToShoppingCartFromShippingAndTaxes() {
         driver.navigate().refresh();
         return new ShoppingCartPage(driver);
     }
