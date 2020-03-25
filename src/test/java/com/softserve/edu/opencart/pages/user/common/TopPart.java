@@ -33,6 +33,7 @@ public abstract class TopPart {
     protected final String DROPDOWN_MYACCOUNT_CSSSELECTOR = ".dropdown-menu-right li";
     //
     protected WebDriver driver;
+    protected WaitUtils waitUtils;
 
 
     //
@@ -57,6 +58,7 @@ public abstract class TopPart {
     public TopPart(WebDriver driver) {
         this.driver = driver;
         isViewCartOpened = false;
+        waitUtils = new WaitUtils(driver, 10);
         initElements();
     }
 

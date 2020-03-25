@@ -3,6 +3,7 @@ package com.softserve.edu.opencart.pages.user.common.shopping_cart;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
 import com.softserve.edu.opencart.tools.RegularExpression;
+import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -67,24 +68,24 @@ public class ShoppingCartPage extends BreadCrumbPart {
     }
 
     /**
-     * finds product component by product from param and clicks refresh button
+     * finds container component by product from param and clicks refresh button
      *
      * @param product
      * @return refreshed ShoppingCartPage
      */
     public ShoppingCartPage refreshShoppingCartPageByProduct(Product product) {
-        this.getShoppingCartProductsContainer()
+                getShoppingCartProductsContainer()
                 .getContainerComponentByProduct(product)
                 .clickRefreshButton();
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        waitUtils.setImplicitWait(0);
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(messageAboutSuccessfulRefresh));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        waitUtils.setImplicitWait(10);
         return new ShoppingCartPage(driver);
     }
 
     /**
-     * finds product component by product from param and clicks remove button
+     * finds container component by product from param and clicks remove button
      *
      * @param product
      * @return new ShoppingCartPage after removing a component
@@ -102,11 +103,11 @@ public class ShoppingCartPage extends BreadCrumbPart {
     }
 
     /**
-     * finds product component by product from param, clears current quantity and sets quantity from param
+     * finds container component by product from param, clears current quantity and sets quantity from param
      *
      * @param product
      * @param quantity quantity of products
-     * @return refreshed ShoppingCartPage
+     * @return refreshed ShoppingCartPage with entered input quantity
      */
     public ShoppingCartPage setQuantity(Product product, String quantity) {
         ShoppingCartContainerComponent shoppingCartProductComponent = getShoppingCartProductsContainer()
@@ -120,7 +121,7 @@ public class ShoppingCartPage extends BreadCrumbPart {
      * driver adds element lo list if element is found, if not list is empty
      *
      * @param by element to check
-     * @return true if element is found, false if not
+     * @return true if list is not empty, false if empty
      */
     public boolean isElementPresent(By by) {
         return !driver.findElements(by).isEmpty();
@@ -184,9 +185,14 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return expectedTotalPrice.equals(getActualTotalPrice());
     }
 
-    public boolean verifyProductRemoved(String expectedRemovedItem) {
+    /**
+     * goes through container components list and checks if product form param is not present in it
+     * @param expectedRemovedItem product expected to be removed
+     * @return false if product is present in  list, true if don't
+     */
+    public boolean verifyProductRemoved(Product expectedRemovedItem) {
         for (ShoppingCartContainerComponent component : getShoppingCartProductsContainer().getContainerComponents()) {
-            if (component.getProductNameText().equals(expectedRemovedItem)) {
+            if (component.getProductNameText().equals(expectedRemovedItem.getName())) {
                 return false;
             }
         }
