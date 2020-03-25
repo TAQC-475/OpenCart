@@ -58,11 +58,11 @@ public class ShoppingCartPage extends BreadCrumbPart {
      */
     public ShippingAndTaxesComponent goToShippingAndTaxesComponent() {
         By shippingAndTaxesComponentExpanded = By.xpath("//a[@aria-expanded = 'true' and contains (text(), 'Estimate Shipping & Taxes')]");
-        driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
+        waitUtils.setImplicitWait(1);
         if (isElementPresent(shippingAndTaxesComponentExpanded)) {
             return new ShippingAndTaxesComponent(driver);
         }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        waitUtils.setImplicitWait(10);
         getShippingAndTaxes().click();
         return new ShippingAndTaxesComponent(driver);
     }
@@ -94,11 +94,11 @@ public class ShoppingCartPage extends BreadCrumbPart {
         this.getShoppingCartProductsContainer()
                 .getContainerComponentByProduct(product)
                 .clickRemoveButton();
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        waitUtils.setImplicitWait(0);
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.stalenessOf(this.getShoppingCartProductsContainer()
                         .getContainerComponentByProduct(product).getProductName()));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        waitUtils.setImplicitWait(10);
         return new ShoppingCartPage(driver);
     }
 

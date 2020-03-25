@@ -59,5 +59,4 @@ public class SelectShippingMethodModalPage {
         new WaitUtils(driver, 10).waitForAlertVisibility();
         return new ShoppingCartPage(driver);
     }
-
 }
