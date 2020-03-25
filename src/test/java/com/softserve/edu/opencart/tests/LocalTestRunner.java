@@ -16,8 +16,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public abstract class LocalTestRunner {
-    private String url = "http://192.168.112.130/opencart/upload/";
-    private String serverUrlLogout = "http://192.168.132.131/opencart/index.php?route=account/logout";
+    private String url = "http://192.168.132.132/opencart/upload/";
+    private String serverUrlLogout = "http://192.168.132.132/opencart/index.php?route=account/logout";
     private final Long ONE_SECOND_DELAY = 1000L;
     private Map<Long, WebDriver> drivers;
     protected SoftAssert softAssert;
