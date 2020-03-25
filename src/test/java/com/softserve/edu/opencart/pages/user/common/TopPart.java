@@ -46,7 +46,6 @@ public abstract class TopPart {
     private WebElement searchTopButton;
     private WebElement cartButton;
     //
-    private ProductsSidebarEmptyPage productsSidebarEmptyPage;
     private MainMenuComponent mainMenuComponent;
     private DropdownComponent dropdownComponent;
     private ViewCartComponent viewCartComponent;
@@ -229,18 +228,15 @@ public abstract class TopPart {
         return getDropdownComponent();
     }
 
-    public MainMenuComponent getMainMenuComponent() {
+    public MainMenuComponent gotoMainMenuComponent() {
+        changeUrl();
         return mainMenuComponent = new MainMenuComponent(driver);
     }
 
-    public ProductsSidebarEmptyPage gotoProductsSidebarEmptyPage() {
-        getProductsSidebarEmptyPage()
-                .gotoLeftMenuBar();
-        return new ProductsSidebarEmptyPage(driver);
-    }
-
-    public ProductsSidebarEmptyPage getProductsSidebarEmptyPage() {
-        return productsSidebarEmptyPage = new ProductsSidebarEmptyPage(driver);
+    private void changeUrl(){
+        String leftMenu = (driver.getCurrentUrl());
+        leftMenu = leftMenu.substring(0,39)+"index.php?route=product/category&path=0";
+        driver.navigate().to(leftMenu);
     }
 
     private void clickDropdownComponentByPartialName(String optionName) {

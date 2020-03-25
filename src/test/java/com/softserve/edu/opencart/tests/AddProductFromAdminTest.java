@@ -32,7 +32,7 @@ public class AddProductFromAdminTest extends LocalAdminTestRunner {
                 .clickCategoryDropdown()
                 .gotoModifiedCategoriesPage()
                 .gotoHomePage()
-                .getMainMenuComponent()
+                .gotoMainMenuComponent()
                 .chooseCategory(Categories.ROUTERS)
                 .checkFirstProduct();
 
