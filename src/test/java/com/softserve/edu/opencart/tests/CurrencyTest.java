@@ -21,21 +21,17 @@ import static com.softserve.edu.opencart.data.ProductRepository.getMacBook;
 public class CurrencyTest extends LocalTestRunner {
 	final String SYMBOL_DOLAR = "$";
 	final String SYMBOL_EURO = "€";
+	final String POUND_STERLING = "£";
 
 	@DataProvider
-	public Object[][] currencyWishList() {
+	public Object[][] currency() {
 		return new Object[][]{
-				{UserRepository.get().getHahaha()},
-		};
-	}
-	@DataProvider
-	public Object[][] currencyCart() {
-		return new Object[][]{
-				{UserRepository.get().getHahaha()},
+				{UserRepository.get().getShoppingCartUser()},
 		};
 	}
 
-	@Test(dataProvider = "currencyWishList")
+	//тест перевіряє чи зміниться валюта у вішлісті
+	@Test(dataProvider = "currency")
 	public void changeCurrencyInWishList(IUser validUser) {
 		// Steps
 		WishListPage actual = loadApplication()
@@ -47,15 +43,61 @@ public class CurrencyTest extends LocalTestRunner {
 				.chooseCurrency(Currencies.EURO);
 		Assert.assertTrue(actual.getPriceText().contains(SYMBOL_EURO));
 	}
-
-	@Test(dataProvider = "currencyCart")
-	public void changeCurrencyInCart(IUser validUser) throws InterruptedException {
+	//тест перевіряє чи зміниться валюта у кошику
+	@Test(dataProvider = "currency")
+	public void changeCurrencyInCart(IUser validUser) {
 		ShoppingCartPage actual = loadApplication()
 				.gotoHomePage()
 				.getProductComponentsContainer()
 				.addProductToCartDirectly(getIPhone())
-				.goToShoppingCartFromAlert();
+				.goToShoppingCartFromAlert()
+				.chooseCurrency(Currencies.POUND_STERLING);
+		Assert.assertTrue(actual.getSubTotalPriceText().contains(POUND_STERLING));
 	}
+	//вибір валюти перед встановдення податку
+	@Test(dataProvider = "currency")
+	public void checkIfCurrencyChengedInCartForTax(IUser validUser) throws InterruptedException {
+		ShoppingCartPage actual = loadApplication()
+				.gotoLoginPage()
+				.successfulLogin(validUser)
+				.gotoHomePage()
+				.getProductComponentsContainer()
+				.addProductToCartDirectly(getIPhone())
+				.goToShoppingCartFromAlert()
+				.chooseCurrency(Currencies.EURO)
+				.goToShippingAndTaxesComponent()
+				.selectCountryByName(validUser.getCountry())
+				.selectRegionStateByName(validUser.getRegionState())
+				.inputPostCode(validUser.getPostCode())
+				.switchToSelectShippingMethodPage()
+				.selectFlatShippingRate()
+				.clickApplyShippingButton();
+		Thread.sleep(2000);
+		Assert.assertTrue(actual.getTaxRateText().contains(SYMBOL_EURO));
+	}
+	//вибір валюти після всьановдення податку(податок пропадає)
+	@Test(dataProvider = "currency")
+	public void checkIfCurrencyChengedInCartForTaxAfterChange(IUser validUser) throws InterruptedException {
+		ShoppingCartPage actual = loadApplication()
+				.gotoLoginPage()
+				.successfulLogin(validUser)
+				.gotoHomePage()
+				.getProductComponentsContainer()
+				.addProductToCartDirectly(getIPhone())
+				.goToShoppingCartFromAlert()
+				.goToShippingAndTaxesComponent()
+				.selectCountryByName(validUser.getCountry())
+				.selectRegionStateByName(validUser.getRegionState())
+				.inputPostCode(validUser.getPostCode())
+				.switchToSelectShippingMethodPage()
+				.selectFlatShippingRate()
+				.clickApplyShippingButton()
+				.chooseCurrency(Currencies.EURO);
+		Thread.sleep(2000);
+		Assert.assertTrue(actual.getTaxRateText().contains(SYMBOL_EURO));
+	}
+
+
 
 
 

@@ -59,6 +59,7 @@ public class WishListPage extends AccountSidebarLoggedPart  {
     return wishListProductsContainerComponent;
   }
 
+  //Currency
   /**
    * This method gets a web element where is the price and currency of products which is in the wish list
    */
@@ -103,7 +104,9 @@ public class WishListPage extends AccountSidebarLoggedPart  {
   }
 
   //BL
-
+  /**
+   * This method is changed currency and return this page with choose currency
+   */
   public WishListPage chooseCurrency(Currencies currency) {
     clickCurrencyByPartialName(currency);
     return new WishListPage(driver);

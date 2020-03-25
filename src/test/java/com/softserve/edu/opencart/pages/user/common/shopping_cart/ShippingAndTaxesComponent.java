@@ -75,6 +75,7 @@ public class ShippingAndTaxesComponent {
      * clicking getQuotes button and switches to SelectShippingMethodModalPage window
      * @return SelectShippingMethodModalPage
      */
+
     public SelectShippingMethodModalPage switchToSelectShippingMethodPage() {
         String shoppingCartWindow = driver.getWindowHandle();
         driver.findElement(By.xpath("//button[@id = 'button-quote']")).click();

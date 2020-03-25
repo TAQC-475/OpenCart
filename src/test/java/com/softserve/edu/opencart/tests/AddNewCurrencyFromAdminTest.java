@@ -22,7 +22,7 @@ public class AddNewCurrencyFromAdminTest extends LocalAdminTestRunner {
 	}
 
 	@Test(dataProvider = "adminAddCurrency")
-	public void checkSuccessful(IUser validAdmin, ICurrency currency) throws Exception {
+	public void checkSuccessful(IUser validAdmin, ICurrency currency){
 		CurrenciesPage currenciesPage = loadSignInPage()
 				.successfulLogin(validAdmin)
 				.gotoCurrencyPage()
