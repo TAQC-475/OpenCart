@@ -64,6 +64,10 @@ public final class ProductRepository {
     public static Product getAllProducts() {
         return new Product("%");
     }
+
+    public static Product getCyrikicProduct(){
+        return new Product("Самсунг");
+    }
     public static Product getSamsungProduct() {
         return new Product("Samsung");
     }

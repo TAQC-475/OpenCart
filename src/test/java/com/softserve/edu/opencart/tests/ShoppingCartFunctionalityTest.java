@@ -1,28 +1,52 @@
 package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.Product;
-import com.softserve.edu.opencart.data.ProductRepository;
 import com.softserve.edu.opencart.data.User;
-import com.softserve.edu.opencart.data.UserRepository;
+import com.softserve.edu.opencart.data.data_provider_repository.DataForShoppingCartFunctionalityTest;
 import com.softserve.edu.opencart.pages.user.common.shopping_cart.ShoppingCartPage;
-import org.testng.annotations.DataProvider;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ShoppingCartFunctionalityTest extends LocalTestRunner {
-    @DataProvider
-    public Object[][] dataForFunctionalityTest() {
-        return new Object[][]{{UserRepository.get().getShoppingCartUser(), ProductRepository.getMacBookForShoppingCart(), ProductRepository.getIPhoneForShoppingCart()}};
+
+    /**
+     * loading application, logging in, adding products to shopping cart, going to shopping cart,
+     * clicking update button and verifying that message about successful refresh is present
+     *
+     * @param testUser testUser from UserRepository
+     * @param product1 product form ProductRepository
+     * @param product2 product form ProductRepository
+     */
+    @Test(dataProvider = "dataForFunctionalityTest", dataProviderClass = DataForShoppingCartFunctionalityTest.class)
+    public void verifyUpdateButtonRefreshesThePage(User testUser, Product product1, Product product2) {
+        ShoppingCartPage shoppingCartPage = loadApplication()
+                .gotoLoginPage()
+                .successfulLogin(testUser)
+                .gotoHomePage()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product1)
+                .goToHomePageFromAlert()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product2)
+                .goToShoppingCartFromAlert()
+                .refreshShoppingCartPageByProduct(product1);
+
+        Assert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh())
+                , "Message about successful refresh is not present");
     }
 
-    @DataProvider
-    public Object[][] dataForShippingAndTaxesTest() {
-        return new Object[][]{{UserRepository.get().getShoppingCartUser(), ProductRepository.getIPhoneForShoppingCart()}};
-    }
-
-    @Test(dataProvider = "dataForFunctionalityTest")
-    public void shoppingCartFunctionalityTest(User testUser, Product product1, Product product2) {
-
-        ShoppingCartPage shoppingCartPage = loadApplication().gotoLoginPage()
+    /**
+     * loading application, logging in, adding products to shopping cart, going to shopping cart, setting quantity for each product,
+     * calculating expected sub-total price and verifying that expected and actual sub-total prices are equal
+     *
+     * @param testUser testUser from UserRepository
+     * @param product1 product form ProductRepository
+     * @param product2 product form ProductRepository
+     */
+    @Test(dataProvider = "dataForFunctionalityTest", dataProviderClass = DataForShoppingCartFunctionalityTest.class)
+    public void verifySubTotalPriceCalculatesCorrectly(User testUser, Product product1, Product product2) {
+        ShoppingCartPage shoppingCartPage = loadApplication()
+                .gotoLoginPage()
                 .successfulLogin(testUser)
                 .gotoHomePage()
                 .getProductComponentsContainer()
@@ -34,96 +58,64 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
                 .setQuantity(product1, product1.getQuantity())
                 .setQuantity(product2, product2.getQuantity());
 
-        softAssert.assertTrue(shoppingCartPage.areExpectedAndActualSubTotalPricesEqual(), "Expected and Actual Sub Total prices are not equal");
-
-        shoppingCartPage = shoppingCartPage.refreshShoppingCartPageByProduct(product2);
-        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()), "There is no refresh success message");
-
-        shoppingCartPage = shoppingCartPage.removeComponentByProduct(product1);
-        verifyProductRemoved(product1.getName());
-        softAssert.assertAll();
+        Assert.assertTrue(shoppingCartPage.areExpectedAndActualSubTotalPricesEqual()
+                , "Expected and actual sub-total prices aren't equal");
     }
 
-    @Test(dataProvider = "dataForShippingAndTaxesTest")
-    public void shippingAndTaxesTest(User testUser, Product product) {
-        ShoppingCartPage shoppingCartPage =
-                loadApplication()
-                        .gotoLoginPage()
-                        .successfulLogin(testUser)
-                        .gotoHomePage()
-                        .getProductComponentsContainer()
-                        .addProductToCartDirectly(product)
-                        .goToShoppingCartFromAlert()
-                        .goToShippingAndTaxesComponent()
-                        .selectCountryByName(testUser.getCountry())
-                        .selectRegionStateByName(testUser.getRegionState())
-                        .inputPostCode(testUser.getPostCode())
-                        .switchToSelectShippingMethodPage()
-                        .selectFlatShippingRate()
-                        .clickApplyShippingButton();
+    /**
+     * loading application, logging in, adding products to shopping cart, going to shopping cart,
+     * clicking remove button and verifying that product is actually removed
+     *
+     * @param testUser testUser from UserRepository
+     * @param product1 product form ProductRepository
+     * @param product2 product form ProductRepository
+     */
+    @Test(dataProvider = "dataForFunctionalityTest", dataProviderClass = DataForShoppingCartFunctionalityTest.class)
+    public void verifyThatRemoveButtonRemovesProduct(User testUser, Product product1, Product product2) {
+        ShoppingCartPage shoppingCartPage = loadApplication()
+                .gotoLoginPage()
+                .successfulLogin(testUser)
+                .gotoHomePage()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product1)
+                .goToHomePageFromAlert()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product2)
+                .goToShoppingCartFromAlert()
+                .removeComponentByProduct(product1);
 
-        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod()), "There is no apply shipping message");
+        Assert.assertTrue(shoppingCartPage.verifyProductRemoved(product1), String.format("Product %s was not removed", product1));
+    }
+
+    /**
+     * loading application, logging in, adding product to shopping cart, going to shopping cart,
+     * entering user shipping data, choosing shipping method,
+     * verifying that message about applying shipping method is present
+     * and verifying that expected and actual total prices are equal
+     *
+     * @param testUser testUser from UserRepository
+     * @param product  product form ProductRepository
+     */
+    @Test(dataProvider = "dataForShippingAndTaxesTest", dataProviderClass = DataForShoppingCartFunctionalityTest.class)
+    public void verifyApplyingShippingMethodAndTotalPriceCalculatesCorrectly(User testUser, Product product) {
+        ShoppingCartPage shoppingCartPage = loadApplication()
+                .gotoLoginPage()
+                .successfulLogin(testUser)
+                .gotoHomePage()
+                .getProductComponentsContainer()
+                .addProductToCartDirectly(product)
+                .goToShoppingCartFromAlert()
+                .goToShippingAndTaxesComponent()
+                .selectCountryByName(testUser.getCountry())
+                .selectRegionStateByName(testUser.getRegionState())
+                .inputPostCode(testUser.getPostCode())
+                .switchToSelectShippingMethodModalPage()
+                .selectFlatShippingRate()
+                .clickApplyShippingButton();
+
+        softAssert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutApplyingShippingMethod())
+                , "There is no apply shipping message");
         softAssert.assertTrue(shoppingCartPage.areExpectedAndActualTotalPricesEqual(), "Expected and actual prices are not equal");
         softAssert.assertAll();
     }
-
-    private void verifyProductRemoved(String expectedRemovedItem) {
-        new ShoppingCartPage(getDriver())
-                .getShoppingCartProductsContainer()
-                .getContainerComponents()
-                .forEach(shoppingCartProductComponent ->
-                        softAssert.assertNotEquals(shoppingCartProductComponent.getProductNameText(),
-                                expectedRemovedItem,
-                                String.format("Product %s was not removed", expectedRemovedItem)));
-    }
-
-//    @Test(dataProvider = "dataForFunctionalityTest")
-//    public void checkSumTest(User testUser, Product product1, Product product2) {
-//        ShoppingCartPage shoppingCartPage = loadApplication().gotoLoginPage()
-//                .successfulLogin(testUser)
-//                .gotoHomePage()
-//                .getProductComponentsContainer()
-//                .addProductToCartDirectly(product1)
-//                .goToHomePageFromAlert()
-//                .getProductComponentsContainer()
-//                .addProductToCartDirectly(product2)
-//                .goToShoppingCartFromAlert()
-//                .setQuantity(product1, product1.getQuantity())
-//                .setQuantity(product2, product2.getQuantity());
-//        Assert.assertTrue(shoppingCartPage.areCorrectAndActualSubTotalPricesEqual());
-//    }
-//
-//    @Test(dataProvider = "dataForFunctionalityTest")
-//    public void refreshButtonTest(User testUser, Product product1, Product product2) {
-//        ShoppingCartPage shoppingCartPage = loadApplication()
-//                .gotoLoginPage()
-//                .successfulLogin(testUser)
-//                .gotoHomePage()
-//                .getProductComponentsContainer()
-//                .addProductToCartDirectly(product1)
-//                .goToHomePageFromAlert()
-//                .getProductComponentsContainer()
-//                .addProductToCartDirectly(product2)
-//                .goToShoppingCartFromAlert()
-//                .refreshShoppingCartPageByProduct(product1);
-//
-//        Assert.assertTrue(shoppingCartPage.isElementPresent(shoppingCartPage.getMessageAboutSuccessfulRefresh()));
-//    }
-//
-//    @Test(dataProvider = "dataForFunctionalityTest")
-//    public void removeButtonTest(User testUser, Product product1, Product product2) {
-//        ShoppingCartPage shoppingCartPage = loadApplication()
-//                .gotoLoginPage()
-//                .successfulLogin(testUser)
-//                .gotoHomePage()
-//                .getProductComponentsContainer()
-//                .addProductToCartDirectly(product1)
-//                .goToHomePageFromAlert()
-//                .getProductComponentsContainer()
-//                .addProductToCartDirectly(product2)
-//                .goToShoppingCartFromAlert()
-//                .removeComponentByProduct(product1);
-//
-//        verifyProductRemoved(product1.getName());
-//    }
 }

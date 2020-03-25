@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 public class SearchSuccessPage extends SearchCriteriaPart {
 
     private ProductsDisplayComponent productsDisplay;
+    private String  firstProductFromList = "#content .product-layout:nth-child(1)";
 
     public SearchSuccessPage(WebDriver driver) {
         super(driver);
@@ -20,15 +21,11 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         productsDisplay = new ProductsDisplayComponent(driver);
     }
 
-    // Page Object
+    // productsDisplay page
 
-    // productsDisplay
-
-    public ProductsDisplayComponent getProductsDisplay() {
+    private ProductsDisplayComponent getProductsDisplay() {
         return productsDisplay;
     }
-
-    // Functional
 
     // Business Logic
 
@@ -37,11 +34,17 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return new SearchSuccessPage(driver);
     }
 
+    /**
+     * Click on 'Sort by:' drop down and choose criteria for search result list
+     */
     public SearchSuccessPage sortProductsByCriteria(SortByFilter filter) {
         productsDisplay.setSortByDropDownMenu(filter);
         return new SearchSuccessPage(driver);
     }
 
+    /**
+     * Click on 'Show:' drop down and choose count of products on page from search result list
+     */
     public SearchSuccessPage showProductsByCount(CountOfProducts count) {
         productsDisplay.setShowDropDownMenu(count);
         return new SearchSuccessPage(driver);
@@ -55,11 +58,17 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return productsDisplay.isShowCorrectQuantitySelected(count);
     }
 
+    /**
+     * Click list button and
+     */
     public SearchSuccessPage viewProductsByList() {
         productsDisplay.viewProductsByList();
         return new SearchSuccessPage(driver);
     }
 
+    /**
+     * Click grid button
+     */
     public SearchSuccessPage viewProductsByGrid() {
         productsDisplay.viewProductsByGrid();
         return new SearchSuccessPage(driver);
@@ -73,10 +82,16 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return productsDisplay.isListViewDisplayed();
     }
 
+    /**
+     * Verifies correct page
+     */
     public boolean isPageActive(String page) {
         return productsDisplay.isPageActive(page);
     }
 
+    /**
+     * Click pagination arrow button
+     */
     public SearchSuccessPage clickNeededPage(Pagination page) {
         productsDisplay.clickNeedPage(page);
         return new SearchSuccessPage(driver);
@@ -95,12 +110,18 @@ public class SearchSuccessPage extends SearchCriteriaPart {
         return new ProductInfoPage(driver);
     }
 
+    /**
+     * @return first product from search result list
+     */
     public ProductComponent getFirstProduct() {
-        WebElement firstProduct = driver.findElement(By.cssSelector("#content .product-layout:nth-child(1)"));
+        WebElement firstProduct = driver.findElement(By.cssSelector(firstProductFromList));
         return new ProductComponent(firstProduct);
     }
-    public ProductInfoPage clickFirstProduct()
-    {
+
+    /**
+     * Click on first product from search result list
+     */
+    public ProductInfoPage clickFirstProduct() {
         getFirstProduct().clickName();
         return new ProductInfoPage(driver);
     }

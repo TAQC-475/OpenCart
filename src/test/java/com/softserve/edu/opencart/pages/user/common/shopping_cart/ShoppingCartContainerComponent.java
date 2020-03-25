@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.math.BigDecimal;
 
 public class ShoppingCartContainerComponent {
-    private WebElement shoppingCartProductComponent;
+    private WebElement shoppingCartContainerComponent;
 
     private WebElement productName;
     private WebElement model;
@@ -18,18 +18,18 @@ public class ShoppingCartContainerComponent {
     private WebElement removeButton;
 
     public ShoppingCartContainerComponent(WebElement shoppingCartProductComponent) {
-        this.shoppingCartProductComponent = shoppingCartProductComponent;
+        this.shoppingCartContainerComponent = shoppingCartProductComponent;
         initElements();
     }
 
     public void initElements() {
-        productName = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-left']/a"));
-        model = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-left']/a/../following-sibling::td[@class = 'text-left' and not (div)]"));
-        quantity = shoppingCartProductComponent.findElement(By.xpath(".//input[@type = 'text']"));
-        refreshButton = shoppingCartProductComponent.findElement(By.xpath(".//button[@data-original-title = 'Update']"));
-        removeButton = shoppingCartProductComponent.findElement(By.xpath(".//button[@data-original-title = 'Remove']"));
-        unitPrice = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-right'][last()-1]"));
-        totalPrice = shoppingCartProductComponent.findElement(By.xpath("./td[@class = 'text-right'][last()]"));
+        productName = shoppingCartContainerComponent.findElement(By.xpath("./td[@class = 'text-left']/a"));
+        model = shoppingCartContainerComponent.findElement(By.xpath("./td[@class = 'text-left']/a/../following-sibling::td[@class = 'text-left' and not (div)]"));
+        quantity = shoppingCartContainerComponent.findElement(By.xpath(".//input[@type = 'text']"));
+        refreshButton = shoppingCartContainerComponent.findElement(By.xpath(".//button[@data-original-title = 'Update']"));
+        removeButton = shoppingCartContainerComponent.findElement(By.xpath(".//button[@data-original-title = 'Remove']"));
+        unitPrice = shoppingCartContainerComponent.findElement(By.xpath("./td[@class = 'text-right'][last()-1]"));
+        totalPrice = shoppingCartContainerComponent.findElement(By.xpath("./td[@class = 'text-right'][last()]"));
     }
 
     public WebElement getProductName() {
@@ -94,11 +94,12 @@ public class ShoppingCartContainerComponent {
 
     /**
      * multiplies product quantity and unit price
-     * @return total price of the product
+     *
+     * @return BigDecimal value of products total price
      */
     public BigDecimal calculateContainerComponentExpectedTotalPrice() {
         BigDecimal quantity = new BigDecimal(getQuantityText());
-        BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartField(getUnitPriceText());
+        BigDecimal bdPrice = new RegularExpression().getBigDecimalFromPriceField(getUnitPriceText());
         return bdPrice.multiply(quantity);
     }
 }

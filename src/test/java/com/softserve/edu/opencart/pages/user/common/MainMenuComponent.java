@@ -2,23 +2,30 @@ package com.softserve.edu.opencart.pages.user.common;
 
 import com.softserve.edu.opencart.data.Categories;
 import com.softserve.edu.opencart.data.creation_product_admin_panel.NewProductRepository;
+import com.softserve.edu.opencart.pages.user.search.ProductsSidebarEmptyPage;
+import com.softserve.edu.opencart.pages.user.search.ProductsSidebarFullPage;
 import com.softserve.edu.opencart.tools.ErrorUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainMenuComponent {
 
     protected final String LIST_SUB_CATEGORIES_XPATH = "//li[@class='dropdown open']/div/div";
     protected final String DROPDOWN_SHOW_ALL_XPATH = "//li[@class='dropdown open']//a[@class='see-all']";
     protected final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
+    protected final String SUB_CATEGORIES = "//a[text()='%s']/parent::*[@class='dropdown']/*[@class='dropdown-menu']//li/a";
 
-    private Categories categoryItem;
     private List<WebElement> menuItemList;
-    private List<List<WebElement>> allTopMenuItems;
+    private List<WebElement> subMenuItems;
+
+    private String allCategories;
 
     private WebDriver driver;
 
@@ -32,26 +39,12 @@ public class MainMenuComponent {
 
     private void initElements() {
         // init elements
-        menuItemList = driver.findElements(By.xpath("//ul[@class='nav navbar-nav']/li/a"));
-//        dropdownComponent = new DropdownComponent(driver, By.cssSelector(LIST_SUB_CATEGOIES_CSSSELECTOR));  // hardcode
-
+        menuItemList = driver.findElements(By.cssSelector("#menu .navbar-ex1-collapse .nav.navbar-nav > li"));
     }
 
     // Page Object
     public List<WebElement> getMenuItemList() {
         return menuItemList;
-    }
-
-    public void setDropdownComponent(DropdownComponent dropdownComponent) {
-        this.dropdownComponent = dropdownComponent;
-    }
-
-    public List<List<WebElement>> getAllTopMenuItems() {
-        return allTopMenuItems;
-    }
-
-    public void setAllTopMenuItems(List<List<WebElement>> allTopMenuItems) {
-        this.allTopMenuItems = allTopMenuItems;
     }
 
     private void createDropdownComponent(By searchLocator) {
@@ -62,6 +55,23 @@ public class MainMenuComponent {
         return dropdownComponent;
     }
 
+    public void setSubMenuItems(List<WebElement> subMenuItems) {
+        this.subMenuItems = subMenuItems;
+    }
+
+    public List<WebElement> getSubMenuItems() {
+        return subMenuItems;
+    }
+
+    public void setAllCategories(String input) {
+        allCategories = input;
+    }
+
+    public String getAllCategories() {
+        return allCategories;
+    }
+
+    // Functional
     public WebElement getMenuTopByCategoryPartialName(String categoryName) {
         WebElement result = null;
         for (WebElement current : getMenuItemList()) {
@@ -73,6 +83,34 @@ public class MainMenuComponent {
         return result;
     }
 
+    public List<String> getSubMenuTopText() {
+        List<String> result = new ArrayList<>();
+        for (WebElement menuItem : getSubMenuItems()) {
+            result.add(menuItem.getText());
+        }
+        return result;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public Map<String, List<String>> getMenuCategoriesMap() {
+        Map<String, List<String>> menuCategoriesMap = new HashMap();
+        for (WebElement menuItem : getMenuItemList()) {
+            String categoryText = menuItem.getText();
+            new Actions(driver).moveToElement(menuItem).build().perform();
+            if (menuItem.getAttribute("class").contains("dropdown")) {
+                List<WebElement> subCategoryElementList = driver.findElements(By.xpath(String.format(SUB_CATEGORIES, categoryText)));
+                List<String> subCategoriesStringList = new ArrayList();
+                for (WebElement subMenuItem : subCategoryElementList) {
+                    subCategoriesStringList.add(subMenuItem.getText());
+                }
+                menuCategoriesMap.put(categoryText, subCategoriesStringList);
+            } else {
+                menuCategoriesMap.put(categoryText, null);
+            }
+        }
+        return menuCategoriesMap;
+    }
+    //------------------------------------------------------------------------------------------------------------------
     public List<String> getMenuTopText() {
         List<String> result = new ArrayList<>();
         for (WebElement menuItem : getMenuItemList()) {
@@ -94,18 +132,23 @@ public class MainMenuComponent {
         getMenuTopByCategoryPartialName(categoryName).click();
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     public void clickMenuTopByPartialName(String categoryName) {
         clickMenuTopByCategoryPartialName(categoryName);
 
         createDropdownComponent(By.xpath(LIST_SUB_CATEGORIES_XPATH));
-        System.out.println(getDropdownComponent().getListOptionsText());
+        setAllCategories(categoryName);
 
-//        clickDropdownComponentByPartialName("Show All " + categoryName);
+        if (getDropdownComponent().isExistDropdownOption()) {
+            setSubMenuItems(getDropdownComponent().getListOptions());
+            setAllCategories(getAllCategories() + getSubMenuTopText());
+        }
 
         createDropdownComponent(By.xpath(DROPDOWN_SHOW_ALL_XPATH));
         clickDropdownComponentByPartialName("Show All " + categoryName);
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     private void clickDropdownComponentByPartialName(String optionName) {
 
         try {
@@ -118,44 +161,35 @@ public class MainMenuComponent {
         }
     }
 
-    public List<String> getListSubCategoryNames() {
-        List<String> result = getDropdownComponent().getListOptionsText();
-        System.out.println("sub categories : " + result.toString());
-        return result;
-    }
-
+    //------------------------------------------------------------------------------------------------------------------
     public MainMenuComponent chooseCategory(Categories menuItem) {
         clickMenuTopByPartialName(menuItem.toString());
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        System.out.println(getAllCategories());
 
         return new MainMenuComponent(driver);
     }
 
-    public WebElement searchSubMenuItems(By searchLocator){
-        WebElement element = null;
-        try {
-            element = driver.findElement(searchLocator);
-        }catch (Exception e){
-            System.out.println("error");
-        }
-        assert element != null;
-        System.out.println(element.getText());
-        return element;
-    }
-
-    // Functional
-
-    public String checkFirstProduct(){
+    public String checkFirstProduct() {
         String productName = NewProductRepository.router().getProductName();
         WebElement product = driver.findElement(By.xpath(String.format("//h4/a[text()='%s']", productName)));
         return product.getText();
     }
 
+    public void gotoEmptyLeftMenu(boolean dropdownAlive) {
+        if (dropdownAlive = true) {
+            gotoFullLeftMenu();
+        } else {
+            gotoEmptyLeftMenu();
+        }
+    }
+
     // Business Logic
 
+    public ProductsSidebarEmptyPage gotoEmptyLeftMenu() {
+        return new ProductsSidebarEmptyPage(driver);
+    }
+
+    public ProductsSidebarFullPage gotoFullLeftMenu() {
+        return new ProductsSidebarFullPage(driver);
+    }
 }

@@ -27,21 +27,22 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
     }
 
     // Page Object
-    public List<WebElement> getLeftMenuItemList() {
-        return menuItemList;
+    public List<WebElement> getLeftMenuItemList() { return menuItemList; }
+
+    public void clickLeftMenuItem(String optionalName){
+//        getLeftMenuItemList().
     }
 
+    // Functional
+
     // check if the page is full or not
-    public boolean checkFullEmptyPage() {
+    private boolean checkFullEmptyPage() {
         try {
             return driver.findElement(By.cssSelector("#content h3")).isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
         }
-
     }
-
-    // Functional
 
     private String withoutNumbers(String strInput) {
         String strResult = "";
@@ -53,7 +54,6 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
         return strResult;
     }
 
-
     public List<String> getLeftMenuItemListText() {
         List<String> result = new ArrayList<>();
         for (WebElement menuItem : getLeftMenuItemList()) {
@@ -62,12 +62,6 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
         return result;
     }
 
-    public void gotoLeftMenuBar() {                      // hardcoded num of element to click on!
-        getMainMenuComponent()
-                .getMenuItemList()
-                .get(0)
-                .click();
-    }
-
     // Business Logic
+
 }

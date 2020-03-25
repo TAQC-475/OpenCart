@@ -2,7 +2,9 @@ package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.CountOfProducts;
 import com.softserve.edu.opencart.data.Pagination;
+import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.SortByFilter;
+import com.softserve.edu.opencart.data.data_provider_repository.DataForAdminTests;
 import com.softserve.edu.opencart.data.data_provider_repository.DataForSearchTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -24,6 +26,7 @@ public class SearchSortingTest extends SearchTestRunner {
     public void checkShowDropDownMenu(CountOfProducts actualInput, CountOfProducts expectedInput) {
         successPage()
                 .showProductsByCount(actualInput);
+
         Assert.assertTrue(successPage().isShowCorrectQuantity(expectedInput),
                 String.format("Expect: %s, but found: %s", actualInput, expectedInput));
     }
@@ -32,11 +35,13 @@ public class SearchSortingTest extends SearchTestRunner {
     public void checkGridAndListView() {
         successPage()
                 .viewProductsByGrid();
-        softAssert.assertTrue(successPage().isGridViewDisplayed());
+        softAssert.assertTrue(successPage().isGridViewDisplayed(),
+                "Grid view button isn't displayed");
 
         successPage()
                 .viewProductsByList();
-        softAssert.assertTrue(successPage().isListViewDisplayed());
+        softAssert.assertTrue(successPage().isListViewDisplayed(),
+                "List view button isn't displayed");
 
         softAssert.assertAll();
     }
@@ -49,5 +54,15 @@ public class SearchSortingTest extends SearchTestRunner {
 
         Assert.assertTrue(successPage().isPageActive(expectedPage),
                 String.format("Expect: %s, but found: %s", actualPage, expectedPage));
+    }
+
+    @Test(dataProvider = "DataForCyrillicProductTests", dataProviderClass = DataForAdminTests.class)
+    public void searchCyrillicProduct(Product cyrillicProduct) {
+        String actual = successPage()
+                .searchNewProduct(cyrillicProduct)
+                .getFirstProduct().getNameText();
+
+        Assert.assertEquals(actual, cyrillicProduct.getName(),
+                "Product not found");
     }
 }

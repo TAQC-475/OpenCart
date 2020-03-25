@@ -12,19 +12,19 @@ public class DataForSearchTests {
     @DataProvider(name = "dataForSortSearchingTests")
     private Object[][] dataForSortSearchingTests(Method method) {
         String testCase = method.getName();
-        if ("checkSortByDropDownMenu".equalsIgnoreCase(testCase)){
+        if ("checkSortByDropDownMenu".equalsIgnoreCase(testCase)) {
             return new Object[][]{{
                     SortByFilter.MODEL_AZ,
-                    SortByFilter.MODEL_AZ}};}
-        else if ("checkShowDropDownMenu".equalsIgnoreCase(testCase)){
+                    SortByFilter.MODEL_AZ}};
+        } else if ("checkShowDropDownMenu".equalsIgnoreCase(testCase)) {
             return new Object[][]{{
                     CountOfProducts.FIFTY,
                     CountOfProducts.FIFTY}};
-        }else if ("checkPagination".equalsIgnoreCase(testCase)) {
-            return new Object[][]{{Pagination.NEXT_PAGE, "2"}};
-        }
-        else {
-            return new Object[][]{{ "ERROR: Data Provider can't find method: " + testCase}};
+        } else if ("checkPagination".equalsIgnoreCase(testCase)) {
+            return new Object[][]{{
+                    Pagination.NEXT_PAGE, "2"}};
+        } else {
+            return new Object[][]{{"ERROR: Data Provider can't find method: " + testCase}};
         }
     }
 }
