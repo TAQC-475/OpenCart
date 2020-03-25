@@ -10,8 +10,8 @@ import org.testng.annotations.Test;
 public class ShoppingCartFunctionalityTest extends LocalTestRunner {
 
     /**
-     * loading application, logging in, adding products to shopping cart, clicking update button
-     * and verifying that message about successful refresh is present
+     * loading application, logging in, adding products to shopping cart, going to shopping cart,
+     * clicking update button and verifying that message about successful refresh is present
      * @param testUser testUser from UserRepository
      * @param product1 product form ProductRepository
      * @param product2 product form ProductRepository
@@ -35,8 +35,8 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
     }
 
     /**
-     * loading application, logging in, adding products to shopping cart, setting quantity for each product,
-     * calculating expected sub-total price and verifying that expected and actual prices are equal
+     * loading application, logging in, adding products to shopping cart, going to shopping cart, setting quantity for each product,
+     * calculating expected sub-total price and verifying that expected and actual sub-total prices are equal
      * @param testUser testUser from UserRepository
      * @param product1 product form ProductRepository
      * @param product2 product form ProductRepository
@@ -61,8 +61,8 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
     }
 
     /**
-     * loading application, logging in, adding products to shopping cart, clicking remove button
-     * and verifying that product is actually removed
+     * loading application, logging in, adding products to shopping cart, going to shopping cart,
+     * clicking remove button and verifying that product is actually removed
      * @param testUser testUser from UserRepository
      * @param product1 product form ProductRepository
      * @param product2 product form ProductRepository
@@ -85,8 +85,9 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
     }
 
     /**
-     * loading application, logging in, adding product to shopping cart, entering user shipping data,
-     * choosing shipping method, verifying that message about applying shipping method
+     * loading application, logging in, adding product to shopping cart, going to shopping cart,
+     * entering user shipping data, choosing shipping method,
+     * verifying that message about applying shipping method is present
      * and verifying that expected and actual total prices are equal
      * @param testUser testUser from UserRepository
      * @param product product form ProductRepository
@@ -104,7 +105,7 @@ public class ShoppingCartFunctionalityTest extends LocalTestRunner {
                         .selectCountryByName(testUser.getCountry())
                         .selectRegionStateByName(testUser.getRegionState())
                         .inputPostCode(testUser.getPostCode())
-                        .switchToSelectShippingMethodPage()
+                        .switchToSelectShippingMethodModalPage()
                         .selectFlatShippingRate()
                         .clickApplyShippingButton();
 

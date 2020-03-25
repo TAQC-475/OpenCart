@@ -62,7 +62,7 @@ public class ShippingAndTaxesComponent {
     }
 
     /**
-     * clears field and inputs new postcode
+     * clears field and inputs new postcode value
      * @param postCode
      * @return ShippingAndTaxesComponent page with entered postcode
      */
@@ -76,7 +76,7 @@ public class ShippingAndTaxesComponent {
      * clicking getQuotes button and switches driver to SelectShippingMethodModalPage window
      * @return SelectShippingMethodModalPage
      */
-    public SelectShippingMethodModalPage switchToSelectShippingMethodPage() {
+    public SelectShippingMethodModalPage switchToSelectShippingMethodModalPage() {
         String shoppingCartWindow = driver.getWindowHandle();
         driver.findElement(By.xpath("//button[@id = 'button-quote']")).click();
         for (String windowHandle : driver.getWindowHandles()) {

@@ -102,7 +102,7 @@ public class ShoppingCartProductsContainer {
     }
 
     /**
-     * goes trough the list of components present at the page, and check if component with name from param is present
+     * goes trough the list of components present at the page, and checks if component with name from param is present
      * @param productName
      * @return component with name from param
      */
