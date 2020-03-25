@@ -25,7 +25,7 @@ public final class RegularExpression {
      * @param priceFieldText text from some price field at the page
      * @return BigDecimal value from the price field text
      */
-    public BigDecimal getBigDecimalFromTheShoppingCartPriceField(String priceFieldText) {
+    public BigDecimal getBigDecimalFromPriceField(String priceFieldText) {
         String stringValue = "";
         Pattern pattern = Pattern.compile("(\\d{1,3},)*\\d{1,3}\\.\\d{2}");
         Matcher matcher = pattern.matcher(priceFieldText);

@@ -94,11 +94,12 @@ public class ShoppingCartContainerComponent {
 
     /**
      * multiplies product quantity and unit price
+     *
      * @return BigDecimal value of products total price
      */
     public BigDecimal calculateContainerComponentExpectedTotalPrice() {
         BigDecimal quantity = new BigDecimal(getQuantityText());
-        BigDecimal bdPrice = new RegularExpression().getBigDecimalFromTheShoppingCartPriceField(getUnitPriceText());
+        BigDecimal bdPrice = new RegularExpression().getBigDecimalFromPriceField(getUnitPriceText());
         return bdPrice.multiply(quantity);
     }
 }
