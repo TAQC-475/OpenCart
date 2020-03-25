@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 public class AddProductFromAdminTest extends LocalAdminTestRunner {
 
     @Test(dataProvider = "addRouterProduct", dataProviderClass = DataForAdminTests.class, priority = 2)
-
     public void addRouter(IUser validAdmin,
                           String name,
                           String tagTitle,
