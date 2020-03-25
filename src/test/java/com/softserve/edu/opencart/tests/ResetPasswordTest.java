@@ -36,7 +36,7 @@ public class ResetPasswordTest extends LocalTestRunner {
                 .goToChangePasswordPage(resetEmail)
                 .resetPassword(user);
 
-        assertEquals(loginPage.getAlertText(), SuccessfulUpdatePasswordLoginPage.EXPECTED_UPDATE_MESSAGE);
+        assertEquals(loginPage.getMessageText(), SuccessfulUpdatePasswordLoginPage.EXPECTED_UPDATE_MESSAGE);
 
         loginPage.successfulLogin(user);
 
