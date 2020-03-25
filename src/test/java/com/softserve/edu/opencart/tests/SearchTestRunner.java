@@ -31,8 +31,5 @@ public abstract class SearchTestRunner extends LocalTestRunner {
     public SearchSuccessPage successPage() {
         return new SearchSuccessPage(getDriver());
     }
-    public SearchUnsuccessPage unsuccessPage()
-    {
-        return new SearchUnsuccessPage(getDriver());
-    }
+    public SearchUnsuccessPage unsuccessPage(){ return new SearchUnsuccessPage(getDriver()); }
 }
