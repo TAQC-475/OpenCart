@@ -18,7 +18,7 @@ import static com.softserve.edu.opencart.data.ProductRepository.getMacBook;
 public class CurrencyTest extends LocalTestRunner {
 
 	//тест перевіряє чи зміниться валюта у вішлісті
-	@Test(dataProvider = "currency", dataProviderClass = DataForCurrencyTest.class, priority = 2)
+	@Test(dataProvider = "userCurrency", dataProviderClass = DataForCurrencyTest.class, priority = 2)
 	public void changeCurrencyInWishList(IUser validUser) {
 		// Steps
 		WishListPage actual = loadApplication()
@@ -31,7 +31,7 @@ public class CurrencyTest extends LocalTestRunner {
 		Assert.assertTrue(actual.getPriceText().contains(CurrenciesSymbol.EURO));
 	}
 	//тест перевіряє чи зміниться валюта у кошику
-	@Test(dataProvider = "currency", dataProviderClass = DataForCurrencyTest.class, priority = 1)
+	@Test(dataProvider = "userCurrency", dataProviderClass = DataForCurrencyTest.class, priority = 1)
 	public void changeCurrencyInCart(IUser validUser) {
 		ShoppingCartPage actual = loadApplication()
 				.gotoHomePage()
@@ -42,7 +42,7 @@ public class CurrencyTest extends LocalTestRunner {
 		Assert.assertTrue(actual.getSubTotalPriceText().contains(CurrenciesSymbol.POUND_STERLING));
 	}
 	//вибір валюти перед встановдення податку
-	@Test(dataProvider = "currency", dataProviderClass = DataForCurrencyTest.class, priority = 3)
+	@Test(dataProvider = "userCurrency", dataProviderClass = DataForCurrencyTest.class, priority = 3)
 	public void checkIfCurrencyChengedInCartForTax(IUser validUser) {
 		ShoppingCartPage actual = loadApplication()
 				.gotoHomePage()
@@ -60,7 +60,7 @@ public class CurrencyTest extends LocalTestRunner {
 		Assert.assertTrue(actual.getTaxRateText().contains(CurrenciesSymbol.US_DOLLAR));
 	}
 	//вибір валюти після всьановдення податку(податок пропадає)
-	@Test(dataProvider = "currency", dataProviderClass = DataForCurrencyTest.class, priority = 4)
+	@Test(dataProvider = "userCurrency", dataProviderClass = DataForCurrencyTest.class, priority = 4)
 	public void checkIfCurrencyChengedInCartForTaxAfterChange(IUser validUser){
 		ShoppingCartPage actual = loadApplication()
 				.gotoHomePage()

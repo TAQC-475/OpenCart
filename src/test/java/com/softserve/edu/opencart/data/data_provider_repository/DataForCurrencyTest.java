@@ -8,18 +8,13 @@ import java.lang.reflect.Method;
 
 public class DataForCurrencyTest {
     @DataProvider
-    public Object[][] currency() {
+    public Object[][] userCurrency() {
         return new Object[][]{
                 {UserRepository.get().getShoppingCartUser()},
         };
     }
     @DataProvider
-    public Object[][] currencyUnregisteredUser() {
-        return new Object[][]{
-        };
-    }
-    @DataProvider
-    public Object[][] adminAddCurrency(Method method) {
+    public Object[][] adminCurrency(Method method) {
         return new Object[][] {
                 { UserRepository.get().getAdmin(), CurrencyRepository.get().getUACurrency()},
         };
