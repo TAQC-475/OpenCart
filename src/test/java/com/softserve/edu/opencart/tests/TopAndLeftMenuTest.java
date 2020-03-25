@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class TopAndLeftMenuTest extends LocalTestRunner {
     @Test
-    public void menuTest() {
+    public void menuTest() throws InterruptedException {
 
 //        Map<String, List<String>> topMenuCategories = loadApplication()
 //                .gotoMainMenuComponent()
@@ -22,9 +22,9 @@ public class TopAndLeftMenuTest extends LocalTestRunner {
         System.out.println(leftMenuItems);
 
 //        System.out.println(topMenuCategories);
-
+//        Assert.assertEquals(topMenuCategories, topMenuCategories);
         Assert.assertEquals(leftMenuItems, leftMenuItems);
-        ;
+
 
 //        MainMenuComponent menuComponent = loadApplication().gotoMainMenuComponent()
 //                .chooseCategory(Categories.DESKTOPS);

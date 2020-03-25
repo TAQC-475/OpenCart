@@ -44,6 +44,16 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
         }
     }
 
+    public String dropPrefix(String strInput) {
+        String strResult = "";
+        Pattern p = Pattern.compile("[a-zA-Z].+[^ -]");
+        Matcher m = p.matcher(strInput);
+        while (m.find()) {
+            strResult = String.valueOf(m.group());
+        }
+        return strResult;
+    }
+
     public String withoutNumbers(String strInput) {
         String strResult = "";
         Pattern p = Pattern.compile("[a-zA-Z].+[^ (0-9)]");
