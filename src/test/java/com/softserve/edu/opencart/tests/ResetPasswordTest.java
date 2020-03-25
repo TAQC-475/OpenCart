@@ -29,7 +29,7 @@ public class ResetPasswordTest extends LocalTestRunner {
     public void resetPasswordTest(IUser user, EmailUser emailUser, ResetEmailEntity resetEmail ){
         SuccessfulUpdatePasswordLoginPage loginPage = loadApplication()
                 .gotoLoginPage()
-                .gotoForgottenPasswordRight()
+                .gotoForgotPasswordPage()
                 .requestResetEmail(emailUser)
                 .login(emailUser)
                 .gotoResetPasswordEmail(resetEmail)
