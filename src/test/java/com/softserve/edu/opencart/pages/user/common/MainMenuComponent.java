@@ -110,6 +110,7 @@ public class MainMenuComponent {
         }
         return menuCategoriesMap;
     }
+
     //------------------------------------------------------------------------------------------------------------------
     public List<String> getMenuTopText() {
         List<String> result = new ArrayList<>();

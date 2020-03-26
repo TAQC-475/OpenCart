@@ -5,15 +5,15 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
 import org.openqa.selenium.WebElement;
+import static com.softserve.edu.opencart.tools.RegularExpression.cutSuffixFromCategory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public abstract class ProductsSidebarPart extends BreadCrumbPart {
 
-    private List<WebElement> menuItemList;
+    private List<WebElement> leftMenuItemList;
 
     public ProductsSidebarPart(WebDriver driver) {
         super(driver);
@@ -22,15 +22,13 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
 
     private void initElements() {
         // init elements
-        menuItemList = driver.findElements(By.xpath("//div[@class='list-group']"));
+        leftMenuItemList = driver.findElements(By.xpath("//div[@class='list-group']/a"));  //
 
     }
 
     // Page Object
-    public List<WebElement> getLeftMenuItemList() { return menuItemList; }
-
-    public void clickLeftMenuItem(String optionalName){
-//        getLeftMenuItemList().
+    public List<WebElement> getLeftMenuItemList() {
+        return leftMenuItemList;
     }
 
     // Functional
@@ -44,30 +42,10 @@ public abstract class ProductsSidebarPart extends BreadCrumbPart {
         }
     }
 
-    public String dropPrefix(String strInput) {
-        String strResult = "";
-        Pattern p = Pattern.compile("[a-zA-Z].+[^ -]");
-        Matcher m = p.matcher(strInput);
-        while (m.find()) {
-            strResult = String.valueOf(m.group());
-        }
-        return strResult;
-    }
-
-    public String withoutNumbers(String strInput) {
-        String strResult = "";
-        Pattern p = Pattern.compile("[a-zA-Z].+[^ (0-9)]");
-        Matcher m = p.matcher(strInput);
-        while (m.find()) {
-            strResult = String.valueOf(m.group());
-        }
-        return strResult;
-    }
-
     public List<String> getLeftMenuItemListText() {
         List<String> result = new ArrayList<>();
         for (WebElement menuItem : getLeftMenuItemList()) {
-            result.add(withoutNumbers(menuItem.getText()));
+            result.add(cutSuffixFromCategory(menuItem.getText()));
         }
         return result;
     }

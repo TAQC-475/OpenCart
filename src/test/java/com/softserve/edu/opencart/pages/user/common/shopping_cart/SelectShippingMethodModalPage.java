@@ -46,7 +46,7 @@ public class SelectShippingMethodModalPage {
     }
 
     /**
-     * clicking apply shipping button and switching driver to shopping cart page window
+     * handling current window, clicking apply shipping button and switching driver to shopping cart page window
      *
      * @return ShoppingCartPage
      */

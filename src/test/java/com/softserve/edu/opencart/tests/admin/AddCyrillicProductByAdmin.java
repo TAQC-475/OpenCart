@@ -24,6 +24,7 @@ public class AddCyrillicProductByAdmin extends LocalAdminTestRunner {
                 .typeModel(model)
                 .clickLinkButton()
                 .typeCategory(category)
+                .clickCategoryDropdown()
                 .gotoModifiedCategoriesPage();
 
         Assert.assertTrue(modifiedCatalogPage().isSuccessTextDisplayed());

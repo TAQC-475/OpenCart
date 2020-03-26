@@ -76,7 +76,7 @@ public class ShippingAndTaxesComponent {
     }
 
     /**
-     * clicking getQuotes button and switches driver to SelectShippingMethodModalPage window
+     * handling current window, clicking getQuotes button and switches driver to SelectShippingMethodModalPage window
      *
      * @return SelectShippingMethodModalPage
      */
