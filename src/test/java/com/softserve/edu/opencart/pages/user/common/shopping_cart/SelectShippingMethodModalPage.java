@@ -36,9 +36,9 @@ public class SelectShippingMethodModalPage {
     }
 
     /**
-     * clicks flat shipping rate button
+     * clicks flat shipping rate checkbox
      *
-     * @return SelectShippingMethodModalPage with selected flat shipping rate button
+     * @return SelectShippingMethodModalPage with selected flat shipping rate checkbox
      */
     public SelectShippingMethodModalPage selectFlatShippingRate() {
         driver.findElement(By.xpath("//input[@value =  'flat.flat']")).click();
