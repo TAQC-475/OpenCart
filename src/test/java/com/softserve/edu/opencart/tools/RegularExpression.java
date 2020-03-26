@@ -36,14 +36,33 @@ public final class RegularExpression {
         return new BigDecimal(stringValue);
     }
 
-    private String getClearCategoryName(String strInput) {
+    /**
+     * gets text from sub category names of the left menu, using regex extracts empty space and "-" symbol before the text, and saves it to String
+     * @param strInput text from sub category name of the left menu
+     * @return strResult text from the sub category name  text
+     */
+    public static String cutPrefixFromSubCategory(String strInput) {
         String strResult = "";
-        Pattern p = Pattern.compile("[A-Z].+[^ (0-9)]");
+        Pattern p = Pattern.compile("[a-zA-Z].+[^ -]");
         Matcher m = p.matcher(strInput);
         while (m.find()) {
             strResult = String.valueOf(m.group());
         }
+        return strResult;
+    }
 
+    /**
+     * gets text from category names of the left menu, using regex extracts numbers in brackets after the text, and saves it to String
+     * @param strInput text from category name of the left menu
+     * @return strResult text from the category name text
+     */
+    public static String cutSuffixFromCategory(String strInput) {
+        String strResult = "";
+        Pattern p = Pattern.compile("[a-zA-Z].+[^ (0-9)]");
+        Matcher m = p.matcher(strInput);
+        while (m.find()) {
+            strResult = String.valueOf(m.group());
+        }
         return strResult;
     }
 }
