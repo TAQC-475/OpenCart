@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
-
+    protected final String LEFT_MENU_ELEMENT = "//div[@class='list-group']/a[contains(text(),'%s')]";
     protected final String SUB_CATEGORIES_NUMBER_ONE = "//div[@class='list-group']/a[contains(text(),'-')][1]";
     protected final String SUB_CATEGORIES = "//div[@class='list-group']/a[contains(text(),'-')]";
 
@@ -35,41 +35,28 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public Map<String, List<String>> getLeftMenuCategoriesMap() throws InterruptedException {
+    public Map<String, List<String>> getLeftMenuCategoriesMap() {
         Map<String, List<String>> menuLeftCategoriesMap = new HashMap();
-        for (WebElement menuItem : getLeftMenuItemList()) {
+        for (String menuItem : getLeftMenuItemListText()) {
             System.out.println("-5");
 
-            if(!isVisible(menuItem)){continue;}
-            String categoryText = cutSuffixFromCategory(menuItem.getText());
-            System.out.println("-4");
-//            new Actions(driver).moveToElement(menuItem).build().perform();
-            System.out.println("0");
+//            if(!isVisible(menuItem)){continue;}
+            String categoryText = cutSuffixFromCategory(menuItem);
             Actions actions = new Actions(driver);
-            actions.moveToElement(menuItem).build().perform();
-            System.out.println("1");
+            actions.moveToElement(driver.findElement(By.xpath(String.format(LEFT_MENU_ELEMENT,menuItem)))).build().perform();
             actions.click().perform();
-            System.out.println("2");
-
-            Thread.sleep(1000);
 
             if (driver.findElements(By.xpath(SUB_CATEGORIES_NUMBER_ONE)).size() != 0) {
-                System.out.println("4");
                 List<WebElement> subCategoryElementList = driver.findElements(By.xpath(String.format(SUB_CATEGORIES, categoryText)));
-                System.out.println("5");
                 List<String> subCategoriesStringList = new ArrayList();
-                System.out.println("6");
                 for (WebElement subMenuItem : subCategoryElementList) {
-                    System.out.println("7");
                     subCategoriesStringList.add(cutPrefixFromSubCategory(subMenuItem.getText()));
-                    System.out.println("8");
                 }
                 menuLeftCategoriesMap.put(categoryText, subCategoriesStringList);
             } else {
                 menuLeftCategoriesMap.put(categoryText, null);
             }
         }
-        System.out.println("10");
         return menuLeftCategoriesMap;
     }
     //------------------------------------------------------------------------------------------------------------------
