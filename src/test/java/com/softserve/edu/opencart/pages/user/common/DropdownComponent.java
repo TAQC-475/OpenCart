@@ -22,7 +22,6 @@ public class DropdownComponent {
 	private void initElements(By searchLocator) {
 		// init elements
         listOptions = driver.findElements(searchLocator);
-        // listOptions = search.getWebElements(searchLocator); // for Strategy
 	}
 
 	// Page Object

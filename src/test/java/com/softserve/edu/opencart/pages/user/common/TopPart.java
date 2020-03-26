@@ -79,7 +79,6 @@ public abstract class TopPart {
 
     // currency
     public WebElement getCurrency() {
-        //return driver.findElement(By.cssSelector(".btn.btn-link.dropdown-toggle"));
         return currency;
     }
 
@@ -217,9 +216,7 @@ public abstract class TopPart {
 
     // dropdownComponent
     protected DropdownComponent getDropdownComponent() {
-        //LeaveUtils.castExceptionByCondition(dropdownOptions == null, OPTION_NULL_MESSAGE);
         if (dropdownComponent == null) {
-            // TODO Develop Custom Exception
             throw new RuntimeException(OPTION_NULL_MESSAGE);
         }
         return dropdownComponent;
@@ -242,15 +239,11 @@ public abstract class TopPart {
     }
 
     private void clickDropdownComponentByPartialName(String optionName) {
-        //LeaveUtils.castExceptionByCondition(!getDropdownOptions().isExistDropdownOptionByPartialName(optionName),
-        //        String.format(OPTION_NOT_FOUND_MESSAGE, optionName, dropdownOptions.getListOptionsText().toString()));
         if (!getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
-            // TODO Develop Custom Exception
             throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName, getDropdownComponent().getListOptionsText().toString()));
         }
         getDropdownComponent().clickDropdownOptionByPartialName(optionName);
         dropdownComponent = null;
-        //closeDropdownComponent();
     }
 
     private void closeDropdownComponent() {
@@ -343,16 +336,16 @@ public abstract class TopPart {
 
     // currency
     private void openCurrencyDropdownComponent() {
-        //clickSearchTopField();
         closeDropdownComponent();
         clickCurrency();
         createDropdownComponent(By.cssSelector(LIST_CURRENCIES_CSSSELECTOR));
     }
 
-    //protected void clickCurrencyByPartialName(String currencyName) { // Code Smell
+    /**
+     * Click on dropdawn button and choose a currency
+     */
     protected void clickCurrencyByPartialName(Currencies optionName) {
         openCurrencyDropdownComponent();
-        //clickDropdownComponentByPartialName(currencyName);
         clickDropdownComponentByPartialName(optionName.toString());
     }
 

@@ -64,6 +64,7 @@ public class HomePage extends TopPart {
         clickCurrencyByPartialName(currency);
         return new HomePage(driver);
     }
+
 	public HomePage addProductToWishList(Product product) {
 		productsContainerComponent.clickProductComponentAddToWishButtonByName(product.getName());
 		new WaitUtils(driver,10).waitForAlertVisibility();

@@ -17,7 +17,7 @@ import static com.softserve.edu.opencart.data.ProductRepository.getMacBook;
 
 public class CurrencyTest extends LocalTestRunner {
 
-	//тест перевіряє чи зміниться валюта у вішлісті
+
 	@Test(dataProvider = "userCurrency", dataProviderClass = DataForCurrencyTest.class, priority = 2)
 	public void changeCurrencyInWishList(IUser validUser) {
 		// Steps
@@ -30,7 +30,7 @@ public class CurrencyTest extends LocalTestRunner {
 				.chooseCurrency(Currencies.EURO);
 		Assert.assertTrue(actual.getPriceText().contains(CurrenciesSymbol.EURO));
 	}
-	//тест перевіряє чи зміниться валюта у кошику
+
 	@Test(dataProvider = "userCurrency", dataProviderClass = DataForCurrencyTest.class, priority = 1)
 	public void changeCurrencyInCart(IUser validUser) {
 		ShoppingCartPage actual = loadApplication()
@@ -41,9 +41,9 @@ public class CurrencyTest extends LocalTestRunner {
 				.chooseCurrency(Currencies.POUND_STERLING);
 		Assert.assertTrue(actual.getSubTotalPriceText().contains(CurrenciesSymbol.POUND_STERLING));
 	}
-	//вибір валюти перед встановдення податку
+
 	@Test(dataProvider = "userCurrency", dataProviderClass = DataForCurrencyTest.class, priority = 3)
-	public void checkIfCurrencyChengedInCartForTax(IUser validUser) {
+	public void changeCurrencyInCartBeforeAddingTax(IUser validUser) {
 		ShoppingCartPage actual = loadApplication()
 				.gotoHomePage()
 				.getProductComponentsContainer()
@@ -59,9 +59,9 @@ public class CurrencyTest extends LocalTestRunner {
 				.clickApplyShippingButton();
 		Assert.assertTrue(actual.getTaxRateText().contains(CurrenciesSymbol.US_DOLLAR));
 	}
-	//вибір валюти після всьановдення податку(податок пропадає)
+
 	@Test(dataProvider = "userCurrency", dataProviderClass = DataForCurrencyTest.class, priority = 4)
-	public void checkIfCurrencyChengedInCartForTaxAfterChange(IUser validUser){
+	public void changeCurrencyInCartAfterAddingTax(IUser validUser){
 		ShoppingCartPage actual = loadApplication()
 				.gotoHomePage()
 				.getProductComponentsContainer()

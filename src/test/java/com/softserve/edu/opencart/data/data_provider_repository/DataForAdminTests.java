@@ -45,11 +45,10 @@ public class DataForAdminTests {
             return new Object[][]{{
                     ProductRepository.getCyrikicProduct()
             }};
-        } else if ("STAS METHOD".equalsIgnoreCase(testCase)){
-            return new Object[][]{{
-                "STAS OBJECTS"
-            }};
-        }
+        } else if ("searchCyrillicProductWithCategory".equalsIgnoreCase(testCase)){
+            return new Object[][]{
+                    { ProductRepository.getCyrikicProduct()
+        }};}
         else {
             return new Object[][]{{"ERROR: Data Provider can't find method: " + testCase}};
         }

@@ -1,7 +1,9 @@
 package com.softserve.edu.opencart.tests;
 
 import com.softserve.edu.opencart.data.Categories;
+import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.ProductRepository;
+import com.softserve.edu.opencart.data.data_provider_repository.DataForAdminTests;
 import com.softserve.edu.opencart.pages.user.search.ProductInfoPage;
 import com.softserve.edu.opencart.pages.user.search.SearchSuccessPage;
 import org.openqa.selenium.WebElement;
@@ -63,5 +65,16 @@ public class SearchCriteriaTest extends SearchTestRunner {
                         .clickFirstProduct();
 
         Assert.assertTrue(productPage.getDescriptionText().contains(ProductRepository.getProductWithDescription().getName()));
+    }
+
+    @Test(dataProvider = "DataForCyrillicProductTests", dataProviderClass = DataForAdminTests.class)
+    public void searchCyrillicProductWithCategory(Product cyrillicProduct) {
+        String actual = successPage()
+                .searchNewProduct(cyrillicProduct)
+                .chooseCategory(Categories.COMPONENTS.toString())
+                .getFirstProduct()
+                .getNameText();
+
+        Assert.assertEquals(actual, cyrillicProduct.getName());
     }
 }

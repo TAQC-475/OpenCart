@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 public abstract class LocalAdminTestRunner extends LocalTestRunner {
-    private String adminServerUrl = "http://192.168.174.130/opencart/upload/admin";
     @Parameters({"adminServerUrl"})
     @BeforeMethod
     public void beforeMethod(String adminServerUrl) {

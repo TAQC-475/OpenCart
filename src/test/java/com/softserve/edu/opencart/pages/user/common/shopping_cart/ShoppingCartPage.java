@@ -219,23 +219,18 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     //Currency
     /**
-<<<<<<< HEAD
      * This method is changed currency and return this page with choose currency
-=======
-     * goes through container components list and checks if product from param is not present in it
-     *
-     * @param expectedRemovedItem product expected to be removed
-     * @return false if product is present in list, true if not present
->>>>>>> 257dc6c7ce80ad1c95d0d4e3baed0ad199050e1b
      */
     public ShoppingCartPage chooseCurrency(Currencies currency) {
         clickCurrencyByPartialName(currency);
         return new ShoppingCartPage(driver);
     }
+
         /**
          * goes through container components list and checks if product form param is not present in it
+         *
          * @param expectedRemovedItem product expected to be removed
-         * @return false if product is present in  list, true if don't
+         * @return false if product is present in list, true if not present
          */
     public boolean verifyProductRemoved(Product expectedRemovedItem) {
         for (ShoppingCartContainerComponent component : getShoppingCartProductsContainer().getContainerComponents()) {
