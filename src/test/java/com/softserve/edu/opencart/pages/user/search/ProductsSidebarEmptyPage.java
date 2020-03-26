@@ -4,10 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
+import static com.softserve.edu.opencart.tools.RegularExpression.cutPrefixFromSubCategory;
+import static com.softserve.edu.opencart.tools.RegularExpression.cutSuffixFromCategory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,23 +18,11 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
     protected final String SUB_CATEGORIES_NUMBER_ONE = "//div[@class='list-group']/a[contains(text(),'-')][1]";
     protected final String SUB_CATEGORIES = "//div[@class='list-group']/a[contains(text(),'-')]";
 
-    private List<WebElement> leftMenuItemList;
-
     public ProductsSidebarEmptyPage(WebDriver driver) {
         super(driver);
-        initElements();
-    }
-
-    private void initElements() {
-        // init elements
-        leftMenuItemList = driver.findElements(By.xpath("//div[@class='list-group']/a"));  //
-
     }
 
     // Page Object
-    public List<WebElement> getLeftMenuItemList() {
-        return leftMenuItemList;
-    }
 
     // Functional
 
@@ -54,7 +41,7 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
             System.out.println("-5");
 
             if(!isVisible(menuItem)){continue;}
-            String categoryText = withoutNumbers(menuItem.getText());
+            String categoryText = cutSuffixFromCategory(menuItem.getText());
             System.out.println("-4");
 //            new Actions(driver).moveToElement(menuItem).build().perform();
             System.out.println("0");
@@ -74,7 +61,7 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
                 System.out.println("6");
                 for (WebElement subMenuItem : subCategoryElementList) {
                     System.out.println("7");
-                    subCategoriesStringList.add(dropPrefix(subMenuItem.getText()));
+                    subCategoriesStringList.add(cutPrefixFromSubCategory(subMenuItem.getText()));
                     System.out.println("8");
                 }
                 menuLeftCategoriesMap.put(categoryText, subCategoriesStringList);
