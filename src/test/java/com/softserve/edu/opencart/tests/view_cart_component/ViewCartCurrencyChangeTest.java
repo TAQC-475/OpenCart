@@ -1,6 +1,6 @@
 package com.softserve.edu.opencart.tests.view_cart_component;
 
-import com.softserve.edu.opencart.data.Currencies;
+import com.softserve.edu.opencart.data.currency.Currencies;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.data.data_provider_repository.ViewCartDataProvider;
 import com.softserve.edu.opencart.pages.user.HomePage;

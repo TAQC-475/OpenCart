@@ -52,6 +52,7 @@ public class LeftMenuPart extends HeaderPart {
 
     private void initElements() {
         // init elements
+
         //web elements in mein menu
         navigatePannel = driver.findElement(By.id("column-left"));
         menuButton = driver.findElement(By.id("button-menu"));
@@ -102,11 +103,9 @@ public class LeftMenuPart extends HeaderPart {
     public WebElement getLogoutButton() {
         return logoutButton;
     }
-
     public String getLogoutButtonText() {
         return getLogoutButton().getAttribute(TAG_ATTRIBUTE_VALUE);
     }
-
     public void clickLogoutButton() {
         getLogoutButton().click();
     }
@@ -125,39 +124,46 @@ public class LeftMenuPart extends HeaderPart {
 
 
     //System
+    /**
+     *This method gets the web element System
+     */
     public WebElement getSystem() {
-//        new WaitUtils(driver, 5).waitForJSandJQueryToLoad();
         wait.until(ExpectedConditions.visibilityOf(system));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return system;
     }
-
+    /**
+     *Click on web element System
+     */
     public void clickSystem() {
         getSystem().click();
     }
 
-    //	public SystemInLeftMenuPart leftMenuPart() {
-//		clickSystem();
-//		return new SystemInLeftMenuPart(driver);
-//	}
     //Localisation
+    /**
+     *Get the web element Localisation
+     */
     public WebElement getLocalisation() {
         wait.until(ExpectedConditions.visibilityOf(localisation));
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return localisation;
     }
-
+    /**
+     *Click on web element Localisation
+     */
     public void clickLocalisation() {
         getLocalisation().click();
     }
 
     //Currencies
+    /**
+     *Get the web element Currencies
+     */
 	public WebElement getCurrencies() {
 		wait.until(ExpectedConditions.elementToBeClickable(currencies));
-//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return currencies;
 	}
-
+    /**
+     *Click on web element Currencies
+     */
 	public void clickCurrencies() {
 		getCurrencies().click();
 	}
@@ -167,13 +173,6 @@ public class LeftMenuPart extends HeaderPart {
         if (!isNavigatePannelActive()) {
             clickMenuButton();
             navigationComponent = new NavigationComponent(navigatePannel, By.cssSelector(NAVIGATION_MENU_LIST_CSSSELECTOR));
-//			try {
-//				Thread.sleep(2000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-            //System.out.println("***LEFTMENU: " + navigationComponent.getListOptionsText());
         }
     }
 
@@ -185,16 +184,10 @@ public class LeftMenuPart extends HeaderPart {
     }
 
     // Business Logic
-
-//    public CurrenciesPage gotoCurrenciesPage() {
-//        activeNavigatePannel();
-//        getNavigationComponent()
-//                .clickNavigationOptionByPartialName("System", "Localisation", "Currencies"); // TODO Use Enum
-//        return new CurrenciesPage(driver);
-//    }
-
+    /**
+     *This method describes the path to the currency page from the main page
+     */
     public CurrenciesPage gotoCurrencyPage() {
-        //activeNavigatePannel();
         clickSystem();
         clickLocalisation();
         clickCurrencies();

@@ -17,7 +17,7 @@ public class SearchCriteriaTest extends SearchTestRunner {
     public void checkSearchFieldsInputValues() {
         String searchField  =
         successPage()
-                .successfulSearch(ProductRepository.getSamsungProduct())
+                .searchNewProduct(ProductRepository.getSamsungProduct())
                 .getCriteriaSearchFieldText();
 
         Assert.assertEquals(searchField, ProductRepository.getSamsungProduct().getName());
@@ -67,7 +67,8 @@ public class SearchCriteriaTest extends SearchTestRunner {
         Assert.assertTrue(productPage.getDescriptionText().contains(ProductRepository.getProductWithDescription().getName()));
     }
 
-    @Test(dataProvider = "DataForCyrillicProductTests", dataProviderClass = DataForAdminTests.class)
+    @Test(dataProvider = "DataForCyrillicProductTests", dataProviderClass = DataForAdminTests.class,
+            description = "Search Cyrillic Product with choosing category")
     public void searchCyrillicProductWithCategory(Product cyrillicProduct) {
         String actual = successPage()
                 .searchNewProduct(cyrillicProduct)

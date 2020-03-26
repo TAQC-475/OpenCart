@@ -80,6 +80,7 @@ public class ShippingAndTaxesComponent {
      *
      * @return SelectShippingMethodModalPage
      */
+
     public SelectShippingMethodModalPage switchToSelectShippingMethodModalPage() {
         String shoppingCartWindow = driver.getWindowHandle();
         driver.findElement(By.xpath("//button[@id = 'button-quote']")).click();
@@ -90,7 +91,6 @@ public class ShippingAndTaxesComponent {
         }
         return new SelectShippingMethodModalPage(driver);
     }
-
     /**
      * refreshes page and returns ShoppingCartPage
      *

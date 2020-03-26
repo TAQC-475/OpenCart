@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 public abstract class LocalAdminTestRunner extends LocalTestRunner {
-
     @Parameters({"adminServerUrl"})
     @BeforeMethod
     public void beforeMethod(String adminServerUrl) {

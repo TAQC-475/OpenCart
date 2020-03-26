@@ -1,10 +1,10 @@
 package com.softserve.edu.opencart.pages.user.search;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import static com.softserve.edu.opencart.tools.RegularExpression.cutPrefixFromSubCategory;
 import static com.softserve.edu.opencart.tools.RegularExpression.cutSuffixFromCategory;
 
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
     protected final String LEFT_MENU_ELEMENT = "//div[@class='list-group']/a[contains(text(),'%s')]";
@@ -23,9 +24,6 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
     }
 
     // Page Object
-
-    // Functional
-
     private boolean isVisible(WebElement element) {
         try {
             return element.isDisplayed();
@@ -34,19 +32,33 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
         }
     }
 
-    //------------------------------------------------------------------------------------------------------------------
+    private boolean isSubCategoriesPresent(){
+        boolean present;
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        if(driver.findElements(By.xpath(SUB_CATEGORIES_NUMBER_ONE)).size() != 0) {
+            present = true;
+        }else {
+            present = false;
+        }
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        return present;
+    }
+    // Functional
+
     public Map<String, List<String>> getLeftMenuCategoriesMap() {
         Map<String, List<String>> menuLeftCategoriesMap = new HashMap();
         for (String menuItem : getLeftMenuItemListText()) {
-            System.out.println("-5");
-
 //            if(!isVisible(menuItem)){continue;}
             String categoryText = cutSuffixFromCategory(menuItem);
             Actions actions = new Actions(driver);
             actions.moveToElement(driver.findElement(By.xpath(String.format(LEFT_MENU_ELEMENT,menuItem)))).build().perform();
+
             actions.click().perform();
 
-            if (driver.findElements(By.xpath(SUB_CATEGORIES_NUMBER_ONE)).size() != 0) {
+            WebDriverWait wait = new WebDriverWait(driver, 50);
+            wait.until((ExpectedCondition<Boolean>) driver -> (Boolean) ((JavascriptExecutor) driver).executeScript("return window.jQuery != undefined && jQuery.active == 0"));
+
+            if (isSubCategoriesPresent()) {
                 List<WebElement> subCategoryElementList = driver.findElements(By.xpath(String.format(SUB_CATEGORIES, categoryText)));
                 List<String> subCategoriesStringList = new ArrayList();
                 for (WebElement subMenuItem : subCategoryElementList) {

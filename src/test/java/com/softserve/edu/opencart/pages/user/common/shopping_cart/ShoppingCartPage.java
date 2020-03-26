@@ -1,5 +1,6 @@
 package com.softserve.edu.opencart.pages.user.common.shopping_cart;
 
+import com.softserve.edu.opencart.data.currency.Currencies;
 import com.softserve.edu.opencart.data.Product;
 import com.softserve.edu.opencart.pages.user.common.BreadCrumbPart;
 import com.softserve.edu.opencart.tools.RegularExpression;
@@ -43,6 +44,39 @@ public class ShoppingCartPage extends BreadCrumbPart {
 
     public WebElement getShippingAndTaxes() {
         return driver.findElement(By.xpath("//a[contains (text(), 'Shipping & Taxes')]"));
+    }
+
+    //Currency
+
+    /**
+     * This method gets a web element where is the sub-total price
+     * and currency of products which is in the cart
+     */
+    public WebElement getSubTotalPrice() {
+        return driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Sub-Total')]/parent::td/following-sibling::td"));
+    }
+
+    /**
+     * This method gets a text of price and currency from sub-total webelement
+     * of products which is in cart
+     */
+    public String getSubTotalPriceText() {
+        return getSubTotalPrice().getText();
+    }
+    //Currency
+
+    /**
+     * This method gets a web element where is the tax rate
+     */
+    public WebElement getTaxRate() {
+        return driver.findElement(By.xpath("//div[@class = 'col-sm-4 col-sm-offset-8']//strong[contains (text(), 'Flat Shipping Rate')]/parent::td/following-sibling::td"));
+    }
+
+    /**
+     * This method gets a text from tax rate webelement
+     */
+    public String getTaxRateText() {
+        return getTaxRate().getText();
     }
 
     public ShoppingCartProductsContainer getShoppingCartProductsContainer() {
@@ -183,12 +217,21 @@ public class ShoppingCartPage extends BreadCrumbPart {
         return expectedTotalPrice.equals(getActualTotalPrice());
     }
 
+    //Currency
     /**
-     * goes through container components list and checks if product from param is not present in it
-     *
-     * @param expectedRemovedItem product expected to be removed
-     * @return false if product is present in list, true if not present
+     * This method is changed currency and return this page with choose currency
      */
+    public ShoppingCartPage chooseCurrency(Currencies currency) {
+        clickCurrencyByPartialName(currency);
+        return new ShoppingCartPage(driver);
+    }
+
+        /**
+         * goes through container components list and checks if product form param is not present in it
+         *
+         * @param expectedRemovedItem product expected to be removed
+         * @return false if product is present in list, true if not present
+         */
     public boolean verifyProductRemoved(Product expectedRemovedItem) {
         for (ShoppingCartContainerComponent component : getShoppingCartProductsContainer().getContainerComponents()) {
             if (component.getProductNameText().equals(expectedRemovedItem.getName())) {

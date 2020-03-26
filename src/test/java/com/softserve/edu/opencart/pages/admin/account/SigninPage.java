@@ -118,7 +118,6 @@ public class SigninPage extends HeaderPart {
     // Business Logic
 
     public Dashboard successfulLogin(IUser validAdmin) {
-        //System.out.println("***" + validAdmin);
         fillLogin(validAdmin);
         return new Dashboard(driver);
     }

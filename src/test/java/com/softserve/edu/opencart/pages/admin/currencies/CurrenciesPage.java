@@ -61,6 +61,9 @@ public class CurrenciesPage extends LeftMenuPart {
 
 
     // Business Logic
+    /**
+     *this method clicks on the button addNewCurrency and goes to a new page
+     */
 	public AddNewCurrencyPage goToAddNewCurrecyPage(){
 		clickAddNewButton();
 		return new AddNewCurrencyPage(driver);

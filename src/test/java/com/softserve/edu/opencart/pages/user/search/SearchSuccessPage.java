@@ -1,6 +1,7 @@
 package com.softserve.edu.opencart.pages.user.search;
 
 import com.softserve.edu.opencart.data.*;
+import com.softserve.edu.opencart.data.currency.Currencies;
 import com.softserve.edu.opencart.pages.user.common.ProductComponent;
 import com.softserve.edu.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;

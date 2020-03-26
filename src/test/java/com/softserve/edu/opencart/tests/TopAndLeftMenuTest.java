@@ -16,7 +16,7 @@ public class TopAndLeftMenuTest extends LocalTestRunner {
         MainMenuComponent menuComponent = loadApplication().gotoMainMenuComponent();
 
         Assert.assertEquals(menuComponent.getMenuCategoriesMap(),
-                menuComponent.gotoEmptyLeftMenu().getLeftMenuCategoriesMap());
+                            menuComponent.gotoEmptyLeftMenu().getLeftMenuCategoriesMap());
     }
 
 }
