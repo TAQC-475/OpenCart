@@ -32,6 +32,7 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
         }
     }
 
+    // Functional
     private boolean isSubCategoriesPresent(){
         boolean present;
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -43,7 +44,6 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return present;
     }
-    // Functional
 
     public Map<String, List<String>> getLeftMenuCategoriesMap() {
         Map<String, List<String>> menuLeftCategoriesMap = new HashMap();
@@ -58,18 +58,22 @@ public class ProductsSidebarEmptyPage extends ProductsSidebarPart {
             WebDriverWait wait = new WebDriverWait(driver, 50);
             wait.until((ExpectedCondition<Boolean>) driver -> (Boolean) ((JavascriptExecutor) driver).executeScript("return window.jQuery != undefined && jQuery.active == 0"));
 
-            if (isSubCategoriesPresent()) {
-                List<WebElement> subCategoryElementList = driver.findElements(By.xpath(String.format(SUB_CATEGORIES, categoryText)));
-                List<String> subCategoriesStringList = new ArrayList();
-                for (WebElement subMenuItem : subCategoryElementList) {
-                    subCategoriesStringList.add(cutPrefixFromSubCategory(subMenuItem.getText()));
-                }
-                menuLeftCategoriesMap.put(categoryText, subCategoriesStringList);
-            } else {
-                menuLeftCategoriesMap.put(categoryText, null);
-            }
+            readSubCategories(menuLeftCategoriesMap, categoryText);
         }
         return menuLeftCategoriesMap;
+    }
+
+    private void readSubCategories(Map<String, List<String>> menuLeftCategoriesMap, String categoryText) {
+        if (isSubCategoriesPresent()) {
+            List<WebElement> subCategoryElementList = driver.findElements(By.xpath(String.format(SUB_CATEGORIES, categoryText)));
+            List<String> subCategoriesStringList = new ArrayList();
+            for (WebElement subMenuItem : subCategoryElementList) {
+                subCategoriesStringList.add(cutPrefixFromSubCategory(subMenuItem.getText()));
+            }
+            menuLeftCategoriesMap.put(categoryText, subCategoriesStringList);
+        } else {
+            menuLeftCategoriesMap.put(categoryText, null);
+        }
     }
     //------------------------------------------------------------------------------------------------------------------
 

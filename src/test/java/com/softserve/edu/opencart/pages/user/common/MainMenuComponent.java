@@ -97,18 +97,22 @@ public class MainMenuComponent {
         for (WebElement menuItem : getMenuItemList()) {
             String categoryText = menuItem.getText();
             new Actions(driver).moveToElement(menuItem).build().perform();
-            if (menuItem.getAttribute("class").contains("dropdown")) {
-                List<WebElement> subCategoryElementList = driver.findElements(By.xpath(String.format(SUB_CATEGORIES, categoryText)));
-                List<String> subCategoriesStringList = new ArrayList();
-                for (WebElement subMenuItem : subCategoryElementList) {
-                    subCategoriesStringList.add(subMenuItem.getText());
-                }
-                menuCategoriesMap.put(categoryText, subCategoriesStringList);
-            } else {
-                menuCategoriesMap.put(categoryText, null);
-            }
+            isDropdownPresent(menuCategoriesMap, menuItem, categoryText);
         }
         return menuCategoriesMap;
+    }
+
+    private void isDropdownPresent(Map<String, List<String>> menuCategoriesMap, WebElement menuItem, String categoryText) {
+        if (menuItem.getAttribute("class").contains("dropdown")) {
+            List<WebElement> subCategoryElementList = driver.findElements(By.xpath(String.format(SUB_CATEGORIES, categoryText)));
+            List<String> subCategoriesStringList = new ArrayList();
+            for (WebElement subMenuItem : subCategoryElementList) {
+                subCategoriesStringList.add(subMenuItem.getText());
+            }
+            menuCategoriesMap.put(categoryText, subCategoriesStringList);
+        } else {
+            menuCategoriesMap.put(categoryText, null);
+        }
     }
 
     //------------------------------------------------------------------------------------------------------------------
